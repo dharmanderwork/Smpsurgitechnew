@@ -1,0 +1,6 @@
+{
+  "name": "SMP Surgitech | Precision Medical & Surgical Instruments Distributor",
+  "description": "B2B medical instruments distributor featuring comprehensive surgical catalogs, interactive PDF spec sheet browsers, and enterprise lead capture & RFQ workflows for hospitals and surgical centers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
