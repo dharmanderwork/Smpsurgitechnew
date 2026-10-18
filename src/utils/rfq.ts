@@ -2,9 +2,8 @@ import { Product, LeadInquiry } from '../types/instruments';
 
 export interface FilterOptions {
   searchQuery: string;
-  specialty: string;
-  instrumentType: string;
-  alloy: string;
+  category?: string;
+  brand?: string;
 }
 
 /**
@@ -20,38 +19,35 @@ export function generateRfqReference(seed?: number): string {
 }
 
 /**
- * Filter products based on search query, specialty, instrument type, and alloy grade
+ * Filter products based on search query, category, and brand manufacturer
  */
 export function filterProducts(products: Product[], filters: FilterOptions): Product[] {
   const query = filters.searchQuery.trim().toLowerCase();
 
   return products.filter((p) => {
-    // Search query matches name, sku, shortDesc, clinicalApplication, or alloy
+    // Search query matches name, sku, shortDesc, clinicalApplication, brand, category, subcategory, material
     if (query) {
       const match =
         p.name.toLowerCase().includes(query) ||
         p.sku.toLowerCase().includes(query) ||
         p.shortDesc.toLowerCase().includes(query) ||
         p.clinicalApplication.toLowerCase().includes(query) ||
-        p.alloy.toLowerCase().includes(query) ||
-        p.specialty.toLowerCase().includes(query) ||
-        p.type.toLowerCase().includes(query);
+        p.brand.toLowerCase().includes(query) ||
+        p.category.toLowerCase().includes(query) ||
+        p.subcategory.toLowerCase().includes(query) ||
+        p.specs.materialOrCoating.toLowerCase().includes(query) ||
+        p.specs.profileOrSize.toLowerCase().includes(query);
       if (!match) return false;
     }
 
-    // Specialty filter
-    if (filters.specialty && filters.specialty !== 'All Specialties') {
-      if (p.specialty !== filters.specialty) return false;
+    // Category filter
+    if (filters.category && filters.category !== 'All Categories') {
+      if (p.category !== filters.category) return false;
     }
 
-    // Instrument type filter
-    if (filters.instrumentType && filters.instrumentType !== 'All Types') {
-      if (p.type !== filters.instrumentType) return false;
-    }
-
-    // Alloy filter
-    if (filters.alloy && filters.alloy !== 'All Alloys') {
-      if (p.alloy !== filters.alloy) return false;
+    // Brand filter
+    if (filters.brand && filters.brand !== 'All Brands') {
+      if (p.brand !== filters.brand) return false;
     }
 
     return true;
@@ -79,19 +75,19 @@ export function validateInquiryForm(form: Partial<LeadInquiry>): ValidationResul
   }
 
   if (!form.hospitalName || form.hospitalName.trim().length < 2) {
-    errors.hospitalName = 'Please enter your hospital, clinic, or organization name.';
+    errors.hospitalName = 'Please enter your hospital, clinic, or catheterization lab name.';
   }
 
   if (!form.department || form.department.trim().length < 2) {
-    errors.department = 'Please specify the clinical department or procurement role.';
+    errors.department = 'Please specify the clinical department (e.g. Cath Lab, Cardiology, CTVS) or role.';
   }
 
   if (!form.items || form.items.length === 0) {
-    errors.items = 'Please select at least one instrument for quotation.';
+    errors.items = 'Please select at least one instrument or device for quotation.';
   } else {
     for (const item of form.items) {
       if (!item.quantity || item.quantity < 1) {
-        errors.items = 'Each instrument item must have a quantity of at least 1 unit.';
+        errors.items = 'Each item must have a quantity of at least 1 unit.';
         break;
       }
     }
@@ -110,16 +106,16 @@ export function calculateRfqSummary(items: Array<{ product: Product; quantity: n
   const totalUnits = items.reduce((acc, curr) => acc + curr.quantity, 0);
   const distinctSkus = items.length;
   
-  const specialtyCounts: Record<string, number> = {};
+  const categoryCounts: Record<string, number> = {};
   for (const item of items) {
-    const spec = item.product.specialty;
-    specialtyCounts[spec] = (specialtyCounts[spec] || 0) + item.quantity;
+    const cat = item.product.category;
+    categoryCounts[cat] = (categoryCounts[cat] || 0) + item.quantity;
   }
 
   return {
     totalUnits,
     distinctSkus,
-    specialtiesRepresented: Object.keys(specialtyCounts).length,
-    specialtyCounts
+    categoriesRepresented: Object.keys(categoryCounts).length,
+    categoryCounts
   };
 }

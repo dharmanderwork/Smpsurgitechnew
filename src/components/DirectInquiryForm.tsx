@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Product, LeadInquiry } from '../types/instruments';
 import { validateInquiryForm, generateRfqReference } from '../utils/rfq';
-import { CheckCircle2, Shield, Send, ArrowRight, Building2, User, Mail, Phone, Clock, FileText } from 'lucide-react';
+import { CheckCircle2, Shield, Send, ArrowRight, Building2, User, Mail, Phone, Clock, FileText, MapPin } from 'lucide-react';
 
 interface DirectInquiryFormProps {
   product: Product;
@@ -19,11 +19,11 @@ export const DirectInquiryForm: React.FC<DirectInquiryFormProps> = ({
     workEmail: '',
     phone: '',
     hospitalName: '',
-    department: 'Operating Room Purchasing',
-    facilityType: 'Hospital' as LeadInquiry['facilityType'],
-    country: 'United States',
+    department: 'Interventional Cardiology / Cath Lab',
+    facilityType: 'Hospital / Cath Lab' as LeadInquiry['facilityType'],
+    territoryState: 'South Rajasthan' as LeadInquiry['territoryState'],
     quantity: 1,
-    targetTimeline: 'Within 2 Weeks' as LeadInquiry['targetTimeline'],
+    targetTimeline: 'Immediate (Emergency Procedure)' as LeadInquiry['targetTimeline'],
     tenderReference: '',
     customLaserMarking: '',
     message: ''
@@ -43,7 +43,7 @@ export const DirectInquiryForm: React.FC<DirectInquiryFormProps> = ({
       hospitalName: formData.hospitalName,
       department: formData.department,
       facilityType: formData.facilityType,
-      country: formData.country,
+      territoryState: formData.territoryState,
       targetTimeline: formData.targetTimeline,
       tenderReference: formData.tenderReference,
       message: formData.message,
@@ -77,7 +77,7 @@ export const DirectInquiryForm: React.FC<DirectInquiryFormProps> = ({
         hospitalName: formData.hospitalName,
         department: formData.department,
         facilityType: formData.facilityType,
-        country: formData.country,
+        territoryState: formData.territoryState,
         targetTimeline: formData.targetTimeline,
         tenderReference: formData.tenderReference,
         message: formData.message,
@@ -87,7 +87,7 @@ export const DirectInquiryForm: React.FC<DirectInquiryFormProps> = ({
       setIsSubmitting(false);
       setSubmittedInquiry(confirmedInquiry);
       if (onSuccess) onSuccess(confirmedInquiry);
-    }, 600);
+    }, 500);
   };
 
   if (submittedInquiry) {
@@ -98,248 +98,223 @@ export const DirectInquiryForm: React.FC<DirectInquiryFormProps> = ({
             <CheckCircle2 className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-lg font-bold">RFQ Inbound Registered</h3>
-            <p className="text-xs text-slate-400">Direct hospital sales inquiry forwarded to medical logistics desk</p>
+            <h3 className="text-lg font-bold">Quotation Request Registered</h3>
+            <p className="text-xs text-slate-400">Dispatched immediately to SMP Surgitech Regional Cardiology Sales Desk</p>
           </div>
         </div>
 
         <div className="bg-slate-950/80 border border-slate-800 rounded-lg p-4 space-y-2 text-xs">
           <div className="flex justify-between items-center pb-2 border-b border-slate-800">
-            <span className="text-slate-400">Official RFQ Reference</span>
+            <span className="text-slate-400">Official RFQ Tracking Code</span>
             <span className="font-mono font-bold text-cyan-400 text-sm">{submittedInquiry.id}</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-slate-400">Instrument SKU</span>
-            <span className="font-mono text-slate-200">{product.sku}</span>
+            <span className="text-slate-400">Selected Product</span>
+            <span className="text-white font-medium">{product.name} ({product.sku})</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-slate-400">Instrument Description</span>
-            <span className="font-medium text-slate-200 truncate max-w-[240px]">{product.name}</span>
+            <span className="text-slate-400">Territory Logistics Desk</span>
+            <span className="text-emerald-400 font-medium">{submittedInquiry.territoryState}</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-slate-400">Quantity Requested</span>
-            <span className="font-bold text-slate-200 tabular-nums">{formData.quantity} units</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-slate-400">Hospital / Facility</span>
-            <span className="text-slate-200">{submittedInquiry.hospitalName} ({submittedInquiry.department})</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-slate-400">Target Delivery Timeline</span>
-            <span className="text-slate-200">{submittedInquiry.targetTimeline}</span>
+            <span className="text-slate-400">Fulfillment Priority</span>
+            <span className="text-cyan-300 font-medium">{submittedInquiry.targetTimeline}</span>
           </div>
         </div>
 
-        <p className="text-xs text-slate-400 leading-relaxed">
-          A dedicated SMP Surgitech territory account manager and clinical specialist will respond within <strong className="text-slate-200">2-4 business hours</strong> with a formal corporate quotation including institutional tier discounts, freight options, and CE/ISO batch certificates.
-        </p>
+        <div className="p-3 bg-cyan-950/40 border border-cyan-800/60 rounded text-xs text-cyan-200">
+          A dedicated territory representative from our regional branch is reviewing your requirement. For emergency cath lab procedures, call our 24/7 hotline at <strong className="text-white">+91 94140 88210</strong>.
+        </div>
 
         <button
-          onClick={() => setSubmittedInquiry(null)}
-          className="w-full py-2.5 text-xs font-semibold text-slate-900 bg-white hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
+          onClick={() => {
+            setSubmittedInquiry(null);
+            setFormData((prev) => ({ ...prev, quantity: 1, message: '' }));
+          }}
+          className="py-2 px-4 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition-colors cursor-pointer"
         >
-          Submit Another Inquiry for This Product
+          Submit Another Inquiry
         </button>
       </div>
     );
   }
 
   return (
-    <div className={`bg-white border border-slate-200/90 rounded-xl ${compact ? 'p-4 sm:p-5' : 'p-6 sm:p-8'} shadow-sm`}>
-      <div className="border-b border-slate-100 pb-4 mb-5">
-        <div className="flex items-center justify-between">
-          <span className="text-xs uppercase tracking-wider font-semibold text-cyan-900">
-            Institutional Quote Request
-          </span>
-          <span className="text-[11px] text-slate-500 font-mono">
-            {product.sku}
-          </span>
+    <form onSubmit={handleSubmit} className="space-y-4 text-left">
+      <div className="bg-cyan-950/20 border border-cyan-900/30 rounded-lg p-3 text-xs flex items-center justify-between">
+        <div>
+          <span className="text-slate-500 block text-[10px] uppercase font-semibold">Inquiring For Product</span>
+          <span className="font-bold text-slate-900">{product.name}</span>
+          <span className="font-mono text-cyan-800 ml-2 font-semibold">[{product.sku}]</span>
         </div>
-        <h3 className="text-lg font-bold text-slate-900 mt-1">
-          Direct Sales & Tender Inquiry
-        </h3>
-        <p className="text-xs text-slate-600 mt-1">
-          SMP Surgitech provides custom institutional pricing, consignment inventory terms, and bulk tender discounts.
-        </p>
+        <div className="text-right">
+          <span className="text-slate-500 block text-[10px] uppercase font-semibold">Authorized Brand</span>
+          <span className="font-semibold text-slate-800">{product.brand}</span>
+        </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Quantity and Custom Laser Marking Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Quantity Needed (Units) *
-            </label>
-            <input
-              type="number"
-              min={1}
-              max={5000}
-              value={formData.quantity}
-              onChange={(e) => setFormData({ ...formData, quantity: parseInt(e.target.value) || 1 })}
-              className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Custom Laser Marking (Optional)
-            </label>
-            <input
-              type="text"
-              placeholder="e.g. OR-SURG-TRAY-04"
-              value={formData.customLaserMarking}
-              onChange={(e) => setFormData({ ...formData, customLaserMarking: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800 placeholder:text-slate-400"
-            />
-          </div>
-        </div>
-
-        {/* Contact Name & Work Email */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Full Name *
-            </label>
-            <input
-              type="text"
-              placeholder="e.g. Dr. Robert Chen, MD"
-              value={formData.contactName}
-              onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
-              className={`w-full px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800 ${
-                errors.contactName ? 'border-red-400 bg-red-50/30' : 'border-slate-300'
-              }`}
-              required
-            />
-            {errors.contactName && <p className="text-[11px] text-red-600 mt-1">{errors.contactName}</p>}
-          </div>
-
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Institutional Email *
-            </label>
-            <input
-              type="email"
-              placeholder="e.g. rchen@clevelandclinic.org"
-              value={formData.workEmail}
-              onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
-              className={`w-full px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800 ${
-                errors.workEmail ? 'border-red-400 bg-red-50/30' : 'border-slate-300'
-              }`}
-              required
-            />
-            {errors.workEmail && <p className="text-[11px] text-red-600 mt-1">{errors.workEmail}</p>}
-          </div>
-        </div>
-
-        {/* Hospital Name & Department */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Hospital / Clinic / Organization *
-            </label>
-            <input
-              type="text"
-              placeholder="e.g. Cleveland Clinic Main Campus"
-              value={formData.hospitalName}
-              onChange={(e) => setFormData({ ...formData, hospitalName: e.target.value })}
-              className={`w-full px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800 ${
-                errors.hospitalName ? 'border-red-400 bg-red-50/30' : 'border-slate-300'
-              }`}
-              required
-            />
-            {errors.hospitalName && <p className="text-[11px] text-red-600 mt-1">{errors.hospitalName}</p>}
-          </div>
-
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Department / Role *
-            </label>
-            <input
-              type="text"
-              placeholder="e.g. OR Materials Management / Chief of Surgery"
-              value={formData.department}
-              onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-              className={`w-full px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800 ${
-                errors.department ? 'border-red-400 bg-red-50/30' : 'border-slate-300'
-              }`}
-              required
-            />
-            {errors.department && <p className="text-[11px] text-red-600 mt-1">{errors.department}</p>}
-          </div>
-        </div>
-
-        {/* Phone & Delivery Timeline */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Phone / Direct Extension
-            </label>
-            <input
-              type="tel"
-              placeholder="+1 (555) 012-3456"
-              value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800 placeholder:text-slate-400"
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Target Delivery Timeline
-            </label>
-            <select
-              value={formData.targetTimeline}
-              onChange={(e) => setFormData({ ...formData, targetTimeline: e.target.value as any })}
-              className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800 bg-white"
-            >
-              <option value="Immediate (Emergency)">Immediate (Emergency O.R. Dispatch)</option>
-              <option value="Within 2 Weeks">Within 2 Weeks (Standard Replenishment)</option>
-              <option value="Within 1 Month">Within 1 Month</option>
-              <option value="Quarterly Tender">Quarterly Hospital Tender</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Notes / Special Clinical Requirements */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">
-            Clinical Specifications & Tender Notes (Optional)
+          <label className="block text-slate-700 font-semibold mb-1 flex items-center gap-1">
+            <User className="w-3.5 h-3.5 text-slate-400" />
+            <span>Full Name & Title *</span>
           </label>
-          <textarea
-            rows={2}
-            placeholder="Special passivation certificates, specific tray compatibility, or tender documentation requests..."
-            value={formData.message}
-            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800 placeholder:text-slate-400"
+          <input
+            type="text"
+            placeholder="Dr. R. K. Sharma / Cath Lab In-charge"
+            value={formData.contactName}
+            onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
+            className={`w-full px-3 py-2 bg-white border rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800 ${
+              errors.contactName ? 'border-red-400 bg-red-50/30' : 'border-slate-300'
+            }`}
+          />
+          {errors.contactName && <p className="text-red-600 text-[11px] mt-0.5">{errors.contactName}</p>}
+        </div>
+
+        <div>
+          <label className="block text-slate-700 font-semibold mb-1 flex items-center gap-1">
+            <Mail className="w-3.5 h-3.5 text-slate-400" />
+            <span>Institutional Email *</span>
+          </label>
+          <input
+            type="email"
+            placeholder="doctor@hospital.org"
+            value={formData.workEmail}
+            onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
+            className={`w-full px-3 py-2 bg-white border rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800 ${
+              errors.workEmail ? 'border-red-400 bg-red-50/30' : 'border-slate-300'
+            }`}
+          />
+          {errors.workEmail && <p className="text-red-600 text-[11px] mt-0.5">{errors.workEmail}</p>}
+        </div>
+
+        <div>
+          <label className="block text-slate-700 font-semibold mb-1 flex items-center gap-1">
+            <Phone className="w-3.5 h-3.5 text-slate-400" />
+            <span>Direct Phone / Mobile *</span>
+          </label>
+          <input
+            type="tel"
+            placeholder="+91 94140 12345"
+            value={formData.phone}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800"
           />
         </div>
 
-        {/* Submit Button */}
+        <div>
+          <label className="block text-slate-700 font-semibold mb-1 flex items-center gap-1">
+            <Building2 className="w-3.5 h-3.5 text-slate-400" />
+            <span>Hospital / Institution Name *</span>
+          </label>
+          <input
+            type="text"
+            placeholder="e.g. Pacific Medical College, Udaipur"
+            value={formData.hospitalName}
+            onChange={(e) => setFormData({ ...formData, hospitalName: e.target.value })}
+            className={`w-full px-3 py-2 bg-white border rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800 ${
+              errors.hospitalName ? 'border-red-400 bg-red-50/30' : 'border-slate-300'
+            }`}
+          />
+          {errors.hospitalName && <p className="text-red-600 text-[11px] mt-0.5">{errors.hospitalName}</p>}
+        </div>
+
+        <div>
+          <label className="block text-slate-700 font-semibold mb-1 flex items-center gap-1">
+            <MapPin className="w-3.5 h-3.5 text-slate-400" />
+            <span>Territory / State *</span>
+          </label>
+          <select
+            value={formData.territoryState}
+            onChange={(e) => setFormData({ ...formData, territoryState: e.target.value as any })}
+            className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800 text-xs"
+          >
+            <option value="South Rajasthan">South Rajasthan (Udaipur, Dungarpur, Banswara, etc.)</option>
+            <option value="Madhya Pradesh">Madhya Pradesh (Indore, Bhopal, Gwalior, Jabalpur)</option>
+            <option value="Chhattisgarh">Chhattisgarh (Raipur, Bilaspur, Durg-Bhilai)</option>
+            <option value="Uttar Pradesh">Part of Uttar Pradesh (Kanpur, Agra, Jhansi, Prayagraj)</option>
+            <option value="Other">Other Territory / National Procurement</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-slate-700 font-semibold mb-1 flex items-center gap-1">
+            <Clock className="w-3.5 h-3.5 text-slate-400" />
+            <span>Required Timeline</span>
+          </label>
+          <select
+            value={formData.targetTimeline}
+            onChange={(e) => setFormData({ ...formData, targetTimeline: e.target.value as any })}
+            className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800 text-xs"
+          >
+            <option value="Immediate (Emergency Procedure)">Immediate (Emergency Cath Lab Procedure: 2-3h)</option>
+            <option value="Within 24-48 Hours">Within 24-48 Hours</option>
+            <option value="Within 1-2 Weeks">Within 1-2 Weeks</option>
+            <option value="Monthly Cath Lab Consignment">Monthly Cath Lab Consignment Stock</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-slate-700 font-semibold mb-1">
+            Required Units / Quantity
+          </label>
+          <input
+            type="number"
+            min="1"
+            value={formData.quantity}
+            onChange={(e) => setFormData({ ...formData, quantity: Math.max(1, parseInt(e.target.value) || 1) })}
+            className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800"
+          />
+        </div>
+
+        <div>
+          <label className="block text-slate-700 font-semibold mb-1">
+            Specific Size Matrix / Stent Sizing
+          </label>
+          <input
+            type="text"
+            placeholder="e.g. 3.0 x 28 mm, 3.5 x 33 mm"
+            value={formData.customLaserMarking}
+            onChange={(e) => setFormData({ ...formData, customLaserMarking: e.target.value })}
+            className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-slate-700 font-semibold mb-1 text-xs">
+          Clinical Notes / Procedure Requirements (Optional)
+        </label>
+        <textarea
+          rows={2}
+          placeholder="Specify if back-up console is required, size variations, or urgent OT scheduling..."
+          value={formData.message}
+          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800 text-xs resize-none"
+        />
+      </div>
+
+      <div className="pt-2 flex items-center justify-between border-t border-slate-100">
+        <div className="flex items-center gap-1.5 text-[11px] text-slate-500">
+          <Shield className="w-3.5 h-3.5 text-emerald-600" />
+          <span>CDSCO & ISO 13485 Compliant B2B Channel</span>
+        </div>
+
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-2.5 px-4 text-sm font-semibold text-white bg-slate-950 hover:bg-cyan-900 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer disabled:opacity-60"
+          className="py-2.5 px-5 text-xs font-semibold text-white bg-slate-900 hover:bg-cyan-900 rounded-lg transition-colors flex items-center gap-2 cursor-pointer shadow-sm disabled:opacity-50"
         >
           {isSubmitting ? (
             <span>Generating RFQ Reference...</span>
           ) : (
             <>
-              <Send className="w-4 h-4" />
-              <span>Submit Direct Quote Request for {product.sku}</span>
+              <Send className="w-3.5 h-3.5 text-cyan-300" />
+              <span>Submit Direct Quote Request</span>
             </>
           )}
         </button>
-
-        <div className="pt-2 flex items-center justify-center gap-4 text-[11px] text-slate-500">
-          <span className="flex items-center gap-1">
-            <Shield className="w-3.5 h-3.5 text-cyan-800" />
-            ISO 13485 Encrypted B2B Transfer
-          </span>
-          <span aria-hidden="true">·</span>
-          <span>Zero Obligation Quotation</span>
-        </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };

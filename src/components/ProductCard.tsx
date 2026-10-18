@@ -23,7 +23,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Card Visual Carrier */}
         <div 
           onClick={() => onOpenDetail(product)} 
-          className="aspect-[16/10] bg-slate-100 overflow-hidden relative cursor-pointer border-b border-slate-100"
+          className="aspect-[16/10] bg-slate-900/5 overflow-hidden relative cursor-pointer border-b border-slate-100"
         >
           <img
             src={product.image}
@@ -34,12 +34,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               (e.target as HTMLElement).style.display = 'none';
             }}
           />
-          {/* Quick SKU & Length Overlay */}
+          {/* Quick SKU & Brand Overlay */}
           <div className="absolute top-2.5 left-2.5 bg-slate-950/80 backdrop-blur-sm px-2 py-0.5 rounded text-[11px] font-mono text-cyan-300">
             {product.sku}
           </div>
-          <div className="absolute top-2.5 right-2.5 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded text-[11px] font-medium text-slate-700">
-            {product.dimensions.totalLength}
+          <div className="absolute top-2.5 right-2.5 bg-white/95 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-semibold text-slate-800 border border-slate-200/60">
+            {product.brand.split(' ')[0]}
           </div>
         </div>
 
@@ -47,9 +47,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <div className="p-5 space-y-3">
           {/* Zero-Pill Unboxed Metadata Line */}
           <div className="flex items-center gap-2 text-xs text-slate-500">
-            <span>{product.specialty}</span>
-            <span aria-hidden="true">·</span>
-            <span className="text-slate-700 font-medium">{product.type}</span>
+            <span className="text-cyan-900 font-semibold">{product.brand}</span>
+            <span aria-hidden="true" className="text-slate-300">·</span>
+            <span className="text-slate-600 truncate">{product.category}</span>
           </div>
 
           {/* Product Headline */}
@@ -64,15 +64,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             {product.shortDesc}
           </p>
 
-          {/* Quick Metallurgical Spec Strip */}
-          <div className="pt-2 border-t border-slate-100 grid grid-cols-2 gap-2 text-[11px]">
+          {/* Quick Specifications Strip */}
+          <div className="pt-2.5 border-t border-slate-100 grid grid-cols-2 gap-2 text-[11px]">
             <div>
-              <span className="text-slate-500 block">Alloy Standard</span>
-              <span className="font-medium text-slate-800 truncate block">{product.alloy}</span>
+              <span className="text-slate-400 block text-[10px] uppercase tracking-wider font-semibold">Profile / Matrix</span>
+              <span className="font-medium text-slate-800 truncate block mt-0.5">{product.specs.profileOrSize}</span>
             </div>
             <div>
-              <span className="text-slate-500 block">Working Tip</span>
-              <span className="font-semibold text-slate-900">{product.dimensions.tipWidth}</span>
+              <span className="text-slate-400 block text-[10px] uppercase tracking-wider font-semibold">Material / Tech</span>
+              <span className="font-medium text-slate-800 truncate block mt-0.5">{product.specs.materialOrCoating}</span>
             </div>
           </div>
         </div>

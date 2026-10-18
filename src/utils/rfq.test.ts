@@ -12,26 +12,34 @@ test('generateRfqReference generates valid RFQ code pattern', () => {
   assert.match(refRandom, new RegExp(`^RFQ-${currentYear}-SMP-\\d{4}$`));
 });
 
-test('filterProducts filters correctly by search query', () => {
+test('filterProducts filters correctly by search query for XIENCE Skypoint', () => {
   const res = filterProducts(SURGICAL_PRODUCTS, {
-    searchQuery: 'debakey',
-    specialty: 'All Specialties',
-    instrumentType: 'All Types',
-    alloy: 'All Alloys'
+    searchQuery: 'skypoint',
+    category: 'All Categories',
+    brand: 'All Brands'
   });
   assert.ok(res.length >= 1);
-  assert.ok(res.some(p => p.sku === 'SMP-CV-4012'));
+  assert.ok(res.some(p => p.sku === 'ABT-XNC-SKY'));
 });
 
-test('filterProducts filters correctly by specialty', () => {
+test('filterProducts filters correctly by category', () => {
   const res = filterProducts(SURGICAL_PRODUCTS, {
     searchQuery: '',
-    specialty: 'Neurosurgery & Spine',
-    instrumentType: 'All Types',
-    alloy: 'All Alloys'
+    category: 'Coronary Stents (XIENCE)',
+    brand: 'All Brands'
   });
-  assert.ok(res.length >= 1);
-  assert.ok(res.every(p => p.specialty === 'Neurosurgery & Spine'));
+  assert.equal(res.length, 4);
+  assert.ok(res.every(p => p.category === 'Coronary Stents (XIENCE)'));
+});
+
+test('filterProducts filters correctly by brand', () => {
+  const res = filterProducts(SURGICAL_PRODUCTS, {
+    searchQuery: '',
+    category: 'All Categories',
+    brand: 'Abbott (Vascular Division)'
+  });
+  assert.ok(res.length >= 4);
+  assert.ok(res.every(p => p.brand === 'Abbott (Vascular Division)'));
 });
 
 test('validateInquiryForm detects missing or invalid fields', () => {
@@ -48,20 +56,20 @@ test('validateInquiryForm detects missing or invalid fields', () => {
   assert.ok(invalidResult.errors.items);
 });
 
-test('validateInquiryForm accepts valid B2B lead data', () => {
+test('validateInquiryForm accepts valid B2B cath lab lead data', () => {
   const validResult = validateInquiryForm({
-    contactName: 'Dr. Sarah Lin, MD',
-    workEmail: 'slin@mayoclinic.org',
-    hospitalName: 'Mayo Clinic Rochester',
-    department: 'Cardiovascular Surgery O.R.',
-    facilityType: 'Hospital',
-    country: 'United States',
-    targetTimeline: 'Within 2 Weeks',
+    contactName: 'Dr. R. K. Maheshwari',
+    workEmail: 'cathlab@pacificcardiac.org',
+    hospitalName: 'Pacific Heart Institute, Udaipur',
+    department: 'Interventional Cardiology / Cath Lab',
+    facilityType: 'Hospital / Cath Lab',
+    territoryState: 'South Rajasthan',
+    targetTimeline: 'Immediate (Emergency Procedure)',
     items: [
       {
-        sku: 'SMP-CV-4012',
-        productName: 'DeBakey Clamp',
-        quantity: 5
+        sku: 'ABT-XNC-SKY',
+        productName: 'XIENCE Skypoint Stent',
+        quantity: 4
       }
     ]
   });
@@ -77,5 +85,5 @@ test('calculateRfqSummary calculates units and counts accurately', () => {
   const summary = calculateRfqSummary(sampleItems);
   assert.equal(summary.totalUnits, 6);
   assert.equal(summary.distinctSkus, 2);
-  assert.equal(summary.specialtiesRepresented, 2);
+  assert.equal(summary.categoriesRepresented, 1);
 });

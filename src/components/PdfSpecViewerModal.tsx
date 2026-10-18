@@ -6,62 +6,62 @@ interface PdfSpecViewerModalProps {
   product: Product | null;
   isOpen: boolean;
   onClose: () => void;
-  onOpenEnquiry: (product: Product) => void;
+  onRequestQuote: (product: Product) => void;
 }
 
 export const PdfSpecViewerModal: React.FC<PdfSpecViewerModalProps> = ({
   product,
   isOpen,
   onClose,
-  onOpenEnquiry
+  onRequestQuote
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [zoomLevel, setZoomLevel] = useState(100);
   const [downloadSuccess, setDownloadSuccess] = useState(false);
 
-  if (!isOpen || !product) return null;
+  // Reset page when product changes
+  React.useEffect(() => {
+    setCurrentPage(1);
+    setZoomLevel(100);
+  }, [product]);
+
+  if (!isOpen || !product || !product.pdfSpec) return null;
 
   const pdf = product.pdfSpec;
   const activePageData = pdf.pages.find((p) => p.pageNumber === currentPage) || pdf.pages[0];
 
   const handleZoom = (delta: number) => {
-    setZoomLevel((prev) => Math.min(175, Math.max(75, prev + delta)));
+    setZoomLevel((prev) => Math.min(150, Math.max(75, prev + delta)));
   };
 
-  const handlePrint = () => {
-    window.print();
-  };
-
-  const handleSimulateDownload = () => {
+  const handleDownload = () => {
     setDownloadSuccess(true);
-    // Create text blob for genuine offline file download
-    const content = `=======================================================
-SMP SURGITECH MEDICAL TECHNOLOGIES CORP.
-TECHNICAL DATA SPECIFICATION SHEET
+    const content = `SMP SURGITECH · PRECISION CARDIOLOGY & SURGICAL SPECIFICATION
 =======================================================
 Document No: ${pdf.docNumber}
 Revision: ${pdf.revision} | Date: ${pdf.effectiveDate}
 Product: ${product.name}
 SKU: ${product.sku}
-Surgical Specialty: ${product.specialty}
-Alloy: ${product.alloy}
-Rockwell Hardness: ${product.metallurgy.rockwellHardness}
-Dimensions: ${product.dimensions.totalLength} | Tip: ${product.dimensions.tipWidth}
-Sterilization: ${product.reprocessing.autoclaveCycle}
-Compliance: ${product.compliance.join(', ')}
+Brand: ${product.brand}
+Category: ${product.category}
+Subcategory: ${product.subcategory}
+Profile / Sizing: ${product.specs.profileOrSize}
+Catheter / Sheath Compatibility: ${product.specs.compatibilityOrSheath}
+Material / Chemistry: ${product.specs.materialOrCoating}
+Sterilization & Shelf Life: ${product.specs.shelfLifeOrSterility}
+MRI Safety: ${product.mriSafety}
+Regulatory Clearances: ${product.regulatoryStatus.join(', ')}
 
-CLINICAL INDICATIONS:
+CLINICAL APPLICATION & INDICATIONS:
 ${product.clinicalApplication}
 
-REPROCESSING GUIDELINES:
-Max Temp: ${product.reprocessing.maxTempCelsius}°C
-Cleaning Chemicals: ${product.reprocessing.compatibleCleaningChem}
-pH Range: ${product.reprocessing.cleaningPhRange}
+KEY ENGINEERING HIGHLIGHTS:
+${product.keyFeatures.map((f, i) => `${i + 1}. ${f}`).join('\n')}
 
 =======================================================
-CONFIDENTIAL INSTITUTIONAL SPECIFICATION
-SMP Surgitech · ISO 13485:2016 Certified Medical Distributor
-Inquiries: procurement@smpsurgitech.com | 1-800-787-4483
+CONFIDENTIAL HEALTHCARE PROCUREMENT SPECIFICATION
+SMP Surgitech · Central & Western India Cardiology Logistics Hub
+Inquiries: procurement@smpsurgitech.com | +91 94140 88210
 =======================================================`;
 
     const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
@@ -88,155 +88,134 @@ Inquiries: procurement@smpsurgitech.com | 1-800-787-4483
         {/* PDF Browser Toolbar */}
         <div className="bg-slate-950 border-b border-slate-800 px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-slate-300">
           {/* Document Title & SKU */}
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="w-8 h-8 rounded bg-red-950/60 border border-red-800/80 flex items-center justify-center text-red-400 font-mono text-xs font-bold shrink-0">
-              PDF
-            </div>
-            <div className="min-w-0">
-              <h2 id="pdf-viewer-title" className="text-sm font-semibold text-white truncate">
-                {pdf.docNumber} · {product.name}
+          <div className="flex items-center gap-3">
+            <span className="bg-cyan-950 text-cyan-300 font-mono text-xs px-2.5 py-1 rounded border border-cyan-800/80 font-bold">
+              PDF SPEC
+            </span>
+            <div>
+              <h2 id="pdf-viewer-title" className="text-sm font-semibold text-white truncate max-w-xs sm:max-w-md">
+                {product.name}
               </h2>
-              <div className="flex items-center gap-2 text-xs text-slate-400">
-                <span className="font-mono">{pdf.revision}</span>
-                <span aria-hidden="true">·</span>
-                <span>ISO 13485 Verified</span>
+              <div className="text-[11px] text-slate-400 font-mono flex items-center gap-2">
+                <span>{pdf.docNumber}</span>
+                <span>·</span>
+                <span>{pdf.revision}</span>
               </div>
             </div>
           </div>
 
-          {/* Controls: Page navigation, Zoom, Print, Download, Close */}
-          <div className="flex items-center gap-2 sm:gap-4 shrink-0">
-            {/* Page Navigation */}
-            <div className="flex items-center bg-slate-800/90 rounded-lg p-1 text-xs">
+          {/* Navigation and Zoom Controls */}
+          <div className="flex items-center gap-2 text-xs">
+            {/* Page Paging Controls */}
+            <div className="flex items-center bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 gap-2">
               <button
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                disabled={currentPage <= 1}
-                className="p-1 rounded hover:bg-slate-700 disabled:opacity-40 disabled:hover:bg-transparent"
-                aria-label="Previous page"
+                disabled={currentPage === 1}
+                className="p-1 text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+                aria-label="Previous Page"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <span className="px-2 font-mono tabular-nums text-slate-200">
+              <span className="font-mono text-slate-200">
                 {currentPage} / {pdf.totalPages}
               </span>
               <button
                 onClick={() => setCurrentPage((p) => Math.min(pdf.totalPages, p + 1))}
-                disabled={currentPage >= pdf.totalPages}
-                className="p-1 rounded hover:bg-slate-700 disabled:opacity-40 disabled:hover:bg-transparent"
-                aria-label="Next page"
+                disabled={currentPage === pdf.totalPages}
+                className="p-1 text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+                aria-label="Next Page"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
 
             {/* Zoom Controls */}
-            <div className="hidden sm:flex items-center bg-slate-800/90 rounded-lg p-1 text-xs">
+            <div className="hidden sm:flex items-center bg-slate-900 border border-slate-700 rounded-lg px-1.5 py-1 gap-1">
               <button
-                onClick={() => handleZoom(-15)}
-                disabled={zoomLevel <= 75}
-                className="p-1 rounded hover:bg-slate-700 disabled:opacity-40"
-                aria-label="Zoom out"
+                onClick={() => handleZoom(-10)}
+                className="p-1 text-slate-400 hover:text-white cursor-pointer"
+                title="Zoom Out"
               >
-                <ZoomOut className="w-4 h-4" />
+                <ZoomOut className="w-3.5 h-3.5" />
               </button>
-              <span className="px-2 font-mono tabular-nums text-slate-200">
+              <span className="font-mono text-[11px] text-slate-300 min-w-[32px] text-center">
                 {zoomLevel}%
               </span>
               <button
-                onClick={() => handleZoom(15)}
-                disabled={zoomLevel >= 175}
-                className="p-1 rounded hover:bg-slate-700 disabled:opacity-40"
-                aria-label="Zoom in"
+                onClick={() => handleZoom(10)}
+                className="p-1 text-slate-400 hover:text-white cursor-pointer"
+                title="Zoom In"
               >
-                <ZoomIn className="w-4 h-4" />
+                <ZoomIn className="w-3.5 h-3.5" />
               </button>
             </div>
 
-            {/* Print */}
+            {/* Download Button */}
             <button
-              onClick={handlePrint}
-              className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
-              title="Print Specification"
-              aria-label="Print spec sheet"
-            >
-              <Printer className="w-4 h-4" />
-            </button>
-
-            {/* Download */}
-            <button
-              onClick={handleSimulateDownload}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-cyan-900/50 hover:bg-cyan-800 border border-cyan-700/60 text-cyan-200 transition-colors"
-              title="Download PDF Spec Sheet"
+              onClick={handleDownload}
+              className="py-1 px-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg border border-slate-700 flex items-center gap-1.5 transition-colors cursor-pointer text-xs"
+              title="Download Technical Spec Sheet"
             >
               {downloadSuccess ? (
                 <>
                   <Check className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Downloaded</span>
+                  <span className="text-emerald-400">Saved</span>
                 </>
               ) : (
                 <>
-                  <Download className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Download PDF</span>
+                  <Download className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Download</span>
                 </>
               )}
             </button>
 
-            {/* Direct RFQ Action from PDF */}
-            <button
-              onClick={() => {
-                onClose();
-                onOpenEnquiry(product);
-              }}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-white text-slate-900 transition-colors cursor-pointer"
-            >
-              <Send className="w-3.5 h-3.5" />
-              <span className="hidden md:inline">Enquire on Spec</span>
-            </button>
-
-            {/* Close Button */}
+            {/* Close Modal */}
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
-              aria-label="Close PDF viewer"
+              className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer ml-1"
+              aria-label="Close PDF Viewer"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
         </div>
 
-        {/* PDF Document Canvas Viewport */}
-        <div className="flex-1 bg-slate-800/90 p-4 sm:p-8 overflow-auto flex justify-center">
-          <div
+        {/* PDF Document Canvas / Preview Stage */}
+        <div className="flex-1 bg-slate-950/90 overflow-auto p-4 sm:p-8 flex justify-center items-start">
+          <div 
             style={{ transform: `scale(${zoomLevel / 100})`, transformOrigin: 'top center' }}
-            className="w-full max-w-[850px] min-h-[1050px] bg-white text-slate-900 shadow-2xl rounded-sm p-8 sm:p-12 transition-transform duration-150 flex flex-col justify-between"
+            className="w-full max-w-[850px] bg-white text-slate-900 shadow-2xl rounded-sm border border-slate-300 transition-transform duration-200 min-h-[900px] p-8 sm:p-12 relative flex flex-col justify-between"
           >
-            {/* PDF Header Sheet */}
+            {/* Top Formal Letterhead Header */}
             <div>
-              <div className="flex items-start justify-between border-b-2 border-slate-900 pb-4 mb-6">
+              <div className="flex justify-between items-start border-b-2 border-slate-900 pb-4 mb-6">
                 <div>
-                  <div className="text-xl font-extrabold tracking-tight text-slate-950 font-display">
-                    SMP SURGITECH
+                  <div className="flex items-center gap-2">
+                    <span className="font-display font-extrabold text-lg sm:text-xl tracking-tight text-slate-950">
+                      SMP SURGITECH
+                    </span>
+                    <span className="bg-slate-900 text-cyan-300 text-[10px] font-mono px-1.5 py-0.5 rounded font-bold">
+                      CARDIOLOGY & SURGICAL
+                    </span>
                   </div>
-                  <div className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">
-                    Medical Technologies Corp. · Central Technical Documentation
-                  </div>
+                  <p className="text-[11px] text-slate-500 font-sans tracking-wide mt-0.5">
+                    Authorized Medical Device Distributor · MP · Chhattisgarh · South Rajasthan · UP
+                  </p>
                 </div>
-                <div className="text-right text-xs space-y-0.5">
-                  <div className="font-mono font-bold text-slate-900">{pdf.docNumber}</div>
-                  <div className="text-slate-500 font-mono text-[11px]">{pdf.revision} · Effective {pdf.effectiveDate}</div>
-                  <div className="text-[10px] text-cyan-800 font-semibold uppercase">ISO 13485:2016 Compliant</div>
+
+                <div className="text-right font-mono text-[10px] text-slate-600 space-y-0.5">
+                  <div className="font-bold text-slate-900">DOC: {pdf.docNumber}</div>
+                  <div>REV: {pdf.revision} · {pdf.effectiveDate}</div>
+                  <div className="text-cyan-800 font-semibold">PAGE {currentPage} OF {pdf.totalPages}</div>
                 </div>
               </div>
 
-              {/* Page Title */}
+              {/* Page Title & Subtitle */}
               <div className="mb-6">
-                <div className="text-xs uppercase tracking-wider text-cyan-800 font-semibold mb-1">
-                  Section {activePageData.pageNumber}.0 Documentation
-                </div>
-                <h1 className="text-xl sm:text-2xl font-bold text-slate-900">
+                <h1 className="text-lg sm:text-xl font-bold font-display text-slate-950">
                   {activePageData.title}
                 </h1>
-                <p className="text-sm text-slate-600 font-medium">
+                <p className="text-xs text-slate-600 font-medium mt-0.5">
                   {activePageData.subtitle}
                 </p>
               </div>
@@ -244,20 +223,20 @@ Inquiries: procurement@smpsurgitech.com | 1-800-787-4483
               {/* Key Instrument Metadata Strip */}
               <div className="bg-slate-50 border border-slate-200 rounded p-3 mb-6 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                 <div>
-                  <span className="text-slate-500 block text-[10px] uppercase">Catalog Model / SKU</span>
-                  <span className="font-mono font-bold text-slate-900">{product.sku}</span>
+                  <span className="text-slate-500 block text-[10px] uppercase font-semibold">Authorized Brand</span>
+                  <span className="font-bold text-slate-900">{product.brand}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[10px] uppercase">Alloy Grade</span>
-                  <span className="font-semibold text-slate-900 truncate block">{product.alloy}</span>
+                  <span className="text-slate-500 block text-[10px] uppercase font-semibold">Catalog SKU</span>
+                  <span className="font-mono font-bold text-cyan-900">{product.sku}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[10px] uppercase">Rockwell Hardness</span>
-                  <span className="font-mono font-bold text-slate-900">{product.metallurgy.rockwellHardness}</span>
+                  <span className="text-slate-500 block text-[10px] uppercase font-semibold">Sizing / Profile</span>
+                  <span className="font-medium text-slate-900 truncate block">{product.specs.profileOrSize}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[10px] uppercase">Regulatory Status</span>
-                  <span className="font-semibold text-emerald-700">CE MDR / FDA Exempt</span>
+                  <span className="text-slate-500 block text-[10px] uppercase font-semibold">Regulatory Status</span>
+                  <span className="font-semibold text-emerald-800">{product.regulatoryStatus[0] || 'Approved'}</span>
                 </div>
               </div>
 
@@ -288,9 +267,9 @@ Inquiries: procurement@smpsurgitech.com | 1-800-787-4483
                             {section.specs.map((spec, sIdx) => (
                               <tr key={sIdx} className={sIdx % 2 === 0 ? 'bg-white' : 'bg-slate-50/60'}>
                                 <td className="py-1.5 px-3 font-sans font-medium text-slate-900">{spec.parameter}</td>
-                                <td className="py-1.5 px-3 font-bold text-slate-950">{spec.nominal}</td>
+                                <td className="py-1.5 px-3 font-semibold text-slate-800">{spec.nominal}</td>
                                 <td className="py-1.5 px-3 text-slate-600">{spec.tolerance}</td>
-                                <td className="py-1.5 px-3 text-slate-500 font-sans">{spec.standard}</td>
+                                <td className="py-1.5 px-3 text-slate-600">{spec.standard}</td>
                               </tr>
                             ))}
                           </tbody>
@@ -300,10 +279,11 @@ Inquiries: procurement@smpsurgitech.com | 1-800-787-4483
 
                     {/* Bullet Points if present */}
                     {section.bulletPoints && section.bulletPoints.length > 0 && (
-                      <ul className="mt-2 space-y-1 text-xs text-slate-700 list-disc list-inside">
+                      <ul className="mt-2 space-y-1.5 text-xs text-slate-700">
                         {section.bulletPoints.map((bp, bIdx) => (
-                          <li key={bIdx} className="leading-relaxed">
-                            {bp}
+                          <li key={bIdx} className="flex items-start gap-2">
+                            <span className="text-cyan-800 font-bold">✓</span>
+                            <span>{bp}</span>
                           </li>
                         ))}
                       </ul>
@@ -313,35 +293,42 @@ Inquiries: procurement@smpsurgitech.com | 1-800-787-4483
               </div>
             </div>
 
-            {/* PDF Footer Sheet */}
-            <div className="pt-8 border-t border-slate-300 mt-8 flex items-center justify-between text-[10px] text-slate-500">
-              <div className="flex items-center gap-2">
-                <Shield className="w-3.5 h-3.5 text-cyan-800" />
-                <span>SMP Surgitech Quality Assurance · Certificate # ISO-13485-2026-QC</span>
+            {/* Formal Technical Sheet Footer */}
+            <div className="pt-8 mt-12 border-t border-slate-200 flex flex-wrap justify-between items-end text-[10px] text-slate-500 font-mono gap-4">
+              <div>
+                <div className="font-bold text-slate-700 uppercase">SMP Surgitech Distribution Assurance</div>
+                <div>Cold-Chain Storage & Tamper-Evident Hospital Consignment</div>
+                <div>Authorized Channel Partner for Abbott, Cordis, Teleflex, St. Jude Medical, J&J MedTech & Pocket ECG</div>
               </div>
-              <div className="font-mono">
-                Page {activePageData.pageNumber} of {pdf.totalPages} · Confidential B2B Medical Record
+              <div className="text-right">
+                <div className="flex items-center gap-1 justify-end text-emerald-800 font-sans font-semibold">
+                  <Shield className="w-3 h-3 text-emerald-600" />
+                  <span>ISO 13485:2016 Audited & CDSCO Licensed</span>
+                </div>
+                <div>Territory Warehouses: Udaipur · Indore · Raipur · Agra</div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Status / Quick Enquire Bar */}
-        <div className="bg-slate-950 border-t border-slate-800 px-4 py-2.5 flex items-center justify-between text-xs text-slate-400">
+        {/* Footer Action Strip */}
+        <div className="bg-slate-950 border-t border-slate-800 px-6 py-3 flex items-center justify-between text-xs text-slate-300">
           <div className="flex items-center gap-2">
-            <FileCheck className="w-4 h-4 text-emerald-400" />
-            <span>Digital Spec Sheet Verified · Ready for Hospital Procurement Submission</span>
+            <FileCheck className="w-4 h-4 text-cyan-400" />
+            <span className="hidden sm:inline">Official Technical Data Document</span>
+            <span className="font-mono text-cyan-300">[{product.sku}]</span>
           </div>
+
           <div className="flex items-center gap-3">
-            <span className="hidden sm:inline">Lead Time: {product.leadTime}</span>
             <button
               onClick={() => {
                 onClose();
-                onOpenEnquiry(product);
+                onRequestQuote(product);
               }}
-              className="text-cyan-400 hover:text-cyan-300 font-semibold cursor-pointer underline underline-offset-2"
+              className="py-1.5 px-4 bg-cyan-700 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
             >
-              Submit Quote Request for {product.sku} →
+              <Send className="w-3.5 h-3.5" />
+              <span>Enquire for Quote on this Model</span>
             </button>
           </div>
         </div>

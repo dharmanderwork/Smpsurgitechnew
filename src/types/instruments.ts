@@ -1,27 +1,20 @@
-export type SurgicalSpecialty =
-  | 'Cardiovascular & Thoracic'
-  | 'Neurosurgery & Spine'
-  | 'Orthopedics & Trauma'
-  | 'General & Laparoscopic'
-  | 'Microsurgery & Ophthalmic'
-  | 'OB/GYN & Urology';
+export type CardiologyCategory =
+  | 'Coronary Stents (XIENCE)'
+  | 'Diagnostic Physiology & Imaging (OCT / FFR)'
+  | 'Cardiovascular Physiology Systems (CoroFlow)'
+  | 'Structural Heart (TAVI)'
+  | 'Mechanical Circulatory Support (Impella & IABP)'
+  | 'Diagnostic Monitoring (Pocket ECG)'
+  | 'Cardiovascular Surgical Instruments';
 
-export type InstrumentType =
-  | 'Clamps & Hemostats'
-  | 'Scissors & Cutters'
-  | 'Forceps & Tweezers'
-  | 'Retractors'
-  | 'Needle Holders'
-  | 'Bone Rongeurs & Cutters'
-  | 'Suction & Cannulas'
-  | 'Systems & Trays';
-
-export type AlloyGrade =
-  | 'German DIN 1.4021 (AISI 420B) Stainless'
-  | 'German DIN 1.4116 / 1.4034 Martensitic'
-  | 'Titanium Ti-6Al-4V ELI (Grade 5)'
-  | 'Tungsten Carbide (TC) Inlays 72 HRC'
-  | 'Austenitic 316L Surgical Grade Steel';
+export type BrandManufacturer =
+  | 'Abbott (Vascular Division)'
+  | 'Cordis (Cardiology)'
+  | 'Teleflex (Vascular Division)'
+  | 'St. Jude Medical (CRM & Structural Heart)'
+  | 'J&J MedTech (Surgical Solutions)'
+  | 'Pocket ECG (Diagnostic Devices)'
+  | 'SMP Surgitech (Cardiovascular Surgical)';
 
 export interface SpecTableItem {
   parameter: string;
@@ -52,31 +45,20 @@ export interface Product {
   id: string;
   sku: string;
   name: string;
-  specialty: SurgicalSpecialty;
-  type: InstrumentType;
-  alloy: AlloyGrade;
+  brand: BrandManufacturer;
+  category: CardiologyCategory;
+  subcategory: string;
   shortDesc: string;
   clinicalApplication: string;
   keyFeatures: string[];
-  dimensions: {
-    totalLength: string;
-    tipWidth: string;
-    curvature?: string;
-    weightGrams: number;
+  specs: {
+    profileOrSize: string;
+    compatibilityOrSheath: string;
+    materialOrCoating: string;
+    shelfLifeOrSterility: string;
   };
-  metallurgy: {
-    rockwellHardness: string;
-    surfaceFinish: string;
-    magneticProperty: string;
-    corrosionPassivation: string;
-  };
-  reprocessing: {
-    autoclaveCycle: string;
-    maxTempCelsius: number;
-    compatibleCleaningChem: string;
-    cleaningPhRange: string;
-  };
-  compliance: string[];
+  mriSafety: string;
+  regulatoryStatus: string[];
   leadTime: string;
   packaging: string;
   image: string;
@@ -91,6 +73,47 @@ export interface RfqItem {
   notes?: string;
 }
 
+export interface TerritoryRegion {
+  state: string;
+  nameHindi?: string;
+  tagline: string;
+  hqCity: string;
+  cities: string[];
+  districtsHindi?: string[];
+  coverageStatus: 'Direct Warehousing & Same-Day Dispatch' | 'Active Cath Lab Logistics' | 'Dedicated Field Technical Support';
+  emergencyCourierHours: string;
+  activeHospitals: number;
+  repContact: {
+    title: string;
+    phone: string;
+    email: string;
+  };
+}
+
+export interface DealerBrand {
+  id: string;
+  name: string;
+  division: string;
+  focus: string;
+  description: string;
+  featuredProducts: string[];
+  badgeText: string;
+}
+
+export interface Testimonial {
+  id: string;
+  authorName: string;
+  designation: string;
+  institution: string;
+  city: string;
+  state: string;
+  rating: number; // 1-5
+  verifiedCathLab: boolean;
+  comment: string;
+  date: string;
+  specialty: string;
+}
+
 export interface LeadInquiry {
   id: string;
   createdAt: string;
@@ -100,9 +123,9 @@ export interface LeadInquiry {
   phone: string;
   hospitalName: string;
   department: string;
-  facilityType: 'Hospital' | 'Ambulatory Surgery Center' | 'Government/Military' | 'GPO/Distributor' | 'Other';
-  country: string;
-  targetTimeline: 'Immediate (Emergency)' | 'Within 2 Weeks' | 'Within 1 Month' | 'Quarterly Tender';
+  territoryState: 'Madhya Pradesh' | 'Chhattisgarh' | 'South Rajasthan' | 'Uttar Pradesh' | 'Other';
+  facilityType: 'Hospital / Cath Lab' | 'Cardiac Center of Excellence' | 'Government / Military' | 'Distributor / GPO' | 'Other';
+  targetTimeline: 'Immediate (Emergency Procedure)' | 'Within 24-48 Hours' | 'Within 1-2 Weeks' | 'Monthly Cath Lab Consignment';
   tenderReference?: string;
   message?: string;
   items: Array<{

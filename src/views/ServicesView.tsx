@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Product } from '../types/instruments';
-import { DirectInquiryForm } from '../components/DirectInquiryForm';
 import { 
   Truck, 
   ShieldCheck, 
@@ -10,8 +9,13 @@ import {
   ArrowRight, 
   Building2, 
   Send,
-  FileCheck
+  HeartPulse,
+  Activity,
+  Boxes,
+  Clock,
+  Sparkles
 } from 'lucide-react';
+import { generateRfqReference } from '../utils/rfq';
 
 interface ServicesViewProps {
   products: Product[];
@@ -24,279 +28,240 @@ export const ServicesView: React.FC<ServicesViewProps> = ({
   onNavigate,
   onOpenAiAssistant
 }) => {
-  const [activeService, setActiveService] = useState('consignment');
+  const [activeService, setActiveService] = useState('cathlab-consignment');
   const [formSent, setFormSent] = useState(false);
+  const [inquiryRef, setInquiryRef] = useState('');
   const [serviceForm, setServiceForm] = useState({
     hospitalName: '',
     contactName: '',
     workEmail: '',
     phone: '',
-    serviceType: 'Hospital Consignment Inventory',
-    department: 'Central Sterile & OR Management',
+    serviceType: 'Cath Lab Emergency Stent Consignment',
+    territoryState: 'South Rajasthan',
+    department: 'Interventional Cardiology / Cath Lab',
     message: ''
   });
 
   const services = [
     {
-      id: 'consignment',
-      name: 'Hospital Consignment Inventory',
-      headline: 'Zero-Capital Consignment Stocking Directly in Hospital Sterile Processing',
-      description: 'Eliminate procedure cancellations caused by missing surgical instruments. SMP Surgitech places pre-consigned trays and backup surgical stock directly inside your health network facilities with automated periodic replenishment.',
+      id: 'cathlab-consignment',
+      name: 'Cath Lab Emergency Stent Consignment',
+      headline: 'Permanent In-Hospital Consignment of XIENCE Stents & Balloon Catheters',
+      description: 'Eliminate procedure delays during acute coronary syndromes (ACS). SMP Surgitech places pre-consigned full size matrices of XIENCE Skypoint, Xpedition 48, Sierra, and Alpine stents directly inside hospital catheterization labs with monthly replenishment.',
       benefits: [
-        'Pay-per-use billing: Hospitals only incur cost when an instrument is consumed or opened',
-        'Emergency 24/7 restocking courier access across regional health corridors',
-        'Eliminates upfront capital expenditures on high-value cardiovascular & neuro surgical trays',
-        'Consignment inventory audited bi-monthly by certified SMP clinical logistics managers'
+        'Pay-per-use billing: Hospital is invoiced strictly upon consumption and sticker log',
+        'Guaranteed size matrix availability covering 2.25 mm to 4.0 mm up to 48 mm lengths',
+        'Emergency 1-3 hour express restocking from our Udaipur, Indore, Raipur, and Agra hubs',
+        'Full UDI and batch expiry surveillance managed by SMP field inventory managers'
       ]
     },
     {
-      id: 'udi-marking',
-      name: 'GS1 UDI Laser Marking & Serialization',
-      headline: 'Permanent Corrosion-Resistant Laser Annealing for Sterile Processing Automation',
-      description: 'Comply with FDA UDI and EU MDR device tracking regulations without degrading surgical stainless steel passivation. Our cold-laser annealing technology ensures indelible 2D Datamatrix codes that survive thousands of autoclaving cycles.',
+      id: 'standby-consoles',
+      name: 'Standby Hemodynamic Console Deployment',
+      headline: 'Emergency Deployment of IABP & CoroFlow Cardiovascular Platforms',
+      description: 'Ensure your ICU and Cath Lab never face equipment shortfalls during high-risk cardiac cases. We provide standby backup consoles for Intra-Aortic Balloon Pumps (IABP) and CoroFlow Microvascular systems with complete calibration certificates.',
       benefits: [
-        'Direct Part Marking (DPM) compatible with all major surgical instrument tracking software (Censitrac, SPM, Impress)',
-        'Custom human-readable alphanumeric strings for surgical department, room, and doctor initials',
-        'ASTM A967 verified passivation integrity post-annealing to prevent pitting rust',
-        'High-density 2D barcodes readable even under microscopic sterilization cameras'
+        'Dedicated standby IABP consoles stationed in key cities across MP, CG, South Rajasthan, and UP',
+        '24/7 technical hotline dispatch with factory-certified clinical applications engineers',
+        'Complete supply of sterile single-use disposable balloon catheters and sensors',
+        'Preventative maintenance and annual biomedical recertification included'
       ]
     },
     {
-      id: 'maintenance',
-      name: 'Sharpening, Passivation & Tray Audits',
-      headline: 'Comprehensive Preventive Maintenance & Surgical Edge Restoration',
-      description: 'Maintain surgical precision and prolong instrument lifespan. SMP Surgitech’s certified instrument technicians perform ultrasonic micro-cleaning, mechanical blade realignment, Tungsten Carbide insert replacements, and chemical bath passivation.',
+      id: 'cathlab-support',
+      name: 'Clinical Specialist Technical Support',
+      headline: 'Certified Applications Specialists for OCT, FFR & Complex PCI',
+      description: 'Our factory-trained clinical applications team supports interventional cardiologists during challenging cases, ensuring seamless OCT co-registration, accurate FFR physiology measurements, and CoroFlow microvascular data acquisition.',
       benefits: [
-        'Complete restorative sharpening of micro-scissors, osteotomes, and bone rongeurs',
-        'Tungsten Carbide (TC) gold-brazed insert replacement for needle holders and Metzenbaums',
-        'Chemical nitric/citric acid passivation restoration to eliminate free surface iron',
-        'Detailed compliance audit certificate for The Joint Commission and DNV hospital inspections'
+        'On-site procedural assistance during OCT pullback imaging and MLD MAX analysis',
+        'In-depth physician and cath lab technician training on coronary physiology indices (IMR, CFR, RRR)',
+        'Zero-drift PressureWire setup and calibration protocols',
+        'Assistance with case recordings and hospital registry documentation'
       ]
     },
     {
-      id: 'custom-oem',
-      name: 'OEM Sourcing & Custom Tray Assembly',
-      headline: 'Tailored Surgical Tray Configurations & Prototype Specialty Forging',
-      description: 'Partner with SMP Surgitech to configure customized multi-discipline surgical trays, specialized pediatric sets, or custom forged alloy prototypes tailored to specific surgeon preferences.',
+      id: 'surgical-sets',
+      name: 'Cardiovascular Surgical Tray Management',
+      headline: 'German DIN Stainless Steel Tray Audits & Restorations',
+      description: 'Complete lifecycle management for cardiothoracic and vascular operating rooms. We audit, refurbish, laser mark, and replenish open-heart clamping sets, CABG sternotomy retractors, and micro-vascular instruments.',
       benefits: [
-        'Turnkey anodized aluminum or stainless steel perforated sterilization cassettes with custom silicone brackets',
-        'Direct metallurgical sourcing from certified German DIN forge partners in Tuttlingen',
-        'Full technical documentation, CAD schematics, and DIN EN 285 autoclave cycle validation',
-        'Flexible batch order minimums for academic medical teaching hospitals'
+        'Tungsten Carbide (TC) jaw replacements on micro-needle holders and Potts scissors',
+        'Custom GS1 2D Datamatrix laser annealing with hospital department serialization',
+        'Repassivation according to ASTM A967 to ensure 100% autoclave corrosion immunity',
+        'Zero-capital tray consignment programs for expanding cardiac surgery departments'
       ]
     }
   ];
 
-  const currentServiceData = services.find((s) => s.id === activeService) || services[0];
+  const currentService = services.find((s) => s.id === activeService) || services[0];
 
-  const handleServiceSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const ref = generateRfqReference();
+    setInquiryRef(ref);
     setFormSent(true);
-    setTimeout(() => {
-      setFormSent(false);
-      setServiceForm({
-        hospitalName: '',
-        contactName: '',
-        workEmail: '',
-        phone: '',
-        serviceType: 'Hospital Consignment Inventory',
-        department: 'Central Sterile & OR Management',
-        message: ''
-      });
-    }, 4000);
   };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-12">
       {/* Header */}
       <div className="border-b border-slate-200 pb-6 space-y-2">
-        <div className="text-xs uppercase tracking-wider font-semibold text-cyan-800">
-          Enterprise Healthcare Solutions
+        <div className="text-xs uppercase tracking-wider font-semibold text-cyan-800 flex items-center gap-1.5">
+          <HeartPulse className="w-3.5 h-3.5" />
+          <span>Specialized B2B Distribution & Hospital Solutions</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-950 font-display">
-          Core B2B Surgical Distribution Services
+          Core Services & Cath Lab Consignment
         </h1>
         <p className="text-sm text-slate-600 max-w-2xl leading-relaxed">
-          Beyond individual instruments, SMP Surgitech partners with hospital surgical suites, procurement consortiums, and ambulatory surgery centers to optimize instrument lifecycles and ensure zero-downtime surgical readiness.
+          Beyond device distribution, SMP Surgitech partners with hospital cardiac institutes across Madhya Pradesh, Chhattisgarh, South Rajasthan, and Uttar Pradesh to ensure zero downtime in acute coronary care.
         </p>
       </div>
 
-      {/* Services Selector & Deep Dive */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left Column: Service Selection Navigation */}
-        <div className="lg:col-span-4 space-y-2">
-          {services.map((svc) => {
-            const isSelected = activeService === svc.id;
-            return (
-              <button
-                key={svc.id}
-                onClick={() => setActiveService(svc.id)}
-                className={`w-full text-left p-4 rounded-xl border transition-all cursor-pointer ${
-                  isSelected
-                    ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
-                    : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:border-slate-300'
-                }`}
-              >
-                <div className={`text-xs font-semibold ${isSelected ? 'text-cyan-400' : 'text-slate-500'}`}>
-                  Service Category
-                </div>
-                <div className="font-display font-bold text-base mt-0.5">
-                  {svc.name}
-                </div>
-              </button>
-            );
-          })}
+      {/* Services Grid Navigation */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+        {services.map((svc) => (
+          <button
+            key={svc.id}
+            onClick={() => setActiveService(svc.id)}
+            className={`p-4 rounded-xl text-left border transition-all cursor-pointer ${
+              activeService === svc.id
+                ? 'bg-slate-900 text-white border-slate-900 shadow-md'
+                : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
+            }`}
+          >
+            <div className="text-xs font-bold leading-snug">{svc.name}</div>
+          </button>
+        ))}
+      </div>
 
-          <div className="pt-4">
-            <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs text-slate-600 space-y-2">
-              <span className="font-bold text-slate-900 block">Hospital Procurement Support:</span>
-              <p>Need custom contract pricing or GPO alignment? Speak with a dedicated SMP Surgitech healthcare advisor.</p>
-              <button
-                onClick={() => onNavigate('contact')}
-                className="text-cyan-800 hover:text-cyan-950 font-bold flex items-center gap-1 cursor-pointer pt-1"
-              >
-                <span>Connect with Regional Advisor</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
+      {/* Active Service Showcase */}
+      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-10 space-y-8">
+        <div className="space-y-3">
+          <span className="text-xs font-mono font-bold text-cyan-900 uppercase tracking-wider bg-cyan-100/60 px-2.5 py-1 rounded">
+            SERVICE SPOTLIGHT
+          </span>
+          <h2 className="text-xl sm:text-2xl font-bold font-display text-slate-950">
+            {currentService.headline}
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl">
+            {currentService.description}
+          </p>
         </div>
 
-        {/* Right Column: Detailed Service Panel */}
-        <div className="lg:col-span-8 space-y-6">
-          <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-6">
-            <div>
-              <div className="text-xs uppercase tracking-wider font-semibold text-cyan-800 mb-1">
-                Institutional Service Specification
-              </div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-950 font-display">
-                {currentServiceData.headline}
-              </h2>
-              <p className="text-sm text-slate-600 mt-2 leading-relaxed">
-                {currentServiceData.description}
+        {/* Benefits List */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {currentService.benefits.map((b, i) => (
+            <div key={i} className="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs flex items-start gap-3">
+              <CheckCircle2 className="w-5 h-5 text-cyan-700 shrink-0 mt-0.5" />
+              <span className="text-xs text-slate-700 leading-relaxed font-medium">{b}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Institutional Inquiry Form for Services */}
+      <div className="bg-slate-900 text-white rounded-2xl p-8 border border-slate-800 shadow-lg">
+        {formSent ? (
+          <div className="text-center py-8 space-y-4 animate-fade-in max-w-md mx-auto">
+            <div className="w-12 h-12 rounded-full bg-emerald-950 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto">
+              <CheckCircle2 className="w-7 h-7" />
+            </div>
+            <h3 className="font-bold text-xl text-white">Service Agreement Inquiry Registered</h3>
+            <p className="text-xs text-slate-300">
+              Reference code: <strong className="font-mono text-cyan-400">{inquiryRef}</strong>. Our regional operations director will contact your materials management team within 2 hours.
+            </p>
+            <button
+              onClick={() => setFormSent(false)}
+              className="py-2 px-4 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg cursor-pointer"
+            >
+              Submit Another Inquiry
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="border-b border-slate-800 pb-4">
+              <h3 className="text-lg font-bold text-white font-display">
+                Initiate a Hospital Consignment or Standby Console Agreement
+              </h3>
+              <p className="text-xs text-slate-400 mt-1">
+                Direct consultation for Cath Lab Directors, Purchase Committees & Healthcare Systems.
               </p>
             </div>
 
-            {/* Key Benefits Grid */}
-            <div className="space-y-3 pt-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
-                Core Institutional Deliverables & Standards
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {currentServiceData.benefits.map((benefit, bIdx) => (
-                  <div key={bIdx} className="bg-slate-50 p-3.5 rounded-lg border border-slate-200/80 flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-cyan-700 shrink-0 mt-0.5" />
-                    <span className="text-xs text-slate-700 leading-relaxed">{benefit}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Service-Specific Lead Capture Form */}
-            <div className="pt-4 border-t border-slate-200 space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
               <div>
-                <h3 className="text-base font-bold text-slate-900">
-                  Request an Institutional Consultation for {currentServiceData.name}
-                </h3>
-                <p className="text-xs text-slate-500">
-                  A regional healthcare logistics specialist will review your surgical suite volume and provide a detailed implementation roadmap.
-                </p>
+                <label className="block text-slate-300 font-semibold mb-1">Contact Name & Designation *</label>
+                <input
+                  required
+                  type="text"
+                  placeholder="Dr. R. K. Sharma / Cath Lab In-charge"
+                  value={serviceForm.contactName}
+                  onChange={(e) => setServiceForm({ ...serviceForm, contactName: e.target.value })}
+                  className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-1 focus:ring-cyan-400 text-xs"
+                />
               </div>
 
-              {formSent ? (
-                <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 text-emerald-800 space-y-2">
-                  <div className="flex items-center gap-2 font-bold text-sm">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                    <span>Inquiry Registered Successfully</span>
-                  </div>
-                  <p className="text-xs text-emerald-700">
-                    Your institutional inquiry has been routed to our Central Hospital Solutions team. An account representative will contact you within 4 business hours.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleServiceSubmit} className="space-y-3 text-xs">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Dr. Jordan Blake, MD"
-                        value={serviceForm.contactName}
-                        onChange={(e) => setServiceForm({ ...serviceForm, contactName: e.target.value })}
-                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
-                        Work Email *
-                      </label>
-                      <input
-                        type="email"
-                        placeholder="jblake@hospital.org"
-                        value={serviceForm.workEmail}
-                        onChange={(e) => setServiceForm({ ...serviceForm, workEmail: e.target.value })}
-                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800"
-                        required
-                      />
-                    </div>
-                  </div>
+              <div>
+                <label className="block text-slate-300 font-semibold mb-1">Institutional Email *</label>
+                <input
+                  required
+                  type="email"
+                  placeholder="name@hospital.org"
+                  value={serviceForm.workEmail}
+                  onChange={(e) => setServiceForm({ ...serviceForm, workEmail: e.target.value })}
+                  className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-1 focus:ring-cyan-400 text-xs"
+                />
+              </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
-                        Hospital / Health System *
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Northwestern Memorial Hospital"
-                        value={serviceForm.hospitalName}
-                        onChange={(e) => setServiceForm({ ...serviceForm, hospitalName: e.target.value })}
-                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
-                        Direct Phone
-                      </label>
-                      <input
-                        type="tel"
-                        placeholder="+1 (555) 234-5678"
-                        value={serviceForm.phone}
-                        onChange={(e) => setServiceForm({ ...serviceForm, phone: e.target.value })}
-                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800"
-                      />
-                    </div>
-                  </div>
+              <div>
+                <label className="block text-slate-300 font-semibold mb-1">Hospital / Medical Center *</label>
+                <input
+                  required
+                  type="text"
+                  placeholder="e.g. Pacific Medical College, Udaipur"
+                  value={serviceForm.hospitalName}
+                  onChange={(e) => setServiceForm({ ...serviceForm, hospitalName: e.target.value })}
+                  className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-1 focus:ring-cyan-400 text-xs"
+                />
+              </div>
 
-                  <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
-                      Specific Service Scope or Annual Volume Details (Optional)
-                    </label>
-                    <textarea
-                      rows={2}
-                      placeholder="Number of surgical suites, current tray count, or target consignment timeline..."
-                      value={serviceForm.message}
-                      onChange={(e) => setServiceForm({ ...serviceForm, message: e.target.value })}
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full py-2.5 px-4 text-xs font-semibold text-white bg-slate-900 hover:bg-cyan-900 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
-                  >
-                    <Send className="w-3.5 h-3.5" />
-                    <span>Submit Service Consultation Request</span>
-                  </button>
-                </form>
-              )}
+              <div>
+                <label className="block text-slate-300 font-semibold mb-1">Territory State *</label>
+                <select
+                  value={serviceForm.territoryState}
+                  onChange={(e) => setServiceForm({ ...serviceForm, territoryState: e.target.value })}
+                  className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-1 focus:ring-cyan-400 text-xs"
+                >
+                  <option value="South Rajasthan">South Rajasthan (Udaipur, Dungarpur, Banswara...)</option>
+                  <option value="Madhya Pradesh">Madhya Pradesh (Indore, Bhopal, Jabalpur...)</option>
+                  <option value="Chhattisgarh">Chhattisgarh (Raipur, Bilaspur, Durg-Bhilai...)</option>
+                  <option value="Uttar Pradesh">Part of Uttar Pradesh (Kanpur, Agra, Jhansi...)</option>
+                  <option value="Other">Other Region</option>
+                </select>
+              </div>
             </div>
-          </div>
-        </div>
+
+            <div>
+              <label className="block text-slate-300 font-semibold mb-1 text-xs">Specific Consignment or Standby Requirements</label>
+              <textarea
+                rows={3}
+                placeholder="Indicate projected monthly stent consumption, emergency console requirements, or preferred delivery timing..."
+                value={serviceForm.message}
+                onChange={(e) => setServiceForm({ ...serviceForm, message: e.target.value })}
+                className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-1 focus:ring-cyan-400 text-xs resize-none"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="py-3 px-6 bg-cyan-700 hover:bg-cyan-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-2 cursor-pointer shadow-md"
+            >
+              <Send className="w-4 h-4" />
+              <span>Submit Service Requisition</span>
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );

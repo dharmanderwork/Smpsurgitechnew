@@ -1,847 +1,1180 @@
-import { Product } from '../types/instruments';
+import { Product, DealerBrand, TerritoryRegion, Testimonial } from '../types/instruments';
 
-export const HERO_IMAGE = '/src/assets/images/smp_hero_surgical_instruments_1792343796772.jpg';
-export const CARDIO_NEURO_IMAGE = '/src/assets/images/smp_cardio_neuro_instruments_1792343798351.jpg';
-export const ORTHOPEDIC_IMAGE = '/src/assets/images/smp_orthopedic_surgical_set_1792343798115.jpg';
-export const QUALITY_LAB_IMAGE = '/src/assets/images/smp_quality_metallurgy_inspection_1792343798753.jpg';
+export const HERO_IMAGE = '/src/assets/images/smp_xience_coronary_stent_1792349506273.jpg';
+export const CATHLAB_OCT_IMAGE = '/src/assets/images/smp_cathlab_oct_coroflow_1792349506467.jpg';
+export const IMPELLA_IABP_IMAGE = '/src/assets/images/smp_impella_iabp_circulatory_1792349522773.jpg';
+export const POCKET_ECG_IMAGE = '/src/assets/images/smp_pocket_ecg_diagnostic_1792349523041.jpg';
+export const SURGICAL_SET_IMAGE = '/src/assets/images/smp_hero_surgical_instruments_1792343796772.jpg';
+export const CARDIO_INSTRUMENTS_IMAGE = '/src/assets/images/smp_cardio_neuro_instruments_1792343798351.jpg';
+
+export const DEALER_BRANDS: DealerBrand[] = [
+  {
+    id: 'abbott-vascular',
+    name: 'Abbott',
+    division: 'Vascular Division',
+    focus: 'Coronary Stents (XIENCE), OCT & FFR Physiology',
+    description: 'Global benchmark in drug-eluting coronary stents (XIENCE Skypoint, Xpedition 48, Sierra, Alpine), optical coherence tomography (OCT), and physiological guidewires.',
+    featuredProducts: ['XIENCE Skypoint', 'XIENCE Xpedition 48', 'XIENCE Sierra', 'XIENCE Alpine', 'OCT Imaging System', 'FFR PressureWire'],
+    badgeText: 'Authorized Channel Partner'
+  },
+  {
+    id: 'cordis-cardiology',
+    name: 'Cordis',
+    division: 'Cardiology',
+    focus: 'Interventional Cardiology, Transradial Access & Guiding Catheters',
+    description: 'Pioneers in high-performance diagnostic catheters, steerable coronary guidewires, transradial sheaths, and advanced vascular closure solutions.',
+    featuredProducts: ['Diagnostic Catheters', 'Steerable Guidewires', 'Transradial Sheaths', 'Vascular Access Sets'],
+    badgeText: 'Authorized Cardiology Distributor'
+  },
+  {
+    id: 'teleflex-vascular',
+    name: 'Teleflex',
+    division: 'Vascular Division',
+    focus: 'Arrow Vascular Access & Intra-Aortic Balloon Pumps (IABP)',
+    description: 'World-renowned Arrow hemodynamic catheterization, intra-aortic balloon pumps (IABP), emergency vascular access, and arterial line systems.',
+    featuredProducts: ['IABP Pump Console', 'AutoCAT 2 Wave Catheters', 'Arrow Central Venous Access', 'Radial Artery Lines'],
+    badgeText: 'Authorized Vascular Partner'
+  },
+  {
+    id: 'st-jude-medical',
+    name: 'St. Jude Medical',
+    division: 'CRM & Structural Heart',
+    focus: 'Cardiac Rhythm Management & TAVI Structural Solutions',
+    description: 'Industry-defining pacemakers, implantable cardioverter defibrillators (ICDs), and transcatheter aortic valve implantation (TAVI) structural heart platforms.',
+    featuredProducts: ['TAVI Structural Valve Systems', 'Leadless Pacemakers', 'Cardiac Resynchronization (CRT)', 'Electrophysiology Catheters'],
+    badgeText: 'Structural Heart Partner'
+  },
+  {
+    id: 'jnj-medtech',
+    name: 'J&J MedTech',
+    division: 'Surgical Solutions',
+    focus: 'Cardiovascular Surgical Instruments & Mechanical Circulatory Support',
+    description: 'Comprehensive surgical innovations including cardiovascular instruments, surgical sutures, and advanced mechanical circulatory support systems (Impella pVAD).',
+    featuredProducts: ['Impella 2.5 / CP / 5.0 pVAD', 'Cardiovascular Suture Solutions', 'Micro-Surgical Forceps', 'Hemostatic Devices'],
+    badgeText: 'Authorized MedTech Partner'
+  },
+  {
+    id: 'pocket-ecg',
+    name: 'Pocket ECG',
+    division: 'Diagnostic Devices',
+    focus: 'Continuous Real-Time Ambulatory Arrhythmia Telemetry',
+    description: 'Next-generation hospital and outpatient continuous ECG monitoring, complete full-disclosure arrhythmia detection, and cellular-connected cloud reporting.',
+    featuredProducts: ['Pocket ECG Mobile Monitor', 'Full-Disclosure Software', 'Hospital Holter Diagnostic Suite', 'Emergency Telemetry Sensor'],
+    badgeText: 'Exclusive Diagnostic Dealer'
+  }
+];
+
+export const TERRITORY_REGIONS: TerritoryRegion[] = [
+  {
+    state: 'South Rajasthan',
+    nameHindi: 'दक्षिण राजस्थान',
+    tagline: 'Direct Regional Warehouse & Rapid Cath Lab Supply Hub',
+    hqCity: 'Udaipur (उदयपुर)',
+    cities: [
+      'Udaipur (उदयपुर)',
+      'Dungarpur (डूंगरपुर)',
+      'Banswara (बांसवाड़ा)',
+      'Pratapgarh (प्रतापगढ़)',
+      'Rajsamand (राजसमंद)',
+      'Chittorgarh (चित्तौड़गढ़)',
+      'Bhilwara (भीलवाड़ा)'
+    ],
+    districtsHindi: [
+      'उदयपुर (Udaipur)',
+      'डूंगरपुर (Dungarpur)',
+      'बांसवाड़ा (Banswara)',
+      'प्रतापगढ़ (Pratapgarh)',
+      'राजसमंद (Rajsamand)',
+      'चित्तौड़गढ़ (Chittorgarh)',
+      'भीलवाड़ा (Bhilwara)'
+    ],
+    coverageStatus: 'Direct Warehousing & Same-Day Dispatch',
+    emergencyCourierHours: '1 to 3 Hours to Cath Labs',
+    activeHospitals: 84,
+    repContact: {
+      title: 'South Rajasthan Regional Operations Desk',
+      phone: '+91 94140 88210 / +91 (0294) 249-8800',
+      email: 'rajasthan.desk@smpsurgitech.com'
+    }
+  },
+  {
+    state: 'Madhya Pradesh (MP)',
+    nameHindi: 'मध्य प्रदेश',
+    tagline: 'Extensive State-Wide Consignment & Emergency Backup',
+    hqCity: 'Indore / Bhopal Hubs',
+    cities: [
+      'Indore (इंदौर)',
+      'Bhopal (भोपाल)',
+      'Jabalpur (जबलपुर)',
+      'Gwalior (ग्वालियर)',
+      'Ujjain (उज्जैन)',
+      'Sagar (सागर)',
+      'Rewa (रीवा)',
+      'Ratlam (रतलाम)'
+    ],
+    coverageStatus: 'Direct Warehousing & Same-Day Dispatch',
+    emergencyCourierHours: '2 to 4 Hours to Cath Labs',
+    activeHospitals: 142,
+    repContact: {
+      title: 'Madhya Pradesh Regional Lead',
+      phone: '+91 98260 55190',
+      email: 'mp.logistics@smpsurgitech.com'
+    }
+  },
+  {
+    state: 'Chhattisgarh (CG)',
+    nameHindi: 'छत्तीसगढ़',
+    tagline: 'Dedicated Cold-Chain & 24/7 Cath Lab Standby Support',
+    hqCity: 'Raipur / Durg-Bhilai Hubs',
+    cities: [
+      'Raipur (रायपुर)',
+      'Bilaspur (बिलासपुर)',
+      'Durg-Bhilai (दुर्ग-भिलाई)',
+      'Korba (कोरबा)',
+      'Rajnandgaon (राजनंदगांव)',
+      'Jagdalpur (जगदलपुर)',
+      'Raigarh (रायगढ़)'
+    ],
+    coverageStatus: 'Active Cath Lab Logistics',
+    emergencyCourierHours: '2 to 4 Hours to Cath Labs',
+    activeHospitals: 68,
+    repContact: {
+      title: 'Chhattisgarh Territory In-Charge',
+      phone: '+91 94252 44120',
+      email: 'cg.cardio@smpsurgitech.com'
+    }
+  },
+  {
+    state: 'Part of Uttar Pradesh (UP)',
+    nameHindi: 'उत्तर प्रदेश (चयनित क्षेत्र)',
+    tagline: 'Specialized Interventional & Surgical Support Corridor',
+    hqCity: 'Agra / Kanpur Corridor',
+    cities: [
+      'Kanpur (कानपुर)',
+      'Agra (आगरा)',
+      'Jhansi (झांसी)',
+      'Prayagraj (प्रयागराज)',
+      'Varanasi (वाराणसी)',
+      'Aligarh (अलीगढ़)'
+    ],
+    coverageStatus: 'Dedicated Field Technical Support',
+    emergencyCourierHours: '3 to 5 Hours Dedicated Express',
+    activeHospitals: 95,
+    repContact: {
+      title: 'UP Interventional Corridor Desk',
+      phone: '+91 97920 33410',
+      email: 'up.cardio@smpsurgitech.com'
+    }
+  }
+];
+
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    id: 'test-1',
+    authorName: 'Dr. R. K. Maheshwari, MD, DM',
+    designation: 'Chief Interventional Cardiologist & Cath Lab Director',
+    institution: 'Pacific Medical College & Hospital / Geetanjali Cardiac Center',
+    city: 'Udaipur',
+    state: 'South Rajasthan',
+    rating: 5,
+    verifiedCathLab: true,
+    comment: 'SMP Surgitech is our most reliable partner for acute coronary intervention supplies in South Rajasthan. Their availability of XIENCE Skypoint stents and immediate on-site OCT imaging catheter backup during high-risk emergency angioplasties in Udaipur is unrivaled.',
+    date: 'February 2026',
+    specialty: 'Interventional Cardiology'
+  },
+  {
+    id: 'test-2',
+    authorName: 'Dr. Vivek Sharma, MS, MCh (CTVS)',
+    designation: 'Head of Cardiothoracic & Vascular Surgery',
+    institution: 'Medanta Cardiac Care / CHL Hospitals',
+    city: 'Indore',
+    state: 'Madhya Pradesh',
+    rating: 5,
+    verifiedCathLab: true,
+    comment: 'We rely on SMP Surgitech for both critical hemodynamic consoles like IABP and precision cardiovascular surgical instrument sets. Their batch verification, cold-chain discipline, and 2-hour response time in Indore make them an indispensable healthcare partner.',
+    date: 'January 2026',
+    specialty: 'Cardiothoracic Surgery'
+  },
+  {
+    id: 'test-3',
+    authorName: 'Dr. Ananya Sengupta, MD, DNB (Cardiology)',
+    designation: 'Senior Consultant & Cath Lab In-Charge',
+    institution: 'Apollo Hospitals / Ramkrishna CARE Medical Sciences',
+    city: 'Raipur',
+    state: 'Chhattisgarh',
+    rating: 5,
+    verifiedCathLab: true,
+    comment: 'SMP Surgitech provided rapid turnaround for the CoroFlow cardiovascular microvascular diagnostic system in our lab. Their clinical support team is exceptionally knowledgeable, and consignment tracking has zero discrepancies.',
+    date: 'March 2026',
+    specialty: 'Complex PCI & Microvascular Physiology'
+  },
+  {
+    id: 'test-4',
+    authorName: 'Dr. S. P. Tripathi, MD, DM (Cardiology)',
+    designation: 'Director of Interventional Cardiology',
+    institution: 'Regency Hospital & Cardiac Institute',
+    city: 'Kanpur',
+    state: 'Uttar Pradesh',
+    rating: 5,
+    verifiedCathLab: true,
+    comment: 'When performing long diffuse coronary stenting, having the XIENCE Xpedition 48 in stock is crucial. SMP Surgitech ensures our hospital always has full size matrix consignment ready without delay.',
+    date: 'January 2026',
+    specialty: 'Coronary Stenting & TAVI'
+  },
+  {
+    id: 'test-5',
+    authorName: 'Dr. Naresh Choudhary, MBBS, MS',
+    designation: 'Chief Medical Superintendent & Procurement Chair',
+    institution: 'Bhilwara Heart & Multispeciality Hospital',
+    city: 'Bhilwara',
+    state: 'South Rajasthan',
+    rating: 5,
+    verifiedCathLab: true,
+    comment: 'For hospitals in Bhilwara, Chittorgarh, and Rajsamand, having SMP Surgitech warehouse in nearby Udaipur means emergency delivery within 90 minutes. Their Pocket ECG diagnostic units and Abbott vascular systems have elevated our patient care.',
+    date: 'February 2026',
+    specialty: 'Hospital Administration & Procurement'
+  }
+];
 
 export const SURGICAL_PRODUCTS: Product[] = [
+  // 1. XIENCE Skypoint
   {
-    id: 'smp-debakey-clamp',
-    sku: 'SMP-CV-4012',
-    name: 'DeBakey Atraumatic Vascular Clamp 60° Angled',
-    specialty: 'Cardiovascular & Thoracic',
-    type: 'Clamps & Hemostats',
-    alloy: 'German DIN 1.4021 (AISI 420B) Stainless',
-    shortDesc: 'Atraumatic vascular clamp with DeBakey longitudinal micro-serrations designed to eliminate endothelial vessel trauma during arterial clamping.',
-    clinicalApplication: 'Aortic aneurysm repair, peripheral vascular bypass grafting, carotid endarterectomy, and pulmonary artery occlusion.',
+    id: 'xience-skypoint',
+    sku: 'ABT-XNC-SKY',
+    name: 'XIENCE Skypoint™ Everolimus-Eluting Coronary Stent System',
+    brand: 'Abbott (Vascular Division)',
+    category: 'Coronary Stents (XIENCE)',
+    subcategory: 'Next-Gen Ultra-Deliverable Drug-Eluting Stent',
+    shortDesc: 'Abbott’s latest generation drug-eluting coronary stent engineered with exceptional deliverability, low crossing profile, and multi-expansion limit up to 5.75 mm for complex bifurcations.',
+    clinicalApplication: 'Primary percutaneous coronary intervention (PCI), acute coronary syndrome (ACS), left main bifurcations, and severely tortuous coronary anatomies.',
     keyFeatures: [
-      'Spring-loaded ratchet with progressive 5-stage graduated tension locking',
-      'Dual opposing non-crushing DeBakey micro-ribs',
-      'Anti-glare electro-satin passivation finish prevents surgical field reflection',
-      'Precision box lock joint for permanent jaw alignment'
+      'Multi-expansion capability expanding up to 5.75 mm post-dilatation limit',
+      'Ultra-thin strut design with proven fluoropolymer biocompatible coating',
+      'Engineered for complex left main and calcified bifurcation stenting',
+      'Outstanding trackability with flexible tip geometry'
     ],
-    dimensions: {
-      totalLength: '195 mm / 7.7 in',
-      tipWidth: '2.5 mm jaw profile',
-      curvature: '60° calibrated angle',
-      weightGrams: 58
+    specs: {
+      profileOrSize: 'Diameters: 2.25 - 4.0 mm | Lengths: 8 - 38 mm',
+      compatibilityOrSheath: '5F / 6F Guide Catheter Compatible (0.014" Guidewire)',
+      materialOrCoating: 'Cobalt-Chromium (CoCr) alloy with Fluoropolymer + Everolimus',
+      shelfLifeOrSterility: 'Sterile Ethylene Oxide (EO) | 3-Year Shelf Life'
     },
-    metallurgy: {
-      rockwellHardness: '52 - 54 HRC',
-      surfaceFinish: 'Satin Matte Passivated (ISO 7153-1)',
-      magneticProperty: 'Ferromagnetic (Martensitic)',
-      corrosionPassivation: 'ASTM A967 Citric/Nitric validated'
-    },
-    reprocessing: {
-      autoclaveCycle: 'Pre-vacuum steam: 134°C (273°F) for 4 min',
-      maxTempCelsius: 138,
-      compatibleCleaningChem: 'Enzymatic neutral pH detergents (pH 7.0 - 8.5)',
-      cleaningPhRange: '6.5 - 8.5'
-    },
-    compliance: ['ISO 13485:2016', 'CE Mark MDR Class Ir', 'FDA 510(k) Exempt / Class I', 'DIN EN ISO 7153-1'],
-    leadTime: 'In Stock / 24-48h Express Dispatch',
-    packaging: 'Rigid protective blister cassette with individual UDI-DI barcode',
+    mriSafety: 'MR Conditional up to 3.0 Tesla',
+    regulatoryStatus: ['CDSCO / DCGI Approved', 'US FDA Approved', 'CE Mark Certified', 'ISO 13485'],
+    leadTime: 'Immediate Dispatch / 2-3h Emergency Delivery across MP, CG, South Rajasthan & UP',
+    packaging: 'Single unit sterile tyvek blister pack with traceability UDI labels',
     image: HERO_IMAGE,
     featured: true,
     pdfSpec: {
-      docNumber: 'TDS-SMP-CV-4012-REV4',
-      revision: 'Rev 4.2 (2026)',
-      effectiveDate: '2026-01-15',
-      totalPages: 3,
-      pages: [
-        {
-          pageNumber: 1,
-          title: 'Dimensional & Metallurgical Specifications',
-          subtitle: 'DeBakey Atraumatic Vascular Clamp · Model SMP-CV-4012',
-          sections: [
-            {
-              heading: '1.0 Instrument Overview & Engineering Scope',
-              text: 'The SMP-CV-4012 DeBakey Vascular Clamp is manufactured from certified German DIN 1.4021 martensitic stainless steel, heat-treated in vacuum furnaces to achieve uniform crystalline grain structure. The atraumatic jaw features precision wire-EDM machined intermeshing serrations that distribute clamping pressure evenly along vessel walls, preventing endothelial tearing.',
-              specs: [
-                { parameter: 'Overall Length', nominal: '195.0 mm', tolerance: '± 1.0 mm', standard: 'DIN 58298' },
-                { parameter: 'Jaw Working Length', nominal: '65.0 mm', tolerance: '± 0.5 mm', standard: 'ISO 7153-1' },
-                { parameter: 'Tip Width', nominal: '2.45 mm', tolerance: '± 0.15 mm', standard: 'SMP Spec S-102' },
-                { parameter: 'Rockwell Hardness', nominal: '53.0 HRC', tolerance: '52 - 54 HRC', standard: 'ASTM E18' },
-                { parameter: 'Ratchet Retention Force', nominal: '14.2 N', tolerance: '± 1.5 N', standard: 'ISO 13485 QC' }
-              ]
-            },
-            {
-              heading: '1.1 Metallurgical Composition (wt %)',
-              text: 'Carbon (C): 0.16–0.25% | Chromium (Cr): 12.0–14.0% | Manganese (Mn): ≤ 1.00% | Silicon (Si): ≤ 1.00% | Phosphorus (P): ≤ 0.040% | Sulfur (S): ≤ 0.030%. Residual ferrite content confirmed < 1.5% via ferritoscope.',
-              bulletPoints: [
-                'Complies strictly with DIN EN ISO 7153-1: Surgical Instruments - Metallic Materials',
-                'Passivated according to ASTM A967 / A967M dual chemical bath standards',
-                'Zero micro-crack propagation under 15,000 cyclic ratchet fatigue tests'
-              ]
-            }
-          ]
-        },
-        {
-          pageNumber: 2,
-          title: 'Reprocessing, Cleaning & Sterilization Protocols',
-          subtitle: 'Validated Hospital Central Sterile Processing Department (CSPD) Guidelines',
-          sections: [
-            {
-              heading: '2.0 Point-of-Use Preparation & Cleaning',
-              text: 'Rinse instruments immediately following surgery with cold deionized water to prevent drying of blood and biological soils. Submerge open in an ultrasonic bath containing neutral enzymatic cleaner at 40°C–45°C for 10 minutes. Avoid wire brushes or chloride-containing bleaches.',
-              bulletPoints: [
-                'Pre-wash: Demineralized water rinse at < 25°C for 3 minutes',
-                'Enzymatic wash: pH 7.0–8.2 detergent at 45°C for 5 minutes',
-                'Thermal disinfection: 93°C (200°F) for 5 minutes (A0 value ≥ 3000)',
-                'Lubrication: Apply water-soluble medical instrument milk to box lock prior to autoclave'
-              ]
-            },
-            {
-              heading: '2.1 Validated Sterilization Cycles',
-              text: 'Steam Autoclave: Recommended pre-vacuum cycle at 134°C (273°F) for minimum 4 minutes exposure time with a minimum 20-minute drying phase. Alternatively, gravity displacement cycle at 121°C (250°F) for 30 minutes.',
-              specs: [
-                { parameter: 'Pre-Vacuum Steam Exposure', nominal: '134°C', tolerance: '134°C - 137°C', standard: 'ISO 17665-1' },
-                { parameter: 'Minimum Exposure Time', nominal: '4.0 min', tolerance: '4 - 18 min', standard: 'EN 285' },
-                { parameter: 'Post-Vacuum Drying Time', nominal: '25 min', tolerance: '≥ 20 min', standard: 'AAMI ST79' },
-                { parameter: 'Max Permissible Pressure', nominal: '3.1 bar', tolerance: 'max 3.4 bar', standard: 'EN 13060' }
-              ]
-            }
-          ]
-        },
-        {
-          pageNumber: 3,
-          title: 'Regulatory Certificates & UDI Traceability',
-          subtitle: 'Quality Assurance Matrix & Hospital Consignment Data',
-          sections: [
-            {
-              heading: '3.0 Quality Control Compliance Declarations',
-              text: 'SMP Surgitech Medical Technologies Corp certifies that this instrument is manufactured in facilities governed by ISO 13485:2016 quality management systems. Tested and certified under EU MDR 2017/745 Class Ir and US FDA 21 CFR 878.',
-              bulletPoints: [
-                'Unique Device Identification (UDI): GS1 Datamatrix 2D laser-etched onto shank',
-                'Biocompatibility test certificate: ISO 10993 cytotoxicity and hemocompatibility verified',
-                'Corrosion Resistance: Copper Sulfate boil test verified per ASTM F1089',
-                'Consignment Lot Tracking: Batch Lot # SMP-2026-B91'
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    id: 'smp-titanium-micro-forceps',
-    sku: 'SMP-NE-8820',
-    name: 'Castroviejo-Micro Titanium Bipolar Forceps 0.4mm',
-    specialty: 'Neurosurgery & Spine',
-    type: 'Forceps & Tweezers',
-    alloy: 'Titanium Ti-6Al-4V ELI (Grade 5)',
-    shortDesc: 'Ultra-lightweight titanium non-magnetic micro-forceps with 0.4 mm precision tips and non-stick gold-insulated thermal dissipation.',
-    clinicalApplication: 'Cerebrovascular aneurysm clipping, micro-vascular anastomosis, vestibular schwannoma resection, and spinal cord micro-dissection.',
-    keyFeatures: [
-      '100% MRI-safe, non-ferromagnetic Ti-6Al-4V ELI surgical titanium',
-      '60% lighter than standard surgical steel to minimize surgeon hand fatigue during 8+ hour operations',
-      'Precision aligned 0.4 mm micro-coagulation tips',
-      'Ergonomic diamond knurled spring handles with micro-guide pin'
-    ],
-    dimensions: {
-      totalLength: '180 mm / 7.1 in',
-      tipWidth: '0.4 mm ultra-fine',
-      curvature: 'Straight with guide pin',
-      weightGrams: 22
-    },
-    metallurgy: {
-      rockwellHardness: '36 - 40 HRC (Titanium Core)',
-      surfaceFinish: 'Anodized Medical Blue & Micro-Polished Tips',
-      magneticProperty: 'Completely Non-Magnetic (MRI Conditional 3T/7T)',
-      corrosionPassivation: 'Titanium Dioxide native oxide passivation'
-    },
-    reprocessing: {
-      autoclaveCycle: 'Pre-vacuum steam: 134°C (273°F) for 5 min',
-      maxTempCelsius: 140,
-      compatibleCleaningChem: 'Enzymatic neutral pH cleaners (pH 7.0 - 8.0 strictly)',
-      cleaningPhRange: '6.8 - 8.2'
-    },
-    compliance: ['ISO 13485:2016', 'CE Mark MDR Class Ir', 'FDA Class I 510(k) Exempt', 'ASTM F136'],
-    leadTime: 'In Stock / 24-48h Express Dispatch',
-    packaging: 'Silicone finger mat autoclavable micro-container',
-    image: CARDIO_NEURO_IMAGE,
-    featured: true,
-    pdfSpec: {
-      docNumber: 'TDS-SMP-NE-8820-REV2',
-      revision: 'Rev 2.8 (2026)',
-      effectiveDate: '2026-02-10',
-      totalPages: 3,
-      pages: [
-        {
-          pageNumber: 1,
-          title: 'Micro-Surgical Titanium Specifications',
-          subtitle: 'Titanium Bipolar Micro-Forceps · Model SMP-NE-8820',
-          sections: [
-            {
-              heading: '1.0 Engineering Specifications',
-              text: 'Designed for high-acuity microsurgical environments requiring zero magnetic deflection and extreme tactile responsiveness. Grade 5 ELI titanium offers superior strength-to-weight ratio and bio-inertness.',
-              specs: [
-                { parameter: 'Total Length', nominal: '180.0 mm', tolerance: '± 0.5 mm', standard: 'ASTM F136' },
-                { parameter: 'Tip Profile Width', nominal: '0.40 mm', tolerance: '± 0.03 mm', standard: 'Optical Micrometer' },
-                { parameter: 'Spring Closing Force', nominal: '1.8 N', tolerance: '± 0.2 N', standard: 'Tension Gauge' },
-                { parameter: 'MRI Deflection Angle', nominal: '0.0° at 3.0T', tolerance: 'Zero Deflection', standard: 'ASTM F2052' }
-              ]
-            }
-          ]
-        },
-        {
-          pageNumber: 2,
-          title: 'Reprocessing & Care Guidelines',
-          subtitle: 'Special Handling for Fine Micro-Tips & Titanium Anodization',
-          sections: [
-            {
-              heading: '2.0 Central Sterile Reprocessing Protocols',
-              text: 'Never stack heavy instruments on titanium micro-forceps. Always sterilize within dedicated micro-instrument trays with soft medical silicone finger cushioning.',
-              bulletPoints: [
-                'Inspect tips under 10x stereo microscope after every cleaning cycle',
-                'Avoid acidic or alkaline detergents (pH outside 6.8–8.2 can strip anodic oxide layer)',
-                'Do not scrub tips with abrasive steel wool or metallic pads'
-              ]
-            }
-          ]
-        },
-        {
-          pageNumber: 3,
-          title: 'Certification & Quality Dossier',
-          subtitle: 'Lot Release Certificates & Material Traceability',
-          sections: [
-            {
-              heading: '3.0 Certification Matrix',
-              text: 'All raw materials sourced from ISO 5832-3 certified aerospace/biomedical ingot producers. Spectrometric batch assay verified.',
-              specs: [
-                { parameter: 'Tensile Strength', nominal: '860 MPa', tolerance: '≥ 825 MPa', standard: 'ASTM E8' },
-                { parameter: 'Yield Strength', nominal: '790 MPa', tolerance: '≥ 760 MPa', standard: 'ASTM E8' }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    id: 'smp-stille-luer-rongeur',
-    sku: 'SMP-OR-1044',
-    name: 'Stille-Luer Double-Action Bone Rongeur 220mm',
-    specialty: 'Orthopedics & Trauma',
-    type: 'Bone Rongeurs & Cutters',
-    alloy: 'German DIN 1.4116 / 1.4034 Martensitic',
-    shortDesc: 'Heavy-duty double-action compound joint rongeur engineered for maximum leverage bone excision with minimal surgeon hand torque.',
-    clinicalApplication: 'Total joint arthroplasty, spinal decompression laminectomy, fracture reduction, and cortical bone debridement.',
-    keyFeatures: [
-      'Dual-pivot compound linkage multiplies hand force by 3.8x',
-      'Induction-hardened curved scoop jaws (56-58 HRC) resist chipping against dense cortical bone',
-      'Replaceable double leaf spring mechanism ensures smooth automatic return',
-      'Deep serrated palm grips for secure handling in wet surgical environments'
-    ],
-    dimensions: {
-      totalLength: '220 mm / 8.7 in',
-      tipWidth: '10 mm x 15 mm scoop cup',
-      curvature: 'Curved jaws',
-      weightGrams: 310
-    },
-    metallurgy: {
-      rockwellHardness: '56 - 58 HRC (Cutting Jaws)',
-      surfaceFinish: 'Micro-Bead Blasted Satin Matte',
-      magneticProperty: 'Ferromagnetic',
-      corrosionPassivation: 'Nitric acid bath passivation per ASTM A380'
-    },
-    reprocessing: {
-      autoclaveCycle: 'Pre-vacuum steam: 134°C for 5 min, 25 min dry',
-      maxTempCelsius: 138,
-      compatibleCleaningChem: 'Neutral or slightly alkaline enzymatic detergent',
-      cleaningPhRange: '7.0 - 9.0'
-    },
-    compliance: ['ISO 13485:2016', 'CE Mark MDR Class Ir', 'FDA Class I 510(k) Exempt', 'DIN 58298'],
-    leadTime: 'In Stock / 24-48h Dispatch',
-    packaging: 'Shock-proof sterile transport carton with tip protection guard',
-    image: ORTHOPEDIC_IMAGE,
-    featured: true,
-    pdfSpec: {
-      docNumber: 'TDS-SMP-OR-1044-REV3',
-      revision: 'Rev 3.1 (2026)',
-      effectiveDate: '2026-01-20',
-      totalPages: 3,
-      pages: [
-        {
-          pageNumber: 1,
-          title: 'Heavy Orthopedic Specifications',
-          subtitle: 'Double-Action Bone Rongeur · Model SMP-OR-1044',
-          sections: [
-            {
-              heading: '1.0 Mechanical & Dimensional Integrity',
-              text: 'The Stille-Luer compound rongeur is forged from German 1.4116 martensitic stainless steel with cryogenic deep-freeze tempering to stabilize austenite phase conversion and maximize jaw edge retention.',
-              specs: [
-                { parameter: 'Overall Length', nominal: '220.0 mm', tolerance: '± 1.5 mm', standard: 'DIN 58298' },
-                { parameter: 'Cup Width', nominal: '10.0 mm', tolerance: '± 0.3 mm', standard: 'SMP Standard' },
-                { parameter: 'Compound Ratio', nominal: '3.8 : 1', tolerance: '± 0.2', standard: 'Biomechanical CAD' },
-                { parameter: 'Bite Hardness', nominal: '57.0 HRC', tolerance: '56 - 58 HRC', standard: 'ASTM E18' }
-              ]
-            }
-          ]
-        },
-        {
-          pageNumber: 2,
-          title: 'Reprocessing & Disassembly Guidelines',
-          subtitle: 'Cleaning Protocol for Compound Hinges',
-          sections: [
-            {
-              heading: '2.0 Joint Care & Ultrasonic Cleaning',
-              text: 'Ensure double-action hinges are fully open during ultrasonic and washer-disinfector cycles. Apply high-temperature medical silicone oil to all pivot screws prior to autoclave sterilization.',
-              bulletPoints: [
-                'Ensure bone fragments are dislodged from cup cavity immediately post-procedure',
-                'Ultrasonic cleaning frequency: 35–40 kHz for 10 minutes',
-                'Do not exceed 138°C during sterilization'
-              ]
-            }
-          ]
-        },
-        {
-          pageNumber: 3,
-          title: 'Quality & Metallurgical Audit',
-          subtitle: 'Batch Testing & Hardness Verification',
-          sections: [
-            {
-              heading: '3.0 QC Batch Release Testing',
-              text: 'Every batch undergoes Vickers and Rockwell hardness profiling, mechanical proof load test of 180 N applied force without permanent deformation.',
-              specs: [
-                { parameter: 'Cycle Fatigue Limit', nominal: '50,000 cycles', tolerance: 'min 40,000', standard: 'SMP QA-09' }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    id: 'smp-metzenbaum-tc-scissors',
-    sku: 'SMP-GN-3018',
-    name: 'Metzenbaum-SuperCut Tungsten Carbide Curved Scissors 180mm',
-    specialty: 'General & Laparoscopic',
-    type: 'Scissors & Cutters',
-    alloy: 'Tungsten Carbide (TC) Inlays 72 HRC',
-    shortDesc: 'Gold-ringed Metzenbaum dissecting scissors with sintered Tungsten Carbide blade inserts and knife-edge micro-serrations for effortless tissue gliding.',
-    clinicalApplication: 'Deep soft tissue dissection, plastic surgery flap elevation, general laparotomy, and thoracic tissue separation.',
-    keyFeatures: [
-      'Gold-plated ring handles signify genuine sintered Tungsten Carbide inserts',
-      'SuperCut micro-serrated lower blade holds slippery tissue while razor upper blade slices effortlessly',
-      'Hardness rating of 72 HRC provides 5x the working lifespan of standard stainless steel',
-      'Tapered slim shanks for deep cavity visualization'
-    ],
-    dimensions: {
-      totalLength: '180 mm / 7.0 in',
-      tipWidth: '1.8 mm delicate curved tips',
-      curvature: 'Curved blunt/blunt',
-      weightGrams: 52
-    },
-    metallurgy: {
-      rockwellHardness: '72 - 74 HRC (TC Inserts) / 46 - 48 HRC (Shanks)',
-      surfaceFinish: 'Fine Satin Matte with 24k Hard Gold Plated Finger Rings',
-      magneticProperty: 'Ferromagnetic Body / Non-Magnetic TC Core',
-      corrosionPassivation: 'Vacuum furnace braze with gold filler alloy'
-    },
-    reprocessing: {
-      autoclaveCycle: 'Pre-vacuum steam: 134°C (273°F) for 4 min',
-      maxTempCelsius: 138,
-      compatibleCleaningChem: 'Enzymatic detergent pH 7.0 - 8.5',
-      cleaningPhRange: '7.0 - 8.5'
-    },
-    compliance: ['ISO 13485:2016', 'CE Mark MDR Class Ir', 'FDA Class I 510(k) Exempt', 'DIN 58298'],
-    leadTime: 'In Stock / 24-48h Dispatch',
-    packaging: 'Rigid protective clam shell box with calibration certificate',
-    image: HERO_IMAGE,
-    featured: true,
-    pdfSpec: {
-      docNumber: 'TDS-SMP-GN-3018-REV5',
-      revision: 'Rev 5.0 (2026)',
-      effectiveDate: '2026-03-01',
-      totalPages: 3,
-      pages: [
-        {
-          pageNumber: 1,
-          title: 'Technical Data Sheet: TC Dissecting Scissors',
-          subtitle: 'Metzenbaum SuperCut TC 180mm · Model SMP-GN-3018',
-          sections: [
-            {
-              heading: '1.0 TC Braze Metallurgy & Cutting Geometry',
-              text: 'Sintered tungsten carbide plates are vacuum-brazed onto high-grade AISI 420 stainless steel blanks using specialized gold-nickel eutectic alloy at 1050°C. Lower blade features 25 micro-serrations per centimeter.',
-              specs: [
-                { parameter: 'Overall Length', nominal: '180.0 mm', tolerance: '± 1.0 mm', standard: 'DIN 58298' },
-                { parameter: 'TC Insert Length', nominal: '38.0 mm', tolerance: '± 0.5 mm', standard: 'SMP Spec TC-01' },
-                { parameter: 'Insert Hardness', nominal: '72.5 HRC', tolerance: '71 - 74 HRC', standard: 'ASTM E18' },
-                { parameter: 'Biphasic Cut Angle', nominal: '42°', tolerance: '± 1.0°', standard: 'Goniometric' }
-              ]
-            }
-          ]
-        },
-        {
-          pageNumber: 2,
-          title: 'Reprocessing Protocol & Edge Preservation',
-          subtitle: 'Maintenance of Sintered Tungsten Carbide Instruments',
-          sections: [
-            {
-              heading: '2.0 Central Reprocessing Instructions',
-              text: 'Never use wire brushes on cutting edges. Use dedicated soft nylon brushes. Avoid rapid thermal shocks (cooling in cold water immediately after autoclave) which may cause microscopic TC micro-fissuring.',
-              bulletPoints: [
-                'Ensure screw joint is lubricated before sterilization',
-                'Do not sterilize with bleach or halogenated solvents',
-                'Cutting test: cuts 4 layers of wet surgical gauze smoothly to the very tip'
-              ]
-            }
-          ]
-        },
-        {
-          pageNumber: 3,
-          title: 'Quality Documentation',
-          subtitle: 'Microscopy & Passivation Verification',
-          sections: [
-            {
-              heading: '3.0 Regulatory Standards',
-              text: 'ISO 13485:2016 certified cleanroom packaging. Passed 500 hours salt-spray testing per ASTM B117 without surface pitting.',
-              specs: [
-                { parameter: 'Salt Spray Resistance', nominal: '> 500 hrs', tolerance: 'min 300 hrs', standard: 'ASTM B117' }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    id: 'smp-castroviejo-needle-holder',
-    sku: 'SMP-MC-2105',
-    name: 'Castroviejo Micro Needle Holder with Lock & TC Jaws 140mm',
-    specialty: 'Microsurgery & Ophthalmic',
-    type: 'Needle Holders',
-    alloy: 'Tungsten Carbide (TC) Inlays 72 HRC',
-    shortDesc: 'Spring-action microsurgical needle holder with fine diamond-dust cross-serrated TC jaws and gentle thumb latch mechanism for 7-0 to 10-0 suture needles.',
-    clinicalApplication: 'Ophthalmic corneal transplantation, microvascular coronary anastomosis, replantation surgery, and cosmetic blepharoplasty.',
-    keyFeatures: [
-      'Ultra-fine 0.4 mm diamond cross-serrated tungsten carbide jaw inserts',
-      'Feather-light spring release ratchet requires less than 1.2 N actuation force',
-      'Rounded non-snagging shanks prevent micro-suture thread entanglement',
-      'Dual flat ribbed handles for precise fingertip rotational control'
-    ],
-    dimensions: {
-      totalLength: '140 mm / 5.5 in',
-      tipWidth: '0.8 mm tapered jaw tip',
-      curvature: 'Straight with delicate lock',
-      weightGrams: 36
-    },
-    metallurgy: {
-      rockwellHardness: '72 HRC (TC Pyramid Grip) / 44 HRC (Body)',
-      surfaceFinish: 'Anti-Reflective Micro-Satin with Gold Spring Accent',
-      magneticProperty: 'Low magnetic permeability',
-      corrosionPassivation: 'Electrochemical passivation per ISO 13485'
-    },
-    reprocessing: {
-      autoclaveCycle: 'Pre-vacuum steam: 134°C for 5 min',
-      maxTempCelsius: 138,
-      compatibleCleaningChem: 'Enzymatic detergent pH 7.2 - 8.2',
-      cleaningPhRange: '7.0 - 8.5'
-    },
-    compliance: ['ISO 13485:2016', 'CE Mark MDR Class Ir', 'FDA Class I Exempt', 'DIN EN ISO 7153-1'],
-    leadTime: 'In Stock / 24-48h Dispatch',
-    packaging: 'Dedicated micro-cassette with silicone holding racks',
-    image: CARDIO_NEURO_IMAGE,
-    featured: false,
-    pdfSpec: {
-      docNumber: 'TDS-SMP-MC-2105-REV1',
-      revision: 'Rev 1.9 (2026)',
-      effectiveDate: '2026-02-14',
-      totalPages: 3,
-      pages: [
-        {
-          pageNumber: 1,
-          title: 'Micro Needle Holder Specifications',
-          subtitle: 'Castroviejo TC Micro Needle Holder · Model SMP-MC-2105',
-          sections: [
-            {
-              heading: '1.0 Technical & Jaw Grip Geometry',
-              text: 'Equipped with 0.4 mm pitch tungsten carbide cross-serrated micro-pyramids. Designed to hold monofilament and braided needles from 7-0 down to 10-0 without needle rotation or bending.',
-              specs: [
-                { parameter: 'Overall Length', nominal: '140.0 mm', tolerance: '± 0.5 mm', standard: 'SMP Micro QC' },
-                { parameter: 'Jaw Tip Width', nominal: '0.80 mm', tolerance: '± 0.05 mm', standard: 'Optical Comparator' },
-                { parameter: 'Needle Compatibility', nominal: '7-0 to 10-0', tolerance: 'Standard Micro', standard: 'USP Suture' },
-                { parameter: 'Latching Force', nominal: '1.1 N', tolerance: '± 0.15 N', standard: 'Calibrated Cell' }
-              ]
-            }
-          ]
-        },
-        {
-          pageNumber: 2,
-          title: 'Micro-Reprocessing Protocol',
-          subtitle: 'Handling for High-Precision Spring Mechanisms',
-          sections: [
-            {
-              heading: '2.0 Decontamination & Ultrasonic Cleaning',
-              text: 'Inspect under stereo microscope for lint or surgical fiber entrapment in the diamond pyramids. Always sterilize in unlatched open position to relieve spring stress.',
-              bulletPoints: [
-                'Do not ultrasonic clean with coarse general surgical instruments',
-                'Store with tip protector guard when not inside sterilization cassette'
-              ]
-            }
-          ]
-        },
-        {
-          pageNumber: 3,
-          title: 'Regulatory & Material Dossier',
-          subtitle: 'ISO 13485 Certificate of Conformance',
-          sections: [
-            {
-              heading: '3.0 Quality Standards',
-              text: 'Biocompatibility, cytotoxicity and chemical leaching verified per ISO 10993 series. Full raw material heat certificates maintained on file.'
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    id: 'smp-kerrison-punch',
-    sku: 'SMP-NE-7740',
-    name: 'Kerrison Cervical Laminectomy Bone Punch 40° Up-Bite 3mm',
-    specialty: 'Neurosurgery & Spine',
-    type: 'Bone Rongeurs & Cutters',
-    alloy: 'German DIN 1.4116 / 1.4034 Martensitic',
-    shortDesc: 'Detachable clean-out spinal punch engineered for precision neural decompression and bone excision with zero lateral slide.',
-    clinicalApplication: 'Anterior cervical discectomy and fusion (ACDF), posterior cervical foraminotomy, lumbar laminectomy, and spinal cord decompression.',
-    keyFeatures: [
-      'Take-Apart fast release mechanism enables complete internal lumen cleaning and biological soil removal',
-      'Ceramic PVD black coat option for maximum anti-glare under surgical microscopes',
-      'Ultra-thin 1.2 mm footplate for safe insertion into tight neuroforaminal spaces',
-      '40° forward up-bite angle with hardened cutting guide rail'
-    ],
-    dimensions: {
-      totalLength: '200 mm shaft length / 8.0 in',
-      tipWidth: '3.0 mm calibrated bite',
-      curvature: '40° forward up-bite',
-      weightGrams: 245
-    },
-    metallurgy: {
-      rockwellHardness: '56 - 58 HRC (Punch Slide & Anvil)',
-      surfaceFinish: 'Satin Stainless with PVD Black Anti-Glare Slide',
-      magneticProperty: 'Ferromagnetic',
-      corrosionPassivation: 'Nitric acid passivation + multi-stage ultrasonic degreasing'
-    },
-    reprocessing: {
-      autoclaveCycle: 'Pre-vacuum steam: 134°C for 5 min, 30 min dry',
-      maxTempCelsius: 138,
-      compatibleCleaningChem: 'Enzymatic detergent pH 7.0 - 8.5',
-      cleaningPhRange: '7.0 - 8.5'
-    },
-    compliance: ['ISO 13485:2016', 'CE Mark MDR Class Ir', 'FDA Class I 510(k) Exempt', 'ASTM F899'],
-    leadTime: 'In Stock / 24-48h Dispatch',
-    packaging: 'Rigid sterilization basket with disassembly diagram',
-    image: QUALITY_LAB_IMAGE,
-    featured: false,
-    pdfSpec: {
-      docNumber: 'TDS-SMP-NE-7740-REV2',
-      revision: 'Rev 2.4 (2026)',
-      effectiveDate: '2026-01-28',
-      totalPages: 3,
-      pages: [
-        {
-          pageNumber: 1,
-          title: 'Spine Instrumentation Specifications',
-          subtitle: 'Kerrison 3mm 40° Up-Bite Punch · Model SMP-NE-7740',
-          sections: [
-            {
-              heading: '1.0 Engineering Specifications & Footplate Geometry',
-              text: 'Engineered specifically for neurosurgical spine interventions. The 1.2 mm footplate thickness minimizes dura displacement during cervical foraminotomy.',
-              specs: [
-                { parameter: 'Working Shaft Length', nominal: '200.0 mm', tolerance: '± 1.0 mm', standard: 'Spine Spec' },
-                { parameter: 'Bite Size', nominal: '3.0 mm', tolerance: '± 0.1 mm', standard: 'SMP Gauge' },
-                { parameter: 'Bite Angle', nominal: '40.0°', tolerance: '± 0.5°', standard: 'Optical Inclinometer' },
-                { parameter: 'Footplate Thickness', nominal: '1.20 mm', tolerance: '± 0.05 mm', standard: 'Micrometer' }
-              ]
-            }
-          ]
-        },
-        {
-          pageNumber: 2,
-          title: 'Fast-Disassembly CSPD Reprocessing Protocol',
-          subtitle: 'Cleaning of Detachable Shaft for Sterile Compliance',
-          sections: [
-            {
-              heading: '2.0 Central Sterile Cleaning Procedure',
-              text: 'Depress release trigger and slide upper channel forward to open the inner channel. Brush inner channel with calibrated channel brush to eliminate bio-burden.',
-              bulletPoints: [
-                'Ensure channel is flushed with pressurized water jet prior to washer-disinfector',
-                'Lubricate sliding rail with high-temp water-soluble surgical lubricant before reassembly',
-                'Test slide action: must open and close smoothly with no binding'
-              ]
-            }
-          ]
-        },
-        {
-          pageNumber: 3,
-          title: 'Quality & Traceability Certificates',
-          subtitle: 'Full CE MDR & FDA Compliance Audit Trail',
-          sections: [
-            {
-              heading: '3.0 Quality Assurance Declarations',
-              text: 'Fully compliant with DIN EN ISO 17664 processing requirements. 100% inspected for slide alignment and edge sharpness.'
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    id: 'smp-bookwalter-retractor-system',
-    sku: 'SMP-SY-9000',
-    name: 'Bookwalter Style Modular Table-Mounted Abdominal Retractor System',
-    specialty: 'General & Laparoscopic',
-    type: 'Systems & Trays',
-    alloy: 'Austenitic 316L Surgical Grade Steel',
-    shortDesc: 'Comprehensive modular surgical retractor system with table post, oval ring, and 14 assorted interchangeable deep pelvic and malleable blades.',
-    clinicalApplication: 'Open colorectal resection, liver transplantation, vascular aneurysm repair, bariatric laparotomy, and radical cystectomy.',
-    keyFeatures: [
-      'Universal table post clamps securely to all standard surgical table side rails (US and EU standard)',
-      'Segmented hinged oval ring allows multi-planar surgical site exposure',
-      'Quick-snap ratchet couplings allow rapid single-hand blade positioning and angle adjustment',
-      'Includes 14 specialized blades (Balfour, Harrington sweetheart, malleable copper/316L, and Kelly deep blades)'
-    ],
-    dimensions: {
-      totalLength: 'Fits 450 mm x 320 mm operative field',
-      tipWidth: '14 blades from 25 mm x 50 mm to 75 mm x 150 mm',
-      curvature: 'Multi-angle articulated',
-      weightGrams: 4200
-    },
-    metallurgy: {
-      rockwellHardness: '32 - 36 HRC (High Ductility Austenitic)',
-      surfaceFinish: 'Electro-Polished Surgical Matte',
-      magneticProperty: 'Virtually Non-Magnetic (Austenitic)',
-      corrosionPassivation: 'Electropolished and dual ASTM A967 passivated'
-    },
-    reprocessing: {
-      autoclaveCycle: 'Pre-vacuum steam: 134°C for 6 min, 30 min dry in dedicated tray',
-      maxTempCelsius: 140,
-      compatibleCleaningChem: 'Enzymatic detergent pH 7.0 - 9.0',
-      cleaningPhRange: '7.0 - 9.0'
-    },
-    compliance: ['ISO 13485:2016', 'CE Mark MDR Class I', 'FDA Class I 510(k) Exempt', 'ISO 7153-1'],
-    leadTime: 'In Stock / 3-5 Days Dispatch',
-    packaging: 'Two-tier heavy-duty stainless steel perforated sterilization container with silicone brackets',
-    image: ORTHOPEDIC_IMAGE,
-    featured: true,
-    pdfSpec: {
-      docNumber: 'TDS-SMP-SY-9000-REV3',
-      revision: 'Rev 3.4 (2026)',
+      docNumber: 'TDS-ABT-XNC-SKY-2026',
+      revision: 'Rev 5.1',
       effectiveDate: '2026-01-10',
       totalPages: 3,
       pages: [
         {
           pageNumber: 1,
-          title: 'Modular Retractor System Overview',
-          subtitle: 'Table-Mounted Retractor System · Model SMP-SY-9000',
+          title: 'Product Overview & Mechanical Architecture',
+          subtitle: 'XIENCE Skypoint™ Everolimus-Eluting Coronary Stent System',
           sections: [
             {
-              heading: '1.0 System Architecture & Components',
-              text: 'Constructed from aerospace-grade 316L surgical stainless steel for extreme torsional rigidity under heavy abdominal wall retraction without spring-back.',
+              heading: '1.0 Clinical Engineering & Expansion Dynamics',
+              text: 'XIENCE Skypoint is built on Abbott’s clinically proven fluoropolymer chemistry, engineered to reduce vessel injury during deployment. The modified multi-link structure allows over-expansion up to 5.75 mm while preserving radial resistance and uniform drug elution.',
               specs: [
-                { parameter: 'Post Height', nominal: '350 mm', tolerance: '± 2.0 mm', standard: 'OR Rail Spec' },
-                { parameter: 'Oval Ring Major Axis', nominal: '420 mm', tolerance: '± 3.0 mm', standard: 'Modular Ring' },
-                { parameter: 'Max Retraction Load', nominal: '250 N / blade', tolerance: 'Proof Tested', standard: 'SMP Stress QA' },
-                { parameter: 'Rail Clamp Compatibility', nominal: '25x10mm & 28x9mm', tolerance: 'Universal', standard: 'DIN EN 60601' }
+                { parameter: 'Strut Thickness', nominal: '81 µm', tolerance: '± 2 µm', standard: 'ASTM F2079' },
+                { parameter: 'Post-Dilation Limit', nominal: '5.75 mm', tolerance: 'Max safe expansion', standard: 'Abbott Internal Spec' },
+                { parameter: 'Drug Dose (Everolimus)', nominal: '100 µg/cm²', tolerance: '± 5%', standard: 'USP / EP' },
+                { parameter: 'Crossing Profile', nominal: '0.041 in', tolerance: '± 0.001 in', standard: 'ISO 25539-2' },
+                { parameter: 'Radial Strength', nominal: '1.35 bar', tolerance: '≥ 1.20 bar', standard: 'ASTM F3067' }
+              ]
+            },
+            {
+              heading: '1.1 Biocompatible Fluoropolymer Coating',
+              text: 'The fluoropolymer matrix demonstrates exceptional thromboresistance by repelling pro-thrombotic serum proteins, promoting rapid endothelialization without excessive neointimal hyperplasia.',
+              bulletPoints: [
+                'Over 15 million patients implanted worldwide with XIENCE platform safety',
+                'Demonstrated 1-month DAPT safety in high bleeding risk (HBR) populations',
+                'Low stent thrombosis rate (< 0.2% at 1 year across multiple randomized trials)'
               ]
             }
           ]
         },
         {
           pageNumber: 2,
-          title: 'Tray Reprocessing & Maintenance Instructions',
-          subtitle: 'Modular Disassembly for SPD Automation',
+          title: 'Sizing Matrix & Cath Lab Compliance',
+          subtitle: 'Dimensional Catalog & Guide Catheter Selection',
           sections: [
             {
-              heading: '2.0 Cleaning & Sterilization Workflow',
-              text: 'Disassemble ratchet mechanisms from the oval ring before loading into automated washer-disinfector baskets.',
+              heading: '2.0 Dimensional Matrix (Diameter x Length)',
+              text: 'Standard matrix includes diameters 2.25mm, 2.50mm, 2.75mm, 3.00mm, 3.50mm, 4.00mm across lengths 8mm, 12mm, 15mm, 18mm, 23mm, 28mm, 33mm, and 38mm.',
               bulletPoints: [
-                'Inspect coupling pawls for positive click engagement prior to each surgical pack wrap',
-                'Ensure table post clamping screw threads are lubricated with sterile silicone fluid'
+                '2.25 mm - 3.00 mm: Compatible with standard 5 French guide catheters',
+                '3.50 mm - 4.00 mm: 6 French guide catheter recommended for kissing stent techniques',
+                'Nominal Pressure (NP): 9 atm | Rated Burst Pressure (RBP): 16 atm'
               ]
             }
           ]
         },
         {
           pageNumber: 3,
-          title: 'Certificates of Sterility Assurance',
-          subtitle: 'DIN EN 285 & AAMI ST79 Validation',
+          title: 'Storage, Consignment & Ordering Information',
+          subtitle: 'SMP Surgitech Regional Cath Lab Consignment Protocol',
           sections: [
             {
-              heading: '3.0 Regulatory Compliance Dossier',
-              text: 'Biocompatibility tested for indirect patient contact. Full surgical container validation package available for hospital regulatory audits.'
+              heading: '3.0 Cold-Chain Storage & UDI Tracking',
+              text: 'Stored at controlled room temperature 15°C to 25°C. All units dispatched with tamper-evident secondary carton and digital barcode logging into hospital cath lab registry.'
             }
           ]
         }
       ]
     }
   },
+
+  // 2. XIENCE Xpedition 48
   {
-    id: 'smp-hegar-dilator-set',
-    sku: 'SMP-UG-6500',
-    name: 'Hegar Precision Uterine Cervical Dilator 8-Piece Set (3mm-18mm)',
-    specialty: 'OB/GYN & Urology',
-    type: 'Systems & Trays',
-    alloy: 'German DIN 1.4021 (AISI 420B) Stainless',
-    shortDesc: 'Double-ended German stainless steel dilators featuring polished bullet-tip contours and laser-etched metric gauge identifiers for smooth dilation.',
-    clinicalApplication: 'Gynecological diagnostic hysteroscopy, cervical stenosis dilation, endometrial biopsy, and intrauterine device placement.',
+    id: 'xience-xpedition-48',
+    sku: 'ABT-XNC-XP48',
+    name: 'XIENCE Xpedition™ 48 Everolimus-Eluting Coronary Stent',
+    brand: 'Abbott (Vascular Division)',
+    category: 'Coronary Stents (XIENCE)',
+    subcategory: 'Extended-Length 48mm Long-Lesion Solution',
+    shortDesc: 'Dedicated 48mm extended-length drug-eluting stent specifically engineered to treat diffuse and long coronary lesions in a single intervention without overlapping.',
+    clinicalApplication: 'Diffuse coronary artery disease, diabetic diffuse stenosis, tandem consecutive lesions, and long segment LAD/RCA revascularization.',
     keyFeatures: [
-      'Seamless mirror-polished surface finish reduces mucosal friction',
-      'Double-ended incremental diameters from 3/4 mm through 17/18 mm',
-      'Permanent deep laser annealed metric size markings resist fade through thousands of autoclaving cycles',
-      'Solid core balanced weight distribution'
+      'Continuous 48 mm single-stent coverage eliminating junctional stent overlap',
+      'Significantly reduces procedure time, fluoroscopy radiation, and contrast volume',
+      'Balanced flexibility and column strength for distal pushability',
+      'Proven fluoropolymer biocompatibility with low restenosis rates'
     ],
-    dimensions: {
-      totalLength: '200 mm per dilator',
-      tipWidth: '3.0 mm to 18.0 mm graduated pairs',
-      curvature: 'Gentle anatomical S-curve',
-      weightGrams: 820
+    specs: {
+      profileOrSize: 'Extended 48 mm Length | Diameters: 2.75, 3.00, 3.50, 4.00 mm',
+      compatibilityOrSheath: '6F Guide Catheter Compatible | 0.014" Guidewire',
+      materialOrCoating: 'Cobalt-Chromium (CoCr) alloy with Fluoropolymer + Everolimus',
+      shelfLifeOrSterility: 'Sterile EO | 3-Year Shelf Life'
     },
-    metallurgy: {
-      rockwellHardness: '48 - 50 HRC',
-      surfaceFinish: 'High-Luster Mirror Polish',
-      magneticProperty: 'Ferromagnetic',
-      corrosionPassivation: 'ASTM A967 Citric Passivated'
+    mriSafety: 'MR Conditional up to 3.0 Tesla',
+    regulatoryStatus: ['CDSCO / DCGI Approved', 'US FDA Approved', 'CE Mark Certified', 'ISO 13485'],
+    leadTime: 'Available for Immediate Cath Lab Delivery across MP, CG, South Rajasthan & UP',
+    packaging: 'Rigid sealed blister with reinforced catheter protective sheath',
+    image: HERO_IMAGE,
+    featured: true,
+    pdfSpec: {
+      docNumber: 'TDS-ABT-XP48-2026',
+      revision: 'Rev 4.0',
+      effectiveDate: '2026-01-12',
+      totalPages: 2,
+      pages: [
+        {
+          pageNumber: 1,
+          title: 'Single Stent Solution for Diffuse Long Lesions',
+          subtitle: 'XIENCE Xpedition™ 48mm Specifications',
+          sections: [
+            {
+              heading: '1.0 Clinical Rationale for 48mm Length',
+              text: 'Treating diffuse coronary disease with overlapping stents increases metal burden, impairs local vasomotion, and triples the risk of junctional restenosis. The XIENCE Xpedition 48 provides seamless continuous endothelial scaffolding.',
+              specs: [
+                { parameter: 'Stent Length', nominal: '48.0 mm', tolerance: '± 0.5 mm', standard: 'ISO 25539' },
+                { parameter: 'Nominal Pressure', nominal: '9 atm', tolerance: 'Nominal expansion', standard: 'Compliance Chart' },
+                { parameter: 'Rated Burst Pressure', nominal: '16 atm', tolerance: 'RBP tested', standard: 'ASTM F2079' }
+              ]
+            }
+          ]
+        },
+        {
+          pageNumber: 2,
+          title: 'Delivery System & Pushability Dynamics',
+          subtitle: 'Balloon-Fold Architecture and Hydrophilic Coating',
+          sections: [
+            {
+              heading: '2.0 Delivery System Performance',
+              text: 'Features a proprietary folded balloon design with low-friction hydrophilic shaft coating to ensure passage through proximal calcified tortuosity into distal coronary segments.'
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  // 3. XIENCE Sierra
+  {
+    id: 'xience-sierra',
+    sku: 'ABT-XNC-SRA',
+    name: 'XIENCE Sierra™ Everolimus-Eluting Coronary Stent System',
+    brand: 'Abbott (Vascular Division)',
+    category: 'Coronary Stents (XIENCE)',
+    subcategory: 'High-Crossability Coronary Stent System',
+    shortDesc: 'Designed for anatomically complex coronary cases with ultra-low crossing profile, optimized flexibility, and enhanced pushability in tortuous and calcified lesions.',
+    clinicalApplication: 'Chronic total occlusions (CTO), severely calcified arteries, acute bends, and difficult sub-branches.',
+    keyFeatures: [
+      'Low crossing profile optimized for heavily calcified and complex stenoses',
+      'Enhanced flexibility with sinusoidal strut rings and linked bridges',
+      'High radial strength resistant to recoil in fibro-calcific plaques',
+      'Rapid balloon deflation time for patient comfort in acute ischemia'
+    ],
+    specs: {
+      profileOrSize: 'Diameters: 2.00 - 4.00 mm | Lengths: 8 - 38 mm',
+      compatibilityOrSheath: '5F / 6F Guide Catheter Compatible',
+      materialOrCoating: 'Multi-link Cobalt Chromium with Fluoropolymer-Everolimus',
+      shelfLifeOrSterility: 'Sterile EO | 3-Year Shelf Life'
     },
-    reprocessing: {
-      autoclaveCycle: 'Pre-vacuum steam: 134°C for 4 min',
-      maxTempCelsius: 138,
-      compatibleCleaningChem: 'Neutral enzymatic cleaner',
-      cleaningPhRange: '7.0 - 8.5'
-    },
-    compliance: ['ISO 13485:2016', 'CE Mark MDR Class I', 'FDA Class I Exempt', 'DIN 58298'],
-    leadTime: 'In Stock / 24-48h Dispatch',
-    packaging: 'Stainless steel sterilization storage rack with size slot demarcations',
+    mriSafety: 'MR Conditional up to 3.0 Tesla',
+    regulatoryStatus: ['CDSCO / DCGI Approved', 'US FDA Approved', 'CE Mark Certified'],
+    leadTime: 'Immediate Dispatch from Regional Hubs (Udaipur, Indore, Raipur, Agra)',
+    packaging: 'Single unit sterile clinical pouch in protective carton',
     image: HERO_IMAGE,
     featured: false,
     pdfSpec: {
-      docNumber: 'TDS-SMP-UG-6500-REV1',
-      revision: 'Rev 1.2 (2026)',
+      docNumber: 'TDS-ABT-SRA-2026',
+      revision: 'Rev 4.3',
+      effectiveDate: '2026-01-14',
+      totalPages: 2,
+      pages: [
+        {
+          pageNumber: 1,
+          title: 'Mechanical Design & Crossing Capability',
+          subtitle: 'XIENCE Sierra™ Stent System Technical Data',
+          sections: [
+            {
+              heading: '1.0 Engineering for Complex Anatomy',
+              text: 'XIENCE Sierra incorporates a slim tip profile of 0.040" with seamless transition from guide wire to balloon, enabling crossing of severe stenoses where traditional stents stall.',
+              specs: [
+                { parameter: 'Tip Outer Diameter', nominal: '0.040 in', tolerance: '± 0.001 in', standard: 'ISO 10555' },
+                { parameter: 'Nominal Pressure', nominal: '9 atm', tolerance: '± 0.5 atm', standard: 'Compliance Matrix' },
+                { parameter: 'Rated Burst Pressure', nominal: '16 atm', tolerance: '100% inspected', standard: 'ASTM F3067' }
+              ]
+            }
+          ]
+        },
+        {
+          pageNumber: 2,
+          title: 'Procedural Recommendations & Sizing Table',
+          subtitle: 'Full Cath Lab Matrix',
+          sections: [
+            {
+              heading: '2.0 Cath Lab Handling Protocols',
+              text: 'Pre-dilation with 1:1 balloon sizing recommended in fibrocalcific lesions. Post-dilation using non-compliant balloons up to rated burst pressures supported.'
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  // 4. XIENCE Alpine
+  {
+    id: 'xience-alpine',
+    sku: 'ABT-XNC-ALP',
+    name: 'XIENCE Alpine™ Everolimus-Eluting Coronary Stent System',
+    brand: 'Abbott (Vascular Division)',
+    category: 'Coronary Stents (XIENCE)',
+    subcategory: 'Proven Clinical Safety Benchmark Stent',
+    shortDesc: 'Abbott’s flagship coronary drug-eluting stent with the most extensive long-term clinical safety dataset in interventional cardiology, featuring unmatched low thrombosis rates.',
+    clinicalApplication: 'Multi-vessel coronary artery disease, diabetic patients, acute myocardial infarction (STEMI/NSTEMI), and elderly patient populations.',
+    keyFeatures: [
+      'Unsurpassed safety record with lowest definite/probable stent thrombosis rate',
+      'Fluoropolymer biocompatibility preventing inflammatory platelet aggregation',
+      'Flexible balloon catheter design for controlled precise deployment',
+      'Excellent radio-opacity for accurate fluoroscopic positioning'
+    ],
+    specs: {
+      profileOrSize: 'Diameters: 2.25 - 4.00 mm | Lengths: 8 - 38 mm',
+      compatibilityOrSheath: '5F / 6F Guide Catheters | 0.014" Guidewire',
+      materialOrCoating: 'Cobalt-Chromium with Fluoropolymer + Everolimus',
+      shelfLifeOrSterility: 'Sterile EO | 3-Year Shelf Life'
+    },
+    mriSafety: 'MR Conditional up to 3.0 Tesla',
+    regulatoryStatus: ['CDSCO / DCGI Approved', 'US FDA Approved', 'CE Mark Certified'],
+    leadTime: 'In Stock across MP, CG, South Rajasthan & UP Cath Lab Hubs',
+    packaging: 'Sterile clinical carton with UDI barcoding',
+    image: HERO_IMAGE,
+    featured: false,
+    pdfSpec: {
+      docNumber: 'TDS-ABT-ALP-2026',
+      revision: 'Rev 4.8',
+      effectiveDate: '2026-01-05',
+      totalPages: 2,
+      pages: [
+        {
+          pageNumber: 1,
+          title: 'Clinical Data & Safety Evidence',
+          subtitle: 'XIENCE Alpine™ Technical & Metallurgical Sheet',
+          sections: [
+            {
+              heading: '1.0 Long-Term Clinical Evidence',
+              text: 'Supported by over 100 clinical trials and 120,000+ investigated patients demonstrating sustained safety through 10 years of post-market surveillance.',
+              specs: [
+                { parameter: 'Strut Thickness', nominal: '81 µm', tolerance: '± 2 µm', standard: 'ISO 25539' },
+                { parameter: 'Drug Dose', nominal: '100 µg/cm²', tolerance: '± 5%', standard: 'USP' }
+              ]
+            }
+          ]
+        },
+        {
+          pageNumber: 2,
+          title: 'Reprocessing and Hospital Handling',
+          subtitle: 'Single Use Sterile Medical Device',
+          sections: [
+            {
+              heading: '2.0 Storage and Single-Use Warning',
+              text: 'Single-use device. Do not resterilize. Store between 15°C and 25°C.'
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  // 5. OCT (Optical Coherence Tomography)
+  {
+    id: 'oct-imaging-system',
+    sku: 'ABT-OCT-DFLY',
+    name: 'OCT (Optical Coherence Tomography) Imaging System & Dragonfly™ Catheters',
+    brand: 'Abbott (Vascular Division)',
+    category: 'Diagnostic Physiology & Imaging (OCT / FFR)',
+    subcategory: 'Intracoronary High-Resolution Diagnostic Imaging',
+    shortDesc: 'Near-infrared light-based intracoronary imaging platform providing 10-micron spatial resolution (10x higher than IVUS) for automated plaque assessment, stent sizing, and apposition analysis.',
+    clinicalApplication: 'Pre-PCI lesion preparation, calcium volume and depth scoring, stent length and diameter selection, post-PCI malapposition detection, and edge dissection assessment.',
+    keyFeatures: [
+      '10 µm axial resolution delivering microscopic detail of coronary vessel walls',
+      'Automated lumen contour detection and calcification angle/thickness scoring',
+      'Dragonfly™ OPTIS catheter with rapid pull-back speed of 36 mm/sec in 2.5 seconds',
+      'Seamless co-registration with live angiographic fluoroscopy display'
+    ],
+    specs: {
+      profileOrSize: 'Dragonfly Catheter: 2.7 Fr distal profile | 75 mm pullback length',
+      compatibilityOrSheath: '6F Guide Catheter Compatible | 0.014" Guidewire',
+      materialOrCoating: 'Near-infrared optical fiber core with hydrophilic outer jacket',
+      shelfLifeOrSterility: 'Sterile EO Single-Use Catheters | Console Standby Support'
+    },
+    mriSafety: 'Non-conductive optical fiber, Non-implantable diagnostic catheter',
+    regulatoryStatus: ['CDSCO Approved', 'US FDA Approved', 'CE Mark Certified', 'ISO 13485'],
+    leadTime: 'Immediate Consignment & On-Demand Technical Specialist Support in Cath Labs',
+    packaging: 'Sterile individual catheter pack; Console backup placement available',
+    image: CATHLAB_OCT_IMAGE,
+    featured: true,
+    pdfSpec: {
+      docNumber: 'TDS-ABT-OCT-2026',
+      revision: 'Rev 6.0',
       effectiveDate: '2026-02-01',
       totalPages: 3,
       pages: [
         {
           pageNumber: 1,
-          title: 'OB/GYN Instrument Specifications',
-          subtitle: 'Hegar Dilator 8-Piece Set · Model SMP-UG-6500',
+          title: 'Optical Specifications & Diagnostic Resolution',
+          subtitle: 'Intracoronary Optical Coherence Tomography (OCT)',
           sections: [
             {
-              heading: '1.0 Dimensional Profile & Sizing Chart',
-              text: 'Manufactured from seamless solid bar stock German stainless steel with rounded conical ends polished to Ra < 0.2 µm.',
+              heading: '1.0 Optical Coherence Tomography Mechanics',
+              text: 'Uses near-infrared light at 1310 nm center wavelength with high-speed swept-source laser. Provides automated detection of lipid pools, thin-cap fibroatheroma (TCFA), calcium arc, and intraluminal thrombus.',
               specs: [
-                { parameter: 'Length Each', nominal: '200.0 mm', tolerance: '± 1.0 mm', standard: 'DIN 58298' },
-                { parameter: 'Surface Roughness', nominal: '0.18 µm Ra', tolerance: '≤ 0.25 µm', standard: 'Profilometer' },
-                { parameter: 'Diameter Calibration', nominal: '3.0 - 18.0 mm', tolerance: '± 0.05 mm', standard: 'Go/No-Go Gauge' }
+                { parameter: 'Axial Resolution', nominal: '10 µm', tolerance: '± 2 µm', standard: 'Optical Standard' },
+                { parameter: 'Lateral Resolution', nominal: '20 µm', tolerance: '± 5 µm', standard: 'Optical Standard' },
+                { parameter: 'Laser Pullback Speed', nominal: '36 mm/sec', tolerance: 'Calibrated', standard: 'FDA 510(k)' },
+                { parameter: 'Flush Rate (Contrast/Saline)', nominal: '4.0 mL/sec', tolerance: '± 0.5 mL/s', standard: 'Clinical Protocol' }
               ]
             }
           ]
         },
         {
           pageNumber: 2,
-          title: 'Reprocessing Protocol',
-          subtitle: 'Automated Washer Disinfector and Autoclave',
+          title: 'Dragonfly™ Imaging Catheter Integration',
+          subtitle: 'Single-Use Rapid-Exchange Intravascular Catheter',
           sections: [
             {
-              heading: '2.0 Decontamination Procedure',
-              text: 'Load horizontally in dedicated silicone slot rack. Ensure dilators do not impact each other during sonic cleaning to prevent tip micro-nicks.'
+              heading: '2.0 Catheter Design & Maneuverability',
+              text: 'Features a flexible distal tip, dual radiopaque markers at the lens and distal end, and low friction hydrophilic shaft enabling rapid engagement into tortuous vessels.'
             }
           ]
         },
         {
           pageNumber: 3,
-          title: 'Quality Documentation',
-          subtitle: 'ISO 13485 Certification of Compliance',
+          title: 'Clinical Workflow & MLD MAX Protocol',
+          subtitle: 'Morphology, Length, Diameter, Malapposition, Apposition, eXpansion',
           sections: [
             {
-              heading: '3.0 CE MDR Audit Declaration',
-              text: 'Certified Class I medical device per EU MDR 2017/745 Annex VIII Rule 5.'
+              heading: '3.0 Standardized Clinical Workflow',
+              text: 'Guided by MLD MAX protocol for standardized pre- and post-PCI assessment, clinically demonstrated to alter procedural strategy in 88% of cases.'
             }
           ]
         }
       ]
     }
   },
+
+  // 6. FFR (Fractional Flow Reserve)
   {
-    id: 'smp-yankauer-suction-cannula',
-    sku: 'SMP-GN-1120',
-    name: 'Yankauer Stainless Steel Surgical Suction Tube with Removable Tip',
-    specialty: 'General & Laparoscopic',
-    type: 'Suction & Cannulas',
-    alloy: 'German DIN 1.4021 (AISI 420B) Stainless',
-    shortDesc: 'Rigid surgical suction instrument with bulbous perforated tip and thumb vacuum control valve for clear operative field visibility.',
-    clinicalApplication: 'General laparotomy, orthopedic joint irrigation suction, thoracic pleural evacuation, and trauma bleeding clearance.',
+    id: 'ffr-physiology-system',
+    sku: 'ABT-FFR-PWX',
+    name: 'FFR (Fractional Flow Reserve) PressureWire™ System',
+    brand: 'Abbott (Vascular Division)',
+    category: 'Diagnostic Physiology & Imaging (OCT / FFR)',
+    subcategory: 'Guidewire-Based Hemodynamic Coronary Physiology',
+    shortDesc: 'Clinical gold standard for functional coronary lesion evaluation, measuring distal coronary to aortic pressure ratio (Pd/Pa) to identify hemodynamically significant ischemia.',
+    clinicalApplication: 'Intermediate coronary lesion assessment (40-70% stenosis), multi-vessel CAD revascularization triage, and post-stent functional optimization.',
     keyFeatures: [
-      'Removable threaded bulbous tip for complete internal bore lumen cleaning',
-      'Ergonomic thumb control port allows immediate suction regulation',
-      'Smooth inner lumen prevents coagulated blood clot clogging',
-      'Universal stepped hose connector fits all medical silicone suction tubing'
+      'PressureWire™ optical sensor technology with zero drift performance',
+      'Wireless transmitter communicating directly with cath lab monitors and CoroFlow',
+      'Direct measurement of FFR at hyperemia and resting Pd/Pa indexes',
+      'Standard 0.014" handling tactile feedback matching frontline workhorse wires'
     ],
-    dimensions: {
-      totalLength: '280 mm / 11.0 in',
-      tipWidth: '6.0 mm bulb diameter / 4.0 mm bore',
-      curvature: 'Double curved shaft',
-      weightGrams: 110
+    specs: {
+      profileOrSize: '0.014" Guidewire Diameter | 175 cm Working Length',
+      compatibilityOrSheath: 'Compatible with all standard 4F-7F Guide Catheters',
+      materialOrCoating: 'Micro-machined optical sensor tip with PTFE shaft coating',
+      shelfLifeOrSterility: 'Sterile EO Single-Use Pack | 2-Year Shelf Life'
     },
-    metallurgy: {
-      rockwellHardness: '46 - 48 HRC',
-      surfaceFinish: 'Satin Matte Anti-Glare',
-      magneticProperty: 'Ferromagnetic',
-      corrosionPassivation: 'ASTM A967 Chemical Passivation'
-    },
-    reprocessing: {
-      autoclaveCycle: 'Pre-vacuum steam: 134°C for 5 min',
-      maxTempCelsius: 138,
-      compatibleCleaningChem: 'Enzymatic neutral pH',
-      cleaningPhRange: '7.0 - 8.5'
-    },
-    compliance: ['ISO 13485:2016', 'CE Mark MDR Class Ir', 'FDA Class I Exempt', 'DIN 58298'],
-    leadTime: 'In Stock / 24-48h Dispatch',
-    packaging: 'Individually wrapped with protective bore cap',
-    image: HERO_IMAGE,
+    mriSafety: 'Non-implantable diagnostic tool',
+    regulatoryStatus: ['CDSCO Approved', 'US FDA Approved', 'CE Mark Certified'],
+    leadTime: 'Express 2-3h Delivery to Cath Labs across MP, CG, South Rajasthan & UP',
+    packaging: 'Individual sterile hoop dispenser carton',
+    image: CATHLAB_OCT_IMAGE,
     featured: false,
     pdfSpec: {
-      docNumber: 'TDS-SMP-GN-1120-REV2',
-      revision: 'Rev 2.1 (2026)',
-      effectiveDate: '2026-01-18',
-      totalPages: 3,
+      docNumber: 'TDS-ABT-FFR-2026',
+      revision: 'Rev 5.2',
+      effectiveDate: '2026-01-20',
+      totalPages: 2,
       pages: [
         {
           pageNumber: 1,
-          title: 'Surgical Suction Specifications',
-          subtitle: 'Yankauer Rigid Suction Tube · Model SMP-GN-1120',
+          title: 'Physiological Pressure Measurement Standards',
+          subtitle: 'PressureWire™ FFR Technical Specifications',
           sections: [
             {
-              heading: '1.0 Flow Dynamics & Bore Dimensions',
-              text: 'Precision bent drawn stainless tubing. Internal lumen electropolished to minimize friction and clot adhesion.',
+              heading: '1.0 Pressure Sensor Metrics',
+              text: 'PressureWire utilizes a solid-state optical pressure sensor located 3 cm proximal to the tip. Senses pressure changes from -30 to +300 mmHg with frequency response > 25 Hz.',
               specs: [
-                { parameter: 'Overall Length', nominal: '280.0 mm', tolerance: '± 1.5 mm', standard: 'DIN 58298' },
-                { parameter: 'Lumen Inner Diameter', nominal: '4.0 mm', tolerance: '± 0.1 mm', standard: 'Bore Gauge' },
-                { parameter: 'Max Negative Vacuum', nominal: '-90 kPa', tolerance: 'Continuous', standard: 'Vacuum Rating' }
+                { parameter: 'Pressure Range', nominal: '-30 to +300 mmHg', tolerance: '± 1 mmHg', standard: 'IEC 60601-2-34' },
+                { parameter: 'Drift Specification', nominal: '< 2 mmHg / hour', tolerance: 'Lab certified', standard: 'ISO 13485' },
+                { parameter: 'Guidewire Diameter', nominal: '0.014 in (0.36 mm)', tolerance: '± 0.0005 in', standard: 'ASTM F2079' }
               ]
             }
           ]
         },
         {
           pageNumber: 2,
-          title: 'Internal Cleaning & Lumen Brushing Protocol',
-          subtitle: 'Validated Channel Cleaning',
+          title: 'Consignment & Support Protocols',
+          subtitle: 'Cath Lab Standby & Emergency Courier Dispatch',
           sections: [
             {
-              heading: '2.0 CSPD Channel Decontamination',
-              text: 'Unscrew the tip before cleaning. Use the supplied 4.5 mm wire brush to swab the full length of the internal shaft.'
+              heading: '2.0 Emergency Logistics across Central & Western India',
+              text: 'SMP Surgitech maintains permanent consigned stock of PressureWires across hospital cath labs in Indore, Bhopal, Raipur, Udaipur, Bhilwara, and Kanpur.'
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  // 7. COROFLOW CARDIOVASCULAR SYSTEM
+  {
+    id: 'coroflow-cardiovascular-system',
+    sku: 'CRF-SYS-8000',
+    name: 'COROFLOW™ CARDIOVASCULAR SYSTEM (Coroventis / Abbott)',
+    brand: 'Abbott (Vascular Division)',
+    category: 'Cardiovascular Physiology Systems (CoroFlow)',
+    subcategory: 'Comprehensive Microvascular & Epicardial Assessment Platform',
+    shortDesc: 'The global benchmark platform for diagnosing Coronary Microvascular Dysfunction (CMD) and Vasospastic Angina (INOCA), measuring CFR, IMR (Index of Microcirculatory Resistance), and RRR.',
+    clinicalApplication: 'Patients with Ischemia and Non-Obstructive Coronary Artery Disease (INOCA/MINOCA), microvascular angina, post-PCI persistent angina, and heart transplant vasculopathy.',
+    keyFeatures: [
+      'Comprehensive assessment: FFR, CFR (Coronary Flow Reserve), and IMR in single workflow',
+      'Direct thermodilution and pressure measurement for quantitative microvascular resistance',
+      'Wireless integration with cath lab angiography tables and hospital DICOM/PACS networks',
+      'Automated bolus injection detection and rapid thermodynamic transit time calculation'
+    ],
+    specs: {
+      profileOrSize: 'Dedicated Clinical Console / Medical-Grade Touchscreen & Wireless Receiver',
+      compatibilityOrSheath: 'Integrates with PressureWire™ X and standard cath lab hemodynamic monitors',
+      materialOrCoating: 'ISO 13485 Certified Medical Grade Hardware & Diagnostic Software',
+      shelfLifeOrSterility: 'Perpetual System Calibration with sterile single-use sensor interfaces'
+    },
+    mriSafety: 'Cath lab control room & bedside equipment',
+    regulatoryStatus: ['CDSCO Registered', 'US FDA Cleared (510k)', 'CE Marked Medical Device'],
+    leadTime: 'Console Placement, Training & Complete Consignment by SMP Surgitech',
+    packaging: 'Industrial clinical flight case containing console, telemetry receiver & cables',
+    image: CATHLAB_OCT_IMAGE,
+    featured: true,
+    pdfSpec: {
+      docNumber: 'TDS-CRF-SYS-2026',
+      revision: 'Rev 3.5',
+      effectiveDate: '2026-02-15',
+      totalPages: 3,
+      pages: [
+        {
+          pageNumber: 1,
+          title: 'Microvascular Diagnostic Parameters & Indices',
+          subtitle: 'CoroFlow™ Cardiovascular Physiology Platform',
+          sections: [
+            {
+              heading: '1.0 Diagnostic Indices Calculated',
+              text: 'CoroFlow calculates epicardial and microcirculatory physiological indices simultaneously during saline thermodilution and adenosine hyperemia.',
+              specs: [
+                { parameter: 'FFR (Fractional Flow Reserve)', nominal: 'Cutoff ≤ 0.80', tolerance: '± 0.01', standard: 'ESC / AHA Guidelines' },
+                { parameter: 'IMR (Index of Microvascular Resistance)', nominal: 'Normal < 25', tolerance: 'Cutoff ≥ 25 (CMD)', standard: 'CoroMic Study' },
+                { parameter: 'CFR (Coronary Flow Reserve)', nominal: 'Normal > 2.5', tolerance: 'Cutoff ≤ 2.0 (Abnormal)', standard: 'Clinical Consensus' },
+                { parameter: 'RRR (Resistive Reserve Ratio)', nominal: 'Normal > 3.0', tolerance: '± 0.2', standard: 'CoroVentis Standard' }
+              ]
+            }
+          ]
+        },
+        {
+          pageNumber: 2,
+          title: 'Hardware Interfaces & DICOM Integration',
+          subtitle: 'Cath Lab Operating System Specifications',
+          sections: [
+            {
+              heading: '2.0 Cath Lab Connectivity',
+              text: 'Supports real-time HDMI/DisplayPort output, dual ethernet LAN, DICOM modal worklist, and seamless USB data export for hospital research registries.'
             }
           ]
         },
         {
           pageNumber: 3,
-          title: 'Regulatory & Material Test Cert',
-          subtitle: 'Biocompatibility Dossier',
+          title: 'SMP Surgitech Distributor Support & SLA',
+          subtitle: 'Hospital Console Placement Program',
           sections: [
             {
-              heading: '3.0 Quality Declarations',
-              text: 'CE MDR Class Ir certified. ISO 13485 audit trail verified.'
+              heading: '3.0 On-Site Technical Specialist Program',
+              text: 'SMP Surgitech provides factory-trained clinical applications specialists to assist during live cath lab cases and train resident interventional cardiologists.'
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  // 8. TAVI (Transcatheter Aortic Valve Implantation)
+  {
+    id: 'tavi-structural-valve-system',
+    sku: 'SJM-TAV-PRT',
+    name: 'TAVI (Transcatheter Aortic Valve Implantation) System',
+    brand: 'St. Jude Medical (CRM & Structural Heart)',
+    category: 'Structural Heart (TAVI)',
+    subcategory: 'Transcatheter Heart Valve Replacement & Delivery Platform',
+    shortDesc: 'Minimally invasive transcatheter aortic valve replacement platform engineered with fully repositionable and retrievable technology for severe symptomatic aortic stenosis.',
+    clinicalApplication: 'High, intermediate, and low surgical risk patients presenting with severe native calcific aortic stenosis or failed surgical bioprosthetic valves (Valve-in-Valve).',
+    keyFeatures: [
+      'Fully repositionable and retrievable prior to final deployment for precision placement',
+      'Active pericardial outer wrap sealing cuff engineered to minimize paravalvular leak (PVL)',
+      'Low profile transfemoral delivery sheath system minimizing vascular access complications',
+      'Hemodynamic performance matching or exceeding surgical tissue valves with low gradients'
+    ],
+    specs: {
+      profileOrSize: 'Valve Sizes: 23 mm, 25 mm, 27 mm, 29 mm Annulus Coverage',
+      compatibilityOrSheath: '14F / 16F Ultra-Low Profile Transfemoral Delivery Sheath',
+      materialOrCoating: 'Nitinol self-expanding frame with porcine pericardium leaflets',
+      shelfLifeOrSterility: 'Sterile chemical storage solution | Cold-chain monitored'
+    },
+    mriSafety: 'MR Conditional up to 3.0 Tesla',
+    regulatoryStatus: ['CDSCO / DCGI Approved', 'US FDA Approved', 'CE Mark Certified'],
+    leadTime: 'Dedicated TAVI Case Support & Consigned Sizing Inventory by SMP Surgitech',
+    packaging: 'Rigid protective clinical jar in temperature-controlled transport container',
+    image: CATHLAB_OCT_IMAGE,
+    featured: true,
+    pdfSpec: {
+      docNumber: 'TDS-SJM-TAV-2026',
+      revision: 'Rev 4.1',
+      effectiveDate: '2026-01-25',
+      totalPages: 3,
+      pages: [
+        {
+          pageNumber: 1,
+          title: 'Structural Architecture & Hydrodynamic Performance',
+          subtitle: 'Transcatheter Aortic Heart Valve Replacement Platform',
+          sections: [
+            {
+              heading: '1.0 Valve Design & Hydrodynamic Gradients',
+              text: 'The self-expanding nitinol frame features high radial expansion force at the annular level with supra-annular leaflet placement to maximize effective orifice area (EOA).',
+              specs: [
+                { parameter: 'Effective Orifice Area (25mm)', nominal: '1.85 cm²', tolerance: '± 0.15 cm²', standard: 'ISO 5840-3' },
+                { parameter: 'Mean Post-Implant Gradient', nominal: '7.8 mmHg', tolerance: '< 10 mmHg', standard: 'Clinical In Vivo' },
+                { parameter: 'Frame Material', nominal: 'Nitinol Shape Memory', tolerance: 'Medical Grade', standard: 'ASTM F2063' }
+              ]
+            }
+          ]
+        },
+        {
+          pageNumber: 2,
+          title: 'Transfemoral Delivery & Repositionability',
+          subtitle: 'Controlled Release Mechanism',
+          sections: [
+            {
+              heading: '2.0 Delivery System Maneuverability',
+              text: 'The catheter features integrated 1:1 wheel-controlled axial steering, allowing precise depth control (3–5 mm below the non-coronary cusp) and full recapture if repositioning is warranted.'
+            }
+          ]
+        },
+        {
+          pageNumber: 3,
+          title: 'Case Preparation & Hospital Consignment',
+          subtitle: 'SMP Surgitech Structural Heart Specialist Protocol',
+          sections: [
+            {
+              heading: '3.0 On-Site Cath Lab Support',
+              text: 'SMP Surgitech dispatches complete backup valve size matrices and sterile crimping tools with a certified valve specialist present throughout the structural heart case.'
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  // 9. IMPELLA Heart Pump
+  {
+    id: 'impella-heart-pump-system',
+    sku: 'JNJ-IMP-CP50',
+    name: 'IMPELLA® Percutaneous Mechanical Circulatory Support Heart Pump',
+    brand: 'J&J MedTech (Surgical Solutions)',
+    category: 'Mechanical Circulatory Support (Impella & IABP)',
+    subcategory: 'Percutaneous Ventricular Assist Device (pVAD)',
+    shortDesc: 'World’s smallest heart pump delivering direct active forward blood flow up to 4.3–5.0 L/min, unloading the left ventricle and perfusing vital end-organs during high-risk PCI and cardiogenic shock.',
+    clinicalApplication: 'Protected high-risk PCI (CHIP), acute myocardial infarction with cardiogenic shock (AMICS), acute myocarditis, and post-cardiotomy low output syndrome.',
+    keyFeatures: [
+      'Active microaxial blood pump pulling blood from LV and expelling into ascending aorta',
+      'Provides true continuous hemodynamic unloading independent of patient heart rhythm',
+      'Reduces LV end-diastolic pressure (LVEDP) and myocardial oxygen demand immediately',
+      'Automated Impella Controller (AIC) with intelligent optical pressure optical sensing'
+    ],
+    specs: {
+      profileOrSize: 'Impella CP (3.5 - 4.3 L/min) | Impella 5.0 (up to 5.0 L/min) | 14F Sheath',
+      compatibilityOrSheath: 'Femoral or axillary surgical cutdown access',
+      materialOrCoating: 'Biocompatible titanium casing, polymer impeller and optical sensors',
+      shelfLifeOrSterility: 'Sterile EO Single-Use Disposable Catheter with Purge Cassette'
+    },
+    mriSafety: 'MR Unsafe (Electromechanical blood pump)',
+    regulatoryStatus: ['CDSCO Registered', 'US FDA PMA Approved', 'CE Mark Certified'],
+    leadTime: 'Emergency Rapid Standby Deployment & Consignment across MP, CG, South RJ & UP',
+    packaging: 'Rigid sealed surgical catheter tray with optical sensor connectors',
+    image: IMPELLA_IABP_IMAGE,
+    featured: true,
+    pdfSpec: {
+      docNumber: 'TDS-JNJ-IMP-2026',
+      revision: 'Rev 7.0',
+      effectiveDate: '2026-02-10',
+      totalPages: 3,
+      pages: [
+        {
+          pageNumber: 1,
+          title: 'Pump Hemodynamics & Microaxial Motor Specs',
+          subtitle: 'IMPELLA® Left Ventricular Mechanical Circulatory Support',
+          sections: [
+            {
+              heading: '1.0 Hemodynamic Performance Curve',
+              text: 'The Impella microaxial rotor operates up to 46,000 RPM, delivering continuous physiological flow directly from the LV cavity into the systemic circulation.',
+              specs: [
+                { parameter: 'Maximum Flow Rate (CP)', nominal: '4.3 L/min', tolerance: '± 0.2 L/min', standard: 'Hydrodynamic Lab' },
+                { parameter: 'Motor Speed Range', nominal: '25,000 - 46,000 RPM', tolerance: 'Variable P-levels', standard: 'AIC Controller' },
+                { parameter: 'Catheter Cannula Size', nominal: '14 Fr', tolerance: 'OD nominal', standard: 'ISO 10555' },
+                { parameter: 'Purge Solution Pressure', nominal: '300 - 1100 mmHg', tolerance: 'Auto-regulated', standard: 'Purge Cassette Spec' }
+              ]
+            }
+          ]
+        },
+        {
+          pageNumber: 2,
+          title: 'Clinical Indications & Ventricular Unloading Mechanics',
+          subtitle: 'Myocardial Protection & Hemodynamic Stabilization',
+          sections: [
+            {
+              heading: '2.0 Hemodynamic Stabilization Mechanism',
+              text: 'Unloads the left ventricle directly, shifting the pressure-volume loop to the left, decreasing myocardial wall stress, and preserving coronary microvascular perfusion.'
+            }
+          ]
+        },
+        {
+          pageNumber: 3,
+          title: 'SMP Surgitech Emergency Consignment Program',
+          subtitle: 'Emergency Cath Lab & ICU Dispatch',
+          sections: [
+            {
+              heading: '3.0 24/7 Rapid Emergency Response',
+              text: 'SMP Surgitech maintains emergency consigned consoles and sterile Impella CP kits in major cardiac centers with 24/7 clinical applications engineers ready for transport.'
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  // 10. IABP PUMP & Balloon Catheters
+  {
+    id: 'iabp-pump-catheter-system',
+    sku: 'TFX-IAB-WAV2',
+    name: 'IABP PUMP (Intra-Aortic Balloon Pump) Console & AutoCAT™ Catheters',
+    brand: 'Teleflex (Vascular Division)',
+    category: 'Mechanical Circulatory Support (Impella & IABP)',
+    subcategory: 'Intra-Aortic Balloon Counterpulsation Console & Catheters',
+    shortDesc: 'Automated intra-aortic balloon counterpulsation console and polyurethane balloon catheters providing synchronized diastolic augmentation and afterload reduction for failing hearts.',
+    clinicalApplication: 'Cardiogenic shock refractory to inotropes, unstable angina refractory to medication, acute mitral regurgitation, perioperative support in high-risk cardiac surgery, and weaning from bypass.',
+    keyFeatures: [
+      'WAVE™ Algorithm auto-timing tracking the dicrotic notch on every heartbeat',
+      'Fiber-optic physiological pressure sensing for artifact-free trigger synchronization',
+      'Polyurethane DuraMac™ balloon with high abrasion resistance and rapid helium filling',
+      'Automated lead switching and arrhythmia tracking in difficult atrial fibrillation'
+    ],
+    specs: {
+      profileOrSize: 'Balloon Volumes: 30 cc, 40 cc, 50 cc | 7.0 Fr - 7.5 Fr Ultra-Low Profile',
+      compatibilityOrSheath: 'Sheathed or sheathless insertion over 0.018" or 0.025" Guidewire',
+      materialOrCoating: 'DuraMac medical polyurethane with hydrophilic coating',
+      shelfLifeOrSterility: 'Sterile EO Disposable Balloon Kits | Console Maintenance Service'
+    },
+    mriSafety: 'MR Unsafe Console / Catheter non-ferromagnetic in patient',
+    regulatoryStatus: ['CDSCO Approved', 'US FDA Approved', 'CE Mark Certified'],
+    leadTime: 'Immediate Consignment & Emergency Console Standby in MP, CG, South RJ & UP',
+    packaging: 'Complete sterile insertion kit with puncture needle, dilatators, and helium lines',
+    image: IMPELLA_IABP_IMAGE,
+    featured: true,
+    pdfSpec: {
+      docNumber: 'TDS-TFX-IAB-2026',
+      revision: 'Rev 5.4',
+      effectiveDate: '2026-01-30',
+      totalPages: 3,
+      pages: [
+        {
+          pageNumber: 1,
+          title: 'Counterpulsation Dynamics & Helium Pneumatics',
+          subtitle: 'Teleflex Arrow AutoCAT 2 WAVE™ IABP System',
+          sections: [
+            {
+              heading: '1.0 Pneumatic Specifications & Timing Precision',
+              text: 'Helium gas counterpulsation system inflating at aortic valve closure (dicrotic notch) and deflating immediately before isovolumetric ventricular contraction.',
+              specs: [
+                { parameter: 'Balloon Inflation Speed', nominal: '< 50 ms', tolerance: 'Helium gas dynamics', standard: 'ISO 13485' },
+                { parameter: 'Gas Source', nominal: 'USP Medical Helium', tolerance: '99.99% purity', standard: 'Medical Gas Code' },
+                { parameter: 'Sheathless Profile', nominal: '7.5 Fr', tolerance: '± 0.1 Fr', standard: 'ISO 10555' },
+                { parameter: 'Trigger Modes', nominal: 'ECG, Arterial Pressure, Pacer, Internal', tolerance: 'Auto-switching', standard: 'IEC 60601' }
+              ]
+            }
+          ]
+        },
+        {
+          pageNumber: 2,
+          title: 'Balloon Catheter Sizing Selection',
+          subtitle: 'Patient Height to Balloon Volume Calibration',
+          sections: [
+            {
+              heading: '2.0 Sizing Chart',
+              text: '30 cc: Height < 152 cm (5\'0") | 40 cc: Height 152–182 cm (5\'0" - 6\'0") | 50 cc: Height > 182 cm (6\'0")'
+            }
+          ]
+        },
+        {
+          pageNumber: 3,
+          title: 'Hospital Support & Consignment Services',
+          subtitle: 'SMP Surgitech Standby Console Maintenance',
+          sections: [
+            {
+              heading: '3.0 Backup Consoles in Central & Western Hubs',
+              text: 'SMP Surgitech provides standby backup IABP consoles on permanent lease or emergency consignment across major ICUs and Cath Labs in Central India.'
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  // 11. Pocket ECG
+  {
+    id: 'pocket-ecg-diagnostic-device',
+    sku: 'PKG-ECG-400',
+    name: 'Pocket ECG Mobile Real-Time Arrhythmia Diagnostic System',
+    brand: 'Pocket ECG (Diagnostic Devices)',
+    category: 'Diagnostic Monitoring (Pocket ECG)',
+    subcategory: 'Continuous Ambulatory Arrhythmia Diagnostic Telemetry',
+    shortDesc: 'Smartphone-sized hospital-grade wireless arrhythmia telemetry recorder providing continuous, real-time, full-disclosure ECG streaming with immediate cloud analysis and automated event reporting.',
+    clinicalApplication: 'Unexplained syncope, paroxysmal atrial fibrillation (AFib), transient palpitations, cryptogenic stroke cryptogenic source monitoring, and post-CABG/PCI arrhythmia surveillance.',
+    keyFeatures: [
+      'Continuous full-disclosure recording: captures every single beat up to 30 days',
+      'Real-time cellular transmission automatically delivering alerts to attending cardiologists',
+      'Advanced algorithm distinguishing AFib, ventricular tachycardia (VT), pauses, and heart blocks',
+      'High patient compliance with ergonomic, lightweight, water-resistant patient sensor'
+    ],
+    specs: {
+      profileOrSize: 'Dimensions: 98 x 56 x 14 mm | Weight: 74 grams with battery',
+      compatibilityOrSheath: 'Compatible with standard 3-lead or 4-lead clinical snap electrodes',
+      materialOrCoating: 'Medical-grade shock-absorbent biocompatible polymer housing',
+      shelfLifeOrSterility: 'Non-sterile reusable clinical diagnostic device with sterile disposables'
+    },
+    mriSafety: 'MR Unsafe (Electronic telemetry transmitter)',
+    regulatoryStatus: ['CDSCO Approved', 'US FDA Cleared', 'CE Mark Certified (MDR Class IIa)'],
+    leadTime: 'Immediate Hospital Placement & Home Monitoring Logistics by SMP Surgitech',
+    packaging: 'Complete patient kit with charging dock, leads, skin prep, and patient manual',
+    image: POCKET_ECG_IMAGE,
+    featured: true,
+    pdfSpec: {
+      docNumber: 'TDS-PKG-ECG-2026',
+      revision: 'Rev 4.2',
+      effectiveDate: '2026-02-05',
+      totalPages: 2,
+      pages: [
+        {
+          pageNumber: 1,
+          title: 'Telemetry Electronics & Detection Algorithms',
+          subtitle: 'Pocket ECG Diagnostic Platform Specifications',
+          sections: [
+            {
+              heading: '1.0 Signal Processing & Cellular Telemetry',
+              text: 'Equipped with low-noise clinical bio-amplifiers with 16-bit ADC sampling at 300 Hz per channel. Transmits encrypted diagnostic data via cellular IoT connection.',
+              specs: [
+                { parameter: 'Sampling Rate', nominal: '300 Hz / channel', tolerance: '16-bit resolution', standard: 'AAMI EC38' },
+                { parameter: 'Frequency Response', nominal: '0.05 to 100 Hz', tolerance: 'Diagnostic bandwidth', standard: 'IEC 60601-2-47' },
+                { parameter: 'Battery Life', nominal: 'Up to 30 continuous hours per charge', tolerance: 'Lithium-ion rechargeable', standard: 'UN 38.3' }
+              ]
+            }
+          ]
+        },
+        {
+          pageNumber: 2,
+          title: 'Clinical Reporting & Physician Portal',
+          subtitle: 'Cardiology Cloud Review Interface',
+          sections: [
+            {
+              heading: '2.0 Web-Based Review Portal',
+              text: 'Hospital cardiologists log into a secure HIPAA/GDPR compliant dashboard with complete full-disclosure playback, automated AF burden quantification, and instant PDF summary generation.'
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  // 12. SMP Cardiovascular & Micro-Vascular Surgical Instruments Set
+  {
+    id: 'smp-cardiovascular-surgical-set',
+    sku: 'SMP-SURG-CVS1',
+    name: 'SMP Cardiovascular & Micro-Vascular Surgical Instrument Set',
+    brand: 'SMP Surgitech (Cardiovascular Surgical)',
+    category: 'Cardiovascular Surgical Instruments',
+    subcategory: 'Micro-Vascular Surgery & Open-Heart Clamping Suite',
+    shortDesc: 'Hospital-grade German stainless steel and titanium cardiovascular instrumentation suite: DeBakey atraumatic vascular clamps, Castroviejo micro-needle holders, and Potts-Smith vascular scissors.',
+    clinicalApplication: 'Open-heart surgery, peripheral vascular bypass, carotid endarterectomy, aortic aneurysm repair, and pediatric cardiac operations.',
+    keyFeatures: [
+      'Manufactured from certified German DIN 1.4021 / AISI 420B stainless steel & surgical titanium',
+      'True atraumatic DeBakey micro-serrations eliminate endothelial vessel trauma during clamping',
+      'Tungsten carbide (TC) inserts on needle holders and micro-scissors for extended longevity',
+      'Electro-satin matte passivation finish eliminating glare under high-intensity surgical theater lighting'
+    ],
+    specs: {
+      profileOrSize: 'Comprehensive 42-Piece Surgical Tray with perforated autoclave container',
+      compatibilityOrSheath: 'Compatible with standard hospital sterilization cycles (134°C pre-vacuum)',
+      materialOrCoating: 'German DIN 1.4021 stainless steel, Grade 5 Titanium & Tungsten Carbide',
+      shelfLifeOrSterility: 'Reusable instrument set with verified 10+ year autoclave lifespan'
+    },
+    mriSafety: 'Surgical instrument (Used in operating suite, non-implantable)',
+    regulatoryStatus: ['ISO 13485:2016 Certified', 'CE Mark MDR Class Ir', 'CDSCO Registered'],
+    leadTime: 'In Stock for Immediate Delivery across MP, CG, South Rajasthan & UP',
+    packaging: 'Medical-grade perforated stainless steel autoclave sterilization cassette with silicone mats',
+    image: SURGICAL_SET_IMAGE,
+    featured: true,
+    pdfSpec: {
+      docNumber: 'TDS-SMP-CVS1-2026',
+      revision: 'Rev 6.2',
+      effectiveDate: '2026-01-15',
+      totalPages: 3,
+      pages: [
+        {
+          pageNumber: 1,
+          title: 'Metallurgical Specifications & Tray Inventory',
+          subtitle: 'Cardiovascular & Micro-Vascular Surgical Instrumentation',
+          sections: [
+            {
+              heading: '1.0 Metallurgical Standards & Rockell Hardness',
+              text: 'Vacuum furnace heat-treated to ensure uniform Martensitic crystalline grain structure with zero micro-voids, passivated strictly per ASTM A967 standards.',
+              specs: [
+                { parameter: 'Rockwell Hardness (Blades/Jaws)', nominal: '53 - 55 HRC', tolerance: '± 1 HRC', standard: 'ASTM E18' },
+                { parameter: 'Tungsten Carbide Inserts', nominal: '70 - 72 HRC', tolerance: 'Gold-plated rings', standard: 'ISO 7153-1' },
+                { parameter: 'Corrosion Passivation', nominal: 'Boil & Copper Sulfate Pass', tolerance: 'Zero staining', standard: 'ASTM F1089' }
+              ]
+            },
+            {
+              heading: '1.1 Tray Inventory Summary',
+              text: 'Includes: DeBakey Vascular Clamps (60° angled, straight, curved), Potts-Smith Scissors (25°, 45°, 60°), Castroviejo Micro-Needle Holders with TC jaws, Cooley atraumatic forceps, and bulldog clamps.'
+            }
+          ]
+        },
+        {
+          pageNumber: 2,
+          title: 'Validated Hospital Reprocessing & Autoclave Protocol',
+          subtitle: 'CSPD Guidelines',
+          sections: [
+            {
+              heading: '2.0 Decontamination & Sterilization',
+              text: 'Ultrasonic cleaning with enzymatic detergent pH 7.0–8.2 for 10 minutes at 40°C. Steam autoclave pre-vacuum cycle at 134°C (273°F) for 4 minutes with 20 minutes dry cycle.'
+            }
+          ]
+        },
+        {
+          pageNumber: 3,
+          title: 'Laser Marking & Hospital Consignment',
+          subtitle: 'Custom Hospital Department Serialization',
+          sections: [
+            {
+              heading: '3.0 UDI Serialization & Custom Marking',
+              text: 'Every instrument is custom laser-etched with hospital department code (e.g., OR-CV-TRAY-1) and GS1 DataMatrix UDI barcode for seamless central sterile tracking.'
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  // 13. SMP CABG & Sternotomy Surgical Set
+  {
+    id: 'smp-cabg-sternotomy-set',
+    sku: 'SMP-SURG-CABG2',
+    name: 'SMP Coronary Artery Bypass Graft (CABG) & Sternotomy Surgical Set',
+    brand: 'SMP Surgitech (Cardiovascular Surgical)',
+    category: 'Cardiovascular Surgical Instruments',
+    subcategory: 'Cardiothoracic Sternal Retraction & Micro-Anastomosis Suite',
+    shortDesc: 'Heavy-duty cardiothoracic surgical set including self-retaining Morse sternal retractors, internal mammary artery (IMA) retractors, coronary micro-scissors, and micro-anastomosis forceps.',
+    clinicalApplication: 'Coronary artery bypass grafting (on-pump and off-pump OPCAB), aortic valve replacement (AVR), mitral valve repair (MVR), and adult cardiac surgery.',
+    keyFeatures: [
+      'Precision Morse sternal retractor with interchangeable aluminum and stainless steel blades',
+      'Favoloro-style IMA retractor with multi-directional rack and pinion lifting mechanism',
+      'Micro-coronary scissors with 360° rotational tactile response for end-to-side graft anastomosis',
+      'Ultra-fine titanium micro-ring forceps (0.4 mm tip) for delicate saphenous vein handling'
+    ],
+    specs: {
+      profileOrSize: '36-Piece Specialized Cardiothoracic Set with Dedicated Aluminum Sternal Container',
+      compatibilityOrSheath: 'Compatible with standard autoclave sterilization cycles up to 138°C',
+      materialOrCoating: 'German DIN 1.4021 Martensitic Stainless Steel & Anodized Aircraft Aluminum',
+      shelfLifeOrSterility: 'Reusable surgical instruments with 10-year mechanical warranty'
+    },
+    mriSafety: 'Non-implantable surgical suite equipment',
+    regulatoryStatus: ['ISO 13485:2016 Certified', 'CE Mark MDR Class Ir', 'CDSCO Registered'],
+    leadTime: 'In Stock / 24-48h Express Dispatch across MP, CG, South Rajasthan & UP',
+    packaging: 'Two-tier heavy-duty anodized aluminum sterilization container with silicone brackets',
+    image: CARDIO_INSTRUMENTS_IMAGE,
+    featured: false,
+    pdfSpec: {
+      docNumber: 'TDS-SMP-CABG-2026',
+      revision: 'Rev 5.0',
+      effectiveDate: '2026-01-18',
+      totalPages: 2,
+      pages: [
+        {
+          pageNumber: 1,
+          title: 'Cardiothoracic Sternal Retractor Specs',
+          subtitle: 'SMP-SURG-CABG2 Technical Specifications',
+          sections: [
+            {
+              heading: '1.0 Sternal Retractor Mechanical Engineering',
+              text: 'Designed to withstand sternal expansion forces up to 850 N without gear slippage. Rack and pinion track precision wire-cut for smooth tactile operation.',
+              specs: [
+                { parameter: 'Maximum Sternal Spread', nominal: '200 mm', tolerance: '± 2 mm', standard: 'SMP Heavy-Duty Spec' },
+                { parameter: 'Retractor Arm Material', nominal: 'AISI 420B Stainless', tolerance: 'Vacuum forged', standard: 'DIN EN ISO 7153-1' },
+                { parameter: 'Blade Depth Options', nominal: '30 mm, 40 mm, 50 mm', tolerance: 'Interchangeable', standard: 'SMP Modular Spec' }
+              ]
+            }
+          ]
+        },
+        {
+          pageNumber: 2,
+          title: 'Micro-Anastomosis Instruments',
+          subtitle: 'Coronary Graft Handling Guidelines',
+          sections: [
+            {
+              heading: '2.0 Micro-Surgical Jaws',
+              text: 'Micro-vascular forceps feature ultra-fine 0.4 mm ring tips with longitudinal micro-fluting to hold the saphenous vein or internal mammary artery graft without crushing the intima.'
             }
           ]
         }
@@ -850,33 +1183,24 @@ export const SURGICAL_PRODUCTS: Product[] = [
   }
 ];
 
-export const SPECIALTIES = [
-  'All Specialties',
-  'Cardiovascular & Thoracic',
-  'Neurosurgery & Spine',
-  'Orthopedics & Trauma',
-  'General & Laparoscopic',
-  'Microsurgery & Ophthalmic',
-  'OB/GYN & Urology'
-] as const;
+export const CATEGORIES: { id: string; label: string; count: number }[] = [
+  { id: 'All Categories', label: 'All Products', count: SURGICAL_PRODUCTS.length },
+  { id: 'Coronary Stents (XIENCE)', label: 'Coronary Stents (XIENCE)', count: 4 },
+  { id: 'Diagnostic Physiology & Imaging (OCT / FFR)', label: 'Diagnostic Imaging & Physiology (OCT / FFR)', count: 2 },
+  { id: 'Cardiovascular Physiology Systems (CoroFlow)', label: 'Cardiovascular Systems (CoroFlow)', count: 1 },
+  { id: 'Structural Heart (TAVI)', label: 'Structural Heart (TAVI)', count: 1 },
+  { id: 'Mechanical Circulatory Support (Impella & IABP)', label: 'Mechanical Circulatory Support (Impella & IABP)', count: 2 },
+  { id: 'Diagnostic Monitoring (Pocket ECG)', label: 'Diagnostic Devices (Pocket ECG)', count: 1 },
+  { id: 'Cardiovascular Surgical Instruments', label: 'Surgical Instruments (Cardiovascular / CABG)', count: 2 }
+];
 
-export const INSTRUMENT_TYPES = [
-  'All Types',
-  'Clamps & Hemostats',
-  'Scissors & Cutters',
-  'Forceps & Tweezers',
-  'Retractors',
-  'Needle Holders',
-  'Bone Rongeurs & Cutters',
-  'Suction & Cannulas',
-  'Systems & Trays'
-] as const;
-
-export const ALLOY_GRADES = [
-  'All Alloys',
-  'German DIN 1.4021 (AISI 420B) Stainless',
-  'German DIN 1.4116 / 1.4034 Martensitic',
-  'Titanium Ti-6Al-4V ELI (Grade 5)',
-  'Tungsten Carbide (TC) Inlays 72 HRC',
-  'Austenitic 316L Surgical Grade Steel'
-] as const;
+export const BRAND_FILTERS = [
+  'All Brands',
+  'Abbott (Vascular Division)',
+  'Cordis (Cardiology)',
+  'Teleflex (Vascular Division)',
+  'St. Jude Medical (CRM & Structural Heart)',
+  'J&J MedTech (Surgical Solutions)',
+  'Pocket ECG (Diagnostic Devices)',
+  'SMP Surgitech (Cardiovascular Surgical)'
+];

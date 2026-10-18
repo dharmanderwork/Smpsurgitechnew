@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Product } from '../types/instruments';
 import { DirectInquiryForm } from './DirectInquiryForm';
-import { X, FileText, Plus, Check, ShieldCheck, Award, Ruler, Sparkles, Layers, RefreshCw } from 'lucide-react';
+import { X, FileText, Plus, Check, ShieldCheck, Award, Ruler, Sparkles, Layers, Truck, MapPin, Send } from 'lucide-react';
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -10,7 +10,7 @@ interface ProductDetailModalProps {
   onOpenPdf: (product: Product) => void;
   onAddToRfq: (product: Product) => void;
   isItemInRfq: boolean;
-  initialTab?: 'overview' | 'specs' | 'reprocessing' | 'inquiry';
+  initialTab?: 'overview' | 'specs' | 'logistics' | 'inquiry';
 }
 
 export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
@@ -22,7 +22,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   isItemInRfq,
   initialTab = 'overview'
 }) => {
-  const [activeTab, setActiveTab] = useState<'overview' | 'specs' | 'reprocessing' | 'inquiry'>(initialTab);
+  const [activeTab, setActiveTab] = useState<'overview' | 'specs' | 'logistics' | 'inquiry'>(initialTab);
 
   React.useEffect(() => {
     if (initialTab) {
@@ -43,13 +43,13 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         {/* Header Strip */}
         <div className="bg-slate-900 text-white px-6 py-4 flex items-center justify-between border-b border-slate-800 shrink-0">
           <div className="flex items-center gap-3">
-            <span className="font-mono text-xs font-bold px-2 py-0.5 bg-slate-800 text-cyan-300 rounded border border-slate-700">
+            <span className="font-mono text-xs font-bold px-2.5 py-1 bg-slate-800 text-cyan-300 rounded border border-slate-700">
               {product.sku}
             </span>
             <div className="text-xs text-slate-300 hidden sm:flex items-center gap-2">
-              <span>{product.specialty}</span>
+              <span className="font-semibold text-white">{product.brand}</span>
               <span aria-hidden="true" className="text-slate-600">·</span>
-              <span>{product.type}</span>
+              <span className="text-slate-300">{product.category}</span>
             </div>
           </div>
 
@@ -67,7 +67,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
           {/* Top Grid: Image + Quick Identity */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
             {/* Image Box */}
-            <div className="md:col-span-5 bg-slate-100 rounded-xl overflow-hidden border border-slate-200 aspect-[4/3] relative flex items-center justify-center">
+            <div className="md:col-span-5 bg-slate-950/5 rounded-xl overflow-hidden border border-slate-200 aspect-[4/3] relative flex items-center justify-center">
               <img
                 src={product.image}
                 alt={product.name}
@@ -77,9 +77,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   (e.target as HTMLElement).style.display = 'none';
                 }}
               />
-              <div className="absolute bottom-2 left-2 right-2 bg-slate-900/80 backdrop-blur-sm text-[11px] text-white px-2.5 py-1.5 rounded flex items-center justify-between">
-                <span className="font-mono text-cyan-300">{product.metallurgy.surfaceFinish}</span>
-                <span>{product.dimensions.totalLength}</span>
+              <div className="absolute bottom-2 left-2 right-2 bg-slate-900/85 backdrop-blur-sm text-[11px] text-white px-2.5 py-1.5 rounded flex items-center justify-between">
+                <span className="font-mono text-cyan-300 font-semibold">{product.brand.split(' ')[0]}</span>
+                <span className="text-slate-300">{product.subcategory}</span>
               </div>
             </div>
 
@@ -87,12 +87,12 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             <div className="md:col-span-7 space-y-4">
               <div>
                 {/* Zero-Pill Unboxed Metadata Line */}
-                <div className="flex items-center gap-2 text-xs text-slate-500 mb-1.5">
-                  <span>{product.specialty}</span>
+                <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 mb-1.5">
+                  <span className="text-cyan-900 font-bold">{product.brand}</span>
                   <span aria-hidden="true">·</span>
-                  <span className="font-medium text-slate-700">{product.type}</span>
+                  <span className="font-medium text-slate-700">{product.category}</span>
                   <span aria-hidden="true">·</span>
-                  <span className="text-emerald-700 font-semibold">{product.leadTime}</span>
+                  <span className="text-emerald-700 font-semibold">{product.leadTime.split('/')[0]}</span>
                 </div>
 
                 <h1 id="product-modal-title" className="text-xl sm:text-2xl font-bold text-slate-950 font-display">
@@ -107,20 +107,20 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               {/* Quick Spec Highlights */}
               <div className="grid grid-cols-2 gap-2 text-xs bg-slate-50 border border-slate-200/80 rounded-lg p-3">
                 <div>
-                  <span className="text-slate-500 block text-[11px]">Primary Metallurgy</span>
-                  <span className="font-semibold text-slate-900">{product.alloy}</span>
+                  <span className="text-slate-500 block text-[11px]">Sizing / Profile</span>
+                  <span className="font-semibold text-slate-900">{product.specs.profileOrSize}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[11px]">Hardness Rating</span>
-                  <span className="font-mono font-bold text-slate-900">{product.metallurgy.rockwellHardness}</span>
+                  <span className="text-slate-500 block text-[11px]">Compatibility</span>
+                  <span className="font-mono font-medium text-slate-900">{product.specs.compatibilityOrSheath}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[11px]">Working Tip / End</span>
-                  <span className="font-medium text-slate-900">{product.dimensions.tipWidth}</span>
+                  <span className="text-slate-500 block text-[11px]">Material / Coating</span>
+                  <span className="font-medium text-slate-900">{product.specs.materialOrCoating}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[11px]">Sterilization Standard</span>
-                  <span className="font-medium text-slate-900">Autoclave 134°C</span>
+                  <span className="text-slate-500 block text-[11px]">MRI Safety</span>
+                  <span className="font-medium text-slate-900">{product.mriSafety}</span>
                 </div>
               </div>
 
@@ -138,18 +138,18 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   onClick={() => onAddToRfq(product)}
                   className={`flex-1 min-w-[150px] py-2 px-3 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
                     isItemInRfq
-                      ? 'bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100'
-                      : 'bg-slate-100 text-slate-800 hover:bg-slate-200 border border-slate-300'
+                      ? 'bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100'
+                      : 'bg-white text-slate-800 border border-slate-300 hover:bg-slate-50'
                   }`}
                 >
                   {isItemInRfq ? (
                     <>
                       <Check className="w-4 h-4 text-emerald-600" />
-                      <span>Added to RFQ Tray</span>
+                      <span>Item in RFQ Tray</span>
                     </>
                   ) : (
                     <>
-                      <Plus className="w-4 h-4 text-slate-600" />
+                      <Plus className="w-4 h-4 text-slate-500" />
                       <span>Add to RFQ Tray</span>
                     </>
                   )}
@@ -157,95 +157,98 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
                 <button
                   onClick={() => setActiveTab('inquiry')}
-                  className="w-full sm:w-auto py-2 px-4 text-xs font-semibold text-white bg-slate-950 hover:bg-cyan-900 rounded-lg transition-colors cursor-pointer"
+                  className="w-full py-2.5 px-4 text-xs font-semibold text-white bg-slate-900 hover:bg-cyan-900 rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
                 >
-                  Instant Quote Inquiry
+                  <Send className="w-3.5 h-3.5 text-cyan-300" />
+                  <span>Direct Quote Request</span>
                 </button>
               </div>
             </div>
           </div>
 
           {/* Navigation Tabs */}
-          <div className="border-b border-slate-200">
-            <div className="flex space-x-6 text-xs sm:text-sm font-semibold">
-              <button
-                onClick={() => setActiveTab('overview')}
-                className={`pb-2.5 border-b-2 transition-colors cursor-pointer ${
-                  activeTab === 'overview'
-                    ? 'border-slate-950 text-slate-950 font-bold'
-                    : 'border-transparent text-slate-500 hover:text-slate-800'
-                }`}
-              >
-                Clinical Applications & Features
-              </button>
-              <button
-                onClick={() => setActiveTab('specs')}
-                className={`pb-2.5 border-b-2 transition-colors cursor-pointer ${
-                  activeTab === 'specs'
-                    ? 'border-slate-950 text-slate-950 font-bold'
-                    : 'border-transparent text-slate-500 hover:text-slate-800'
-                }`}
-              >
-                Metallurgical Specifications
-              </button>
-              <button
-                onClick={() => setActiveTab('reprocessing')}
-                className={`pb-2.5 border-b-2 transition-colors cursor-pointer ${
-                  activeTab === 'reprocessing'
-                    ? 'border-slate-950 text-slate-950 font-bold'
-                    : 'border-transparent text-slate-500 hover:text-slate-800'
-                }`}
-              >
-                CSPD Reprocessing & Sterilization
-              </button>
-              <button
-                onClick={() => setActiveTab('inquiry')}
-                className={`pb-2.5 border-b-2 transition-colors cursor-pointer text-cyan-800 font-bold ${
-                  activeTab === 'inquiry'
-                    ? 'border-cyan-800 text-cyan-950'
-                    : 'border-transparent text-cyan-700 hover:text-cyan-900'
-                }`}
-              >
-                Direct Inquiry Form
-              </button>
-            </div>
+          <div className="border-b border-slate-200 flex gap-6 text-sm font-medium">
+            <button
+              onClick={() => setActiveTab('overview')}
+              className={`pb-3 text-xs font-semibold transition-colors relative cursor-pointer ${
+                activeTab === 'overview'
+                  ? 'text-cyan-950 border-b-2 border-cyan-800'
+                  : 'text-slate-500 hover:text-slate-900'
+              }`}
+            >
+              Overview & Clinical Indications
+            </button>
+            <button
+              onClick={() => setActiveTab('specs')}
+              className={`pb-3 text-xs font-semibold transition-colors relative cursor-pointer ${
+                activeTab === 'specs'
+                  ? 'text-cyan-950 border-b-2 border-cyan-800'
+                  : 'text-slate-500 hover:text-slate-900'
+              }`}
+            >
+              Technical Specifications & Sizing
+            </button>
+            <button
+              onClick={() => setActiveTab('logistics')}
+              className={`pb-3 text-xs font-semibold transition-colors relative cursor-pointer ${
+                activeTab === 'logistics'
+                  ? 'text-cyan-950 border-b-2 border-cyan-800'
+                  : 'text-slate-500 hover:text-slate-900'
+              }`}
+            >
+              Territory Dispatch & Consignment
+            </button>
+            <button
+              onClick={() => setActiveTab('inquiry')}
+              className={`pb-3 text-xs font-semibold transition-colors relative cursor-pointer flex items-center gap-1.5 ${
+                activeTab === 'inquiry'
+                  ? 'text-cyan-950 border-b-2 border-cyan-800'
+                  : 'text-cyan-800 hover:text-cyan-950'
+              }`}
+            >
+              <Send className="w-3.5 h-3.5" />
+              <span>Direct Inquiry Form</span>
+            </button>
           </div>
 
-          {/* Tab Content Panels */}
+          {/* Tab Contents */}
           {activeTab === 'overview' && (
-            <div className="space-y-4 text-sm animate-fade-in">
-              <div>
-                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">
-                  Primary Surgical Indications
-                </h2>
-                <p className="text-slate-700 leading-relaxed bg-slate-50 p-3.5 rounded-lg border border-slate-200/60">
-                  {product.clinicalApplication}
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
-                  Precision Engineering Highlights
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  {product.keyFeatures.map((feat, idx) => (
-                    <div key={idx} className="flex items-start gap-2 bg-white p-3 rounded-lg border border-slate-200">
-                      <div className="w-1.5 h-1.5 rounded-full bg-cyan-700 mt-2 shrink-0" />
-                      <span className="text-xs text-slate-700 leading-relaxed">{feat}</span>
-                    </div>
-                  ))}
+            <div className="space-y-4 text-xs text-slate-700 animate-fade-in">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200/80 space-y-2">
+                  <h2 className="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-cyan-800" />
+                    Key Engineering Highlights
+                  </h2>
+                  <ul className="space-y-1.5 pt-1">
+                    {product.keyFeatures.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-700 mt-1.5 shrink-0" />
+                        <span className="leading-relaxed">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
 
-              <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-500">
-                <span className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-cyan-700" />
-                  ISO 13485:2016 Compliant
-                </span>
-                <span aria-hidden="true">·</span>
-                <span>CE Class Ir MDR Certified</span>
-                <span aria-hidden="true">·</span>
-                <span>FDA Exempt (21 CFR Part 878)</span>
+                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200/80 space-y-2">
+                  <h2 className="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+                    <Award className="w-4 h-4 text-cyan-800" />
+                    Primary Clinical Applications
+                  </h2>
+                  <p className="leading-relaxed pt-1 text-slate-600">
+                    {product.clinicalApplication}
+                  </p>
+                  <div className="pt-2">
+                    <span className="text-[11px] font-semibold text-slate-500 block mb-1">Regulatory Approvals</span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {product.regulatoryStatus.map((reg, idx) => (
+                        <span key={idx} className="bg-white px-2 py-0.5 rounded border border-slate-200 text-[10px] font-medium text-slate-700">
+                          {reg}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           )}
@@ -256,28 +259,28 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <div className="border border-slate-200 rounded-lg p-4 space-y-3">
                   <h2 className="font-bold text-slate-900 border-b border-slate-200 pb-1.5 flex items-center gap-1.5">
                     <Layers className="w-4 h-4 text-cyan-800" />
-                    Metallurgical Properties
+                    Device Engineering & Chemistry
                   </h2>
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-slate-500">Alloy Standard</span>
-                      <span className="font-semibold text-slate-900">{product.alloy}</span>
+                      <span className="text-slate-500">Authorized Manufacturer</span>
+                      <span className="font-semibold text-slate-900">{product.brand}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500">Hardness (Rockwell)</span>
-                      <span className="font-mono font-bold text-slate-900">{product.metallurgy.rockwellHardness}</span>
+                      <span className="text-slate-500">Subcategory / Line</span>
+                      <span className="font-medium text-slate-900">{product.subcategory}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500">Surface Finish</span>
-                      <span className="text-slate-900">{product.metallurgy.surfaceFinish}</span>
+                      <span className="text-slate-500">Material / Chemistry</span>
+                      <span className="text-slate-900">{product.specs.materialOrCoating}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500">Magnetic Behavior</span>
-                      <span className="text-slate-900">{product.metallurgy.magneticProperty}</span>
+                      <span className="text-slate-500">Sterilization Standard</span>
+                      <span className="text-slate-900">{product.specs.shelfLifeOrSterility}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500">Passivation Test</span>
-                      <span className="text-slate-900">{product.metallurgy.corrosionPassivation}</span>
+                      <span className="text-slate-500">MRI Safety</span>
+                      <span className="font-semibold text-emerald-800">{product.mriSafety}</span>
                     </div>
                   </div>
                 </div>
@@ -285,30 +288,24 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <div className="border border-slate-200 rounded-lg p-4 space-y-3">
                   <h2 className="font-bold text-slate-900 border-b border-slate-200 pb-1.5 flex items-center gap-1.5">
                     <Ruler className="w-4 h-4 text-cyan-800" />
-                    Dimensional Tolerances
+                    Dimensional & Sizing Matrix
                   </h2>
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-slate-500">Overall Length</span>
-                      <span className="font-semibold text-slate-900">{product.dimensions.totalLength}</span>
+                      <span className="text-slate-500">Profile / Available Sizes</span>
+                      <span className="font-semibold text-slate-900">{product.specs.profileOrSize}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500">Tip / Working End</span>
-                      <span className="font-semibold text-slate-900">{product.dimensions.tipWidth}</span>
-                    </div>
-                    {product.dimensions.curvature && (
-                      <div className="flex justify-between">
-                        <span className="text-slate-500">Curvature / Angle</span>
-                        <span className="text-slate-900">{product.dimensions.curvature}</span>
-                      </div>
-                    )}
-                    <div className="flex justify-between">
-                      <span className="text-slate-500">Unit Mass (Net)</span>
-                      <span className="font-mono tabular-nums text-slate-900">{product.dimensions.weightGrams} g</span>
+                      <span className="text-slate-500">Catheter / Sheath Match</span>
+                      <span className="font-mono text-slate-900">{product.specs.compatibilityOrSheath}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-500">Packaging Type</span>
-                      <span className="text-slate-900 truncate max-w-[180px]">{product.packaging}</span>
+                      <span className="text-slate-900 truncate max-w-[200px]">{product.packaging}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Technical Data Sheet</span>
+                      <span className="font-mono text-cyan-800 font-semibold">{product.pdfSpec.docNumber}</span>
                     </div>
                   </div>
                 </div>
@@ -316,33 +313,56 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             </div>
           )}
 
-          {activeTab === 'reprocessing' && (
+          {activeTab === 'logistics' && (
             <div className="space-y-4 text-xs animate-fade-in">
               <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-3">
                 <div className="flex items-center gap-2">
-                  <RefreshCw className="w-4 h-4 text-cyan-800" />
-                  <h2 className="font-bold text-slate-900">Hospital Central Sterile Reprocessing Validation</h2>
+                  <Truck className="w-4 h-4 text-cyan-800" />
+                  <h2 className="font-bold text-slate-900 text-sm">SMP Surgitech Regional Cath Lab Delivery Network</h2>
                 </div>
                 <p className="text-slate-600 leading-relaxed">
-                  SMP Surgitech instruments undergo rigorous validation according to DIN EN ISO 17664, AAMI ST79, and EN 285 standards.
+                  Permanent consigned stock and emergency backup consoles are stationed across our regional distribution hubs to guarantee uninterrupted cath lab and surgical operations.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                   <div className="bg-white p-3 rounded border border-slate-200 space-y-1">
-                    <span className="text-slate-500 block text-[11px]">Recommended Steam Cycle</span>
-                    <span className="font-bold text-slate-900">{product.reprocessing.autoclaveCycle}</span>
+                    <div className="flex items-center gap-1.5 font-bold text-slate-900">
+                      <MapPin className="w-3.5 h-3.5 text-cyan-700" />
+                      <span>South Rajasthan (Udaipur Regional Hub)</span>
+                    </div>
+                    <p className="text-[11px] text-slate-600">
+                      Serving Udaipur, Dungarpur, Banswara, Pratapgarh, Rajsamand, Chittorgarh, and Bhilwara. Emergency delivery in 1 to 3 hours.
+                    </p>
                   </div>
+
                   <div className="bg-white p-3 rounded border border-slate-200 space-y-1">
-                    <span className="text-slate-500 block text-[11px]">Max Permissible Temperature</span>
-                    <span className="font-bold text-slate-900">{product.reprocessing.maxTempCelsius}°C (280°F)</span>
+                    <div className="flex items-center gap-1.5 font-bold text-slate-900">
+                      <MapPin className="w-3.5 h-3.5 text-cyan-700" />
+                      <span>Madhya Pradesh (Indore & Bhopal Hubs)</span>
+                    </div>
+                    <p className="text-[11px] text-slate-600">
+                      Serving Indore, Bhopal, Jabalpur, Gwalior, Ujjain, Sagar, and Rewa with 2 to 4 hour express dispatch.
+                    </p>
                   </div>
+
                   <div className="bg-white p-3 rounded border border-slate-200 space-y-1">
-                    <span className="text-slate-500 block text-[11px]">Validated Cleaning Chemistry</span>
-                    <span className="font-medium text-slate-900">{product.reprocessing.compatibleCleaningChem}</span>
+                    <div className="flex items-center gap-1.5 font-bold text-slate-900">
+                      <MapPin className="w-3.5 h-3.5 text-cyan-700" />
+                      <span>Chhattisgarh (Raipur & Durg Hubs)</span>
+                    </div>
+                    <p className="text-[11px] text-slate-600">
+                      Full state coverage including Raipur, Bilaspur, Durg-Bhilai, Korba, and Jagdalpur with dedicated cold-chain logging.
+                    </p>
                   </div>
+
                   <div className="bg-white p-3 rounded border border-slate-200 space-y-1">
-                    <span className="text-slate-500 block text-[11px]">Chemical pH Operating Range</span>
-                    <span className="font-bold text-slate-900">{product.reprocessing.cleaningPhRange}</span>
+                    <div className="flex items-center gap-1.5 font-bold text-slate-900">
+                      <MapPin className="w-3.5 h-3.5 text-cyan-700" />
+                      <span>Part of Uttar Pradesh (Agra/Kanpur Corridor)</span>
+                    </div>
+                    <p className="text-[11px] text-slate-600">
+                      Dedicated technical specialists serving Kanpur, Agra, Jhansi, Prayagraj, and Varanasi cardiac institutes.
+                    </p>
                   </div>
                 </div>
               </div>

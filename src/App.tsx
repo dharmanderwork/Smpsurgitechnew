@@ -16,6 +16,7 @@ import { GeminiSpecAssistant } from './components/GeminiSpecAssistant';
 import { HomeView } from './views/HomeView';
 import { CatalogView } from './views/CatalogView';
 import { SpecSheetsView } from './views/SpecSheetsView';
+import { CoverageView } from './views/CoverageView';
 import { ServicesView } from './views/ServicesView';
 import { AboutView } from './views/AboutView';
 import { RfqPortalView } from './views/RfqPortalView';
@@ -23,7 +24,7 @@ import { ContactView } from './views/ContactView';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<string>('home');
-  const [selectedSpecialtyFilter, setSelectedSpecialtyFilter] = useState<string | undefined>(undefined);
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<string | undefined>(undefined);
 
   // RFQ Basket state with local storage persistence
   const [rfqItems, setRfqItems] = useState<RfqItem[]>(() => {
@@ -38,7 +39,7 @@ export default function App() {
       {
         product: SURGICAL_PRODUCTS[0],
         quantity: 2,
-        customLaserMarking: 'OR-CV-TRAY-A'
+        customLaserMarking: '3.0 x 28 mm'
       }
     ];
   });
@@ -54,7 +55,7 @@ export default function App() {
   // Modals state
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-  const [detailModalTab, setDetailModalTab] = useState<'overview' | 'specs' | 'reprocessing' | 'inquiry'>('overview');
+  const [detailModalTab, setDetailModalTab] = useState<'overview' | 'specs' | 'logistics' | 'inquiry'>('overview');
 
   const [pdfProduct, setPdfProduct] = useState<Product | null>(null);
   const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
@@ -63,12 +64,12 @@ export default function App() {
   const [isAiAssistantOpen, setIsAiAssistantOpen] = useState(false);
 
   // Navigation handler
-  const handleNavigate = (view: string, specialtyFilter?: string) => {
+  const handleNavigate = (view: string, categoryFilter?: string) => {
     setCurrentView(view);
-    if (specialtyFilter) {
-      setSelectedSpecialtyFilter(specialtyFilter);
+    if (categoryFilter) {
+      setSelectedCategoryFilter(categoryFilter);
     } else {
-      setSelectedSpecialtyFilter(undefined);
+      setSelectedCategoryFilter(undefined);
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -107,7 +108,7 @@ export default function App() {
   };
 
   // Open modals handlers
-  const handleOpenProductDetail = (product: Product, defaultTab: 'overview' | 'inquiry' = 'overview') => {
+  const handleOpenProductDetail = (product: Product, defaultTab: 'overview' | 'specs' | 'logistics' | 'inquiry' = 'overview') => {
     setSelectedProduct(product);
     setDetailModalTab(defaultTab);
     setIsDetailModalOpen(true);
@@ -152,13 +153,17 @@ export default function App() {
         {currentView === 'catalog' && (
           <CatalogView
             products={SURGICAL_PRODUCTS}
-            selectedSpecialtyFilter={selectedSpecialtyFilter}
+            selectedCategoryFilter={selectedCategoryFilter}
             onOpenProductDetail={handleOpenProductDetail}
             onOpenPdf={handleOpenPdf}
             onAddToRfq={handleAddToRfq}
             isItemInRfq={isItemInRfq}
             onOpenAiAssistant={() => setIsAiAssistantOpen(true)}
           />
+        )}
+
+        {currentView === 'coverage' && (
+          <CoverageView onNavigate={handleNavigate} />
         )}
 
         {currentView === 'spec-sheets' && (
@@ -183,12 +188,10 @@ export default function App() {
 
         {currentView === 'rfq' && (
           <RfqPortalView
-            products={SURGICAL_PRODUCTS}
             rfqItems={rfqItems}
             onUpdateQuantity={handleUpdateQuantity}
             onRemoveItem={handleRemoveFromRfq}
             onClearAll={handleClearRfq}
-            onAddProduct={handleAddToRfq}
             onNavigate={handleNavigate}
             onOpenPdf={handleOpenPdf}
           />
@@ -218,7 +221,7 @@ export default function App() {
         product={pdfProduct}
         isOpen={isPdfModalOpen}
         onClose={() => setIsPdfModalOpen(false)}
-        onOpenEnquiry={handleOpenEnquiryFromPdf}
+        onRequestQuote={handleOpenEnquiryFromPdf}
       />
 
       {/* Multi-Item Consolidated RFQ Drawer */}
@@ -230,10 +233,6 @@ export default function App() {
         onRemoveItem={handleRemoveFromRfq}
         onClearAll={handleClearRfq}
         onOpenPdf={handleOpenPdf}
-        onProceedToFullRfqPortal={() => {
-          setIsRfqDrawerOpen(false);
-          handleNavigate('rfq');
-        }}
       />
 
       {/* Gemini AI Clinical Spec & Tray Matcher */}

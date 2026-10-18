@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { RfqItem, LeadInquiry } from '../types/instruments';
+import { RfqItem, LeadInquiry, Product } from '../types/instruments';
 import { calculateRfqSummary, validateInquiryForm, generateRfqReference } from '../utils/rfq';
-import { X, Trash2, Send, Plus, Minus, CheckCircle2, Shield, ArrowRight, FileSpreadsheet } from 'lucide-react';
+import { X, Trash2, Send, Plus, Minus, CheckCircle2, Shield, ArrowRight, Building2, User, Mail, Phone, Clock, FileText, MapPin } from 'lucide-react';
 
 interface RfqDrawerProps {
   isOpen: boolean;
@@ -10,8 +10,7 @@ interface RfqDrawerProps {
   onUpdateQuantity: (productId: string, quantity: number) => void;
   onRemoveItem: (productId: string) => void;
   onClearAll: () => void;
-  onOpenPdf: (product: any) => void;
-  onProceedToFullRfqPortal: () => void;
+  onOpenPdf: (product: Product) => void;
 }
 
 export const RfqDrawer: React.FC<RfqDrawerProps> = ({
@@ -21,19 +20,19 @@ export const RfqDrawer: React.FC<RfqDrawerProps> = ({
   onUpdateQuantity,
   onRemoveItem,
   onClearAll,
-  onOpenPdf,
-  onProceedToFullRfqPortal
+  onOpenPdf
 }) => {
   const [formData, setFormData] = useState({
     contactName: '',
     workEmail: '',
     phone: '',
     hospitalName: '',
-    department: 'Hospital Central Procurement',
-    facilityType: 'Hospital' as LeadInquiry['facilityType'],
-    country: 'United States',
-    targetTimeline: 'Within 2 Weeks' as LeadInquiry['targetTimeline'],
-    tenderReference: ''
+    department: 'Cath Lab Procurement / Supply Chain',
+    facilityType: 'Hospital / Cath Lab' as LeadInquiry['facilityType'],
+    territoryState: 'South Rajasthan' as LeadInquiry['territoryState'],
+    targetTimeline: 'Immediate (Emergency Procedure)' as LeadInquiry['targetTimeline'],
+    tenderReference: '',
+    message: ''
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -54,9 +53,10 @@ export const RfqDrawer: React.FC<RfqDrawerProps> = ({
       hospitalName: formData.hospitalName,
       department: formData.department,
       facilityType: formData.facilityType,
-      country: formData.country,
+      territoryState: formData.territoryState,
       targetTimeline: formData.targetTimeline,
       tenderReference: formData.tenderReference,
+      message: formData.message,
       items: items.map((i) => ({
         sku: i.product.sku,
         productName: i.product.name,
@@ -85,22 +85,23 @@ export const RfqDrawer: React.FC<RfqDrawerProps> = ({
         hospitalName: formData.hospitalName,
         department: formData.department,
         facilityType: formData.facilityType,
-        country: formData.country,
+        territoryState: formData.territoryState,
         targetTimeline: formData.targetTimeline,
         tenderReference: formData.tenderReference,
+        message: formData.message,
         items: inquiryDraft.items!
       };
 
       setIsSubmitting(false);
       setSubmittedInquiry(confirmed);
       onClearAll();
-    }, 700);
+    }, 600);
   };
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-slate-950/70 backdrop-blur-xs animate-fade-in">
       <div 
-        className="bg-white w-full max-w-xl h-full shadow-2xl flex flex-col border-l border-slate-200"
+        className="w-full max-w-xl bg-white h-full shadow-2xl flex flex-col justify-between border-l border-slate-200"
         role="dialog"
         aria-modal="true"
         aria-labelledby="rfq-drawer-title"
@@ -108,287 +109,323 @@ export const RfqDrawer: React.FC<RfqDrawerProps> = ({
         {/* Drawer Header */}
         <div className="bg-slate-900 text-white p-5 flex items-center justify-between border-b border-slate-800 shrink-0">
           <div>
-            <h2 id="rfq-drawer-title" className="text-base font-bold flex items-center gap-2">
-              <span>Institutional RFQ Tray</span>
-              <span className="text-xs bg-cyan-900/80 text-cyan-200 px-2 py-0.5 rounded font-mono font-normal">
-                {items.length} {items.length === 1 ? 'Instrument' : 'Instruments'}
+            <div className="flex items-center gap-2">
+              <span className="font-display font-bold text-base tracking-tight">Hospital Procurement RFQ Tray</span>
+              <span className="bg-cyan-950 text-cyan-300 font-mono text-[11px] px-2 py-0.5 rounded border border-cyan-800">
+                {summary.totalUnits} Units ({summary.distinctSkus} Items)
               </span>
-            </h2>
+            </div>
             <p className="text-xs text-slate-400 mt-0.5">
-              Consolidated quote request for hospital purchasing & tender committees
+              Consolidated tender quotation request · Direct to SMP Surgitech logistics
             </p>
           </div>
+
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
-            aria-label="Close RFQ tray"
+            className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
+            aria-label="Close RFQ Drawer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Drawer Content */}
+        {/* Drawer Scrollable Content */}
         <div className="flex-1 overflow-y-auto p-5 space-y-6">
           {submittedInquiry ? (
-            <div className="bg-slate-900 rounded-xl p-6 text-white space-y-4">
+            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 text-white space-y-5 animate-fade-in">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-emerald-950 border border-emerald-500/50 flex items-center justify-center text-emerald-400">
+                <div className="w-10 h-10 rounded-full bg-emerald-950 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold">Consolidated Tender Request Sent</h3>
-                  <p className="text-xs text-slate-400">Reference: {submittedInquiry.id}</p>
+                  <h3 className="text-lg font-bold">Consolidated Tender RFQ Submitted</h3>
+                  <p className="text-xs text-slate-400">Formal quote document generated and dispatched to field operations</p>
                 </div>
               </div>
 
-              <div className="bg-slate-950 p-4 rounded-lg text-xs space-y-2 border border-slate-800">
-                <div className="flex justify-between border-b border-slate-800 pb-2">
-                  <span className="text-slate-400">Submitted By</span>
-                  <span className="font-semibold text-slate-200">{submittedInquiry.contactName}</span>
+              <div className="bg-slate-950/80 border border-slate-800 rounded-lg p-4 space-y-2.5 text-xs">
+                <div className="flex justify-between items-center pb-2 border-b border-slate-800">
+                  <span className="text-slate-400">Official RFQ Reference Code</span>
+                  <span className="font-mono font-bold text-cyan-400 text-base">{submittedInquiry.id}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-400">Hospital Facility</span>
-                  <span className="text-slate-200">{submittedInquiry.hospitalName}</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-400">Territory Logistics Desk</span>
+                  <span className="text-white font-medium">{submittedInquiry.territoryState}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-400">Total Distinct Lines</span>
-                  <span className="font-mono text-cyan-300">{submittedInquiry.items.length} SKUs</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-400">Fulfillment Priority</span>
+                  <span className="text-cyan-300 font-medium">{submittedInquiry.targetTimeline}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-400">Total Items Registered</span>
+                  <span className="text-emerald-400 font-medium">{submittedInquiry.items.length} Product Models</span>
                 </div>
               </div>
 
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Thank you. The surgical distribution logistics department will assemble line-item pricing, batch test documentation, and shipping schedule within 4 hours.
-              </p>
+              <div className="p-3 bg-cyan-950/40 border border-cyan-800/60 rounded text-xs text-cyan-200">
+                A sales operations lead from our regional warehouse (Udaipur / Indore / Raipur / Agra) will contact you immediately with stock availability, batch expiry certifications, and institutional quotation.
+              </div>
 
               <button
                 onClick={() => {
                   setSubmittedInquiry(null);
                   onClose();
                 }}
-                className="w-full py-2.5 text-xs font-semibold text-slate-900 bg-white hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
+                className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer"
               >
-                Close Tray
-              </button>
-            </div>
-          ) : items.length === 0 ? (
-            <div className="text-center py-12 space-y-3">
-              <div className="w-12 h-12 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center mx-auto text-slate-400">
-                <FileSpreadsheet className="w-6 h-6" />
-              </div>
-              <h3 className="text-sm font-semibold text-slate-900">Your RFQ Tray is Empty</h3>
-              <p className="text-xs text-slate-500 max-w-xs mx-auto">
-                Explore our catalog to add precision German stainless instruments, titanium micro-tools, and specialized sets.
-              </p>
-              <button
-                onClick={onClose}
-                className="mt-2 py-2 px-4 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
-              >
-                Browse Instruments Catalog
+                Close & Return to Catalog
               </button>
             </div>
           ) : (
             <>
-              {/* Item List */}
-              <div className="space-y-3">
-                <div className="flex items-center justify-between text-xs text-slate-500">
-                  <span>Selected Surgical Tools ({items.length})</span>
-                  <button
-                    onClick={onClearAll}
-                    className="text-red-600 hover:text-red-700 font-medium"
-                  >
-                    Clear All
-                  </button>
+              {/* Product Items List */}
+              {items.length === 0 ? (
+                <div className="py-12 text-center space-y-3">
+                  <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-400">
+                    <FileText className="w-6 h-6" />
+                  </div>
+                  <h4 className="font-bold text-slate-800 text-sm">Your RFQ Tray is Empty</h4>
+                  <p className="text-xs text-slate-500 max-w-xs mx-auto">
+                    Add coronary stents, OCT/FFR systems, IABP consoles, or surgical instrument sets from the catalog to submit a consolidated quote request.
+                  </p>
                 </div>
+              ) : (
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                    <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                      Selected Clinical Instruments ({items.length})
+                    </span>
+                    <button
+                      onClick={onClearAll}
+                      className="text-[11px] text-red-600 hover:text-red-800 font-medium flex items-center gap-1 cursor-pointer"
+                    >
+                      <Trash2 className="w-3 h-3" />
+                      <span>Clear All</span>
+                    </button>
+                  </div>
 
-                <div className="divide-y divide-slate-100 border border-slate-200 rounded-lg overflow-hidden">
-                  {items.map(({ product, quantity }) => (
-                    <div key={product.id} className="p-3 bg-white flex items-center justify-between gap-3 text-xs">
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2">
-                          <span className="font-mono font-bold text-slate-900 text-[11px]">{product.sku}</span>
-                          <span className="text-slate-400">·</span>
-                          <span className="text-slate-500 truncate">{product.specialty}</span>
+                  <div className="divide-y divide-slate-100 border border-slate-200 rounded-lg overflow-hidden">
+                    {items.map(({ product, quantity }) => (
+                      <div key={product.id} className="p-3 bg-white flex items-center justify-between gap-3 text-xs">
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono font-bold text-slate-900 text-[11px]">{product.sku}</span>
+                            <span className="text-slate-400">·</span>
+                            <span className="text-cyan-900 font-semibold truncate">{product.brand}</span>
+                          </div>
+                          <h4 className="font-semibold text-slate-800 truncate mt-0.5">{product.name}</h4>
+                          <div className="text-[11px] text-slate-500 flex items-center gap-2 mt-1">
+                            <span>{product.specs.profileOrSize}</span>
+                            <button
+                              onClick={() => onOpenPdf(product)}
+                              className="text-cyan-800 hover:underline font-medium"
+                            >
+                              [View PDF Spec]
+                            </button>
+                          </div>
                         </div>
-                        <h4 className="font-semibold text-slate-800 truncate mt-0.5">{product.name}</h4>
-                        <div className="text-[11px] text-slate-500 flex items-center gap-2 mt-1">
-                          <span>{product.alloy}</span>
+
+                        {/* Quantity Controls */}
+                        <div className="flex items-center gap-1.5 shrink-0">
                           <button
-                            onClick={() => onOpenPdf(product)}
-                            className="text-cyan-800 hover:underline font-medium"
+                            onClick={() => onUpdateQuantity(product.id, Math.max(1, quantity - 1))}
+                            className="w-6 h-6 rounded bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 cursor-pointer"
+                            aria-label={`Decrease quantity of ${product.sku}`}
                           >
-                            [PDF Spec]
+                            <Minus className="w-3 h-3" />
+                          </button>
+                          <span className="w-6 text-center font-mono font-bold text-slate-900">
+                            {quantity}
+                          </span>
+                          <button
+                            onClick={() => onUpdateQuantity(product.id, quantity + 1)}
+                            className="w-6 h-6 rounded bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 cursor-pointer"
+                            aria-label={`Increase quantity of ${product.sku}`}
+                          >
+                            <Plus className="w-3 h-3" />
+                          </button>
+                          <button
+                            onClick={() => onRemoveItem(product.id)}
+                            className="p-1.5 text-slate-400 hover:text-red-600 transition-colors cursor-pointer ml-1"
+                            title="Remove from tray"
+                            aria-label={`Remove ${product.sku} from RFQ Tray`}
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
-                      {/* Quantity Controls */}
-                      <div className="flex items-center gap-1.5 shrink-0">
-                        <button
-                          onClick={() => onUpdateQuantity(product.id, Math.max(1, quantity - 1))}
-                          className="w-6 h-6 rounded bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700"
-                          aria-label={`Decrease quantity of ${product.sku}`}
-                        >
-                          <Minus className="w-3 h-3" />
-                        </button>
-                        <span className="w-7 text-center font-mono font-bold tabular-nums text-slate-900">
-                          {quantity}
-                        </span>
-                        <button
-                          onClick={() => onUpdateQuantity(product.id, quantity + 1)}
-                          className="w-6 h-6 rounded bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700"
-                          aria-label={`Increase quantity of ${product.sku}`}
-                        >
-                          <Plus className="w-3 h-3" />
-                        </button>
-                        <button
-                          onClick={() => onRemoveItem(product.id)}
-                          className="p-1 text-slate-400 hover:text-red-600 rounded ml-1"
-                          aria-label={`Remove ${product.sku} from RFQ tray`}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
+              {/* Inquiry Lead Form */}
+              {items.length > 0 && (
+                <form onSubmit={handleSubmit} className="space-y-4 pt-2">
+                  <div className="border-t border-slate-200 pt-4">
+                    <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">
+                      Procurement Officer & Hospital Details
+                    </h4>
+
+                    <div className="space-y-3 text-xs">
+                      <div>
+                        <label className="block text-slate-700 font-semibold mb-1 flex items-center gap-1">
+                          <User className="w-3.5 h-3.5 text-slate-400" />
+                          <span>Contact Name & Title *</span>
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Dr. Vivek Sharma / Purchase Head"
+                          value={formData.contactName}
+                          onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
+                          className={`w-full px-3 py-2 bg-white border rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800 ${
+                            errors.contactName ? 'border-red-400 bg-red-50/30' : 'border-slate-300'
+                          }`}
+                        />
+                        {errors.contactName && <p className="text-red-600 text-[11px] mt-0.5">{errors.contactName}</p>}
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-slate-700 font-semibold mb-1 flex items-center gap-1">
+                            <Mail className="w-3.5 h-3.5 text-slate-400" />
+                            <span>Work Email *</span>
+                          </label>
+                          <input
+                            type="email"
+                            placeholder="procurement@hospital.org"
+                            value={formData.workEmail}
+                            onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
+                            className={`w-full px-3 py-2 bg-white border rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800 ${
+                              errors.workEmail ? 'border-red-400 bg-red-50/30' : 'border-slate-300'
+                            }`}
+                          />
+                          {errors.workEmail && <p className="text-red-600 text-[11px] mt-0.5">{errors.workEmail}</p>}
+                        </div>
+
+                        <div>
+                          <label className="block text-slate-700 font-semibold mb-1 flex items-center gap-1">
+                            <Phone className="w-3.5 h-3.5 text-slate-400" />
+                            <span>Mobile Phone *</span>
+                          </label>
+                          <input
+                            type="tel"
+                            placeholder="+91 98260 12345"
+                            value={formData.phone}
+                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                            className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-slate-700 font-semibold mb-1 flex items-center gap-1">
+                            <Building2 className="w-3.5 h-3.5 text-slate-400" />
+                            <span>Hospital / Institution Name *</span>
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="e.g. Medanta Cardiac Care / Apollo"
+                            value={formData.hospitalName}
+                            onChange={(e) => setFormData({ ...formData, hospitalName: e.target.value })}
+                            className={`w-full px-3 py-2 bg-white border rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800 ${
+                              errors.hospitalName ? 'border-red-400 bg-red-50/30' : 'border-slate-300'
+                            }`}
+                          />
+                          {errors.hospitalName && <p className="text-red-600 text-[11px] mt-0.5">{errors.hospitalName}</p>}
+                        </div>
+
+                        <div>
+                          <label className="block text-slate-700 font-semibold mb-1 flex items-center gap-1">
+                            <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                            <span>Territory / State *</span>
+                          </label>
+                          <select
+                            value={formData.territoryState}
+                            onChange={(e) => setFormData({ ...formData, territoryState: e.target.value as any })}
+                            className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800 text-xs"
+                          >
+                            <option value="South Rajasthan">South Rajasthan (Udaipur, Dungarpur, Banswara, Bhilwara...)</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh (Indore, Bhopal, Jabalpur, Gwalior...)</option>
+                            <option value="Chhattisgarh">Chhattisgarh (Raipur, Bilaspur, Durg-Bhilai...)</option>
+                            <option value="Uttar Pradesh">Part of Uttar Pradesh (Kanpur, Agra, Jhansi, Prayagraj...)</option>
+                            <option value="Other">Other Region / National</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-slate-700 font-semibold mb-1 flex items-center gap-1">
+                            <Clock className="w-3.5 h-3.5 text-slate-400" />
+                            <span>Fulfillment Urgency</span>
+                          </label>
+                          <select
+                            value={formData.targetTimeline}
+                            onChange={(e) => setFormData({ ...formData, targetTimeline: e.target.value as any })}
+                            className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800 text-xs"
+                          >
+                            <option value="Immediate (Emergency Procedure)">Immediate Emergency (2-3 Hours)</option>
+                            <option value="Within 24-48 Hours">Within 24-48 Hours</option>
+                            <option value="Within 1-2 Weeks">Within 1-2 Weeks</option>
+                            <option value="Monthly Cath Lab Consignment">Monthly Cath Lab Consignment Stock</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-slate-700 font-semibold mb-1">
+                            Tender or Purchase Order Reference (Optional)
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="e.g. TND-2026-CARDIO-89"
+                            value={formData.tenderReference}
+                            onChange={(e) => setFormData({ ...formData, tenderReference: e.target.value })}
+                            className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-slate-700 font-semibold mb-1">
+                          Consignment / Clinical Notes (Optional)
+                        </label>
+                        <textarea
+                          rows={2}
+                          placeholder="Include catheter size ratios, standby console requirements, or special packaging notes..."
+                          value={formData.message}
+                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-800 text-xs resize-none"
+                        />
                       </div>
                     </div>
-                  ))}
-                </div>
-
-                {/* Summary Strip */}
-                <div className="bg-slate-50 p-3 rounded-lg border border-slate-200/80 flex justify-between items-center text-xs">
-                  <span className="text-slate-600">Total Units Requested</span>
-                  <span className="font-mono font-bold text-slate-900 tabular-nums">{summary.totalUnits} items</span>
-                </div>
-              </div>
-
-              {/* Fast Lead Capture Submission */}
-              <div className="pt-2 border-t border-slate-200 space-y-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
-                  Procurement Information
-                </h3>
-
-                <form onSubmit={handleSubmit} className="space-y-3 text-xs">
-                  <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Katherine Hayes, RN OR Lead"
-                      value={formData.contactName}
-                      onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800"
-                      required
-                    />
-                    {errors.contactName && <p className="text-[11px] text-red-600 mt-1">{errors.contactName}</p>}
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2">
-                    <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
-                        Work Email *
-                      </label>
-                      <input
-                        type="email"
-                        placeholder="khayes@hopkins.edu"
-                        value={formData.workEmail}
-                        onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
-                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800"
-                        required
-                      />
-                      {errors.workEmail && <p className="text-[11px] text-red-600 mt-1">{errors.workEmail}</p>}
-                    </div>
-
-                    <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
-                        Phone / Ext
-                      </label>
-                      <input
-                        type="tel"
-                        placeholder="+1 (555) 019-2834"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-2">
-                    <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
-                        Hospital / Health System *
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Johns Hopkins Medicine"
-                        value={formData.hospitalName}
-                        onChange={(e) => setFormData({ ...formData, hospitalName: e.target.value })}
-                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800"
-                        required
-                      />
-                      {errors.hospitalName && <p className="text-[11px] text-red-600 mt-1">{errors.hospitalName}</p>}
-                    </div>
-
-                    <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
-                        Department *
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="OR Material Management"
-                        value={formData.department}
-                        onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800"
-                        required
-                      />
-                      {errors.department && <p className="text-[11px] text-red-600 mt-1">{errors.department}</p>}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
-                      Required Timeline
-                    </label>
-                    <select
-                      value={formData.targetTimeline}
-                      onChange={(e) => setFormData({ ...formData, targetTimeline: e.target.value as any })}
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-800 bg-white"
+                  {/* Submission Action */}
+                  <div className="pt-4 border-t border-slate-200 space-y-3">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full py-3 px-4 bg-slate-900 hover:bg-cyan-950 text-white font-semibold text-xs rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md disabled:opacity-50"
                     >
-                      <option value="Immediate (Emergency)">Immediate (Emergency Dispatch)</option>
-                      <option value="Within 2 Weeks">Within 2 Weeks</option>
-                      <option value="Within 1 Month">Within 1 Month</option>
-                      <option value="Quarterly Tender">Quarterly Hospital Tender</option>
-                    </select>
+                      {isSubmitting ? (
+                        <span>Processing Hospital Quote Request...</span>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4 text-cyan-300" />
+                          <span>Submit Formal Tender RFQ ({summary.totalUnits} Units)</span>
+                        </>
+                      )}
+                    </button>
+
+                    <div className="flex items-center justify-center gap-2 text-[11px] text-slate-500">
+                      <Shield className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>Official Authorized Distributor · 100% Cold Chain Compliant</span>
+                    </div>
                   </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full py-2.5 px-4 text-xs font-semibold text-white bg-slate-950 hover:bg-cyan-900 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm disabled:opacity-50"
-                  >
-                    {isSubmitting ? (
-                      <span>Packaging Quote Dossier...</span>
-                    ) : (
-                      <>
-                        <Send className="w-3.5 h-3.5" />
-                        <span>Submit Multi-Item RFQ Request ({summary.totalUnits} Units)</span>
-                      </>
-                    )}
-                  </button>
                 </form>
-              </div>
-
-              {/* Or Navigate to Full Tender Portal */}
-              <div className="pt-2 text-center">
-                <button
-                  onClick={() => {
-                    onClose();
-                    onProceedToFullRfqPortal();
-                  }}
-                  className="text-xs text-cyan-800 hover:text-cyan-950 font-semibold flex items-center justify-center gap-1 mx-auto cursor-pointer"
-                >
-                  <span>Open Full Tender Documentation Portal</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
+              )}
             </>
           )}
         </div>
