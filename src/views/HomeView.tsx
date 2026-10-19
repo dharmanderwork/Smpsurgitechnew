@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Product, DealerBrand, TerritoryRegion, Testimonial } from '../types/instruments';
 import { ProductCard } from '../components/ProductCard';
 import { 
@@ -24,6 +24,9 @@ import {
   Building2, 
   Award, 
   ChevronRight, 
+  ChevronLeft,
+  Play,
+  Pause,
   Star, 
   HeartPulse, 
   Activity, 
@@ -34,9 +37,118 @@ import {
   Send,
   Boxes,
   Zap,
-  Check
+  Check,
+  Plus
 } from 'lucide-react';
 import { generateRfqReference } from '../utils/rfq';
+
+interface HeroSlide {
+  id: string;
+  productId: string;
+  tabTitle: string;
+  shortOem: string;
+  brandTag: string;
+  badge: string;
+  title: string;
+  subtitle: string;
+  desc: string;
+  image: string;
+  specs: { label: string; value: string }[];
+  targetCategory: string;
+}
+
+const HERO_SLIDES: HeroSlide[] = [
+  {
+    id: 'xience-stent',
+    productId: 'xience-skypoint',
+    tabTitle: 'XIENCE™ Stents',
+    shortOem: 'Abbott',
+    brandTag: 'Abbott Vascular Division · Authorized Channel Partner',
+    badge: 'Flagship Coronary Intervention',
+    title: 'XIENCE Skypoint™ Everolimus-Eluting Coronary Stent System',
+    subtitle: 'Ultra-Deliverable Multi-Link Platform · Expandable up to 5.75 mm',
+    desc: 'The global clinical safety benchmark with over 15 million implants worldwide. Engineered with 81µm cobalt-chromium struts and bio-inert fluoropolymer coating for lowest stent thrombosis rates (<0.2%).',
+    image: HERO_IMAGE,
+    specs: [
+      { label: 'Strut Metallurgy', value: '81 µm L-605 Cobalt Chromium' },
+      { label: 'Post-Dilation Limit', value: 'Over-expansion to 5.75 mm' },
+      { label: 'Emergency Stock', value: 'Full size matrix (2.25 - 4.0 mm)' }
+    ],
+    targetCategory: 'Coronary Stents (XIENCE)'
+  },
+  {
+    id: 'cathlab-oct',
+    productId: 'oct-imaging-system',
+    tabTitle: 'Cath Lab OCT & Imaging',
+    shortOem: 'Abbott',
+    brandTag: 'Abbott Diagnostic Physiology · Intracoronary Imaging',
+    badge: '10-Micron Microscopic Resolution',
+    title: 'OCT Diagnostic Imaging System & Dragonfly™ Catheters',
+    subtitle: 'High-Resolution Intracoronary Imaging · 10x Higher Detail than IVUS',
+    desc: 'Near-infrared swept-source intravascular imaging with automated MLD MAX workflow for precision stent length sizing, calcium arc scoring, and stent malapposition verification.',
+    image: CATHLAB_OCT_IMAGE,
+    specs: [
+      { label: 'Axial Resolution', value: '10 µm microscopic precision' },
+      { label: 'Laser Pullback', value: '36 mm/sec (2.5s rapid sweep)' },
+      { label: 'Cath Lab Placement', value: 'Console & certified specialist on-site' }
+    ],
+    targetCategory: 'Diagnostic Physiology & Imaging (OCT / FFR)'
+  },
+  {
+    id: 'impella-iabp',
+    productId: 'impella-heart-pump-system',
+    tabTitle: 'Impella® & Arrow IABP',
+    shortOem: 'J&J / Teleflex',
+    brandTag: 'J&J MedTech & Teleflex Vascular · Hemodynamic Support',
+    badge: 'Critical Circulatory Rescue',
+    title: 'Impella® pVAD & Teleflex Arrow AutoCAT 2 WAVE™ IABP',
+    subtitle: 'Active Left Ventricular Unloading (Up to 5.0 L/min) & Helium Counterpulsation',
+    desc: 'Comprehensive hemodynamic rescue platforms for cardiogenic shock and protected high-risk PCI (CHIP). Complete bedside consoles and catheter kits consigned across Central India.',
+    image: IMPELLA_IABP_IMAGE,
+    specs: [
+      { label: 'Forward Blood Flow', value: '3.5 to 5.0 L/min continuous' },
+      { label: 'Helium Inflation', value: '< 50 ms synchronized wave' },
+      { label: 'Standby Consignment', value: '2-3 Hr Emergency Cath Lab dispatch' }
+    ],
+    targetCategory: 'Mechanical Circulatory Support (Impella & IABP)'
+  },
+  {
+    id: 'surgical-sets',
+    productId: 'smp-cardiovascular-surgical-set',
+    tabTitle: 'German Surgical Sets',
+    shortOem: 'SMP Surgitech',
+    brandTag: 'SMP Surgitech Precision Surgery · ISO 13485:2016 Certified',
+    badge: 'Open-Heart & Vascular Sets',
+    title: 'Cardiovascular & Micro-Vascular Surgical Instrument Suite',
+    subtitle: 'German DIN 1.4021 Stainless Steel & Grade 5 Titanium',
+    desc: 'Hospital-grade open-heart instrumentation: DeBakey atraumatic vascular clamps, Castroviejo micro-needle holders with tungsten carbide diamond pyramid inlays, and Potts scissors.',
+    image: SURGICAL_SET_IMAGE,
+    specs: [
+      { label: 'Certified Alloy', value: 'German DIN 1.4021 & Ti-6Al-4V ELI' },
+      { label: 'Satin Finish', value: 'Anti-glare electro-passivation' },
+      { label: 'Autoclave Durability', value: '10+ Year hospital autoclave lifespan' }
+    ],
+    targetCategory: 'Cardiovascular Surgical Instruments'
+  },
+  {
+    id: 'pocket-ecg',
+    productId: 'pocket-ecg-diagnostic-device',
+    tabTitle: 'Pocket ECG Telemetry',
+    shortOem: 'Pocket ECG',
+    brandTag: 'Pocket ECG Diagnostics · Continuous Ambulatory Monitoring',
+    badge: 'Real-Time Ambulatory Arrhythmia Care',
+    title: 'Pocket ECG Real-Time Wireless Arrhythmia Diagnostic System',
+    subtitle: 'Continuous 30-Day Full-Disclosure Cellular Telemetry',
+    desc: 'Smartphone-sized clinical sensor capturing every single heartbeat with real-time cloud analysis and immediate automated physician alerts for AFib, VT, and syncope evaluation.',
+    image: POCKET_ECG_IMAGE,
+    specs: [
+      { label: 'Recording Mode', value: '100% Full-disclosure (30 days)' },
+      { label: 'Cloud Cellular', value: 'Built-in real-time IoT transmission' },
+      { label: 'Device Form', value: '74 grams water-resistant sensor' }
+    ],
+    targetCategory: 'Diagnostic Monitoring (Pocket ECG)'
+  }
+];
 
 interface HomeViewProps {
   products: Product[];
@@ -61,6 +173,30 @@ export const HomeView: React.FC<HomeViewProps> = ({
   const [activeTerritoryTab, setActiveTerritoryTab] = useState<string>('South Rajasthan');
   const [quickQuoteSubmitted, setQuickQuoteSubmitted] = useState<string | null>(null);
 
+  // Banner carousel state
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(true);
+
+  // Autoplay effect
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [isAutoPlaying]);
+
+  const activeSlide = HERO_SLIDES[currentSlide];
+  const activeProduct = products.find((p) => p.id === activeSlide.productId) || products[0];
+
+  const handleNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+  };
+
+  const handlePrevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+  };
+
   // Filtered products for homepage spotlight
   const filteredProducts = products.filter((p) => {
     if (selectedProductCategory === 'All') return true;
@@ -80,129 +216,325 @@ export const HomeView: React.FC<HomeViewProps> = ({
   };
 
   return (
-    <div className="space-y-20 pb-20">
-      {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white pt-10 pb-18 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Column: Headlines & B2B Lead Conversion */}
-            <div className="lg:col-span-7 space-y-6">
-              {/* Institutional Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/80 border border-slate-700/80 text-cyan-300 text-xs font-semibold">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                <span>Authorized Distributor · Interventional Cardiology & Surgical Solutions</span>
+    <div className="space-y-16 pb-20">
+      {/* 1. HERO SECTION: PREMIUM PANORAMIC BANNER & CLINICAL SHOWCASE */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white pt-8 pb-16 border-b border-slate-800">
+        {/* Ambient background glow and grid */}
+        <div className="absolute inset-0 bg-grid-slate-dark opacity-30 pointer-events-none" />
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[360px] bg-cyan-600/10 blur-[140px] pointer-events-none rounded-full" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 space-y-8">
+          {/* Top Editorial Kicker & Commanding Value Proposition */}
+          <div className="max-w-4xl space-y-4">
+            <div className="flex flex-wrap items-center gap-2 text-xs text-cyan-300 font-semibold tracking-wide">
+              <span>Authorized Regional Distributor</span>
+              <span aria-hidden="true">·</span>
+              <span>Interventional Cardiology & Precision Surgery</span>
+              <span aria-hidden="true">·</span>
+              <span className="text-white">Central & Western India Hub</span>
+            </div>
+
+            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.12]">
+              Precision Cardiovascular Technologies & Surgical Solutions
+            </h1>
+
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-sans max-w-3xl">
+              <strong className="text-white">SMP Surgitech</strong> is the authorized regional partner for <strong>Abbott Vascular</strong>, <strong>Cordis</strong>, <strong>Teleflex</strong>, <strong>St. Jude Medical</strong>, and <strong>J&J MedTech</strong>. Supplying drug-eluting coronary stents, OCT/FFR physiology consoles, mechanical circulatory support, and German surgical instrumentation with rapid 2-hour emergency cath lab delivery.
+            </p>
+
+            {/* Quick Action Navigation Buttons */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <button
+                onClick={() => onNavigate('catalog')}
+                className="px-6 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-lg shadow-cyan-950/60 flex items-center gap-2 cursor-pointer"
+              >
+                <span>Explore Full Catalog (140+ SKUs)</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+
+              <button
+                onClick={() => onNavigate('contact')}
+                className="px-6 py-3 bg-slate-800/90 hover:bg-slate-700 text-white font-bold text-xs sm:text-sm rounded-xl border border-slate-700 transition-colors flex items-center gap-2 cursor-pointer"
+              >
+                <FileText className="w-4 h-4 text-cyan-300" />
+                <span>Request Institutional Quotation (RFQ)</span>
+              </button>
+
+              <button
+                onClick={onOpenAiAssistant}
+                className="px-4 py-3 bg-slate-900/90 hover:bg-slate-800 text-cyan-300 font-semibold text-xs sm:text-sm rounded-xl border border-cyan-800/60 transition-colors flex items-center gap-2 cursor-pointer"
+              >
+                <Sparkles className="w-4 h-4 text-cyan-400" />
+                <span>AI Clinical Spec Matcher</span>
+              </button>
+
+              <a
+                href="tel:+919414088210"
+                className="px-4 py-3 bg-slate-900/70 hover:bg-slate-800/80 text-slate-300 hover:text-white text-xs sm:text-sm rounded-xl border border-slate-800 transition-colors flex items-center gap-2"
+              >
+                <Phone className="w-3.5 h-3.5 text-emerald-400" />
+                <span>24x7 Cath Lab Hotline: <strong className="text-white">+91 94140 88210</strong></span>
+              </a>
+            </div>
+          </div>
+
+          {/* Interactive Technology Selector Tabs */}
+          <div className="pt-2">
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+              {HERO_SLIDES.map((slide, idx) => {
+                const isActive = currentSlide === idx;
+                return (
+                  <button
+                    key={slide.id}
+                    onClick={() => {
+                      setCurrentSlide(idx);
+                      setIsAutoPlaying(false);
+                    }}
+                    className={`px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
+                      isActive
+                        ? 'bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20 font-bold'
+                        : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800'
+                    }`}
+                  >
+                    <span>{slide.tabTitle}</span>
+                    <span className={`text-[10px] px-1.5 py-0.5 rounded font-mono ${
+                      isActive ? 'bg-slate-950/20 text-slate-950 font-bold' : 'bg-slate-800 text-cyan-300'
+                    }`}>
+                      {slide.shortOem}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* THE MASTER HERO BANNER SHOWCASE */}
+          <div 
+            className="w-full relative min-h-[440px] sm:min-h-[480px] lg:min-h-[500px] rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl bg-slate-950 flex flex-col justify-between group"
+            onMouseEnter={() => setIsAutoPlaying(false)}
+            onMouseLeave={() => setIsAutoPlaying(true)}
+          >
+            {/* Banner Background Image */}
+            <div className="absolute inset-0 z-0 overflow-hidden">
+              <img
+                src={activeSlide.image}
+                alt={activeSlide.title}
+                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-700 ease-out"
+              />
+
+              {/* Measured contrast scrim: dark on left & bottom for 100% readable typography, transparent on right for full equipment view */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/30 md:bg-gradient-to-r md:from-slate-950 md:via-slate-950/85 md:to-transparent" />
+              
+              {/* Subtle blue ambient vignette */}
+              <div className="absolute inset-0 bg-radial-gradient pointer-events-none opacity-40" />
+            </div>
+
+            {/* Top Bar inside Banner: Brand Division Badge & Live Dispatch SLA */}
+            <div className="relative z-10 p-5 sm:p-6 flex flex-wrap items-center justify-between gap-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/90 backdrop-blur-md border border-slate-700/80 text-cyan-300 text-xs font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                <span>{activeSlide.brandTag}</span>
               </div>
 
-              {/* Main Headline */}
-              <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.12]">
-                Precision Medical & Interventional Cardiology Instruments
-              </h1>
-
-              {/* Descriptive Copy */}
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl font-sans">
-                <strong>SMP Surgitech</strong> is the authorized regional distribution partner for globally renowned cardiology systems and precision surgical instruments. Supplying drug-eluting coronary stents, OCT/FFR physiology systems, mechanical circulatory consoles, and cardiac surgical sets with rapid 2-4 hour emergency cath lab delivery.
-              </p>
-
-              {/* Territory Highlights Line */}
-              <div className="p-3.5 bg-slate-800/50 border border-slate-700/60 rounded-xl text-xs flex flex-wrap items-center gap-3 text-slate-300">
-                <span className="text-cyan-400 font-bold flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5" />
-                  Primary Coverage:
-                </span>
-                <span>Madhya Pradesh (MP)</span>
-                <span className="text-slate-600">·</span>
-                <span>Chhattisgarh (CG)</span>
-                <span className="text-slate-600">·</span>
-                <span className="font-semibold text-white">South Rajasthan (Udaipur Regional Hub)</span>
-                <span className="text-slate-600">·</span>
-                <span>Part of Uttar Pradesh (UP)</span>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <button
-                  onClick={() => onNavigate('catalog')}
-                  className="px-6 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-lg shadow-cyan-950/50 flex items-center gap-2 cursor-pointer"
-                >
-                  <span>Explore Product Catalog</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-
-                <button
-                  onClick={() => onNavigate('contact')}
-                  className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs sm:text-sm rounded-xl border border-slate-700 transition-colors flex items-center gap-2 cursor-pointer"
-                >
-                  <Send className="w-4 h-4 text-cyan-300" />
-                  <span>Request Institutional Quotation</span>
-                </button>
-
-                <button
-                  onClick={onOpenAiAssistant}
-                  className="px-4 py-3 bg-slate-900/90 hover:bg-slate-800 text-cyan-300 font-semibold text-xs sm:text-sm rounded-xl border border-cyan-800/60 transition-colors flex items-center gap-2 cursor-pointer"
-                >
-                  <Sparkles className="w-4 h-4 text-cyan-400" />
-                  <span>AI Spec Matcher</span>
-                </button>
-              </div>
-
-              {/* Trust Indicators */}
-              <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-slate-800/80 text-xs text-slate-400">
-                <div>
-                  <div className="font-mono text-lg font-bold text-white">480+</div>
-                  <div className="text-[11px] text-slate-400">Hospitals & Cath Labs</div>
-                </div>
-                <div>
-                  <div className="font-mono text-lg font-bold text-cyan-300">&lt; 2-3 Hrs</div>
-                  <div className="text-[11px] text-slate-400">Emergency Dispatch</div>
-                </div>
-                <div>
-                  <div className="font-mono text-lg font-bold text-white">100%</div>
-                  <div className="text-[11px] text-slate-400">Cold-Chain Compliant</div>
-                </div>
-                <div>
-                  <div className="font-mono text-lg font-bold text-emerald-400">4.96 / 5.0</div>
-                  <div className="text-[11px] text-slate-400">Verified Rating</div>
-                </div>
+              <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/85 backdrop-blur-md border border-emerald-800/60 text-emerald-300 text-xs font-medium">
+                <Clock className="w-3.5 h-3.5 text-emerald-400" />
+                <span>2-3 Hr Emergency Cath Lab Dispatch Available</span>
               </div>
             </div>
 
-            {/* Right Column: Hero Visual Frame */}
-            <div className="lg:col-span-5">
-              <div className="relative rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl bg-slate-900 group">
-                <img
-                  src={HERO_IMAGE}
-                  alt="XIENCE Drug-Eluting Coronary Stent System"
-                  referrerPolicy="no-referrer"
-                  className="w-full aspect-[4/3] object-cover group-hover:scale-103 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
-                
-                {/* Floating Stent Identity Card */}
-                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-slate-950/85 backdrop-blur-md border border-slate-800 text-white space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">
-                      FLAGSHIP PRODUCT
-                    </span>
-                    <span className="text-[11px] text-slate-400 font-semibold">Abbott Vascular Division</span>
-                  </div>
-                  <h3 className="font-display font-bold text-base text-white">
-                    XIENCE™ Coronary Stent Systems
-                  </h3>
-                  <p className="text-xs text-slate-300 leading-snug">
-                    Skypoint, Xpedition 48, Sierra & Alpine · World benchmark in deliverability and fluoropolymer biocompatibility.
-                  </p>
-                  <div className="flex items-center justify-between pt-1 text-[11px] text-cyan-300">
-                    <button 
-                      onClick={() => onNavigate('catalog', 'Coronary Stents (XIENCE)')}
-                      className="font-semibold hover:underline flex items-center gap-1 cursor-pointer"
-                    >
-                      <span>View Sizing Matrix</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
-                    </button>
-                    <span className="text-slate-400">In Stock for Immediate Delivery</span>
-                  </div>
+            {/* Middle Content on Banner: Product Title, Technical Specs & Action Controls */}
+            <div className="relative z-10 p-5 sm:p-8 max-w-2xl space-y-4">
+              <div className="space-y-2">
+                <div className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-bold">
+                  {activeSlide.badge}
+                </div>
+                <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
+                  {activeSlide.title}
+                </h2>
+                <div className="text-xs sm:text-sm font-semibold text-cyan-200">
+                  {activeSlide.subtitle}
                 </div>
               </div>
+
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans line-clamp-3 sm:line-clamp-none">
+                {activeSlide.desc}
+              </p>
+
+              {/* Technical Highlights Specification Table */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+                {activeSlide.specs.map((spec, i) => (
+                  <div 
+                    key={i} 
+                    className="p-2.5 rounded-lg bg-slate-900/80 backdrop-blur-md border border-slate-700/70 text-xs"
+                  >
+                    <div className="text-[10px] uppercase font-bold text-slate-400">{spec.label}</div>
+                    <div className="font-semibold text-white mt-0.5 truncate">{spec.value}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Direct Banner Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <button
+                  onClick={() => onOpenProductDetail(activeProduct, 'overview')}
+                  className="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center gap-1.5 cursor-pointer"
+                >
+                  <span>View Specifications & Sizing</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+
+                <button
+                  onClick={() => onOpenPdf(activeProduct)}
+                  className="px-4 py-2.5 bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-xs rounded-xl border border-slate-700 transition-colors flex items-center gap-1.5 cursor-pointer"
+                >
+                  <FileText className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Interactive PDF Spec</span>
+                </button>
+
+                <button
+                  onClick={() => onAddToRfq(activeProduct)}
+                  className={`px-4 py-2.5 text-xs font-semibold rounded-xl border transition-all flex items-center gap-1.5 cursor-pointer ${
+                    isItemInRfq(activeProduct.id)
+                      ? 'bg-emerald-950/80 border-emerald-700 text-emerald-300'
+                      : 'bg-slate-800/90 hover:bg-slate-700 border-slate-700 text-white'
+                  }`}
+                >
+                  {isItemInRfq(activeProduct.id) ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>In RFQ Tray</span>
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>Add to RFQ</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Bottom Controls Bar inside Banner */}
+            <div className="relative z-10 px-5 py-3 sm:px-6 sm:py-4 bg-slate-950/80 backdrop-blur-md border-t border-slate-800/80 flex items-center justify-between gap-4">
+              {/* Slide Thumbnail Pills */}
+              <div className="flex items-center gap-2">
+                {HERO_SLIDES.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      setCurrentSlide(idx);
+                      setIsAutoPlaying(false);
+                    }}
+                    aria-label={`Go to slide ${idx + 1}`}
+                    className={`h-2 rounded-full transition-all cursor-pointer ${
+                      currentSlide === idx 
+                        ? 'w-8 bg-cyan-400' 
+                        : 'w-2 bg-slate-700 hover:bg-slate-500'
+                    }`}
+                  />
+                ))}
+              </div>
+
+              {/* Navigation Controls: Slide index, prev/next arrows & play/pause */}
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-mono text-slate-400">
+                  <strong className="text-white">{String(currentSlide + 1).padStart(2, '0')}</strong>
+                  {' '}/ {String(HERO_SLIDES.length).padStart(2, '0')}
+                </span>
+
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+                    aria-label={isAutoPlaying ? 'Pause carousel' : 'Play carousel'}
+                    className="p-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+                  >
+                    {isAutoPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                  </button>
+
+                  <button
+                    onClick={handlePrevSlide}
+                    aria-label="Previous slide"
+                    className="p-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+
+                  <button
+                    onClick={handleNextSlide}
+                    aria-label="Next slide"
+                    className="p-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 4-COLUMN HIGH-IMPACT PROOF & NETWORK STRIP */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+            <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800/90 space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-2xl font-bold text-white tabular-nums">480+</span>
+                <Building2 className="w-5 h-5 text-cyan-400 opacity-80" />
+              </div>
+              <div className="text-xs font-semibold text-slate-200">Partner Hospitals & Cath Labs</div>
+              <div className="text-[11px] text-slate-400">Consigned across MP, CG, South RJ & UP</div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800/90 space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-2xl font-bold text-cyan-300 tabular-nums">&lt; 2-3 Hrs</span>
+                <Clock className="w-5 h-5 text-cyan-400 opacity-80" />
+              </div>
+              <div className="text-xs font-semibold text-slate-200">Emergency Dispatch Turnaround</div>
+              <div className="text-[11px] text-slate-400">Direct courier to hospital cath lab suite</div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800/90 space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-2xl font-bold text-white tabular-nums">100%</span>
+                <ShieldCheck className="w-5 h-5 text-emerald-400 opacity-80" />
+              </div>
+              <div className="text-xs font-semibold text-slate-200">Cold-Chain & Sterile Barrier</div>
+              <div className="text-[11px] text-slate-400">ISO 13485:2016 verified lot & UDI tracking</div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800/90 space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-2xl font-bold text-emerald-400 tabular-nums">6 Global OEMs</span>
+                <Award className="w-5 h-5 text-emerald-400 opacity-80" />
+              </div>
+              <div className="text-xs font-semibold text-slate-200">Authorized Channel Dealership</div>
+              <div className="text-[11px] text-slate-400">Abbott · Cordis · Teleflex · St. Jude · J&J</div>
+            </div>
+          </div>
+
+          {/* REGIONAL HUB & EMERGENCY DISPATCH BAR */}
+          <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex flex-wrap items-center justify-between gap-4 text-xs">
+            <div className="flex flex-wrap items-center gap-3 text-slate-300">
+              <span className="text-cyan-400 font-bold flex items-center gap-1.5">
+                <MapPin className="w-4 h-4 text-cyan-400 shrink-0" />
+                <span>Regional Distribution Hubs:</span>
+              </span>
+              <span className="font-semibold text-white">Udaipur Central Warehouse (South Rajasthan)</span>
+              <span className="text-slate-600" aria-hidden="true">·</span>
+              <span>Indore & Bhopal (MP)</span>
+              <span className="text-slate-600" aria-hidden="true">·</span>
+              <span>Raipur (CG)</span>
+              <span className="text-slate-600" aria-hidden="true">·</span>
+              <span>Kanpur & Southern UP</span>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => onNavigate('coverage')}
+                className="text-cyan-400 hover:text-cyan-300 font-semibold hover:underline flex items-center gap-1 cursor-pointer"
+              >
+                <span>View Territory District Matrix</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
             </div>
           </div>
         </div>
