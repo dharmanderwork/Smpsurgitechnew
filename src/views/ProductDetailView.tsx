@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Product } from '../types/instruments';
+import { FALLBACK_IMAGE } from '../data/products';
 import { DirectInquiryForm } from '../components/DirectInquiryForm';
 import { 
   ArrowLeft, 
@@ -144,6 +145,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                   alt={product.name}
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover object-center group-hover:scale-103 transition-transform duration-500"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    if (target && !target.src.includes('data:image')) {
+                      target.src = FALLBACK_IMAGE;
+                    }
+                  }}
                 />
 
                 {/* Badges inside visual */}
@@ -628,6 +635,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                         alt={rel.name}
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          if (target && !target.src.includes('data:image')) {
+                            target.src = FALLBACK_IMAGE;
+                          }
+                        }}
                       />
                       <div className="absolute top-2 left-2 bg-slate-950/80 px-2 py-0.5 rounded text-[10px] font-mono text-cyan-300">
                         {rel.sku}

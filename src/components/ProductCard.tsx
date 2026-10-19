@@ -1,5 +1,6 @@
 import React from 'react';
 import { Product } from '../types/instruments';
+import { FALLBACK_IMAGE } from '../data/products';
 import { FileText, Send, Plus, Check, ShieldCheck, ChevronRight } from 'lucide-react';
 
 interface ProductCardProps {
@@ -31,7 +32,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             referrerPolicy="no-referrer"
             className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
             onError={(e) => {
-              (e.target as HTMLElement).style.display = 'none';
+              const target = e.target as HTMLImageElement;
+              if (target && !target.src.includes('data:image')) {
+                target.src = FALLBACK_IMAGE;
+              }
             }}
           />
           {/* Quick SKU & Brand Overlay */}

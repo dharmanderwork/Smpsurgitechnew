@@ -1,5 +1,5 @@
 import React from 'react';
-import { HERO_IMAGE, CATHLAB_OCT_IMAGE, DEALER_BRANDS, TERRITORY_REGIONS } from '../data/products';
+import { HERO_IMAGE, CATHLAB_OCT_IMAGE, DEALER_BRANDS, TERRITORY_REGIONS, FALLBACK_IMAGE } from '../data/products';
 import { 
   ShieldCheck, 
   Award, 
@@ -69,6 +69,12 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
               alt="Cardiac Catheterization Laboratory Support"
               referrerPolicy="no-referrer"
               className="w-full aspect-[4/3] object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                if (target && !target.src.includes('data:image')) {
+                  target.src = FALLBACK_IMAGE;
+                }
+              }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 text-white text-xs space-y-1">

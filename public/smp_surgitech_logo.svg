@@ -1,0 +1,10 @@
+<svg viewBox="0 0 520 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left Teal ECG Heartbeat Pulse Wave -->
+  <path d="M 8 48 L 28 48 L 34 43 L 40 54 L 47 13 L 58 78 L 66 36 L 72 48 L 88 48" stroke="#38B2A6" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- SMP Text in Serif Font -->
+  <text x="96" y="60" font-family="Georgia, 'Times New Roman', Cambria, serif" font-size="46" font-weight="700" letter-spacing="0.5" fill="#38B2A6">SMP</text>
+  <!-- SURGITECH Text in Serif Font -->
+  <text x="208" y="60" font-family="Georgia, 'Times New Roman', Cambria, serif" font-size="46" font-weight="700" letter-spacing="1.2" fill="#52437B">SURGITECH</text>
+  <!-- Right Purple ECG Heartbeat Pulse Wave -->
+  <path d="M 444 48 L 454 48 L 460 43 L 466 54 L 473 13 L 484 78 L 492 36 L 498 48 L 512 48" stroke="#52437B" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

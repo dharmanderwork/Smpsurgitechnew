@@ -11,7 +11,8 @@ import {
   POCKET_ECG_IMAGE,
   SURGICAL_SET_IMAGE,
   CARDIO_INSTRUMENTS_IMAGE,
-  QUALITY_INSPECTION_IMAGE
+  QUALITY_INSPECTION_IMAGE,
+  FALLBACK_IMAGE
 } from '../data/products';
 import { 
   ShieldCheck, 
@@ -231,6 +232,12 @@ export const HomeView: React.FC<HomeViewProps> = ({
             alt={activeSlide.title}
             referrerPolicy="no-referrer"
             className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-1000 ease-out"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              if (target && !target.src.includes('data:image')) {
+                target.src = FALLBACK_IMAGE;
+              }
+            }}
           />
 
           {/* Measured High-Contrast Scrim: Deep navy/black gradient for typography legibility */}
@@ -645,24 +652,38 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
             {/* Right Column: Cleanroom Metallurgy & Hub Showcase (5 cols) */}
             <div className="lg:col-span-5 space-y-4">
-              <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-md group">
-                <img
-                  src={QUALITY_INSPECTION_IMAGE}
-                  alt="SMP Surgitech Cleanroom Inspection & Quality Assurance Lab"
-                  referrerPolicy="no-referrer"
-                  className="w-full aspect-[4/3] object-cover group-hover:scale-103 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
-                
-                <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-slate-900/90 backdrop-blur-md border border-slate-700/80 text-white space-y-1">
-                  <div className="flex items-center justify-between text-[10px] font-mono text-cyan-300 font-bold">
-                    <span>ISO CLASS 7 CLEANROOM FACILITY</span>
-                    <span>AUDITED 2026</span>
+              <div className="rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-md group">
+                {/* 100% Unobstructed Cleanroom Lab Image */}
+                <div className="relative overflow-hidden bg-slate-950">
+                  <img
+                    src={QUALITY_INSPECTION_IMAGE}
+                    alt="SMP Surgitech Cleanroom Inspection & Quality Assurance Lab"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-56 sm:h-64 lg:h-72 object-cover object-center group-hover:scale-103 transition-transform duration-500"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      if (target && !target.src.includes('data:image')) {
+                        target.src = FALLBACK_IMAGE;
+                      }
+                    }}
+                  />
+                  {/* Subtle top indicator that does not obstruct the photo */}
+                  <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-slate-950/80 backdrop-blur-md border border-cyan-500/30 text-[10px] font-mono font-bold text-cyan-300 flex items-center gap-1.5 shadow-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                    <span>ISO 13485:2016 QUALITY LAB</span>
                   </div>
-                  <div className="font-display font-bold text-xs sm:text-sm text-white">
+                </div>
+                
+                {/* Cleanroom Facility Component - Positioned cleanly below photo to prevent any image hiding */}
+                <div className="p-4 sm:p-5 bg-slate-900 border-t border-slate-800 text-white space-y-2">
+                  <div className="flex items-center justify-between text-[10px] sm:text-xs font-mono text-cyan-300 font-bold tracking-wide">
+                    <span>ISO CLASS 7 CLEANROOM FACILITY</span>
+                    <span className="text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800/60 font-semibold">AUDITED 2026</span>
+                  </div>
+                  <div className="font-display font-bold text-sm sm:text-base text-white">
                     Optical Comparator & Metallurgy Passivation
                   </div>
-                  <p className="text-[11px] text-slate-300">
+                  <p className="text-xs text-slate-300 leading-relaxed">
                     100% pre-dispatch inspection of surgical tolerances, corrosion resistance, and sterile blister seals.
                   </p>
                 </div>

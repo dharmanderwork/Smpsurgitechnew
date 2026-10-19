@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Product } from '../types/instruments';
+import { FALLBACK_IMAGE } from '../data/products';
 import { DirectInquiryForm } from './DirectInquiryForm';
 import { X, FileText, Plus, Check, ShieldCheck, Award, Ruler, Sparkles, Layers, Truck, MapPin, Send } from 'lucide-react';
 
@@ -74,7 +75,10 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"
                 onError={(e) => {
-                  (e.target as HTMLElement).style.display = 'none';
+                  const target = e.target as HTMLImageElement;
+                  if (target && !target.src.includes('data:image')) {
+                    target.src = FALLBACK_IMAGE;
+                  }
                 }}
               />
               <div className="absolute bottom-2 left-2 right-2 bg-slate-900/85 backdrop-blur-sm text-[11px] text-white px-2.5 py-1.5 rounded flex items-center justify-between">

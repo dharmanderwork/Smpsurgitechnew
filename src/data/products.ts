@@ -1,12 +1,24 @@
 import { Product, DealerBrand, TerritoryRegion, Testimonial } from '../types/instruments';
 
-export const HERO_IMAGE = '/src/assets/images/smp_xience_coronary_stent_1792349506273.jpg';
-export const CATHLAB_OCT_IMAGE = '/src/assets/images/smp_cathlab_oct_coroflow_1792349506467.jpg';
-export const IMPELLA_IABP_IMAGE = '/src/assets/images/smp_impella_iabp_circulatory_1792349522773.jpg';
-export const POCKET_ECG_IMAGE = '/src/assets/images/smp_pocket_ecg_diagnostic_1792349523041.jpg';
-export const SURGICAL_SET_IMAGE = '/src/assets/images/smp_hero_surgical_instruments_1792343796772.jpg';
-export const CARDIO_INSTRUMENTS_IMAGE = '/src/assets/images/smp_cardio_neuro_instruments_1792343798351.jpg';
-export const QUALITY_INSPECTION_IMAGE = '/src/assets/images/smp_quality_metallurgy_inspection_1792343798753.jpg';
+import heroImg from '../assets/images/smp_xience_coronary_stent_1792349506273.jpg';
+import cathlabOctImg from '../assets/images/smp_cathlab_oct_coroflow_1792349506467.jpg';
+import impellaIabpImg from '../assets/images/smp_impella_iabp_circulatory_1792349522773.jpg';
+import pocketEcgImg from '../assets/images/smp_pocket_ecg_diagnostic_1792349523041.jpg';
+import surgicalSetImg from '../assets/images/smp_hero_surgical_instruments_1792343796772.jpg';
+import cardioInstrumentsImg from '../assets/images/smp_cardio_neuro_instruments_1792343798351.jpg';
+import qualityInspectionImg from '../assets/images/smp_quality_metallurgy_inspection_1792343798753.jpg';
+import orthoInstrumentsImg from '../assets/images/smp_orthopedic_surgical_set_1792343798115.jpg';
+
+export const HERO_IMAGE = heroImg;
+export const CATHLAB_OCT_IMAGE = cathlabOctImg;
+export const IMPELLA_IABP_IMAGE = impellaIabpImg;
+export const POCKET_ECG_IMAGE = pocketEcgImg;
+export const SURGICAL_SET_IMAGE = surgicalSetImg;
+export const CARDIO_INSTRUMENTS_IMAGE = cardioInstrumentsImg;
+export const QUALITY_INSPECTION_IMAGE = qualityInspectionImg;
+export const ORTHO_INSTRUMENTS_IMAGE = orthoInstrumentsImg;
+
+export const FALLBACK_IMAGE = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" fill="%230f172a"><rect width="800" height="600" fill="%23090d16"/><circle cx="400" cy="300" r="140" fill="%230e7490" opacity="0.2"/><path d="M350 300h100M400 250v100" stroke="%2338bdf8" stroke-width="12" stroke-linecap="round"/><text x="400" y="470" fill="%2394a3b8" font-family="sans-serif" font-size="22" font-weight="bold" text-anchor="middle">SMP SURGITECH PRECISION SPEC</text></svg>';
 
 export const DEALER_BRANDS: DealerBrand[] = [
   {
