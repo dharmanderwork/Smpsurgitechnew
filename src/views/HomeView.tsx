@@ -218,156 +218,80 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
   return (
     <div className="space-y-16 pb-20">
-      {/* 1. HERO SECTION: PREMIUM PANORAMIC BANNER & CLINICAL SHOWCASE */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white pt-8 pb-16 border-b border-slate-800">
-        {/* Ambient background glow and grid */}
-        <div className="absolute inset-0 bg-grid-slate-dark opacity-30 pointer-events-none" />
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[360px] bg-cyan-600/10 blur-[140px] pointer-events-none rounded-full" />
+      {/* 1. HERO SECTION: FULL-WIDTH PANORAMIC FLAGSHIP BANNER */}
+      <section 
+        className="w-full relative overflow-hidden bg-slate-950 text-white border-b border-slate-800 flex flex-col justify-between group min-h-[580px] sm:min-h-[620px] lg:min-h-[660px]"
+        onMouseEnter={() => setIsAutoPlaying(false)}
+        onMouseLeave={() => setIsAutoPlaying(true)}
+      >
+        {/* Full-Width Background Equipment Image */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <img
+            src={activeSlide.image}
+            alt={activeSlide.title}
+            referrerPolicy="no-referrer"
+            className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-1000 ease-out"
+          />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 space-y-8">
-          {/* Top Editorial Kicker & Commanding Value Proposition */}
-          <div className="max-w-4xl space-y-4">
-            <div className="flex flex-wrap items-center gap-2 text-xs text-cyan-300 font-semibold tracking-wide">
-              <span>Authorized Regional Distributor</span>
-              <span aria-hidden="true">·</span>
-              <span>Interventional Cardiology & Precision Surgery</span>
-              <span aria-hidden="true">·</span>
-              <span className="text-white">Central & Western India Hub</span>
-            </div>
+          {/* Measured High-Contrast Scrim: Deep navy/black gradient for typography legibility */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/85 to-slate-950/40 md:bg-gradient-to-r md:from-slate-950 md:via-slate-950/90 md:to-slate-950/30" />
+          
+          {/* Subtle ambient lighting */}
+          <div className="absolute -top-32 left-1/3 w-[900px] h-[360px] bg-cyan-600/15 blur-[140px] pointer-events-none rounded-full" />
+        </div>
 
-            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.12]">
-              Precision Cardiovascular Technologies & Surgical Solutions
-            </h1>
-
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-sans max-w-3xl">
-              <strong className="text-white">SMP Surgitech</strong> is the authorized regional partner for <strong>Abbott Vascular</strong>, <strong>Cordis</strong>, <strong>Teleflex</strong>, <strong>St. Jude Medical</strong>, and <strong>J&J MedTech</strong>. Supplying drug-eluting coronary stents, OCT/FFR physiology consoles, mechanical circulatory support, and German surgical instrumentation with rapid 2-hour emergency cath lab delivery.
-            </p>
-
-            {/* Quick Action Navigation Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <button
-                onClick={() => onNavigate('catalog')}
-                className="px-6 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-lg shadow-cyan-950/60 flex items-center gap-2 cursor-pointer"
-              >
-                <span>Explore Full Catalog (140+ SKUs)</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-
-              <button
-                onClick={() => onNavigate('contact')}
-                className="px-6 py-3 bg-slate-800/90 hover:bg-slate-700 text-white font-bold text-xs sm:text-sm rounded-xl border border-slate-700 transition-colors flex items-center gap-2 cursor-pointer"
-              >
-                <FileText className="w-4 h-4 text-cyan-300" />
-                <span>Request Institutional Quotation (RFQ)</span>
-              </button>
-
-              <button
-                onClick={onOpenAiAssistant}
-                className="px-4 py-3 bg-slate-900/90 hover:bg-slate-800 text-cyan-300 font-semibold text-xs sm:text-sm rounded-xl border border-cyan-800/60 transition-colors flex items-center gap-2 cursor-pointer"
-              >
-                <Sparkles className="w-4 h-4 text-cyan-400" />
-                <span>AI Clinical Spec Matcher</span>
-              </button>
-
-              <a
-                href="tel:+919414088210"
-                className="px-4 py-3 bg-slate-900/70 hover:bg-slate-800/80 text-slate-300 hover:text-white text-xs sm:text-sm rounded-xl border border-slate-800 transition-colors flex items-center gap-2"
-              >
-                <Phone className="w-3.5 h-3.5 text-emerald-400" />
-                <span>24x7 Cath Lab Hotline: <strong className="text-white">+91 94140 88210</strong></span>
-              </a>
-            </div>
-          </div>
-
-          {/* Interactive Technology Selector Tabs */}
-          <div className="pt-2">
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-              {HERO_SLIDES.map((slide, idx) => {
-                const isActive = currentSlide === idx;
-                return (
-                  <button
-                    key={slide.id}
-                    onClick={() => {
-                      setCurrentSlide(idx);
-                      setIsAutoPlaying(false);
-                    }}
-                    className={`px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
-                      isActive
-                        ? 'bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20 font-bold'
-                        : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800'
-                    }`}
-                  >
-                    <span>{slide.tabTitle}</span>
-                    <span className={`text-[10px] px-1.5 py-0.5 rounded font-mono ${
-                      isActive ? 'bg-slate-950/20 text-slate-950 font-bold' : 'bg-slate-800 text-cyan-300'
-                    }`}>
-                      {slide.shortOem}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* THE MASTER HERO BANNER SHOWCASE */}
-          <div 
-            className="w-full relative min-h-[440px] sm:min-h-[480px] lg:min-h-[500px] rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl bg-slate-950 flex flex-col justify-between group"
-            onMouseEnter={() => setIsAutoPlaying(false)}
-            onMouseLeave={() => setIsAutoPlaying(true)}
-          >
-            {/* Banner Background Image */}
-            <div className="absolute inset-0 z-0 overflow-hidden">
-              <img
-                src={activeSlide.image}
-                alt={activeSlide.title}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-700 ease-out"
-              />
-
-              {/* Measured contrast scrim: dark on left & bottom for 100% readable typography, transparent on right for full equipment view */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/30 md:bg-gradient-to-r md:from-slate-950 md:via-slate-950/85 md:to-transparent" />
-              
-              {/* Subtle blue ambient vignette */}
-              <div className="absolute inset-0 bg-radial-gradient pointer-events-none opacity-40" />
-            </div>
-
-            {/* Top Bar inside Banner: Brand Division Badge & Live Dispatch SLA */}
-            <div className="relative z-10 p-5 sm:p-6 flex flex-wrap items-center justify-between gap-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/90 backdrop-blur-md border border-slate-700/80 text-cyan-300 text-xs font-semibold">
+        {/* Top Authority & SLA Bar inside Full-Width Banner */}
+        <div className="relative z-10 w-full pt-6 sm:pt-8 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="bg-cyan-950/90 text-cyan-300 font-bold px-2.5 py-1 rounded-full text-[11px] border border-cyan-800/80 flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                <span>{activeSlide.brandTag}</span>
-              </div>
-
-              <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/85 backdrop-blur-md border border-emerald-800/60 text-emerald-300 text-xs font-medium">
-                <Clock className="w-3.5 h-3.5 text-emerald-400" />
-                <span>2-3 Hr Emergency Cath Lab Dispatch Available</span>
-              </div>
+                <span>AUTHORIZED CHANNEL PARTNER</span>
+              </span>
+              <span className="text-slate-300 text-[11px] font-medium hidden sm:inline">
+                Abbott · Cordis · Teleflex · St. Jude Medical · J&J MedTech
+              </span>
             </div>
 
-            {/* Middle Content on Banner: Product Title, Technical Specs & Action Controls */}
-            <div className="relative z-10 p-5 sm:p-8 max-w-2xl space-y-4">
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/90 backdrop-blur-md border border-emerald-800/60 text-emerald-300 text-xs font-medium">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+              <span>2-3 Hr Emergency Cath Lab Dispatch: MP · CG · South RJ · UP</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content Area inside Full-Width Banner */}
+        <div className="relative z-10 w-full py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Left Column: Heading, Clinical Subtitle, Technical Specs & Action Buttons */}
+            <div className="lg:col-span-8 space-y-4 sm:space-y-5">
               <div className="space-y-2">
-                <div className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-bold">
-                  {activeSlide.badge}
+                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-md bg-cyan-900/40 text-cyan-300 font-mono text-[11px] font-bold tracking-wider uppercase border border-cyan-700/50">
+                  <span>{activeSlide.badge}</span>
+                  <span aria-hidden="true" className="text-cyan-600">·</span>
+                  <span className="text-white font-semibold">{activeSlide.brandTag}</span>
                 </div>
-                <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
+
+                <h1 className="font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.12]">
                   {activeSlide.title}
-                </h2>
-                <div className="text-xs sm:text-sm font-semibold text-cyan-200">
+                </h1>
+
+                <div className="text-xs sm:text-base font-semibold text-cyan-200">
                   {activeSlide.subtitle}
                 </div>
               </div>
 
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans line-clamp-3 sm:line-clamp-none">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans max-w-2xl">
                 {activeSlide.desc}
               </p>
 
-              {/* Technical Highlights Specification Table */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+              {/* Technical Specifications Highlights Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1 max-w-2xl">
                 {activeSlide.specs.map((spec, i) => (
                   <div 
                     key={i} 
-                    className="p-2.5 rounded-lg bg-slate-900/80 backdrop-blur-md border border-slate-700/70 text-xs"
+                    className="p-2.5 rounded-xl bg-slate-900/80 backdrop-blur-md border border-slate-700/70 text-xs"
                   >
                     <div className="text-[10px] uppercase font-bold text-slate-400">{spec.label}</div>
                     <div className="font-semibold text-white mt-0.5 truncate">{spec.value}</div>
@@ -375,11 +299,19 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 ))}
               </div>
 
-              {/* Direct Banner Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              {/* Action Buttons: Responsive & Wrap-Safe */}
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-2">
+                <button
+                  onClick={() => onNavigate('catalog')}
+                  className="px-5 py-2.5 sm:py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-lg shadow-cyan-950/60 flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>Explore Full Catalog (140+ SKUs)</span>
+                  <ArrowRight className="w-4 h-4 shrink-0" />
+                </button>
+
                 <button
                   onClick={() => onOpenProductDetail(activeProduct, 'overview')}
-                  className="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="px-4 sm:px-5 py-2.5 sm:py-3 bg-slate-800/90 hover:bg-slate-700 text-white font-bold text-xs sm:text-sm rounded-xl border border-slate-700 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <span>View Specifications & Sizing</span>
                   <ChevronRight className="w-3.5 h-3.5" />
@@ -387,7 +319,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
                 <button
                   onClick={() => onOpenPdf(activeProduct)}
-                  className="px-4 py-2.5 bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-xs rounded-xl border border-slate-700 transition-colors flex items-center gap-1.5 cursor-pointer"
+                  className="px-4 py-2.5 sm:py-3 bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-xs sm:text-sm rounded-xl border border-slate-700 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <FileText className="w-3.5 h-3.5 text-cyan-400" />
                   <span>Interactive PDF Spec</span>
@@ -395,7 +327,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
                 <button
                   onClick={() => onAddToRfq(activeProduct)}
-                  className={`px-4 py-2.5 text-xs font-semibold rounded-xl border transition-all flex items-center gap-1.5 cursor-pointer ${
+                  className={`px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold rounded-xl border transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                     isItemInRfq(activeProduct.id)
                       ? 'bg-emerald-950/80 border-emerald-700 text-emerald-300'
                       : 'bg-slate-800/90 hover:bg-slate-700 border-slate-700 text-white'
@@ -416,10 +348,88 @@ export const HomeView: React.FC<HomeViewProps> = ({
               </div>
             </div>
 
-            {/* Bottom Controls Bar inside Banner */}
-            <div className="relative z-10 px-5 py-3 sm:px-6 sm:py-4 bg-slate-950/80 backdrop-blur-md border-t border-slate-800/80 flex items-center justify-between gap-4">
-              {/* Slide Thumbnail Pills */}
-              <div className="flex items-center gap-2">
+            {/* Right Column: Floating Glassmorphic Clinical Equipment Dossier Card */}
+            <div className="lg:col-span-4 hidden lg:block">
+              <div className="p-6 rounded-2xl bg-slate-900/85 backdrop-blur-md border border-slate-700/80 shadow-2xl space-y-4 text-xs">
+                <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                  <span className="font-bold text-white text-sm">Clinical Equipment Dossier</span>
+                  <span className="px-2 py-0.5 rounded bg-emerald-950 border border-emerald-700 text-emerald-300 font-mono text-[10px]">
+                    100% AUTHENTIC
+                  </span>
+                </div>
+
+                <div className="space-y-3 text-slate-300">
+                  <div className="flex items-start gap-2.5">
+                    <ShieldCheck className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                    <div>
+                      <div className="font-semibold text-white">Authorized Channel Partner</div>
+                      <p className="text-[11px] text-slate-400">Direct distribution authorization for Abbott, Cordis, Teleflex & J&J MedTech.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2.5">
+                    <Building2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                    <div>
+                      <div className="font-semibold text-white">480+ Consigned Cath Labs</div>
+                      <p className="text-[11px] text-slate-400">Active consignment accounts across Madhya Pradesh, Chhattisgarh, South Rajasthan & UP.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2.5">
+                    <Clock className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <div>
+                      <div className="font-semibold text-white">&lt; 2-3 Hours Rapid Dispatch</div>
+                      <p className="text-[11px] text-slate-400">Urgent intra-operative case support and same-day sterile corridor transit.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-[11px]">
+                  <span className="text-slate-400">24x7 Cath Lab Helpline:</span>
+                  <a href="tel:+919414088210" className="text-cyan-400 hover:text-cyan-300 font-mono font-bold">
+                    +91 94140 88210
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Full-Width Controls & Pillar Switcher Bar */}
+        <div className="relative z-10 w-full bg-slate-950/90 backdrop-blur-md border-t border-slate-800/90">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-3.5 flex flex-col lg:flex-row items-center justify-between gap-3">
+            {/* Interactive Technology Selector Tabs */}
+            <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto w-full lg:w-auto pb-1 lg:pb-0 scrollbar-none">
+              {HERO_SLIDES.map((slide, idx) => {
+                const isActive = currentSlide === idx;
+                return (
+                  <button
+                    key={slide.id}
+                    onClick={() => {
+                      setCurrentSlide(idx);
+                      setIsAutoPlaying(false);
+                    }}
+                    className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer ${
+                      isActive
+                        ? 'bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20 font-bold'
+                        : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800'
+                    }`}
+                  >
+                    <span>{slide.tabTitle}</span>
+                    <span className={`text-[10px] px-1.5 py-0.5 rounded font-mono ${
+                      isActive ? 'bg-slate-950/20 text-slate-950 font-bold' : 'bg-slate-800 text-cyan-300'
+                    }`}>
+                      {slide.shortOem}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Slider Playback Controls */}
+            <div className="flex items-center justify-between lg:justify-end w-full lg:w-auto gap-4 shrink-0">
+              {/* Slide Thumbnail Indicators */}
+              <div className="flex items-center gap-1.5">
                 {HERO_SLIDES.map((_, idx) => (
                   <button
                     key={idx}
@@ -428,17 +438,17 @@ export const HomeView: React.FC<HomeViewProps> = ({
                       setIsAutoPlaying(false);
                     }}
                     aria-label={`Go to slide ${idx + 1}`}
-                    className={`h-2 rounded-full transition-all cursor-pointer ${
+                    className={`h-1.5 rounded-full transition-all cursor-pointer ${
                       currentSlide === idx 
-                        ? 'w-8 bg-cyan-400' 
+                        ? 'w-7 bg-cyan-400' 
                         : 'w-2 bg-slate-700 hover:bg-slate-500'
                     }`}
                   />
                 ))}
               </div>
 
-              {/* Navigation Controls: Slide index, prev/next arrows & play/pause */}
-              <div className="flex items-center gap-3">
+              {/* Counter, Autoplay & Prev/Next Arrows */}
+              <div className="flex items-center gap-2.5">
                 <span className="text-xs font-mono text-slate-400">
                   <strong className="text-white">{String(currentSlide + 1).padStart(2, '0')}</strong>
                   {' '}/ {String(HERO_SLIDES.length).padStart(2, '0')}
@@ -472,71 +482,73 @@ export const HomeView: React.FC<HomeViewProps> = ({
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* 4-COLUMN HIGH-IMPACT PROOF & NETWORK STRIP */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
-            <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800/90 space-y-1">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-2xl font-bold text-white tabular-nums">480+</span>
-                <Building2 className="w-5 h-5 text-cyan-400 opacity-80" />
-              </div>
-              <div className="text-xs font-semibold text-slate-200">Partner Hospitals & Cath Labs</div>
-              <div className="text-[11px] text-slate-400">Consigned across MP, CG, South RJ & UP</div>
+      {/* 4-COLUMN HIGH-IMPACT PROOF & NETWORK STRIP */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="p-4 rounded-xl bg-white border border-slate-200/90 shadow-xs space-y-1">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-2xl font-bold text-slate-950 tabular-nums">480+</span>
+              <Building2 className="w-5 h-5 text-cyan-700 opacity-80" />
             </div>
-
-            <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800/90 space-y-1">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-2xl font-bold text-cyan-300 tabular-nums">&lt; 2-3 Hrs</span>
-                <Clock className="w-5 h-5 text-cyan-400 opacity-80" />
-              </div>
-              <div className="text-xs font-semibold text-slate-200">Emergency Dispatch Turnaround</div>
-              <div className="text-[11px] text-slate-400">Direct courier to hospital cath lab suite</div>
-            </div>
-
-            <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800/90 space-y-1">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-2xl font-bold text-white tabular-nums">100%</span>
-                <ShieldCheck className="w-5 h-5 text-emerald-400 opacity-80" />
-              </div>
-              <div className="text-xs font-semibold text-slate-200">Cold-Chain & Sterile Barrier</div>
-              <div className="text-[11px] text-slate-400">ISO 13485:2016 verified lot & UDI tracking</div>
-            </div>
-
-            <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800/90 space-y-1">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-2xl font-bold text-emerald-400 tabular-nums">6 Global OEMs</span>
-                <Award className="w-5 h-5 text-emerald-400 opacity-80" />
-              </div>
-              <div className="text-xs font-semibold text-slate-200">Authorized Channel Dealership</div>
-              <div className="text-[11px] text-slate-400">Abbott · Cordis · Teleflex · St. Jude · J&J</div>
-            </div>
+            <div className="text-xs font-semibold text-slate-900">Partner Hospitals & Cath Labs</div>
+            <div className="text-[11px] text-slate-500">Consigned across MP, CG, South RJ & UP</div>
           </div>
 
-          {/* REGIONAL HUB & EMERGENCY DISPATCH BAR */}
-          <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex flex-wrap items-center justify-between gap-4 text-xs">
-            <div className="flex flex-wrap items-center gap-3 text-slate-300">
-              <span className="text-cyan-400 font-bold flex items-center gap-1.5">
-                <MapPin className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span>Regional Distribution Hubs:</span>
-              </span>
-              <span className="font-semibold text-white">Udaipur Central Warehouse (South Rajasthan)</span>
-              <span className="text-slate-600" aria-hidden="true">·</span>
-              <span>Indore & Bhopal (MP)</span>
-              <span className="text-slate-600" aria-hidden="true">·</span>
-              <span>Raipur (CG)</span>
-              <span className="text-slate-600" aria-hidden="true">·</span>
-              <span>Kanpur & Southern UP</span>
+          <div className="p-4 rounded-xl bg-white border border-slate-200/90 shadow-xs space-y-1">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-2xl font-bold text-cyan-800 tabular-nums">&lt; 2-3 Hrs</span>
+              <Clock className="w-5 h-5 text-cyan-700 opacity-80" />
             </div>
+            <div className="text-xs font-semibold text-slate-900">Emergency Dispatch Turnaround</div>
+            <div className="text-[11px] text-slate-500">Direct courier to hospital cath lab suite</div>
+          </div>
 
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => onNavigate('coverage')}
-                className="text-cyan-400 hover:text-cyan-300 font-semibold hover:underline flex items-center gap-1 cursor-pointer"
-              >
-                <span>View Territory District Matrix</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </button>
+          <div className="p-4 rounded-xl bg-white border border-slate-200/90 shadow-xs space-y-1">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-2xl font-bold text-emerald-700 tabular-nums">100%</span>
+              <ShieldCheck className="w-5 h-5 text-emerald-600 opacity-80" />
             </div>
+            <div className="text-xs font-semibold text-slate-900">Cold-Chain & Sterile Barrier</div>
+            <div className="text-[11px] text-slate-500">ISO 13485:2016 verified lot & UDI tracking</div>
+          </div>
+
+          <div className="p-4 rounded-xl bg-white border border-slate-200/90 shadow-xs space-y-1">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-2xl font-bold text-emerald-700 tabular-nums">6 Global OEMs</span>
+              <Award className="w-5 h-5 text-emerald-600 opacity-80" />
+            </div>
+            <div className="text-xs font-semibold text-slate-900">Authorized Channel Dealership</div>
+            <div className="text-[11px] text-slate-500">Abbott · Cordis · Teleflex · St. Jude · J&J</div>
+          </div>
+        </div>
+
+        {/* REGIONAL HUB & EMERGENCY DISPATCH BAR */}
+        <div className="p-4 rounded-xl bg-slate-900 text-white flex flex-wrap items-center justify-between gap-4 text-xs border border-slate-800 shadow-xs">
+          <div className="flex flex-wrap items-center gap-3 text-slate-300">
+            <span className="text-cyan-400 font-bold flex items-center gap-1.5">
+              <MapPin className="w-4 h-4 text-cyan-400 shrink-0" />
+              <span>Regional Distribution Hubs:</span>
+            </span>
+            <span className="font-semibold text-white">Udaipur Central Warehouse (South Rajasthan)</span>
+            <span className="text-slate-600" aria-hidden="true">·</span>
+            <span>Indore & Bhopal (MP)</span>
+            <span className="text-slate-600" aria-hidden="true">·</span>
+            <span>Raipur (CG)</span>
+            <span className="text-slate-600" aria-hidden="true">·</span>
+            <span>Kanpur & Southern UP</span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => onNavigate('coverage')}
+              className="text-cyan-400 hover:text-cyan-300 font-semibold hover:underline flex items-center gap-1 cursor-pointer"
+            >
+              <span>View Territory District Matrix</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </button>
           </div>
         </div>
       </section>
@@ -1111,13 +1123,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
       </section>
 
       {/* 6. INTEGRATED QUICK QUOTE & LEAD GENERATION SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-12 border border-slate-800 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <section className="max-w-7xl mx-auto px-3 sm:px-6">
+        <div className="bg-slate-900 text-white rounded-3xl p-5 sm:p-8 lg:p-12 border border-slate-800 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center max-w-full overflow-hidden">
           <div className="lg:col-span-6 space-y-4">
             <span className="text-cyan-400 font-bold text-xs uppercase tracking-wider block">
               B2B Institutional Sales & Tender Desk
             </span>
-            <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight break-words">
               Request a Direct Institutional Quotation
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -1140,7 +1152,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </div>
           </div>
 
-          <div className="lg:col-span-6 bg-white text-slate-900 rounded-2xl p-6 sm:p-8 shadow-lg">
+          <div className="lg:col-span-6 bg-white text-slate-900 rounded-2xl p-4 sm:p-6 lg:p-8 shadow-lg max-w-full overflow-hidden">
             {quickQuoteSubmitted ? (
               <div className="text-center py-6 space-y-4 animate-fade-in">
                 <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">

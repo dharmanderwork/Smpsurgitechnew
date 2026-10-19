@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShieldCheck, Mail, Phone, MapPin, Download, HeartPulse, Clock, FileText } from 'lucide-react';
+import { SmpLogo } from './SmpLogo';
 
 interface FooterProps {
   onNavigate: (view: string) => void;
@@ -65,13 +66,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 md:grid-cols-12 gap-8">
         {/* Brand Information */}
         <div className="md:col-span-4 space-y-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-800 text-cyan-300 flex items-center justify-center font-bold text-sm font-mono">
-              SMP
-            </div>
-            <span className="font-display text-xl font-bold text-white tracking-tight">
-              SMP Surgitech
-            </span>
+          <div className="flex items-center">
+            <SmpLogo className="h-8 w-auto object-contain" variant="light" />
           </div>
           <p className="text-xs text-slate-400 leading-relaxed">
             Premier B2B medical distributor specializing in interventional cardiology devices, drug-eluting coronary stents, hemodynamic assist consoles, and precision cardiovascular surgical instrumentation.
