@@ -8,7 +8,6 @@ import { Product, RfqItem } from './types/instruments';
 import { SURGICAL_PRODUCTS } from './data/products';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { ProductDetailModal } from './components/ProductDetailModal';
 import { PdfSpecViewerModal } from './components/PdfSpecViewerModal';
 import { RfqDrawer } from './components/RfqDrawer';
 import { GeminiSpecAssistant } from './components/GeminiSpecAssistant';
@@ -21,6 +20,7 @@ import { ServicesView } from './views/ServicesView';
 import { AboutView } from './views/AboutView';
 import { RfqPortalView } from './views/RfqPortalView';
 import { ContactView } from './views/ContactView';
+import { ProductDetailView } from './views/ProductDetailView';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<string>('home');
@@ -52,9 +52,8 @@ export default function App() {
     }
   }, [rfqItems]);
 
-  // Modals state
+  // Product selection and tab state
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [detailModalTab, setDetailModalTab] = useState<'overview' | 'specs' | 'logistics' | 'inquiry'>('overview');
 
   const [pdfProduct, setPdfProduct] = useState<Product | null>(null);
@@ -107,11 +106,12 @@ export default function App() {
     return rfqItems.some((item) => item.product.id === productId);
   };
 
-  // Open modals handlers
+  // Product view handler - navigates to dedicated responsive page
   const handleOpenProductDetail = (product: Product, defaultTab: 'overview' | 'specs' | 'logistics' | 'inquiry' = 'overview') => {
     setSelectedProduct(product);
     setDetailModalTab(defaultTab);
-    setIsDetailModalOpen(true);
+    setCurrentView('product-detail');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleOpenPdf = (product: Product) => {
@@ -120,9 +120,8 @@ export default function App() {
   };
 
   const handleOpenEnquiryFromPdf = (product: Product) => {
-    setSelectedProduct(product);
-    setDetailModalTab('inquiry');
-    setIsDetailModalOpen(true);
+    setIsPdfModalOpen(false);
+    handleOpenProductDetail(product, 'inquiry');
   };
 
   return (
@@ -159,6 +158,19 @@ export default function App() {
             onAddToRfq={handleAddToRfq}
             isItemInRfq={isItemInRfq}
             onOpenAiAssistant={() => setIsAiAssistantOpen(true)}
+          />
+        )}
+
+        {currentView === 'product-detail' && (
+          <ProductDetailView
+            product={selectedProduct || SURGICAL_PRODUCTS[0]}
+            allProducts={SURGICAL_PRODUCTS}
+            onNavigate={handleNavigate}
+            onOpenProductDetail={handleOpenProductDetail}
+            onOpenPdf={handleOpenPdf}
+            onAddToRfq={handleAddToRfq}
+            isItemInRfq={isItemInRfq}
+            initialTab={detailModalTab}
           />
         )}
 
@@ -204,17 +216,6 @@ export default function App() {
 
       {/* Corporate Footer */}
       <Footer onNavigate={handleNavigate} />
-
-      {/* Product Detail & Direct Quote Modal */}
-      <ProductDetailModal
-        product={selectedProduct}
-        isOpen={isDetailModalOpen}
-        onClose={() => setIsDetailModalOpen(false)}
-        onOpenPdf={handleOpenPdf}
-        onAddToRfq={handleAddToRfq}
-        isItemInRfq={selectedProduct ? isItemInRfq(selectedProduct.id) : false}
-        initialTab={detailModalTab}
-      />
 
       {/* Technical PDF Spec Browser Modal */}
       <PdfSpecViewerModal

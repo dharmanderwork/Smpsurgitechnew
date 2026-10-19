@@ -10,7 +10,8 @@ import {
   IMPELLA_IABP_IMAGE, 
   POCKET_ECG_IMAGE,
   SURGICAL_SET_IMAGE,
-  CARDIO_INSTRUMENTS_IMAGE
+  CARDIO_INSTRUMENTS_IMAGE,
+  QUALITY_INSPECTION_IMAGE
 } from '../data/products';
 import { 
   ShieldCheck, 
@@ -540,7 +541,143 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </section>
 
-      {/* 2. AUTHORIZED DEALER FOR SECTION */}
+      {/* 2. ABOUT SMP SURGITECH SECTION */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden p-6 sm:p-10 lg:p-12 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            {/* Left Column: Narrative, Mission & Core Values (7 cols) */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="space-y-3">
+                <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-cyan-900">
+                  <ShieldCheck className="w-4 h-4 text-cyan-700" />
+                  <span>Institutional Healthcare Distribution Infrastructure</span>
+                  <span aria-hidden="true" className="text-slate-300">·</span>
+                  <span className="font-mono text-slate-500">ISO 13485:2016 Certified</span>
+                </div>
+
+                <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-950 tracking-tight leading-tight">
+                  About SMP Surgitech
+                </h2>
+
+                <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-sans">
+                  Founded as a high-reliability institutional healthcare distribution bridge, <strong>SMP Surgitech</strong> delivers world-class interventional cardiology, cardiac rhythm, and precision surgical technologies directly to hospital operating suites, catheterization laboratories, and critical care units across <strong>Central & Western India</strong>.
+                </p>
+              </div>
+
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
+                As the authorized regional channel distributor for global pioneers—including <strong>Abbott Vascular</strong>, <strong>Cordis</strong>, <strong>Teleflex</strong>, <strong>St. Jude Medical</strong>, and <strong>Johnson & Johnson MedTech</strong>—SMP Surgitech maintains uninterrupted hospital consignments, rapid emergency courier corridors, and complete sterile lot traceability, ensuring cardiac teams never face intra-operative stock-outs.
+              </p>
+
+              {/* 4 Core Pillars Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
+                  <div className="flex items-center gap-2 text-slate-900 font-bold text-xs">
+                    <Clock className="w-4 h-4 text-cyan-700 shrink-0" />
+                    <span>2–3 Hr Emergency Dispatch</span>
+                  </div>
+                  <p className="text-[11px] text-slate-600 leading-relaxed">
+                    Direct road and air express logistics connecting Udaipur HQ to Indore, Bhopal, Raipur, and Bhilwara cath labs.
+                  </p>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
+                  <div className="flex items-center gap-2 text-slate-900 font-bold text-xs">
+                    <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
+                    <span>Cold-Chain & UDI Assurance</span>
+                  </div>
+                  <p className="text-[11px] text-slate-600 leading-relaxed">
+                    15°C–25°C temperature-controlled warehousing, barcode datalogging, and full regulatory DCGI/CDSCO compliance.
+                  </p>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
+                  <div className="flex items-center gap-2 text-slate-900 font-bold text-xs">
+                    <Sparkles className="w-4 h-4 text-cyan-700 shrink-0" />
+                    <span>On-Site Clinical Support</span>
+                  </div>
+                  <p className="text-[11px] text-slate-600 leading-relaxed">
+                    Certified applications engineers assisting cath lab teams during live OCT imaging, CoroFlow FFR, and Impella pVAD cases.
+                  </p>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
+                  <div className="flex items-center gap-2 text-slate-900 font-bold text-xs">
+                    <Award className="w-4 h-4 text-amber-700 shrink-0" />
+                    <span>German Surgical Metallurgy</span>
+                  </div>
+                  <p className="text-[11px] text-slate-600 leading-relaxed">
+                    Certified DIN 1.4021 & Grade 5 Titanium micro-instruments with Rockwell 54-58 HRC hardness and electro-satin passivation.
+                  </p>
+                </div>
+              </div>
+
+              {/* Action Links */}
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <button
+                  onClick={() => onNavigate('about')}
+                  className="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-colors flex items-center gap-2 cursor-pointer shadow-sm"
+                >
+                  <span>Learn More About Our Operations</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+
+                <button
+                  onClick={() => onNavigate('coverage')}
+                  className="px-4 py-2.5 bg-cyan-50 hover:bg-cyan-100 text-cyan-950 border border-cyan-200 text-xs font-semibold rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-cyan-700" />
+                  <span>Explore Coverage Network</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Right Column: Cleanroom Metallurgy & Hub Showcase (5 cols) */}
+            <div className="lg:col-span-5 space-y-4">
+              <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-md group">
+                <img
+                  src={QUALITY_INSPECTION_IMAGE}
+                  alt="SMP Surgitech Cleanroom Inspection & Quality Assurance Lab"
+                  referrerPolicy="no-referrer"
+                  className="w-full aspect-[4/3] object-cover group-hover:scale-103 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+                
+                <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-slate-900/90 backdrop-blur-md border border-slate-700/80 text-white space-y-1">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-cyan-300 font-bold">
+                    <span>ISO CLASS 7 CLEANROOM FACILITY</span>
+                    <span>AUDITED 2026</span>
+                  </div>
+                  <div className="font-display font-bold text-xs sm:text-sm text-white">
+                    Optical Comparator & Metallurgy Passivation
+                  </div>
+                  <p className="text-[11px] text-slate-300">
+                    100% pre-dispatch inspection of surgical tolerances, corrosion resistance, and sterile blister seals.
+                  </p>
+                </div>
+              </div>
+
+              {/* Regional Network Quick Summary Box */}
+              <div className="p-4 rounded-xl bg-slate-900 text-white space-y-2.5">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-bold text-cyan-300">Udaipur Central Distribution Hub</span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">
+                    HQ & Warehouse
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  Centrally situated in Udaipur (South Rajasthan) to enable immediate same-day highway transit to Bhilwara, Chittorgarh, Rajsamand, Dungarpur, Banswara, and neighboring MP borders (Ratlam, Mandsaur, Neemuch).
+                </p>
+                <div className="pt-1 flex items-center justify-between text-[11px] text-slate-400 border-t border-slate-800">
+                  <span>Active Consignments: <strong className="text-white">480+ Hospitals</strong></span>
+                  <span className="text-emerald-400 font-semibold">Zero-Stockout Guarantee</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. AUTHORIZED DEALER FOR SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-10">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-900 text-xs font-bold uppercase tracking-wider">
