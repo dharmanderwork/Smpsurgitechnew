@@ -1183,6 +1183,1385 @@ export const SURGICAL_PRODUCTS: Product[] = [
         }
       ]
     }
+  },
+  // product add on
+  {
+    id: "abbott-trek-balloon",
+    sku: "ABT-TRK-RX",
+    name: "TREK™ Coronary Dilatation Catheter",
+    brand: "Abbott Healthcare Pvt. Ltd. (Vascular Division)",
+    category: "Coronary Balloon Catheters",
+    subcategory: "Rapid-exchange coronary balloon catheter",
+    shortDesc: "Rapid-exchange PTCA balloon catheter designed for coronary lesion dilatation; available in model-specific diameters and lengths.",
+    clinicalApplication: "Coronary balloon angioplasty and selected post-stent dilatation indications according to the applicable IFU.",
+    keyFeatures: [
+      "Rapid-exchange catheter platform",
+      "Smooth shaft transitions for deliverability",
+      "Choose size and platform from current manufacturer catalogue"
+    ],
+    specs: {
+      profileOrSize: "Diameter and length vary by SKU; consult current compliance chart",
+      compatibilityOrSheath: "0.014 in guidewire platform; guide catheter size depends on balloon SKU",
+      materialOrCoating: "Balloon and shaft materials vary by model; see manufacturer IFU",
+      shelfLifeOrSterility: "Sterile, single-use; confirm shelf life on package label"
+    },
+    mriSafety: "Not an implant; MRI safety generally not applicable to the catheter itself",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/abbott-trek-balloon.jpg',
+    featured: false
+  },
+  {
+    id: "abbott-nc-trek-balloon",
+    sku: "ABT-NCT-RX",
+    name: "NC TREK™ Non-Compliant Coronary Dilatation Catheter",
+    brand: "Abbott Healthcare Pvt. Ltd. (Vascular Division)",
+    category: "Coronary Balloon Catheters",
+    subcategory: "Non-compliant PTCA balloon catheter",
+    shortDesc: "Non-compliant coronary dilatation balloon for controlled high-pressure dilatation, with exact sizing and pressure limits specified by model.",
+    clinicalApplication: "Coronary lesion and stent dilatation where indicated by the product IFU.",
+    keyFeatures: [
+      "Non-compliant balloon platform",
+      "Rapid-exchange and model-specific configurations",
+      "Use the exact SKU compliance chart for rated burst pressure"
+    ],
+    specs: {
+      profileOrSize: "Diameter, length and pressure limits vary by SKU",
+      compatibilityOrSheath: "0.014 in guidewire; guide catheter compatibility varies by balloon diameter",
+      materialOrCoating: "Polymer balloon and catheter shaft; exact formulation varies by model",
+      shelfLifeOrSterility: "Sterile, single-use; check labelled expiry"
+    },
+    mriSafety: "Not an implant; MRI safety generally not applicable to the catheter itself",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/abbott-nc-trek-balloon.jpg',
+    featured: false
+  },
+  {
+    id: "abbott-nc-trek-neo",
+    sku: "ABT-NCT-NEO",
+    name: "NC TREK NEO™ Coronary Dilatation Catheter",
+    brand: "Abbott Healthcare Pvt. Ltd. (Vascular Division)",
+    category: "Coronary Balloon Catheters",
+    subcategory: "Non-compliant coronary balloon catheter",
+    shortDesc: "Abbott non-compliant rapid-exchange coronary balloon with a broad size matrix, including larger diameter options in the manufacturer catalogue.",
+    clinicalApplication: "Coronary lesion dilatation and indicated post-stent expansion; follow current IFU and size-specific limits.",
+    keyFeatures: [
+      "Rapid-exchange platform",
+      "Hydrophilic distal coating",
+      "0.014 in guidewire compatibility",
+      "Manufacturer lists 145 cm shaft length and 18 atm rated burst pressure"
+    ],
+    specs: {
+      profileOrSize: "1.50–6.00 mm diameters across model range; 145 cm shaft length",
+      compatibilityOrSheath: "0.014 in guidewire; minimum guide catheter ID depends on diameter",
+      materialOrCoating: "Pebax or Grilamid balloon material by diameter; flexible tungsten/Pebax marker material",
+      shelfLifeOrSterility: "Sterile EO; manufacturer lists 36-month shelf life"
+    },
+    mriSafety: "Not an implant; MRI safety generally not applicable to the catheter itself",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/abbott-nc-trek-neo.jpg',
+    featured: false
+  },
+  {
+    id: "abbott-allstar-guidewire",
+    sku: "ABT-GW-ALLSTAR",
+    name: "AllStar™ Coronary Guidewire",
+    brand: "Abbott Healthcare Pvt. Ltd. (Vascular Division)",
+    category: "Coronary Guidewires",
+    subcategory: "Coronary guidewire",
+    shortDesc: "Workhorse coronary guidewire for routine wire crossing and device delivery; confirm current model-specific properties.",
+    clinicalApplication: "Coronary guidewire placement and lesion/device crossing as specified in the applicable IFU.",
+    keyFeatures: [
+      "Model-specific tip load, tip shape and coating",
+      "Check current manufacturer catalogue before ordering",
+      "Single-use device; do not infer dimensions across models"
+    ],
+    specs: {
+      profileOrSize: "Diameter, working length and tip configuration vary by model",
+      compatibilityOrSheath: "Turnpike catheter family is designed to track over a 0.014 in guidewire; model compatibility must be confirmed",
+      materialOrCoating: "Guidewire core and coating vary by product family",
+      shelfLifeOrSterility: "Sterile, single-use; verify expiry and package label"
+    },
+    mriSafety: "Not an implant; MRI safety generally not applicable to the guidewire itself",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/abbott-allstar-guidewire.jpg',
+    featured: false
+  },
+  {
+    id: "abbott-crossit-guidewire",
+    sku: "ABT-GW-CROSSIT",
+    name: "CrossIT™ Coronary Guidewire",
+    brand: "Abbott Healthcare Pvt. Ltd. (Vascular Division)",
+    category: "Coronary Guidewires",
+    subcategory: "Coronary guidewire",
+    shortDesc: "Coronary guidewire family intended for lesion crossing; exact tip load and coating depend on model.",
+    clinicalApplication: "Coronary guidewire placement and lesion/device crossing as specified in the applicable IFU.",
+    keyFeatures: [
+      "Model-specific tip load, tip shape and coating",
+      "Check current manufacturer catalogue before ordering",
+      "Single-use device; do not infer dimensions across models"
+    ],
+    specs: {
+      profileOrSize: "Diameter, working length and tip configuration vary by model",
+      compatibilityOrSheath: "Turnpike catheter family is designed to track over a 0.014 in guidewire; model compatibility must be confirmed",
+      materialOrCoating: "Guidewire core and coating vary by product family",
+      shelfLifeOrSterility: "Sterile, single-use; verify expiry and package label"
+    },
+    mriSafety: "Not an implant; MRI safety generally not applicable to the guidewire itself",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/abbott-crossit-guidewire.jpg',
+    featured: false
+  },
+  {
+    id: "abbott-bmw-guidewire",
+    sku: "ABT-GW-BMW",
+    name: "BMW™ Coronary Guidewire",
+    brand: "Abbott Healthcare Pvt. Ltd. (Vascular Division)",
+    category: "Coronary Guidewires",
+    subcategory: "Coronary guidewire",
+    shortDesc: "Workhorse coronary guidewire for routine coronary access and device delivery.",
+    clinicalApplication: "Coronary guidewire placement and lesion/device crossing as specified in the applicable IFU.",
+    keyFeatures: [
+      "Model-specific tip load, tip shape and coating",
+      "Check current manufacturer catalogue before ordering",
+      "Single-use device; do not infer dimensions across models"
+    ],
+    specs: {
+      profileOrSize: "Diameter, working length and tip configuration vary by model",
+      compatibilityOrSheath: "Turnpike catheter family is designed to track over a 0.014 in guidewire; model compatibility must be confirmed",
+      materialOrCoating: "Guidewire core and coating vary by product family",
+      shelfLifeOrSterility: "Sterile, single-use; verify expiry and package label"
+    },
+    mriSafety: "Not an implant; MRI safety generally not applicable to the guidewire itself",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/abbott-bmw-guidewire.jpg',
+    featured: false
+  },
+  {
+    id: "abbott-whisper-guidewire",
+    sku: "ABT-GW-WHISPER",
+    name: "Whisper™ Coronary Guidewire",
+    brand: "Abbott Healthcare Pvt. Ltd. (Vascular Division)",
+    category: "Coronary Guidewires",
+    subcategory: "Coronary guidewire",
+    shortDesc: "Coronary guidewire family designed for navigating challenging coronary anatomy; verify model-specific characteristics.",
+    clinicalApplication: "Coronary guidewire placement and lesion/device crossing as specified in the applicable IFU.",
+    keyFeatures: [
+      "Model-specific tip load, tip shape and coating",
+      "Check current manufacturer catalogue before ordering",
+      "Single-use device; do not infer dimensions across models"
+    ],
+    specs: {
+      profileOrSize: "Diameter, working length and tip configuration vary by model",
+      compatibilityOrSheath: "Turnpike catheter family is designed to track over a 0.014 in guidewire; model compatibility must be confirmed",
+      materialOrCoating: "Guidewire core and coating vary by product family",
+      shelfLifeOrSterility: "Sterile, single-use; verify expiry and package label"
+    },
+    mriSafety: "Not an implant; MRI safety generally not applicable to the guidewire itself",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/abbott-whisper-guidewire.jpg',
+    featured: false
+  },
+  {
+    id: "abbott-pilot-guidewire",
+    sku: "ABT-GW-PILOT",
+    name: "PILOT™ Coronary Guidewire",
+    brand: "Abbott Healthcare Pvt. Ltd. (Vascular Division)",
+    category: "Coronary Guidewires",
+    subcategory: "Coronary guidewire",
+    shortDesc: "Coronary guidewire family for lesion crossing, including model-specific options for complex anatomy.",
+    clinicalApplication: "Coronary guidewire placement and lesion/device crossing as specified in the applicable IFU.",
+    keyFeatures: [
+      "Model-specific tip load, tip shape and coating",
+      "Check current manufacturer catalogue before ordering",
+      "Single-use device; do not infer dimensions across models"
+    ],
+    specs: {
+      profileOrSize: "Diameter, working length and tip configuration vary by model",
+      compatibilityOrSheath: "Turnpike catheter family is designed to track over a 0.014 in guidewire; model compatibility must be confirmed",
+      materialOrCoating: "Guidewire core and coating vary by product family",
+      shelfLifeOrSterility: "Sterile, single-use; verify expiry and package label"
+    },
+    mriSafety: "Not an implant; MRI safety generally not applicable to the guidewire itself",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/abbott-pilot-guidewire.jpg',
+    featured: false
+  },
+  {
+    id: "abbott-versaturn-guidewire",
+    sku: "ABT-GW-VERSATURN",
+    name: "VersaTurn™ Guidewire",
+    brand: "Abbott Healthcare Pvt. Ltd. (Vascular Division)",
+    category: "Coronary Guidewires",
+    subcategory: "Coronary guidewire",
+    shortDesc: "Guidewire product name supplied for the catalogue; verify exact manufacturer model and IFU before publication.",
+    clinicalApplication: "Coronary guidewire placement and lesion/device crossing as specified in the applicable IFU.",
+    keyFeatures: [
+      "Model-specific tip load, tip shape and coating",
+      "Check current manufacturer catalogue before ordering",
+      "Single-use device; do not infer dimensions across models"
+    ],
+    specs: {
+      profileOrSize: "Diameter, working length and tip configuration vary by model",
+      compatibilityOrSheath: "Turnpike catheter family is designed to track over a 0.014 in guidewire; model compatibility must be confirmed",
+      materialOrCoating: "Guidewire core and coating vary by product family",
+      shelfLifeOrSterility: "Sterile, single-use; verify expiry and package label"
+    },
+    mriSafety: "Not an implant; MRI safety generally not applicable to the guidewire itself",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/abbott-versaturn-guidewire.jpg',
+    featured: false
+  },
+  {
+    id: "abbott-graftmaster",
+    sku: "ABT-GRAFTMASTER",
+    name: "GRAFTMASTER™ RX Coronary Stent Graft System",
+    brand: "Abbott Healthcare Pvt. Ltd. (Vascular Division)",
+    category: "Coronary Access & Delivery Devices",
+    subcategory: "Covered coronary stent graft",
+    shortDesc: "Rapid-exchange coronary stent-graft system using an ePTFE graft layer between stainless-steel stents; intended indications and markets are restricted by the current IFU.",
+    clinicalApplication: "Treatment of selected coronary perforations only when permitted by the applicable local label and IFU.",
+    keyFeatures: [
+      "Rapid-exchange delivery platform",
+      "ePTFE graft between 316L stainless-steel stents",
+      "Manufacturer US page lists 0.014 in guidewire and 143 cm catheter length"
+    ],
+    specs: {
+      profileOrSize: "Model diameters and lengths vary; US product page lists diameters from 2.8–4.8 mm",
+      compatibilityOrSheath: "0.014 in guidewire; minimum guide catheter size varies by model",
+      materialOrCoating: "316L stainless steel with expandable PTFE graft",
+      shelfLifeOrSterility: "Sterile implant system; shelf life and storage per package label"
+    },
+    mriSafety: "Confirm MRI conditions for the implanted device using current manufacturer labeling",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/abbott-graftmaster.jpg',
+    featured: false
+  },
+  {
+    id: "abbott-indeflator",
+    sku: "ABT-INDEFLATOR",
+    name: "Coronary Balloon Inflation Device (Indeflator)",
+    brand: "Abbott Healthcare Pvt. Ltd. (Vascular Division)",
+    category: "Coronary Access & Delivery Devices",
+    subcategory: "Balloon inflation device",
+    shortDesc: "Manual inflation device used to inflate and deflate compatible angioplasty balloons and monitor pressure during the procedure.",
+    clinicalApplication: "Controlled inflation and deflation of compatible balloon catheters during interventional procedures.",
+    keyFeatures: [
+      "Manual pressure control",
+      "Pressure gauge and syringe configuration depend on model",
+      "Confirm rated pressure and connector compatibility on package"
+    ],
+    specs: {
+      profileOrSize: "Capacity and pressure range vary by model",
+      compatibilityOrSheath: "Use only with compatible balloon catheter and connectors",
+      materialOrCoating: "Medical-grade components; exact materials depend on SKU",
+      shelfLifeOrSterility: "Sterile or non-sterile status varies by model; verify label"
+    },
+    mriSafety: "Non-implantable external device; MRI not applicable during cath-lab use",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/abbott-indeflator.jpg',
+    featured: false
+  },
+  {
+    id: "abbott-y-connector",
+    sku: "ABT-Y-CONNECTOR",
+    name: "Hemostasis Y-Connector Valve",
+    brand: "Abbott Healthcare Pvt. Ltd. (Vascular Division)",
+    category: "Coronary Access & Delivery Devices",
+    subcategory: "Hemostasis valve / Y-connector",
+    shortDesc: "Y-connector accessory designed to provide catheter access and hemostasis around a guidewire or interventional device.",
+    clinicalApplication: "Guide catheter access during interventional cardiology procedures.",
+    keyFeatures: [
+      "Hemostasis valve configuration varies by model",
+      "Side-arm flushing/access port",
+      "Verify connector and device compatibility"
+    ],
+    specs: {
+      profileOrSize: "Dimensions and port configuration vary by SKU",
+      compatibilityOrSheath: "Compatibility depends on guide catheter and inserted device",
+      materialOrCoating: "Medical-grade polymer components; exact materials vary",
+      shelfLifeOrSterility: "Sterility and single-use status per package label"
+    },
+    mriSafety: "Non-implantable accessory; MRI not applicable during use",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/abbott-y-connector.jpg',
+    featured: false
+  },
+  {
+    id: "abbott-proglide",
+    sku: "ABT-PROCLOSE-PG",
+    name: "Perclose ProGlide™ Suture-Mediated Closure System",
+    brand: "Abbott Healthcare Pvt. Ltd. (Vascular Division)",
+    category: "Vascular Closure Devices",
+    subcategory: "Femoral vascular closure",
+    shortDesc: "Suture-mediated vascular closure system designed for hemostasis at selected femoral arterial and venous access sites.",
+    clinicalApplication: "Femoral access-site closure when patient, sheath size and procedure meet the current IFU.",
+    keyFeatures: [
+      "Suture-mediated closure",
+      "May be used in pre-close or post-close workflows as permitted by IFU",
+      "Access-size indications are model and label dependent"
+    ],
+    specs: {
+      profileOrSize: "Device and sheath indications vary; consult current IFU",
+      compatibilityOrSheath: "Use within labelled femoral access and sheath-size range",
+      materialOrCoating: "Suture and delivery components; exact materials per IFU",
+      shelfLifeOrSterility: "Sterile, single-use; check package expiry"
+    },
+    mriSafety: "Not a permanent implant in the usual sense; MRI considerations depend on retained suture and current labeling",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/abbott-proglide.jpg',
+    featured: false
+  },
+  {
+    id: "abbott-orbital-atherectomy",
+    sku: "ABT-ORBITAL",
+    name: "Orbital Atherectomy System (Diamondback 360™)",
+    brand: "Abbott Healthcare Pvt. Ltd. (Vascular Division)",
+    category: "Atherectomy Systems",
+    subcategory: "Orbital atherectomy",
+    shortDesc: "Orbital atherectomy platform used to modify selected calcified lesions; confirm the exact system, indication and market availability.",
+    clinicalApplication: "Lesion preparation in appropriately selected calcified vessels under the system IFU.",
+    keyFeatures: [
+      "Atherectomy console and disposable device family",
+      "Device selection depends on anatomy and indication",
+      "Do not substitute this entry for a specific catheter SKU"
+    ],
+    specs: {
+      profileOrSize: "Crown, catheter and sheath details vary by model",
+      compatibilityOrSheath: "Use only the manufacturer-specified guidewire, sheath and console configuration",
+      materialOrCoating: "Diamond-coated crown and catheter components; model-specific",
+      shelfLifeOrSterility: "Sterile disposable components; console is reusable equipment"
+    },
+    mriSafety: "External console and disposable catheter; follow manufacturer MRI labeling",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/abbott-orbital-atherectomy.jpg',
+    featured: false
+  },
+  {
+    id: "sjm-vvir-pacemaker",
+    sku: "SJM-VVIR",
+    name: "VVIR Pacemaker System",
+    brand: "St. Jude Medical India Pvt. Ltd. (CRM Division)",
+    category: "Cardiac Rhythm Management (CRM)",
+    subcategory: "Cardiac rhythm management implant/system",
+    shortDesc: "Single-chamber rate-responsive pacing system; exact generator and lead model must be selected from current catalogue.",
+    clinicalApplication: "Pacing for indicated bradyarrhythmias under physician assessment.",
+    keyFeatures: [
+      "Single-chamber pacing category",
+      "Rate-responsive mode",
+      "Generator/lead compatibility is model-specific"
+    ],
+    specs: {
+      profileOrSize: "Generator and lead options vary by model",
+      compatibilityOrSheath: "Lead and generator compatibility per manufacturer documentation",
+      materialOrCoating: "Implantable electronic generator and pacing lead",
+      shelfLifeOrSterility: "Sterile implantable components; verify expiry on label"
+    },
+    mriSafety: "MRI status is model/system-specific; do not assume MRI conditionality",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/sjm-vvir-pacemaker.jpg',
+    featured: false
+  },
+  {
+    id: "sjm-dddr-pacemaker",
+    sku: "SJM-DDDR",
+    name: "DDDR Pacemaker System",
+    brand: "St. Jude Medical India Pvt. Ltd. (CRM Division)",
+    category: "Cardiac Rhythm Management (CRM)",
+    subcategory: "Cardiac rhythm management implant/system",
+    shortDesc: "Dual-chamber rate-responsive pacing system; exact generator, lead and programming features depend on model.",
+    clinicalApplication: "Pacing for indicated bradyarrhythmias under physician assessment.",
+    keyFeatures: [
+      "Dual-chamber pacing category",
+      "Rate-responsive mode",
+      "Confirm exact model and lead compatibility"
+    ],
+    specs: {
+      profileOrSize: "Generator and lead options vary by model",
+      compatibilityOrSheath: "Lead and generator compatibility per manufacturer documentation",
+      materialOrCoating: "Implantable electronic generator and pacing leads",
+      shelfLifeOrSterility: "Sterile implantable components; verify expiry on label"
+    },
+    mriSafety: "MRI status is model/system-specific; do not assume MRI conditionality",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/sjm-dddr-pacemaker.jpg',
+    featured: false
+  },
+  {
+    id: "sjm-crt-p",
+    sku: "SJM-CRTP",
+    name: "CRT-P Cardiac Resynchronization Pacemaker",
+    brand: "St. Jude Medical India Pvt. Ltd. (CRM Division)",
+    category: "Cardiac Rhythm Management (CRM)",
+    subcategory: "Cardiac rhythm management implant/system",
+    shortDesc: "Cardiac resynchronization pacemaker category; select the exact model and compatible lead system from the current catalogue.",
+    clinicalApplication: "Cardiac resynchronization pacing for patients meeting the relevant clinical criteria.",
+    keyFeatures: [
+      "Biventricular pacing category",
+      "Exact features depend on generator model",
+      "Lead configuration is patient and model dependent"
+    ],
+    specs: {
+      profileOrSize: "Generator and lead options vary by model",
+      compatibilityOrSheath: "Confirm compatible leads and labelled implant procedure",
+      materialOrCoating: "Implantable electronic generator and pacing leads",
+      shelfLifeOrSterility: "Sterile implantable components; verify expiry on label"
+    },
+    mriSafety: "MRI status is model/system-specific; confirm exact generator and lead combination",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/sjm-crt-p.jpg',
+    featured: false
+  },
+  {
+    id: "sjm-sicd",
+    sku: "SJM-SICD",
+    name: "Subcutaneous Implantable Cardioverter Defibrillator (S-ICD)",
+    brand: "Manufacturer / model to be confirmed (CRM)",
+    category: "Cardiac Rhythm Management (CRM)",
+    subcategory: "Cardiac rhythm management implant/system",
+    shortDesc: "Subcutaneous defibrillator system category requested for the catalogue. S-ICD manufacturer/model must be confirmed; do not attribute it to St. Jude without the exact catalogue reference." ,
+    clinicalApplication: "Defibrillation therapy for patients meeting the applicable indications.",
+    keyFeatures: [
+      "Subcutaneous lead and pulse-generator architecture",
+      "Remote monitoring availability is model/service dependent",
+      "MRI conditions must be checked for the exact system"
+    ],
+    specs: {
+      profileOrSize: "Generator and lead dimensions vary by model",
+      compatibilityOrSheath: "Use only labelled system components",
+      materialOrCoating: "Implantable electronic generator and subcutaneous electrode",
+      shelfLifeOrSterility: "Sterile implantable components; verify expiry on label"
+    },
+    mriSafety: "MRI conditions vary by model and full implanted system; do not assume 1.5T or 3T compatibility",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/sjm-sicd.jpg',
+    featured: false
+  },
+  {
+    id: "sjm-dicd",
+    sku: "SJM-DICD",
+    name: "Dual-Chamber Implantable Cardioverter Defibrillator (D-ICD)",
+    brand: "St. Jude Medical India Pvt. Ltd. (CRM Division)",
+    category: "Cardiac Rhythm Management (CRM)",
+    subcategory: "Cardiac rhythm management implant/system",
+    shortDesc: "Dual-chamber ICD category; exact generator model, lead system and available features require catalogue verification.",
+    clinicalApplication: "Defibrillation and pacing therapy for patients meeting applicable indications.",
+    keyFeatures: [
+      "Dual-chamber ICD category",
+      "Remote monitoring is model/service dependent",
+      "MRI labelling is specific to the complete implanted system"
+    ],
+    specs: {
+      profileOrSize: "Generator and lead options vary by model",
+      compatibilityOrSheath: "Use only labelled compatible leads and accessories",
+      materialOrCoating: "Implantable electronic generator and pacing leads",
+      shelfLifeOrSterility: "Sterile implantable components; verify expiry on label"
+    },
+    mriSafety: "MRI conditions vary by model and full implanted system",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/sjm-dicd.jpg',
+    featured: false
+  },
+  {
+    id: "sjm-crtd",
+    sku: "SJM-CRTD",
+    name: "CRT-D Cardiac Resynchronization Defibrillator",
+    brand: "St. Jude Medical India Pvt. Ltd. (CRM Division)",
+    category: "Cardiac Rhythm Management (CRM)",
+    subcategory: "Cardiac rhythm management implant/system",
+    shortDesc: "Cardiac resynchronization defibrillator category; exact generator and lead system must be confirmed by catalogue/IFU.",
+    clinicalApplication: "Cardiac resynchronization and defibrillation therapy for eligible patients.",
+    keyFeatures: [
+      "CRT with defibrillation capability",
+      "Remote monitoring is model/service dependent",
+      "Exact therapy and MRI features depend on model"
+    ],
+    specs: {
+      profileOrSize: "Generator and lead options vary by model",
+      compatibilityOrSheath: "Use only labelled compatible leads and accessories",
+      materialOrCoating: "Implantable electronic generator and pacing/defibrillation leads",
+      shelfLifeOrSterility: "Sterile implantable components; verify expiry on label"
+    },
+    mriSafety: "MRI conditions vary by model and full implanted system",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/sjm-crtd.jpg',
+    featured: false
+  },
+  {
+    id: "sjm-temporary-pacing-lead",
+    sku: "SJM-TEMP-PACE",
+    name: "Temporary Pacing System / Temporary Pacing Lead",
+    brand: "St. Jude Medical India Pvt. Ltd. (CRM Division)",
+    category: "Cardiac Rhythm Management (CRM)",
+    subcategory: "Cardiac rhythm management implant/system",
+    shortDesc: "Temporary pacing product category; verify whether the required item is a lead, generator or complete kit.",
+    clinicalApplication: "Temporary pacing when clinically indicated and as specified by the selected device IFU.",
+    keyFeatures: [
+      "Temporary rather than permanent pacing",
+      "Exact lead sizes and generator compatibility vary",
+      "Check whether listing is lead-only or complete system"
+    ],
+    specs: {
+      profileOrSize: "Lead size and length vary by model",
+      compatibilityOrSheath: "Compatibility depends on temporary pacemaker generator and lead connector",
+      materialOrCoating: "Medical-grade pacing lead and/or external generator",
+      shelfLifeOrSterility: "Sterility and single-use status per component label"
+    },
+    mriSafety: "External/non-permanent system; follow component-specific MRI restrictions",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/sjm-temporary-pacing-lead.jpg',
+    featured: false
+  },
+  {
+    id: "sjm-leadless-pacemaker",
+    sku: "SJM-LEADLESS",
+    name: "Leadless Pacemaker System",
+    brand: "Manufacturer / model to be confirmed (CRM)",
+    category: "Cardiac Rhythm Management (CRM)",
+    subcategory: "Cardiac rhythm management implant/system",
+    shortDesc: "Leadless pacing system category requested for the catalogue. Confirm the exact manufacturer/model and current market availability before attributing it to St. Jude Medical." ,
+    clinicalApplication: "Pacing for eligible patients under the applicable product IFU.",
+    keyFeatures: [
+      "Intracardiac leadless generator architecture",
+      "Model-specific delivery catheter",
+      "MRI conditions and pacing mode depend on exact model"
+    ],
+    specs: {
+      profileOrSize: "Device and delivery catheter dimensions vary by model",
+      compatibilityOrSheath: "Use the specific delivery system and labelled venous access pathway",
+      materialOrCoating: "Implantable electronic device with dedicated delivery catheter",
+      shelfLifeOrSterility: "Sterile implantable device and delivery catheter; verify package expiry"
+    },
+    mriSafety: "MRI conditions are model-specific; confirm current manufacturer labeling",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/sjm-leadless-pacemaker.jpg',
+    featured: false
+  },
+  {
+    id: "sjm-tpi-lead-6f-5f",
+    sku: "SJM-TPI-LEAD",
+    name: "Temporary Pacing Lead, 5F / 6F",
+    brand: "St. Jude Medical India Pvt. Ltd. (OCT / FFR Division)",
+    category: "Temporary Pacing Accessories",
+    subcategory: "Temporary pacing lead",
+    shortDesc: "Temporary pacing lead offered in the requested 5F and 6F sizes; verify the exact catalog number and length before ordering.",
+    clinicalApplication: "Temporary intracardiac pacing when indicated by the device IFU.",
+    keyFeatures: [
+      "5F and 6F variants requested",
+      "Confirm connector, length and curve from catalogue",
+      "Use with compatible external pacing generator"
+    ],
+    specs: {
+      profileOrSize: "5F / 6F variants; length and tip configuration require SKU confirmation",
+      compatibilityOrSheath: "External pacing generator compatibility is model-specific",
+      materialOrCoating: "Medical-grade pacing lead; exact materials per IFU",
+      shelfLifeOrSterility: "Sterile, single-use; verify expiry on label"
+    },
+    mriSafety: "Temporary lead; MRI restrictions apply during use and depend on exact component",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/sjm-tpi-lead-6f-5f.jpg',
+    featured: false
+  },
+  {
+    id: "sjm-tpi-balloon-tip-lead-5f",
+    sku: "SJM-TPI-BALLOON-5F",
+    name: "Temporary Pacing Lead, Balloon Tip, 5F",
+    brand: "St. Jude Medical India Pvt. Ltd. (OCT / FFR Division)",
+    category: "Temporary Pacing Accessories",
+    subcategory: "Balloon-tip temporary pacing lead",
+    shortDesc: "Balloon-tip temporary pacing lead in the requested 5F configuration; verify exact model, balloon use instructions and compatible generator.",
+    clinicalApplication: "Temporary intracardiac pacing as specified by the manufacturer IFU.",
+    keyFeatures: [
+      "5F requested size",
+      "Balloon-tip configuration",
+      "Use only according to the exact product instructions"
+    ],
+    specs: {
+      profileOrSize: "5F; exact length and balloon details need SKU confirmation",
+      compatibilityOrSheath: "Compatible external pacing generator per IFU",
+      materialOrCoating: "Medical-grade catheter/lead materials; exact construction per IFU",
+      shelfLifeOrSterility: "Sterile, single-use; verify expiry on label"
+    },
+    mriSafety: "Temporary lead; MRI restrictions apply during use",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/sjm-tpi-balloon-tip-lead-5f.jpg',
+    featured: false
+  },
+  {
+    id: "sjm-df-optis-oct-kit",
+    sku: "SJM-DF-OPTIS-KIT",
+    name: "Dragonfly™ / OPTIS™ OCT Imaging Catheter Kit",
+    brand: "St. Jude Medical India Pvt. Ltd. (OCT / FFR Division)",
+    category: "Diagnostic Physiology & Imaging (OCT / FFR)",
+    subcategory: "OCT imaging catheter kit",
+    shortDesc: "Intravascular OCT imaging catheter kit intended for use with the compatible OCT console/platform; exact catheter and console generation must be matched.",
+    clinicalApplication: "Intracoronary imaging during indicated interventional procedures.",
+    keyFeatures: [
+      "Single-use imaging catheter",
+      "Compatible console and catheter generation must be confirmed",
+      "Follow the exact catheter IFU for flushing and pullback"
+    ],
+    specs: {
+      profileOrSize: "Dimensions and pullback options vary by catheter model",
+      compatibilityOrSheath: "Compatible OPTIS/OCT platform and guide catheter per IFU",
+      materialOrCoating: "Optical fibre and catheter shaft; model-specific",
+      shelfLifeOrSterility: "Sterile, single-use catheter; console reusable"
+    },
+    mriSafety: "Non-implantable diagnostic catheter; MRI not applicable during cath-lab use",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/sjm-df-optis-oct-kit.jpg',
+    featured: false
+  },
+  {
+    id: "sjm-ffr-console",
+    sku: "SJM-FFR-CONSOLE",
+    name: "FFR Physiology Console",
+    brand: "St. Jude Medical India Pvt. Ltd. (OCT / FFR Division)",
+    category: "Diagnostic Physiology & Imaging (OCT / FFR)",
+    subcategory: "Fractional flow reserve console",
+    shortDesc: "Console/platform for physiological pressure measurements; compatibility with the selected pressure wire and lab equipment must be verified.",
+    clinicalApplication: "Physiological assessment of coronary lesions using compatible pressure-sensing devices.",
+    keyFeatures: [
+      "Console/software version determines supported indices",
+      "Verify pressure-wire compatibility",
+      "Connectivity and accessories vary by platform"
+    ],
+    specs: {
+      profileOrSize: "Console and accessories depend on model",
+      compatibilityOrSheath: "Use only compatible pressure wires and manufacturer-approved accessories",
+      materialOrCoating: "Medical electrical equipment",
+      shelfLifeOrSterility: "Reusable console; follow manufacturer cleaning and service instructions"
+    },
+    mriSafety: "External console; MRI not applicable during cath-lab use",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/sjm-ffr-console.jpg',
+    featured: false
+  },
+  {
+    id: "sjm-oct-console",
+    sku: "SJM-OCT-CONSOLE",
+    name: "OCT Imaging Console / OPTIS System",
+    brand: "St. Jude Medical India Pvt. Ltd. (OCT / FFR Division)",
+    category: "Diagnostic Physiology & Imaging (OCT / FFR)",
+    subcategory: "Optical coherence tomography console",
+    shortDesc: "Console/platform for intravascular OCT imaging with compatible imaging catheters; exact generation and included accessories require confirmation.",
+    clinicalApplication: "Intracoronary imaging during indicated interventional procedures.",
+    keyFeatures: [
+      "Compatible OCT imaging platform",
+      "Console generation and catheter support must be verified",
+      "Follow manufacturer setup and maintenance instructions"
+    ],
+    specs: {
+      profileOrSize: "Console dimensions and software configuration vary by model",
+      compatibilityOrSheath: "Compatible imaging catheter and lab interfaces per IFU",
+      materialOrCoating: "Medical electrical equipment and imaging software",
+      shelfLifeOrSterility: "Reusable console; catheters are separately supplied sterile disposables"
+    },
+    mriSafety: "External console; MRI not applicable during cath-lab use",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/sjm-oct-console.jpg',
+    featured: false
+  },
+  {
+    id: "amplatzer-pda-occluder",
+    sku: "ABT-AMP-PDA",
+    name: "Amplatzer™ Duct Occluder (PDA)",
+    brand: "Abbott (Structural Heart Division)",
+    category: "Structural Heart (Congenital Interventions)",
+    subcategory: "Patent ductus arteriosus occluder",
+    shortDesc: "Transcatheter occluder family for closure of patent ductus arteriosus; select model and size using current manufacturer sizing guidance.",
+    clinicalApplication: "PDA closure in patients meeting the exact device IFU.",
+    keyFeatures: [
+      "Nitinol mesh construction; polyester material is present in some models",
+      "Multiple models and size matrices exist",
+      "Device choice must follow manufacturer sizing guidance"
+    ],
+    specs: {
+      profileOrSize: "Model-specific; PDA occluder sizes vary by device family",
+      compatibilityOrSheath: "Dedicated delivery system and sheath size vary by model",
+      materialOrCoating: "Nitinol mesh; model-specific polyester components",
+      shelfLifeOrSterility: "Sterile implantable device; verify labelled expiry"
+    },
+    mriSafety: "MRI conditions must be confirmed for exact model and current labeling",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/amplatzer-pda-occluder.jpg',
+    featured: false
+  },
+  {
+    id: "amplatzer-pda-ii",
+    sku: "ABT-AMP-PDA2",
+    name: "Amplatzer™ Duct Occluder II (PDA II)",
+    brand: "Abbott (Structural Heart Division)",
+    category: "Structural Heart (Congenital Interventions)",
+    subcategory: "PDA occluder",
+    shortDesc: "Low-profile duct occluder designed to conform to selected duct anatomies; model sizing and approach must follow current IFU.",
+    clinicalApplication: "Transcatheter closure of selected patent ductus arteriosus.",
+    keyFeatures: [
+      "Conformable occluder design",
+      "Pulmonary or aortic approach as permitted by IFU",
+      "Model-specific sizing and delivery system"
+    ],
+    specs: {
+      profileOrSize: "Model-specific; consult current sizing table",
+      compatibilityOrSheath: "Use only compatible Amplatzer delivery system and sheath",
+      materialOrCoating: "Nitinol mesh; confirm model-specific materials",
+      shelfLifeOrSterility: "Sterile implantable device; verify labelled expiry"
+    },
+    mriSafety: "MRI conditions are model-specific; confirm current labeling",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/amplatzer-pda-ii.jpg',
+    featured: false
+  },
+  {
+    id: "amplatzer-asd-occluder",
+    sku: "ABT-AMP-ASD",
+    name: "Amplatzer™ Septal Occluder (ASD)",
+    brand: "Abbott (Structural Heart Division)",
+    category: "Structural Heart (Congenital Interventions)",
+    subcategory: "Atrial septal defect occluder",
+    shortDesc: "Double-disc transcatheter occluder made from nitinol mesh with polyester material, designed for closure of selected atrial septal defects.",
+    clinicalApplication: "Transcatheter ASD closure for patients meeting the applicable IFU.",
+    keyFeatures: [
+      "Double-disc design",
+      "Nitinol mesh and polyester material",
+      "Size selection requires defect assessment and IFU"
+    ],
+    specs: {
+      profileOrSize: "Model-specific waist and disc diameters",
+      compatibilityOrSheath: "Dedicated delivery system and sheath vary by size",
+      materialOrCoating: "Nitinol mesh and polyester",
+      shelfLifeOrSterility: "Sterile implantable device; verify labelled expiry"
+    },
+    mriSafety: "MRI conditions must be confirmed for the exact model and current labeling",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/amplatzer-asd-occluder.jpg',
+    featured: false
+  },
+  {
+    id: "vsd-occluder",
+    sku: "SH-VSD-OCC",
+    name: "Ventricular Septal Defect (VSD) Occluder",
+    brand: "Abbott (Structural Heart Division)",
+    category: "Structural Heart (Congenital Interventions)",
+    subcategory: "VSD closure device",
+    shortDesc: "VSD occluder category requested for catalogue listing; manufacturer, model and market availability must be verified before specifying an exact device.",
+    clinicalApplication: "Closure of selected ventricular septal defects only when supported by the exact device IFU.",
+    keyFeatures: [
+      "Exact device family must be confirmed",
+      "Model-specific sizing and delivery system",
+      "Do not infer suitability from ASD/PDA device specifications"
+    ],
+    specs: {
+      profileOrSize: "Model-specific; verify manufacturer catalogue",
+      compatibilityOrSheath: "Dedicated delivery system and sheath depend on device model",
+      materialOrCoating: "Model-specific implant materials; confirm IFU",
+      shelfLifeOrSterility: "Sterility and expiry per exact product label"
+    },
+    mriSafety: "MRI conditions depend on exact implanted device and labeling",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/vsd-occluder.jpg',
+    featured: false
+  },
+  {
+    id: "structural-delivery-system",
+    sku: "SH-DELIVERY-SYS",
+    name: "Structural Heart Occluder Delivery System",
+    brand: "Abbott (Structural Heart Division)",
+    category: "Structural Heart (Congenital Interventions)",
+    subcategory: "Delivery system",
+    shortDesc: "Delivery system for compatible structural heart occluders; exact model must be matched to the selected implant.",
+    clinicalApplication: "Transcatheter delivery of the specific compatible occluder according to IFU.",
+    keyFeatures: [
+      "Device-specific delivery platform",
+      "Sheath and cable compatibility are model-specific",
+      "Not interchangeable across all occluder families"
+    ],
+    specs: {
+      profileOrSize: "Length and French size vary by model",
+      compatibilityOrSheath: "Only compatible implant and accessories listed in IFU",
+      materialOrCoating: "Catheter, sheath and cable materials vary",
+      shelfLifeOrSterility: "Sterility and single-use status per model label"
+    },
+    mriSafety: "Non-implantable delivery system; MRI not applicable during use",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/structural-delivery-system.jpg',
+    featured: false
+  },
+  {
+    id: "structural-sizing-balloon",
+    sku: "SH-SIZING-BALLOON",
+    name: "Structural Heart Sizing Balloon",
+    brand: "Abbott (Structural Heart Division)",
+    category: "Structural Heart (Congenital Interventions)",
+    subcategory: "Sizing balloon catheter",
+    shortDesc: "Sizing balloon category for structural heart procedures; exact balloon platform and dimensions must be confirmed from the manufacturer catalogue.",
+    clinicalApplication: "Anatomical sizing during structural heart procedures when indicated by the device IFU.",
+    keyFeatures: [
+      "Balloon dimensions vary by model",
+      "Compatible guidewire and sheath depend on platform",
+      "Follow rated pressure and sizing instructions"
+    ],
+    specs: {
+      profileOrSize: "Diameter, length and pressure ratings are model-specific",
+      compatibilityOrSheath: "Guidewire and sheath compatibility per IFU",
+      materialOrCoating: "Medical-grade balloon catheter materials; exact materials per model",
+      shelfLifeOrSterility: "Sterile, single-use; verify expiry on label"
+    },
+    mriSafety: "Non-implantable catheter; MRI not applicable during procedure",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/structural-sizing-balloon.jpg',
+    featured: false
+  },
+  {
+    id: "teleflex-guideliner-v3",
+    sku: "TFX-GUIDELINER-V3",
+    name: "GuideLiner® V3 Guide Extension Catheter",
+    brand: "Teleflex (Arrow)",
+    category: "Cardiology Access Catheters",
+    subcategory: "Guide extension catheter",
+    shortDesc: "Guide extension catheter intended to provide additional backup support and facilitate delivery of interventional devices in selected coronary anatomies.",
+    clinicalApplication: "Coronary device delivery when indicated by the catheter IFU.",
+    keyFeatures: [
+      "Half-pipe technology and coil-reinforced extension",
+      "Five sizes: 5, 5.5, 6, 7 and 8 Fr",
+      "Designed to facilitate delivery of interventional devices"
+    ],
+    specs: {
+      profileOrSize: "Five sizes: 5, 5.5, 6, 7 and 8 Fr; working length 150 cm",
+      compatibilityOrSheath: "Guide catheter ID requirements vary by size; see current GuideLiner V3 sizing table",
+      materialOrCoating: "Catheter shaft and coating are model-specific",
+      shelfLifeOrSterility: "Sterile, single-use; verify expiry on label"
+    },
+    mriSafety: "Non-implantable catheter; MRI not applicable during procedure",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/teleflex-guideliner-v3.jpg',
+    featured: false
+  },
+  {
+    id: "teleflex-supercross",
+    sku: "TFX-SUPERCROSS",
+    name: "SuperCross™ Coronary Microcatheter",
+    brand: "Teleflex (Arrow)",
+    category: "Cardiology Access Catheters",
+    subcategory: "Microcatheter",
+    shortDesc: "Microcatheter family with model-specific tip configurations for guidewire direction and selective access.",
+    clinicalApplication: "Selective coronary guidewire access according to the exact product IFU.",
+    keyFeatures: [
+      "Multiple tip configurations: Straight/Flexible, 45°, 90°, 120° and 90° XT (availability varies by market)",
+      "Select configuration and size from current catalogue",
+      "Compatibility is model-specific"
+    ],
+    specs: {
+      profileOrSize: "Tip angle, length and French size vary by model",
+      compatibilityOrSheath: "Guidewire compatibility and guide catheter requirements per IFU; SuperCross models are intended for use with steerable guidewires",
+      materialOrCoating: "Catheter shaft and coating vary by model",
+      shelfLifeOrSterility: "Sterile, single-use; verify expiry on label"
+    },
+    mriSafety: "Non-implantable catheter; MRI not applicable during procedure",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/teleflex-supercross.jpg',
+    featured: false
+  },
+  {
+    id: "teleflex-turnpike",
+    sku: "TFX-TURNPIKE",
+    name: "Turnpike® Torqueable Microcatheter",
+    brand: "Teleflex (Arrow)",
+    category: "Cardiology Access Catheters",
+    subcategory: "Torqueable coronary microcatheter",
+    shortDesc: "Torqueable microcatheter family designed to support wire delivery through challenging coronary anatomy; exact family variant must be selected.",
+    clinicalApplication: "Coronary guidewire support and lesion crossing as indicated by the selected model IFU.",
+    keyFeatures: [
+      "Family includes model variants; confirm Standard, Spiral or Gold if applicable",
+      "Torque response and tip features are model-specific",
+      "Use only within labelled guidewire compatibility"
+    ],
+    specs: {
+      profileOrSize: "Length and distal profile vary by variant",
+      compatibilityOrSheath: "Guidewire and guide catheter compatibility per IFU",
+      materialOrCoating: "Braided/torqueable catheter construction varies by model",
+      shelfLifeOrSterility: "Sterile, single-use; verify expiry on label"
+    },
+    mriSafety: "Non-implantable catheter; MRI not applicable during procedure",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/teleflex-turnpike.jpg',
+    featured: false
+  },
+  {
+    id: "cordis-guiding-catheter",
+    sku: "CRD-GUIDING-CATHETER",
+    name: "Guiding Catheter",
+    brand: "Cordis (Cardiology)",
+    category: "Cordis Interventional Products",
+    subcategory: "Interventional catheter / accessory",
+    shortDesc: "Guide catheter used to provide access and support during interventional procedures.",
+    clinicalApplication: "Coronary angiography/intervention with compatible devices.",
+    keyFeatures: [
+      "Exact SKU and local market availability must be confirmed",
+      "Use according to manufacturer IFU",
+      "Do not assume sizes or compatibility across product families"
+    ],
+    specs: {
+      profileOrSize: "French size, curve, length and inner diameter vary by model",
+      compatibilityOrSheath: "Guidewire/device compatibility depends on selected catheter",
+      materialOrCoating: "Polymer catheter with reinforcement/coating depending on model",
+      shelfLifeOrSterility: "Sterility and single-use status per exact package label"
+    },
+    mriSafety: "MRI conditions not applicable to non-implantable catheter/accessory during procedure",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/cordis-guiding-catheter.jpg',
+    featured: false
+  },
+  {
+    id: "cordis-diagnostic-catheter",
+    sku: "CRD-DIAGNOSTIC-CATHETER",
+    name: "Diagnostic Catheter",
+    brand: "Cordis (Cardiology)",
+    category: "Cordis Interventional Products",
+    subcategory: "Interventional catheter / accessory",
+    shortDesc: "Diagnostic catheter family for contrast injection and vascular/coronary angiography.",
+    clinicalApplication: "Diagnostic angiography as specified by the catheter IFU.",
+    keyFeatures: [
+      "Exact SKU and local market availability must be confirmed",
+      "Use according to manufacturer IFU",
+      "Do not assume sizes or compatibility across product families"
+    ],
+    specs: {
+      profileOrSize: "French size, curve and length vary by model",
+      compatibilityOrSheath: "Compatible with labelled access route and injection system",
+      materialOrCoating: "Polymer catheter and radiopaque markers; exact construction varies",
+      shelfLifeOrSterility: "Sterility and single-use status per exact package label"
+    },
+    mriSafety: "MRI conditions not applicable to non-implantable catheter/accessory during procedure",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/cordis-diagnostic-catheter.jpg',
+    featured: false
+  },
+  {
+    id: "cordis-femoral-sheath",
+    sku: "CRD-FEMORAL-SHEATH",
+    name: "Femoral Introducer Sheath",
+    brand: "Cordis (Cardiology)",
+    category: "Cordis Interventional Products",
+    subcategory: "Interventional catheter / accessory",
+    shortDesc: "Introducer sheath family for femoral vascular access.",
+    clinicalApplication: "Femoral access for diagnostic or interventional procedures.",
+    keyFeatures: [
+      "Exact SKU and local market availability must be confirmed",
+      "Use according to manufacturer IFU",
+      "Do not assume sizes or compatibility across product families"
+    ],
+    specs: {
+      profileOrSize: "French size and usable length vary by model",
+      compatibilityOrSheath: "Compatible dilator, guidewire and access devices per IFU",
+      materialOrCoating: "Sheath, dilator and valve materials vary by model",
+      shelfLifeOrSterility: "Sterility and single-use status per exact package label"
+    },
+    mriSafety: "MRI conditions not applicable to non-implantable catheter/accessory during procedure",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/cordis-femoral-sheath.jpg',
+    featured: false
+  },
+  {
+    id: "cordis-radial-sheath",
+    sku: "CRD-RADIAL-SHEATH",
+    name: "Radial Introducer Sheath",
+    brand: "Cordis (Cardiology)",
+    category: "Cordis Interventional Products",
+    subcategory: "Interventional catheter / accessory",
+    shortDesc: "Introducer sheath family designed for radial vascular access.",
+    clinicalApplication: "Radial access for diagnostic or interventional procedures.",
+    keyFeatures: [
+      "Exact SKU and local market availability must be confirmed",
+      "Use according to manufacturer IFU",
+      "Do not assume sizes or compatibility across product families"
+    ],
+    specs: {
+      profileOrSize: "French size and usable length vary by model",
+      compatibilityOrSheath: "Compatible dilator, guidewire and access devices per IFU",
+      materialOrCoating: "Sheath, dilator and valve materials vary by model",
+      shelfLifeOrSterility: "Sterility and single-use status per exact package label"
+    },
+    mriSafety: "MRI conditions not applicable to non-implantable catheter/accessory during procedure",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/cordis-radial-sheath.jpg',
+    featured: false
+  },
+  {
+    id: "cordis-aperi-balloon",
+    sku: "CRD-APERI-BALLOON",
+    name: "Aperi Balloon Catheter",
+    brand: "Cordis (Cardiology)",
+    category: "Cordis Interventional Products",
+    subcategory: "Interventional catheter / accessory",
+    shortDesc: "Balloon catheter product name requested for the Cordis catalogue; verify exact product family and SKU against the current Cordis catalogue.",
+    clinicalApplication: "Use only for the indication stated in the confirmed product IFU.",
+    keyFeatures: [
+      "Exact SKU and local market availability must be confirmed",
+      "Use according to manufacturer IFU",
+      "Do not assume sizes or compatibility across product families"
+    ],
+    specs: {
+      profileOrSize: "Diameter, length and pressure ratings require exact SKU confirmation",
+      compatibilityOrSheath: "Guidewire and catheter compatibility require exact model confirmation",
+      materialOrCoating: "Balloon and shaft materials require exact model confirmation",
+      shelfLifeOrSterility: "Sterility and single-use status per exact package label"
+    },
+    mriSafety: "MRI conditions not applicable to non-implantable catheter/accessory during procedure",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/cordis-aperi-balloon.jpg',
+    featured: false
+  },
+  {
+    id: "cordis-selution-slr",
+    sku: "CRD-SELUTION-SLR",
+    name: "SELUTION SLR™ Sirolimus-Eluting Balloon",
+    brand: "Cordis (Cardiology)",
+    category: "Cordis Interventional Products",
+    subcategory: "Interventional catheter / accessory",
+    shortDesc: "Drug-eluting balloon platform using sustained limus release technology; confirm the exact vascular indication and market-specific label.",
+    clinicalApplication: "Balloon treatment of lesions only within the approved/labelled indication for the exact market.",
+    keyFeatures: [
+      "Exact SKU and local market availability must be confirmed",
+      "Use according to manufacturer IFU",
+      "Do not assume sizes or compatibility across product families"
+    ],
+    specs: {
+      profileOrSize: "Diameter, length and shaft dimensions vary by model",
+      compatibilityOrSheath: "Guidewire and sheath compatibility per exact IFU",
+      materialOrCoating: "Drug-coated balloon catheter; coating and platform are model-specific",
+      shelfLifeOrSterility: "Sterility and single-use status per exact package label"
+    },
+    mriSafety: "MRI conditions not applicable to non-implantable catheter/accessory during procedure",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/cordis-selution-slr.jpg',
+    featured: false
+  },
+  {
+    id: "cordis-amba-tig",
+    sku: "CRD-AMBA-TIG",
+    name: "Amba TIG Diagnostic Catheter",
+    brand: "Cordis (Cardiology)",
+    category: "Cordis Interventional Products",
+    subcategory: "Interventional catheter / accessory",
+    shortDesc: "TIG-shaped diagnostic catheter entry; confirm exact Amba product name and SKU from current catalogue before publishing.",
+    clinicalApplication: "Diagnostic angiography according to the exact catheter IFU.",
+    keyFeatures: [
+      "Exact SKU and local market availability must be confirmed",
+      "Use according to manufacturer IFU",
+      "Do not assume sizes or compatibility across product families"
+    ],
+    specs: {
+      profileOrSize: "French size and length require SKU confirmation",
+      compatibilityOrSheath: "Compatible access route and injection system per IFU",
+      materialOrCoating: "Polymer catheter with radiopaque markers; exact construction varies",
+      shelfLifeOrSterility: "Sterility and single-use status per exact package label"
+    },
+    mriSafety: "MRI conditions not applicable to non-implantable catheter/accessory during procedure",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/cordis-amba-tig.jpg',
+    featured: false
+  },
+  {
+    id: "cordis-long-sheath",
+    sku: "CRD-LONG-SHEATH",
+    name: "Long Introducer Sheath",
+    brand: "Cordis (Cardiology)",
+    category: "Cordis Interventional Products",
+    subcategory: "Interventional catheter / accessory",
+    shortDesc: "Long sheath product category for selected vascular access and device delivery.",
+    clinicalApplication: "Vascular access and device delivery within labelled indications.",
+    keyFeatures: [
+      "Exact SKU and local market availability must be confirmed",
+      "Use according to manufacturer IFU",
+      "Do not assume sizes or compatibility across product families"
+    ],
+    specs: {
+      profileOrSize: "French size and length vary by model",
+      compatibilityOrSheath: "Compatible dilator, guidewire and devices per IFU",
+      materialOrCoating: "Sheath and valve materials vary by model",
+      shelfLifeOrSterility: "Sterility and single-use status per exact package label"
+    },
+    mriSafety: "MRI conditions not applicable to non-implantable catheter/accessory during procedure",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/cordis-long-sheath.jpg',
+    featured: false
+  },
+  {
+    id: "cordis-biopsy-forceps",
+    sku: "CRD-BIOPSY-FORCEPS",
+    name: "Biopsy Forceps",
+    brand: "Cordis (Cardiology)",
+    category: "Cordis Interventional Products",
+    subcategory: "Interventional catheter / accessory",
+    shortDesc: "Biopsy forceps product category; exact Cordis product family and intended anatomy need confirmation.",
+    clinicalApplication: "Use only for the tissue sampling indication stated in the exact IFU.",
+    keyFeatures: [
+      "Exact SKU and local market availability must be confirmed",
+      "Use according to manufacturer IFU",
+      "Do not assume sizes or compatibility across product families"
+    ],
+    specs: {
+      profileOrSize: "Jaw type, diameter and working length vary by model",
+      compatibilityOrSheath: "Compatible scope/channel and access system must be verified",
+      materialOrCoating: "Medical-grade metallic/polymer components vary by model",
+      shelfLifeOrSterility: "Sterility and single-use status per exact package label"
+    },
+    mriSafety: "MRI conditions not applicable to non-implantable catheter/accessory during procedure",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/cordis-biopsy-forceps.jpg',
+    featured: false
+  },
+  {
+    id: "spectrum-indeflator",
+    sku: "SPM-INDEFLATOR",
+    name: "Inflation Device (Indeflator)",
+    brand: "Spectrum Medtech",
+    category: "Cath Lab Consumables",
+    subcategory: "Cath-lab disposable accessory",
+    shortDesc: "Manual inflation device for inflation/deflation and pressure monitoring of compatible balloon catheters.",
+    clinicalApplication: "Controlled inflation and deflation of compatible balloon catheters.",
+    keyFeatures: [
+      "100% SKU-specific selection; verify connector type and pressure rating",
+      "Follow package labelling and IFU",
+      "Do not infer sterility or pressure rating from product name"
+    ],
+    specs: {
+      profileOrSize: "Capacity and pressure range vary by model",
+      compatibilityOrSheath: "Compatible balloon catheter and connector per label",
+      materialOrCoating: "Medical-grade components; exact materials per SKU",
+      shelfLifeOrSterility: "Sterility, single-use status and expiry per exact package label"
+    },
+    mriSafety: "Non-implantable accessory; MRI not applicable during cath-lab use",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/spectrum-indeflator.jpg',
+    featured: false
+  },
+  {
+    id: "spectrum-y-connector",
+    sku: "SPM-Y-CONNECTOR",
+    name: "Y-Connector / Hemostasis Valve",
+    brand: "Spectrum Medtech",
+    category: "Cath Lab Consumables",
+    subcategory: "Cath-lab disposable accessory",
+    shortDesc: "Hemostasis valve accessory to permit device passage while maintaining haemostasis at the catheter hub.",
+    clinicalApplication: "Guide catheter access during interventional procedures.",
+    keyFeatures: [
+      "100% SKU-specific selection; verify connector type and pressure rating",
+      "Follow package labelling and IFU",
+      "Do not infer sterility or pressure rating from product name"
+    ],
+    specs: {
+      profileOrSize: "Port and valve configuration vary by model",
+      compatibilityOrSheath: "Guide catheter and inserted-device compatibility per IFU",
+      materialOrCoating: "Medical-grade polymer components; exact materials per SKU",
+      shelfLifeOrSterility: "Sterility, single-use status and expiry per exact package label"
+    },
+    mriSafety: "Non-implantable accessory; MRI not applicable during cath-lab use",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/spectrum-y-connector.jpg',
+    featured: false
+  },
+  {
+    id: "spectrum-manifold-2-3-port",
+    sku: "SPM-MANIFOLD-2-3-PORT",
+    name: "2-Port / 3-Port Manifold",
+    brand: "Spectrum Medtech",
+    category: "Cath Lab Consumables",
+    subcategory: "Cath-lab disposable accessory",
+    shortDesc: "Multi-port manifold for controlled connection of compatible lines and fluid pathways.",
+    clinicalApplication: "Cath-lab fluid/contrast line setup according to the system instructions.",
+    keyFeatures: [
+      "100% SKU-specific selection; verify connector type and pressure rating",
+      "Follow package labelling and IFU",
+      "Do not infer sterility or pressure rating from product name"
+    ],
+    specs: {
+      profileOrSize: "2-port and 3-port variants; dimensions vary by SKU",
+      compatibilityOrSheath: "Pressure rating and connector compatibility must be checked on label",
+      materialOrCoating: "Medical-grade polymer/stopcock components vary by SKU",
+      shelfLifeOrSterility: "Sterility, single-use status and expiry per exact package label"
+    },
+    mriSafety: "Non-implantable accessory; MRI not applicable during cath-lab use",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/spectrum-manifold-2-3-port.jpg',
+    featured: false
+  },
+  {
+    id: "spectrum-puncture-needle",
+    sku: "SPM-PUNCTURE-NEEDLE",
+    name: "Vascular Puncture Needle",
+    brand: "Spectrum Medtech",
+    category: "Cath Lab Consumables",
+    subcategory: "Cath-lab disposable accessory",
+    shortDesc: "Needle product category for vascular access; exact gauge, length and tip design must be selected from catalogue.",
+    clinicalApplication: "Vascular puncture only as specified by the device IFU.",
+    keyFeatures: [
+      "100% SKU-specific selection; verify connector type and pressure rating",
+      "Follow package labelling and IFU",
+      "Do not infer sterility or pressure rating from product name"
+    ],
+    specs: {
+      profileOrSize: "Gauge and length vary by model",
+      compatibilityOrSheath: "Compatible access technique and guidewire per IFU",
+      materialOrCoating: "Medical-grade stainless steel and handle materials vary by model",
+      shelfLifeOrSterility: "Sterility, single-use status and expiry per exact package label"
+    },
+    mriSafety: "Non-implantable accessory; MRI not applicable during cath-lab use",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/spectrum-puncture-needle.jpg',
+    featured: false
+  },
+  {
+    id: "spectrum-high-pressure-monitor-line",
+    sku: "SPM-HIGH-PRESSURE-MONITOR-LINE",
+    name: "High-Pressure Monitoring Line",
+    brand: "Spectrum Medtech",
+    category: "Cath Lab Consumables",
+    subcategory: "Cath-lab disposable accessory",
+    shortDesc: "Pressure monitoring extension line for compatible transducers and cath-lab monitoring systems.",
+    clinicalApplication: "Pressure signal/fluid pathway connection within labelled pressure limits.",
+    keyFeatures: [
+      "100% SKU-specific selection; verify connector type and pressure rating",
+      "Follow package labelling and IFU",
+      "Do not infer sterility or pressure rating from product name"
+    ],
+    specs: {
+      profileOrSize: "Length, priming volume and pressure rating vary by model",
+      compatibilityOrSheath: "Compatible pressure transducer, monitor and connectors per label",
+      materialOrCoating: "Medical-grade tubing and connector materials vary",
+      shelfLifeOrSterility: "Sterility, single-use status and expiry per exact package label"
+    },
+    mriSafety: "Non-implantable accessory; MRI not applicable during cath-lab use",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/spectrum-high-pressure-monitor-line.jpg',
+    featured: false
+  },
+  {
+    id: "spectrum-extension-line",
+    sku: "SPM-EXTENSION-LINE",
+    name: "Extension Line (100 / 150 / 200 cm)",
+    brand: "Spectrum Medtech",
+    category: "Cath Lab Consumables",
+    subcategory: "Cath-lab disposable accessory",
+    shortDesc: "Extension line family in requested 100, 150 and 200 cm lengths; confirm pressure rating and connector type by SKU.",
+    clinicalApplication: "Extension of compatible fluid or pressure line assemblies.",
+    keyFeatures: [
+      "100% SKU-specific selection; verify connector type and pressure rating",
+      "Follow package labelling and IFU",
+      "Do not infer sterility or pressure rating from product name"
+    ],
+    specs: {
+      profileOrSize: "100 / 150 / 200 cm requested variants",
+      compatibilityOrSheath: "Connector type and pressure rating must match intended circuit",
+      materialOrCoating: "Medical-grade tubing and connectors; exact materials per SKU",
+      shelfLifeOrSterility: "Sterility, single-use status and expiry per exact package label"
+    },
+    mriSafety: "Non-implantable accessory; MRI not applicable during cath-lab use",
+    regulatoryStatus: [],
+    leadTime: 'Contact SMP Surgitech for current availability',
+    packaging: 'Refer to exact manufacturer package label and instructions for use',
+    image: '/src/assets/images/products/spectrum-extension-line.jpg',
+    featured: false
   }
 ];
 
