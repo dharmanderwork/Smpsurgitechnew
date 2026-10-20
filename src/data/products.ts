@@ -1,18 +1,32 @@
 import { Product, DealerBrand, TerritoryRegion, Testimonial } from '../types/instruments';
 
-export const HERO_IMAGE = '/src/assets/images/smp_xience_coronary_stent_1792349506273.jpg';
-export const CATHLAB_OCT_IMAGE = '/src/assets/images/smp_cathlab_oct_coroflow_1792349506467.jpg';
-export const IMPELLA_IABP_IMAGE = '/src/assets/images/smp_impella_iabp_circulatory_1792349522773.jpg';
-export const POCKET_ECG_IMAGE = '/src/assets/images/smp_pocket_ecg_diagnostic_1792349523041.jpg';
-export const SURGICAL_SET_IMAGE = '/src/assets/images/smp_hero_surgical_instruments_1792343796772.jpg';
-export const CARDIO_INSTRUMENTS_IMAGE = '/src/assets/images/smp_cardio_neuro_instruments_1792343798351.jpg';
-export const QUALITY_INSPECTION_IMAGE = '/src/assets/images/smp_quality_metallurgy_inspection_1792343798753.jpg';
-export const ORTHO_INSTRUMENTS_IMAGE = '/src/assets/images/smp_orthopedic_surgical_set_1792343798115.jpg';
-export const CRM_PACEMAKER_IMAGE = '/src/assets/images/crm_pacemaker_device_1792526056792.jpg';
-export const STRUCTURAL_OCCLUDER_IMAGE = '/src/assets/images/structural_heart_occluder_1792526057954.jpg';
-export const CATHETER_ACCESS_IMAGE = '/src/assets/images/interventional_catheter_access_1792526057946.jpg';
-export const TRANSRADIAL_SHEATH_IMAGE = '/src/assets/images/transradial_sheath_introducer_1792526058222.jpg';
-export const CATHLAB_CONSUMABLES_IMAGE = '/src/assets/images/cathlab_manifold_syringes_1792526059158.jpg';
+import heroImg from '../assets/images/smp_xience_coronary_stent_1792349506273.jpg';
+import cathlabOctImg from '../assets/images/smp_cathlab_oct_coroflow_1792349506467.jpg';
+import impellaIabpImg from '../assets/images/smp_impella_iabp_circulatory_1792349522773.jpg';
+import pocketEcgImg from '../assets/images/smp_pocket_ecg_diagnostic_1792349523041.jpg';
+import surgicalSetImg from '../assets/images/smp_hero_surgical_instruments_1792343796772.jpg';
+import cardioInstrumentsImg from '../assets/images/smp_cardio_neuro_instruments_1792343798351.jpg';
+import qualityInspectionImg from '../assets/images/smp_quality_metallurgy_inspection_1792343798753.jpg';
+import orthoInstrumentsImg from '../assets/images/smp_orthopedic_surgical_set_1792343798115.jpg';
+import crmPacemakerImg from '../assets/images/crm_pacemaker_device_1792526056792.jpg';
+import structuralOccluderImg from '../assets/images/structural_heart_occluder_1792526057954.jpg';
+import catheterAccessImg from '../assets/images/interventional_catheter_access_1792526057946.jpg';
+import transradialSheathImg from '../assets/images/transradial_sheath_introducer_1792526058222.jpg';
+import cathlabConsumablesImg from '../assets/images/cathlab_manifold_syringes_1792526059158.jpg';
+
+export const HERO_IMAGE = heroImg;
+export const CATHLAB_OCT_IMAGE = cathlabOctImg;
+export const IMPELLA_IABP_IMAGE = impellaIabpImg;
+export const POCKET_ECG_IMAGE = pocketEcgImg;
+export const SURGICAL_SET_IMAGE = surgicalSetImg;
+export const CARDIO_INSTRUMENTS_IMAGE = cardioInstrumentsImg;
+export const QUALITY_INSPECTION_IMAGE = qualityInspectionImg;
+export const ORTHO_INSTRUMENTS_IMAGE = orthoInstrumentsImg;
+export const CRM_PACEMAKER_IMAGE = crmPacemakerImg;
+export const STRUCTURAL_OCCLUDER_IMAGE = structuralOccluderImg;
+export const CATHETER_ACCESS_IMAGE = catheterAccessImg;
+export const TRANSRADIAL_SHEATH_IMAGE = transradialSheathImg;
+export const CATHLAB_CONSUMABLES_IMAGE = cathlabConsumablesImg;
 
 export const FALLBACK_IMAGE = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" fill="%230f172a"><rect width="800" height="600" fill="%23090d16"/><circle cx="400" cy="300" r="140" fill="%230e7490" opacity="0.2"/><path d="M350 300h100M400 250v100" stroke="%2338bdf8" stroke-width="12" stroke-linecap="round"/><text x="400" y="470" fill="%2394a3b8" font-family="sans-serif" font-size="22" font-weight="bold" text-anchor="middle">SMP SURGITECH PRECISION SPEC</text></svg>';
 
@@ -2573,15 +2587,29 @@ const RAW_SURGICAL_PRODUCTS: Product[] = [
 function enrichProduct(p: Product): Product {
   let img = p.image;
   if (!img || img.startsWith('/src/assets/images/products/') || img.includes('data:image')) {
-    const textCorpus = `${p.id} ${p.name} ${p.category} ${p.subcategory} ${p.shortDesc}`.toLowerCase();
-    if (textCorpus.includes('pacemaker') || textCorpus.includes('icd') || textCorpus.includes('pacing') || textCorpus.includes('crm') || textCorpus.includes('resynchronization')) {
+    const textCorpus = `${p.id} ${p.name} ${p.category} ${p.subcategory || ''} ${p.shortDesc || ''}`.toLowerCase();
+    if (textCorpus.includes('pacemaker') || textCorpus.includes('icd') || textCorpus.includes('pacing') || textCorpus.includes('crm') || textCorpus.includes('resynchronization') || textCorpus.includes('tpi')) {
       img = CRM_PACEMAKER_IMAGE;
     } else if (textCorpus.includes('occluder') || textCorpus.includes('plug') || textCorpus.includes('amplatzer') || textCorpus.includes('septal') || textCorpus.includes('structural')) {
       img = STRUCTURAL_OCCLUDER_IMAGE;
-    } else if (textCorpus.includes('manifold') || textCorpus.includes('syringe') || textCorpus.includes('tubing') || textCorpus.includes('transducer') || textCorpus.includes('extension') || textCorpus.includes('y-connector') || textCorpus.includes('indeflator') || textCorpus.includes('cable') || textCorpus.includes('consumables')) {
+    } else if (textCorpus.includes('manifold') || textCorpus.includes('syringe') || textCorpus.includes('tubing') || textCorpus.includes('transducer') || textCorpus.includes('extension') || textCorpus.includes('y-connector') || textCorpus.includes('indeflator') || textCorpus.includes('cable') || textCorpus.includes('consumables') || textCorpus.includes('line')) {
       img = CATHLAB_CONSUMABLES_IMAGE;
     } else if (textCorpus.includes('sheath') || textCorpus.includes('proglide') || textCorpus.includes('prostyle') || textCorpus.includes('exoseal') || textCorpus.includes('introducer') || textCorpus.includes('needle') || textCorpus.includes('radial') || textCorpus.includes('closure')) {
       img = TRANSRADIAL_SHEATH_IMAGE;
+    } else if (textCorpus.includes('balloon') || textCorpus.includes('trek') || textCorpus.includes('stent') || textCorpus.includes('xience')) {
+      img = HERO_IMAGE;
+    } else if (textCorpus.includes('oct') || textCorpus.includes('ffr') || textCorpus.includes('optis') || textCorpus.includes('coroflow')) {
+      img = CATHLAB_OCT_IMAGE;
+    } else if (textCorpus.includes('iabp') || textCorpus.includes('impella') || textCorpus.includes('circulatory') || textCorpus.includes('pump')) {
+      img = IMPELLA_IABP_IMAGE;
+    } else if (textCorpus.includes('ecg') || textCorpus.includes('holter') || textCorpus.includes('telemetry') || textCorpus.includes('arrhythmia')) {
+      img = POCKET_ECG_IMAGE;
+    } else if (textCorpus.includes('orthopedic') || textCorpus.includes('bone') || textCorpus.includes('trauma')) {
+      img = ORTHO_INSTRUMENTS_IMAGE;
+    } else if (textCorpus.includes('surgical set') || textCorpus.includes('tray') || textCorpus.includes('operating')) {
+      img = SURGICAL_SET_IMAGE;
+    } else if (textCorpus.includes('clamp') || textCorpus.includes('forceps') || textCorpus.includes('scissors') || textCorpus.includes('needle holder')) {
+      img = CARDIO_INSTRUMENTS_IMAGE;
     } else {
       img = CATHETER_ACCESS_IMAGE;
     }
