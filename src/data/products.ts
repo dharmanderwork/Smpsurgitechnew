@@ -19,7 +19,8 @@ export const DEALER_BRANDS: DealerBrand[] = [
     focus: 'Coronary Stents (XIENCE), OCT & FFR Physiology',
     description: 'Global benchmark in drug-eluting coronary stents (XIENCE Skypoint, Xpedition 48, Sierra, Alpine), optical coherence tomography (OCT), and physiological guidewires.',
     featuredProducts: ['XIENCE Skypoint', 'XIENCE Xpedition 48', 'XIENCE Sierra', 'XIENCE Alpine', 'OCT Imaging System', 'FFR PressureWire'],
-    badgeText: 'Authorized Channel Partner'
+    badgeText: 'Authorized Channel Partner',
+    logoUrl: '/partners/abbott.jpg'
   },
   {
     id: 'cordis-cardiology',
@@ -28,7 +29,8 @@ export const DEALER_BRANDS: DealerBrand[] = [
     focus: 'Interventional Cardiology, Transradial Access & Guiding Catheters',
     description: 'Pioneers in high-performance diagnostic catheters, steerable coronary guidewires, transradial sheaths, and advanced vascular closure solutions.',
     featuredProducts: ['Diagnostic Catheters', 'Steerable Guidewires', 'Transradial Sheaths', 'Vascular Access Sets'],
-    badgeText: 'Authorized Cardiology Distributor'
+    badgeText: 'Authorized Cardiology Distributor',
+    logoUrl: '/partners/cordis.jpg'
   },
   {
     id: 'teleflex-vascular',
@@ -37,7 +39,8 @@ export const DEALER_BRANDS: DealerBrand[] = [
     focus: 'Arrow Vascular Access & Intra-Aortic Balloon Pumps (IABP)',
     description: 'World-renowned Arrow hemodynamic catheterization, intra-aortic balloon pumps (IABP), emergency vascular access, and arterial line systems.',
     featuredProducts: ['IABP Pump Console', 'AutoCAT 2 Wave Catheters', 'Arrow Central Venous Access', 'Radial Artery Lines'],
-    badgeText: 'Authorized Vascular Partner'
+    badgeText: 'Authorized Vascular Partner',
+    logoUrl: '/partners/teleflex.jpg'
   },
   {
     id: 'st-jude-medical',
@@ -46,7 +49,8 @@ export const DEALER_BRANDS: DealerBrand[] = [
     focus: 'Cardiac Rhythm Management & TAVI Structural Solutions',
     description: 'Industry-defining pacemakers, implantable cardioverter defibrillators (ICDs), and transcatheter aortic valve implantation (TAVI) structural heart platforms.',
     featuredProducts: ['TAVI Structural Valve Systems', 'Leadless Pacemakers', 'Cardiac Resynchronization (CRT)', 'Electrophysiology Catheters'],
-    badgeText: 'Structural Heart Partner'
+    badgeText: 'Structural Heart Partner',
+    logoUrl: '/partners/st-jude.jpg'
   },
   {
     id: 'jnj-medtech',
@@ -55,7 +59,8 @@ export const DEALER_BRANDS: DealerBrand[] = [
     focus: 'Cardiovascular Surgical Instruments & Mechanical Circulatory Support',
     description: 'Comprehensive surgical innovations including cardiovascular instruments, surgical sutures, and advanced mechanical circulatory support systems (Impella pVAD).',
     featuredProducts: ['Impella 2.5 / CP / 5.0 pVAD', 'Cardiovascular Suture Solutions', 'Micro-Surgical Forceps', 'Hemostatic Devices'],
-    badgeText: 'Authorized MedTech Partner'
+    badgeText: 'Authorized MedTech Partner',
+    logoUrl: '/partners/medtech.jpg'
   },
   {
     id: 'pocket-ecg',
@@ -64,7 +69,8 @@ export const DEALER_BRANDS: DealerBrand[] = [
     focus: 'Continuous Real-Time Ambulatory Arrhythmia Telemetry',
     description: 'Next-generation hospital and outpatient continuous ECG monitoring, complete full-disclosure arrhythmia detection, and cellular-connected cloud reporting.',
     featuredProducts: ['Pocket ECG Mobile Monitor', 'Full-Disclosure Software', 'Hospital Holter Diagnostic Suite', 'Emergency Telemetry Sensor'],
-    badgeText: 'Exclusive Diagnostic Dealer'
+    badgeText: 'Exclusive Diagnostic Dealer',
+    logoUrl: '/partners/pocket-ecg.jpg'
   }
 ];
 

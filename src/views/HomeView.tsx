@@ -725,6 +725,32 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </p>
         </div>
 
+        {/* Authorized Dealer Logos - Responsive Showcase Above Cards */}
+        <div className="mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+            {DEALER_BRANDS.map((brand) => (
+              <div
+                key={`dealer-logo-${brand.id}`}
+                onClick={() => onNavigate('catalog')}
+                title={`Authorized Distributor for ${brand.name} - ${brand.division}`}
+                className="bg-white rounded-xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-cyan-300 transition-all p-3 sm:p-4 flex flex-col items-center justify-center text-center group cursor-pointer h-20 sm:h-24"
+              >
+                <div className="h-10 sm:h-12 w-full flex items-center justify-center">
+                  <img
+                    src={brand.logoUrl || `/partners/${brand.id}.jpg`}
+                    alt={`${brand.name} Authorized Dealer`}
+                    className="max-h-9 sm:max-h-11 max-w-[90%] object-contain filter group-hover:scale-105 transition-transform duration-200"
+                    loading="lazy"
+                  />
+                </div>
+                <span className="text-[10px] font-bold text-slate-500 group-hover:text-cyan-950 transition-colors mt-1.5 truncate max-w-full">
+                  {brand.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Brands Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {DEALER_BRANDS.map((brand) => (
@@ -1081,15 +1107,24 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <div className="space-y-2 pt-2 border-t border-slate-100 text-xs">
                 <div className="flex justify-between items-center">
                   <span className="text-slate-600">Emergency Cath Lab Dispatch (&lt; 3h)</span>
-                  <span className="font-mono font-bold text-slate-900">4.98 / 5.0</span>
+                  <span className="inline-flex items-center gap-1 font-mono font-bold text-slate-900 bg-amber-50/70 border border-amber-200/80 px-2 py-0.5 rounded text-xs">
+                    <span>4.9</span>
+                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-slate-600">Cold-Chain Storage & UDI Batch Integrity</span>
-                  <span className="font-mono font-bold text-slate-900">5.00 / 5.0</span>
+                  <span className="inline-flex items-center gap-1 font-mono font-bold text-slate-900 bg-amber-50/70 border border-amber-200/80 px-2 py-0.5 rounded text-xs">
+                    <span>5.0</span>
+                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-slate-600">Clinical Specialist Technical Assistance</span>
-                  <span className="font-mono font-bold text-slate-900">4.94 / 5.0</span>
+                  <span className="inline-flex items-center gap-1 font-mono font-bold text-slate-900 bg-amber-50/70 border border-amber-200/80 px-2 py-0.5 rounded text-xs">
+                    <span>4.9</span>
+                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  </span>
                 </div>
               </div>
             </div>

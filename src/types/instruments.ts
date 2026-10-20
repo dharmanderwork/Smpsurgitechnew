@@ -98,6 +98,7 @@ export interface DealerBrand {
   description: string;
   featuredProducts: string[];
   badgeText: string;
+  logoUrl?: string;
 }
 
 export interface Testimonial {
