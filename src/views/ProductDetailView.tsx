@@ -20,7 +20,8 @@ import {
   Layers, 
   AlertCircle,
   Building2,
-  ExternalLink
+  ExternalLink,
+  ShoppingCart
 } from 'lucide-react';
 
 interface ProductDetailViewProps {
@@ -219,24 +220,24 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                   </div>
                 </div>
 
-                {/* Primary Add to RFQ Button */}
+                {/* Primary Add to Cart Button */}
                 <button
                   onClick={handleAddMultipleToRfq}
                   className={`w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm ${
                     inRfq
                       ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-900/20'
-                      : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-cyan-900/20'
+                      : 'bg-cyan-700 hover:bg-cyan-800 text-white shadow-cyan-900/20'
                   }`}
                 >
                   {inRfq ? (
                     <>
                       <Check className="w-4 h-4" />
-                      <span>Added to RFQ Tray (Click to add {orderQuantity} more)</span>
+                      <span>In Cart (Click to add {orderQuantity} more)</span>
                     </>
                   ) : (
                     <>
-                      <Plus className="w-4 h-4" />
-                      <span>Add to RFQ Tray ({orderQuantity} units)</span>
+                      <ShoppingCart className="w-4 h-4" />
+                      <span>Add to Cart ({orderQuantity} units)</span>
                     </>
                   )}
                 </button>

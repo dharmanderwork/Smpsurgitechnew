@@ -23,7 +23,7 @@ export const SpecSheetsView: React.FC<SpecSheetsViewProps> = ({
       p.sku.toLowerCase().includes(searchTerm.toLowerCase()) ||
       p.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
       p.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      p.pdfSpec.docNumber.toLowerCase().includes(searchTerm.toLowerCase())
+      (p.pdfSpec?.docNumber || p.sku).toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const filteredPdfs = OFFICIAL_MANUFACTURER_PDFS.filter(
@@ -190,7 +190,7 @@ export const SpecSheetsView: React.FC<SpecSheetsViewProps> = ({
                           PDF
                         </span>
                         <div>
-                          <div>{prod.pdfSpec.docNumber}</div>
+                          <div>{prod.pdfSpec?.docNumber || `TDS-${prod.sku}`}</div>
                           {prod.pdfUrl && (
                             <span className="text-[10px] text-emerald-700 font-sans font-semibold flex items-center gap-1">
                               ✓ Official PDF
@@ -210,7 +210,7 @@ export const SpecSheetsView: React.FC<SpecSheetsViewProps> = ({
                       {prod.specs.profileOrSize}
                     </td>
                     <td className="py-3 px-4 font-mono text-slate-500 whitespace-nowrap">
-                      {prod.pdfSpec.effectiveDate}
+                      {prod.pdfSpec?.effectiveDate || 'Current Spec'}
                     </td>
                     <td className="py-3 px-4 text-right whitespace-nowrap space-x-2">
                       <button

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { RfqItem, LeadInquiry, Product } from '../types/instruments';
 import { calculateRfqSummary, validateInquiryForm, generateRfqReference } from '../utils/rfq';
-import { X, Trash2, Send, Plus, Minus, CheckCircle2, Shield, ArrowRight, Building2, User, Mail, Phone, Clock, FileText, MapPin } from 'lucide-react';
+import { X, Trash2, Send, Plus, Minus, CheckCircle2, Shield, ArrowRight, Building2, User, Mail, Phone, Clock, FileText, MapPin, ShoppingCart } from 'lucide-react';
 
 interface RfqDrawerProps {
   isOpen: boolean;
@@ -110,7 +110,8 @@ export const RfqDrawer: React.FC<RfqDrawerProps> = ({
         <div className="bg-slate-900 text-white p-5 flex items-center justify-between border-b border-slate-800 shrink-0">
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-display font-bold text-base tracking-tight">Hospital Procurement RFQ Tray</span>
+              <ShoppingCart className="w-5 h-5 text-cyan-300" />
+              <span id="rfq-drawer-title" className="font-display font-bold text-base tracking-tight">Procurement Quote Cart</span>
               <span className="bg-cyan-950 text-cyan-300 font-mono text-[11px] px-2 py-0.5 rounded border border-cyan-800">
                 {summary.totalUnits} Units ({summary.distinctSkus} Items)
               </span>
@@ -123,7 +124,7 @@ export const RfqDrawer: React.FC<RfqDrawerProps> = ({
           <button
             onClick={onClose}
             className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
-            aria-label="Close RFQ Drawer"
+            aria-label="Close Cart Drawer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -184,16 +185,16 @@ export const RfqDrawer: React.FC<RfqDrawerProps> = ({
                   <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-400">
                     <FileText className="w-6 h-6" />
                   </div>
-                  <h4 className="font-bold text-slate-800 text-sm">Your RFQ Tray is Empty</h4>
+                  <h4 className="font-bold text-slate-800 text-sm">Your Procurement Cart is Empty</h4>
                   <p className="text-xs text-slate-500 max-w-xs mx-auto">
-                    Add coronary stents, OCT/FFR systems, IABP consoles, or surgical instrument sets from the catalog to submit a consolidated quote request.
+                    Add coronary stents, CRM pacemakers, catheters, or surgical instrument sets from the catalog to submit a consolidated quote request.
                   </p>
                 </div>
               ) : (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between pb-2 border-b border-slate-100">
                     <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                      Selected Clinical Instruments ({items.length})
+                      Cart Items ({items.length})
                     </span>
                     <button
                       onClick={onClearAll}
@@ -247,8 +248,8 @@ export const RfqDrawer: React.FC<RfqDrawerProps> = ({
                           <button
                             onClick={() => onRemoveItem(product.id)}
                             className="p-1.5 text-slate-400 hover:text-red-600 transition-colors cursor-pointer ml-1"
-                            title="Remove from tray"
-                            aria-label={`Remove ${product.sku} from RFQ Tray`}
+                            title="Remove from Cart"
+                            aria-label={`Remove ${product.sku} from Cart`}
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -414,7 +415,7 @@ export const RfqDrawer: React.FC<RfqDrawerProps> = ({
                       ) : (
                         <>
                           <Send className="w-4 h-4 text-cyan-300" />
-                          <span>Submit Formal Tender RFQ ({summary.totalUnits} Units)</span>
+                          <span>Submit Quote Request for Cart ({summary.totalUnits} Units)</span>
                         </>
                       )}
                     </button>

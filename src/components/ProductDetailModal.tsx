@@ -309,7 +309,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-500">Technical Data Sheet</span>
-                      <span className="font-mono text-cyan-800 font-semibold">{product.pdfSpec.docNumber}</span>
+                      <span className="font-mono text-cyan-800 font-semibold">{product.pdfSpec?.docNumber || `TDS-${product.sku}`}</span>
                     </div>
                   </div>
                 </div>

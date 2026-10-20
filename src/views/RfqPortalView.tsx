@@ -123,10 +123,10 @@ export const RfqPortalView: React.FC<RfqPortalViewProps> = ({
           <span>Consolidated Institutional Tender System</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-950 font-display">
-          Formal Request for Quotation (RFQ)
+          Hospital Procurement Cart & Formal RFQ
         </h1>
         <p className="text-sm text-slate-600 max-w-2xl leading-relaxed">
-          Aggregate multiple coronary stent lines, OCT/FFR diagnostic systems, and surgical suites into a formal institutional procurement tender.
+          Review items in your procurement cart, configure quantity requirements, and generate an official hospital tender dossier directly to our regional distribution hubs.
         </p>
       </div>
 
@@ -182,7 +182,7 @@ export const RfqPortalView: React.FC<RfqPortalViewProps> = ({
           <div className="lg:col-span-7 space-y-4">
             <div className="flex items-center justify-between pb-2 border-b border-slate-200">
               <h2 className="text-base font-bold text-slate-900 font-display">
-                Tender Instruments ({rfqItems.length})
+                Procurement Cart Items ({rfqItems.length})
               </h2>
               {rfqItems.length > 0 && (
                 <button
@@ -198,9 +198,9 @@ export const RfqPortalView: React.FC<RfqPortalViewProps> = ({
             {rfqItems.length === 0 ? (
               <div className="text-center py-12 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
                 <FileText className="w-8 h-8 text-slate-400 mx-auto" />
-                <h3 className="font-bold text-slate-800 text-sm">Your RFQ Basket is Empty</h3>
+                <h3 className="font-bold text-slate-800 text-sm">Your Procurement Cart is Empty</h3>
                 <p className="text-xs text-slate-500 max-w-xs mx-auto">
-                  Browse our catalog of XIENCE stents, OCT/FFR systems, and surgical sets to add products to your quotation request.
+                  Browse our catalog of XIENCE stents, CRM pacemakers, catheters, and surgical sets to add products to your quotation cart.
                 </p>
                 <button
                   onClick={() => onNavigate('catalog')}

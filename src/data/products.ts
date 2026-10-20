@@ -8,6 +8,11 @@ export const SURGICAL_SET_IMAGE = '/src/assets/images/smp_hero_surgical_instrume
 export const CARDIO_INSTRUMENTS_IMAGE = '/src/assets/images/smp_cardio_neuro_instruments_1792343798351.jpg';
 export const QUALITY_INSPECTION_IMAGE = '/src/assets/images/smp_quality_metallurgy_inspection_1792343798753.jpg';
 export const ORTHO_INSTRUMENTS_IMAGE = '/src/assets/images/smp_orthopedic_surgical_set_1792343798115.jpg';
+export const CRM_PACEMAKER_IMAGE = '/src/assets/images/crm_pacemaker_device_1792526056792.jpg';
+export const STRUCTURAL_OCCLUDER_IMAGE = '/src/assets/images/structural_heart_occluder_1792526057954.jpg';
+export const CATHETER_ACCESS_IMAGE = '/src/assets/images/interventional_catheter_access_1792526057946.jpg';
+export const TRANSRADIAL_SHEATH_IMAGE = '/src/assets/images/transradial_sheath_introducer_1792526058222.jpg';
+export const CATHLAB_CONSUMABLES_IMAGE = '/src/assets/images/cathlab_manifold_syringes_1792526059158.jpg';
 
 export const FALLBACK_IMAGE = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" fill="%230f172a"><rect width="800" height="600" fill="%23090d16"/><circle cx="400" cy="300" r="140" fill="%230e7490" opacity="0.2"/><path d="M350 300h100M400 250v100" stroke="%2338bdf8" stroke-width="12" stroke-linecap="round"/><text x="400" y="470" fill="%2394a3b8" font-family="sans-serif" font-size="22" font-weight="bold" text-anchor="middle">SMP SURGITECH PRECISION SPEC</text></svg>';
 
@@ -233,7 +238,7 @@ export const TESTIMONIALS: Testimonial[] = [
   }
 ];
 
-export const SURGICAL_PRODUCTS: Product[] = [
+const RAW_SURGICAL_PRODUCTS: Product[] = [
   // 1. XIENCE Skypoint
   {
     id: 'xience-skypoint',
@@ -2565,25 +2570,145 @@ export const SURGICAL_PRODUCTS: Product[] = [
   }
 ];
 
+function enrichProduct(p: Product): Product {
+  let img = p.image;
+  if (!img || img.startsWith('/src/assets/images/products/') || img.includes('data:image')) {
+    const textCorpus = `${p.id} ${p.name} ${p.category} ${p.subcategory} ${p.shortDesc}`.toLowerCase();
+    if (textCorpus.includes('pacemaker') || textCorpus.includes('icd') || textCorpus.includes('pacing') || textCorpus.includes('crm') || textCorpus.includes('resynchronization')) {
+      img = CRM_PACEMAKER_IMAGE;
+    } else if (textCorpus.includes('occluder') || textCorpus.includes('plug') || textCorpus.includes('amplatzer') || textCorpus.includes('septal') || textCorpus.includes('structural')) {
+      img = STRUCTURAL_OCCLUDER_IMAGE;
+    } else if (textCorpus.includes('manifold') || textCorpus.includes('syringe') || textCorpus.includes('tubing') || textCorpus.includes('transducer') || textCorpus.includes('extension') || textCorpus.includes('y-connector') || textCorpus.includes('indeflator') || textCorpus.includes('cable') || textCorpus.includes('consumables')) {
+      img = CATHLAB_CONSUMABLES_IMAGE;
+    } else if (textCorpus.includes('sheath') || textCorpus.includes('proglide') || textCorpus.includes('prostyle') || textCorpus.includes('exoseal') || textCorpus.includes('introducer') || textCorpus.includes('needle') || textCorpus.includes('radial') || textCorpus.includes('closure')) {
+      img = TRANSRADIAL_SHEATH_IMAGE;
+    } else {
+      img = CATHETER_ACCESS_IMAGE;
+    }
+  }
+
+  let spec = p.pdfSpec;
+  if (!spec) {
+    spec = {
+      docNumber: `TDS-${p.sku}-2026`,
+      revision: 'Rev 4.2',
+      effectiveDate: '2026-01-20',
+      totalPages: 2,
+      pages: [
+        {
+          pageNumber: 1,
+          title: `${p.name} Specification`,
+          subtitle: `${p.brand} · ${p.subcategory || p.category}`,
+          sections: [
+            {
+              heading: '1.0 Clinical Engineering & Application',
+              text: p.clinicalApplication || p.shortDesc,
+              bulletPoints: p.keyFeatures && p.keyFeatures.length > 0 ? p.keyFeatures : [
+                'Engineered for critical catheterization laboratory and cardiac surgical procedures',
+                'Certified biocompatibility compliant with ISO 10993 and USP Class VI requirements',
+                '100% sterile barrier packaging with individual lot tracking and GS1 UDI barcoding'
+              ]
+            },
+            {
+              heading: '2.0 Mechanical Sizing & Dimensional Tolerances',
+              text: 'Manufactured to precision cardiovascular tolerances with validated trackability and pushability metrics.',
+              specs: [
+                { parameter: 'Profile / Sizing Matrix', nominal: p.specs.profileOrSize || 'Standard Matrix', tolerance: '± 0.05 mm', standard: 'ISO 10555-1' },
+                { parameter: 'Sheath / Guide Match', nominal: p.specs.compatibilityOrSheath || 'Standard Luer Lock', tolerance: 'Universal Fit', standard: 'ISO 80369-7' },
+                { parameter: 'Material / Formulation', nominal: p.specs.materialOrCoating || 'Medical Polymer / Alloy', tolerance: 'Compliant', standard: 'ASTM F619' },
+                { parameter: 'Sterilization Standard', nominal: p.specs.shelfLifeOrSterility || 'Sterile EO / SAL 10⁻⁶', tolerance: 'Single Use', standard: 'ISO 11135' }
+              ]
+            }
+          ]
+        },
+        {
+          pageNumber: 2,
+          title: 'Cath Lab Sizing & Consignment Storage Protocol',
+          subtitle: 'SMP Surgitech Regional Cath Lab Consignment Protocol',
+          sections: [
+            {
+              heading: '3.0 Consignment & Rapid Cath Lab Supply',
+              text: 'Maintained in continuous hospital consignment stock across our regional warehouses in Udaipur, Indore, Raipur, and Agra. Direct dispatch with 1 to 3 hours courier window for emergency angioplasties.',
+              bulletPoints: [
+                'Individual batch verification with sterile indicator integrity checks',
+                'Store between 15°C and 25°C away from direct sunlight',
+                'Dedicated 24/7 technical representative standby for cath lab procedures'
+              ]
+            },
+            {
+              heading: '4.0 Regulatory Authorizations',
+              text: 'Authorized and registered under CDSCO / DCGI regulations (Government of India) with CE Mark certification.'
+            }
+          ]
+        }
+      ]
+    };
+  }
+
+  let pdfUrl = p.pdfUrl;
+  let pdfFileName = p.pdfFileName;
+  const pIdLower = p.id.toLowerCase();
+  const pCatLower = p.category.toLowerCase();
+  const pNameLower = p.name.toLowerCase();
+
+  if (!pdfUrl) {
+    if (pIdLower.includes('guideliner') || pCatLower.includes('access catheters') || pNameLower.includes('brite tip')) {
+      pdfUrl = '/pdf/MCI-2018-0444_IN_VSI_BR_GuideLiner_V3_Catheter-EN_GKN.pdf';
+      pdfFileName = 'MCI-2018-0444_GuideLiner_V3_Catheter.pdf';
+    } else if (pIdLower.includes('turnpike') || pCatLower.includes('guidewire')) {
+      pdfUrl = '/pdf/MCI-2019-0823_IN_VSI_BR_Turnpike_EN-IN_HR (1).pdf';
+      pdfFileName = 'MCI-2019-0823_Turnpike_Microcatheter.pdf';
+    } else if (pIdLower.includes('supercross')) {
+      pdfUrl = '/pdf/MCI-2018-0396_IN_VSI_BR_Supercrosscombined_EN_LR_2.pdf';
+      pdfFileName = 'MCI-2018-0396_Supercross_Microcatheter.pdf';
+    } else if (pIdLower.includes('cvc') || pIdLower.includes('iabp') || pNameLower.includes('arrow') || pNameLower.includes('optimus')) {
+      pdfUrl = '/pdf/Interventional-AC3-IABP-Brochure_MC-005536-Rev-0.1.pdf';
+      pdfFileName = 'Interventional_AC3_IABP_Brochure.pdf';
+    } else if (pIdLower.includes('impella')) {
+      pdfUrl = '/pdf/Impella CP with SmartAssist Data Sheet.pdf';
+      pdfFileName = 'Impella_CP_SmartAssist_Data_Sheet.pdf';
+    }
+  }
+
+  return {
+    ...p,
+    image: img,
+    pdfSpec: spec,
+    pdfUrl,
+    pdfFileName
+  };
+}
+
+export const SURGICAL_PRODUCTS: Product[] = RAW_SURGICAL_PRODUCTS.map(enrichProduct);
+
 export const CATEGORIES: { id: string; label: string; count: number }[] = [
   { id: 'All Categories', label: 'All Products', count: SURGICAL_PRODUCTS.length },
-  { id: 'Coronary Stents (XIENCE)', label: 'Coronary Stents (XIENCE)', count: 4 },
-  { id: 'Diagnostic Physiology & Imaging (OCT / FFR)', label: 'Diagnostic Imaging & Physiology (OCT / FFR)', count: 2 },
-  { id: 'Cardiovascular Physiology Systems (CoroFlow)', label: 'Cardiovascular Systems (CoroFlow)', count: 1 },
-  { id: 'Structural Heart (TAVI)', label: 'Structural Heart (TAVI)', count: 1 },
-  { id: 'Mechanical Circulatory Support (Impella & IABP)', label: 'Mechanical Circulatory Support (Impella & IABP)', count: 2 },
-  { id: 'Diagnostic Monitoring (Pocket ECG)', label: 'Diagnostic Devices (Pocket ECG)', count: 1 },
-  { id: 'Cardiovascular Surgical Instruments', label: 'Surgical Instruments (Cardiovascular / CABG)', count: 2 }
+  { id: 'Coronary Stents (XIENCE)', label: 'Coronary Stents (XIENCE)', count: SURGICAL_PRODUCTS.filter(p => p.category === 'Coronary Stents (XIENCE)').length },
+  { id: 'Diagnostic Physiology & Imaging (OCT / FFR)', label: 'Diagnostic Imaging & Physiology (OCT / FFR)', count: SURGICAL_PRODUCTS.filter(p => p.category === 'Diagnostic Physiology & Imaging (OCT / FFR)').length },
+  { id: 'Cardiovascular Physiology Systems (CoroFlow)', label: 'Cardiovascular Systems (CoroFlow)', count: SURGICAL_PRODUCTS.filter(p => p.category === 'Cardiovascular Physiology Systems (CoroFlow)').length },
+  { id: 'Structural Heart (TAVI)', label: 'Structural Heart & Occluders (TAVI / ASO)', count: SURGICAL_PRODUCTS.filter(p => p.category.includes('Structural')).length },
+  { id: 'Mechanical Circulatory Support (Impella & IABP)', label: 'Mechanical Circulatory Support (Impella & IABP)', count: SURGICAL_PRODUCTS.filter(p => p.category.includes('Circulatory')).length },
+  { id: 'Cardiac Rhythm Management (CRM)', label: 'Cardiac Rhythm Management (CRM & Pacemakers)', count: SURGICAL_PRODUCTS.filter(p => p.category.includes('Rhythm')).length },
+  { id: 'Cardiology Access Catheters', label: 'Access Catheters & Balloon Dilatation', count: SURGICAL_PRODUCTS.filter(p => p.category.includes('Catheters') || p.category.includes('Guidewires') || p.category.includes('Balloon') || p.category.includes('Access')).length },
+  { id: 'Cath Lab Consumables', label: 'Cath Lab Consumables & Manifolds', count: SURGICAL_PRODUCTS.filter(p => p.category.includes('Consumables')).length },
+  { id: 'Cardiovascular Surgical Instruments', label: 'Surgical Instruments (Cardiovascular / CABG)', count: SURGICAL_PRODUCTS.filter(p => p.category.includes('Surgical')).length },
+  { id: 'Diagnostic Monitoring (Pocket ECG)', label: 'Diagnostic Devices (Pocket ECG)', count: SURGICAL_PRODUCTS.filter(p => p.category.includes('Diagnostic Monitoring')).length }
 ];
 
 export const BRAND_FILTERS = [
   'All Brands',
   'Abbott (Vascular Division)',
+  'Abbott Healthcare Pvt. Ltd. (Vascular Division)',
+  'Abbott (Structural Heart Division)',
   'Cordis (Cardiology)',
   'Teleflex (Vascular Division)',
+  'Teleflex (Arrow)',
   'St. Jude Medical (CRM & Structural Heart)',
+  'St. Jude Medical India Pvt. Ltd. (CRM Division)',
+  'St. Jude Medical India Pvt. Ltd. (OCT / FFR Division)',
   'J&J MedTech (Surgical Solutions)',
   'Pocket ECG (Diagnostic Devices)',
+  'Spectrum Medtech',
   'SMP Surgitech (Cardiovascular Surgical)'
 ];
 

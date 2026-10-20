@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ClipboardList, Menu, X, Sparkles, Phone, Mail } from 'lucide-react';
+import { ShoppingCart, Menu, X, Sparkles, Phone, Mail } from 'lucide-react';
 import { SmpLogo } from './SmpLogo';
 
 interface NavbarProps {
@@ -100,14 +100,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="whitespace-nowrap">AI Spec Matcher</span>
           </button>
 
-          {/* Consolidated RFQ Basket Button */}
+          {/* Consolidated Cart Button */}
           <button
             onClick={onOpenRfqDrawer}
             className="relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-semibold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-lg transition-colors cursor-pointer shrink-0"
-            aria-label={`View RFQ quote basket with ${rfqItemCount} items`}
+            aria-label={`View Cart with ${rfqItemCount} items`}
+            title="Open Procurement Cart"
           >
-            <ClipboardList className="w-3.5 h-3.5 text-slate-700" />
-            <span className="hidden sm:inline">RFQ Tray</span>
+            <ShoppingCart className="w-3.5 h-3.5 text-slate-700" />
+            <span className="hidden sm:inline">Cart</span>
             {rfqItemCount > 0 && (
               <span className="bg-cyan-800 text-white font-mono text-[10px] font-bold px-1.5 py-0.2 rounded-full">
                 {rfqItemCount}
@@ -160,6 +161,27 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           <div className="pt-3 border-t border-slate-100 flex flex-col gap-2.5">
+            {/* Mobile Cart Action Button */}
+            <button
+              onClick={() => {
+                onOpenRfqDrawer();
+                setMobileMenuOpen(false);
+              }}
+              className="w-full py-2.5 px-4 text-xs font-bold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl transition-all shadow-xs flex items-center justify-between cursor-pointer"
+            >
+              <span className="flex items-center gap-2">
+                <ShoppingCart className="w-4 h-4 text-slate-700" />
+                <span>View Procurement Cart</span>
+              </span>
+              {rfqItemCount > 0 ? (
+                <span className="bg-cyan-800 text-white font-mono text-[11px] font-bold px-2 py-0.5 rounded-full">
+                  {rfqItemCount} items
+                </span>
+              ) : (
+                <span className="text-slate-400 text-[11px]">Empty</span>
+              )}
+            </button>
+
             {/* Mobile Contact Action Button */}
             <button
               onClick={() => {

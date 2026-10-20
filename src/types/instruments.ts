@@ -5,16 +5,30 @@ export type CardiologyCategory =
   | 'Structural Heart (TAVI)'
   | 'Mechanical Circulatory Support (Impella & IABP)'
   | 'Diagnostic Monitoring (Pocket ECG)'
-  | 'Cardiovascular Surgical Instruments';
+  | 'Cardiovascular Surgical Instruments'
+  | 'Cardiac Rhythm Management (CRM)'
+  | 'Temporary Pacing Accessories'
+  | 'Structural Heart (Congenital Interventions)'
+  | 'Cardiology Access Catheters'
+  | 'Cordis Interventional Products'
+  | 'Cath Lab Consumables'
+  | (string & {});
 
 export type BrandManufacturer =
   | 'Abbott (Vascular Division)'
+  | 'Abbott (Structural Heart Division)'
   | 'Cordis (Cardiology)'
   | 'Teleflex (Vascular Division)'
+  | 'Teleflex (Arrow)'
   | 'St. Jude Medical (CRM & Structural Heart)'
+  | 'St. Jude Medical India Pvt. Ltd. (CRM Division)'
+  | 'St. Jude Medical India Pvt. Ltd. (OCT / FFR Division)'
+  | 'Manufacturer / model to be confirmed (CRM)'
   | 'J&J MedTech (Surgical Solutions)'
   | 'Pocket ECG (Diagnostic Devices)'
-  | 'SMP Surgitech (Cardiovascular Surgical)';
+  | 'Spectrum Medtech'
+  | 'SMP Surgitech (Cardiovascular Surgical)'
+  | (string & {});
 
 export interface SpecTableItem {
   parameter: string;
@@ -64,7 +78,7 @@ export interface Product {
   image: string;
   pdfUrl?: string;
   pdfFileName?: string;
-  pdfSpec: PdfDocument;
+  pdfSpec?: PdfDocument;
   featured?: boolean;
 }
 

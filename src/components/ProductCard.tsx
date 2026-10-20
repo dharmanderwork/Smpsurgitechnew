@@ -1,7 +1,7 @@
 import React from 'react';
 import { Product } from '../types/instruments';
 import { FALLBACK_IMAGE } from '../data/products';
-import { FileText, Send, Plus, Check, ShieldCheck, ChevronRight } from 'lucide-react';
+import { FileText, Send, ShoppingCart, Check, ShieldCheck, ChevronRight } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -82,7 +82,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
       </div>
 
-      {/* Action Footer: PDF Spec Sheet + Enquire for Quote */}
+      {/* Action Footer: PDF Spec Sheet + Cart */}
       <div className="p-4 bg-slate-50/70 border-t border-slate-100 space-y-2">
         <div className="flex items-center gap-2">
           {/* PDF Spec Browser Trigger */}
@@ -95,19 +95,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             <span>PDF Spec</span>
           </button>
 
-          {/* Fast RFQ Tray Toggle */}
+          {/* Fast Cart Toggle */}
           <button
             onClick={() => onAddToRfq(product)}
             className={`py-1.5 px-3 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors cursor-pointer border ${
               isInRfq
                 ? 'bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100'
-                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
+                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100 hover:border-slate-300'
             }`}
-            title={isInRfq ? 'In RFQ Tray' : 'Add to consolidated quote request'}
-            aria-label={isInRfq ? `Item ${product.sku} is in RFQ Tray` : `Add ${product.sku} to RFQ Tray`}
+            title={isInRfq ? 'In Cart' : 'Add to Procurement Cart'}
+            aria-label={isInRfq ? `Item ${product.sku} is in Cart` : `Add ${product.sku} to Cart`}
           >
-            {isInRfq ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Plus className="w-3.5 h-3.5 text-slate-500" />}
-            <span className="hidden sm:inline">{isInRfq ? 'Added' : 'Tray'}</span>
+            {isInRfq ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <ShoppingCart className="w-3.5 h-3.5 text-slate-500" />}
+            <span className="whitespace-nowrap">{isInRfq ? 'In Cart' : 'Add to Cart'}</span>
           </button>
         </div>
 
