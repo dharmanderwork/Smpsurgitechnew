@@ -21,7 +21,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   // Clean, focused navigation: removed 'area covered' and 'pdf spec sheets', direct quote renamed to 'Contact'
   const navLinks = [
-    { id: 'home', label: 'Overview' },
+    { id: 'home', label: 'Home' },
     { id: 'catalog', label: 'Product Catalog' },
     { id: 'services', label: 'Cath Lab Services' },
     { id: 'about', label: 'About Us' },
