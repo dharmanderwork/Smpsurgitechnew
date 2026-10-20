@@ -340,7 +340,7 @@ export const RfqPortalView: React.FC<RfqPortalViewProps> = ({
                     <option value="South Rajasthan">South Rajasthan (Udaipur, Dungarpur, Banswara...)</option>
                     <option value="Madhya Pradesh">Madhya Pradesh (Indore, Bhopal, Jabalpur...)</option>
                     <option value="Chhattisgarh">Chhattisgarh (Raipur, Bilaspur...)</option>
-                    <option value="Uttar Pradesh">Part of Uttar Pradesh (Kanpur, Agra, Jhansi...)</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh (Kanpur, Agra, Jhansi...)</option>
                     <option value="Other">Other Region / National</option>
                   </select>
                 </div>

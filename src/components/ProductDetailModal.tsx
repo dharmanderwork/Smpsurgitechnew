@@ -135,7 +135,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   className="flex-1 min-w-[150px] py-2 px-3 text-xs font-semibold text-cyan-950 bg-cyan-50 hover:bg-cyan-100 border border-cyan-200 rounded-lg flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <FileText className="w-4 h-4 text-cyan-700" />
-                  <span>Open PDF Spec Sheet</span>
+                  <span>{product.pdfUrl ? 'Open Manufacturer PDF Spec' : 'Open PDF Spec Sheet'}</span>
                 </button>
 
                 <button
@@ -362,7 +362,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   <div className="bg-white p-3 rounded border border-slate-200 space-y-1">
                     <div className="flex items-center gap-1.5 font-bold text-slate-900">
                       <MapPin className="w-3.5 h-3.5 text-cyan-700" />
-                      <span>Part of Uttar Pradesh (Agra/Kanpur Corridor)</span>
+                      <span>Uttar Pradesh (Agra/Kanpur Corridor)</span>
                     </div>
                     <p className="text-[11px] text-slate-600">
                       Dedicated technical specialists serving Kanpur, Agra, Jhansi, Prayagraj, and Varanasi cardiac institutes.

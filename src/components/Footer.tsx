@@ -53,7 +53,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <Clock className="w-4 h-4" />
             </div>
             <div>
-              <div className="font-bold text-white text-xs">Part of Uttar Pradesh (Agra/Kanpur)</div>
+              <div className="font-bold text-white text-xs">Uttar Pradesh (Agra/Kanpur)</div>
               <p className="text-[11px] text-slate-400 mt-0.5">
                 Express interventional corridor serving Kanpur, Agra, Jhansi, Prayagraj, Varanasi.
               </p>

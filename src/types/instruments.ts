@@ -62,6 +62,8 @@ export interface Product {
   leadTime: string;
   packaging: string;
   image: string;
+  pdfUrl?: string;
+  pdfFileName?: string;
   pdfSpec: PdfDocument;
   featured?: boolean;
 }
@@ -75,11 +77,9 @@ export interface RfqItem {
 
 export interface TerritoryRegion {
   state: string;
-  nameHindi?: string;
   tagline: string;
   hqCity: string;
   cities: string[];
-  districtsHindi?: string[];
   coverageStatus: 'Direct Warehousing & Same-Day Dispatch' | 'Active Cath Lab Logistics' | 'Dedicated Field Technical Support';
   emergencyCourierHours: string;
   activeHospitals: number;

@@ -232,7 +232,7 @@ export const DirectInquiryForm: React.FC<DirectInquiryFormProps> = ({
             <option value="South Rajasthan">South Rajasthan (Udaipur, Dungarpur, Banswara, etc.)</option>
             <option value="Madhya Pradesh">Madhya Pradesh (Indore, Bhopal, Gwalior, Jabalpur)</option>
             <option value="Chhattisgarh">Chhattisgarh (Raipur, Bilaspur, Durg-Bhilai)</option>
-            <option value="Uttar Pradesh">Part of Uttar Pradesh (Kanpur, Agra, Jhansi, Prayagraj)</option>
+            <option value="Uttar Pradesh">Uttar Pradesh (Kanpur, Agra, Jhansi, Prayagraj)</option>
             <option value="Other">Other Territory / National Procurement</option>
           </select>
         </div>

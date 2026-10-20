@@ -89,7 +89,7 @@ export const ContactView: React.FC = () => {
                   <span>South Rajasthan Central Warehouse</span>
                 </div>
                 <div className="text-slate-600 pl-5">
-                  Udaipur (उदयपुर), serving Dungarpur, Banswara, Pratapgarh, Rajsamand, Chittorgarh, Bhilwara.
+                  Udaipur, serving Dungarpur, Banswara, Pratapgarh, Rajsamand, Chittorgarh, Bhilwara.
                 </div>
                 <div className="font-mono text-cyan-900 pl-5 text-[11px] font-semibold">
                   Phone: +91 (0294) 249-8800 / +91 94140 88210
@@ -125,7 +125,7 @@ export const ContactView: React.FC = () => {
               <div className="space-y-1 pt-2 border-t border-slate-100">
                 <div className="font-bold text-slate-900 flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-cyan-800" />
-                  <span>Part of Uttar Pradesh Corridor</span>
+                  <span>Uttar Pradesh Corridor</span>
                 </div>
                 <div className="text-slate-600 pl-5">
                   Agra & Kanpur specialized interventional corridor, serving Jhansi, Prayagraj, Varanasi.
@@ -230,7 +230,7 @@ export const ContactView: React.FC = () => {
                     <option value="South Rajasthan">South Rajasthan (Udaipur, Dungarpur, Banswara, Bhilwara...)</option>
                     <option value="Madhya Pradesh">Madhya Pradesh (Indore, Bhopal, Jabalpur, Gwalior...)</option>
                     <option value="Chhattisgarh">Chhattisgarh (Raipur, Bilaspur, Durg-Bhilai...)</option>
-                    <option value="Uttar Pradesh">Part of Uttar Pradesh (Kanpur, Agra, Jhansi, Prayagraj...)</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh (Kanpur, Agra, Jhansi, Prayagraj...)</option>
                     <option value="Other">Other Region</option>
                   </select>
                 </div>

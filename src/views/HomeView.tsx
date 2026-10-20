@@ -821,9 +821,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     }`}
                   >
                     <span>{region.state}</span>
-                    {region.nameHindi && (
-                      <span className="block text-[10px] font-normal opacity-80">{region.nameHindi}</span>
-                    )}
                   </button>
                 );
               })}
@@ -840,9 +837,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     <h3 className="font-display text-xl font-bold text-white">
                       {activeRegion.state}
                     </h3>
-                    {activeRegion.nameHindi && (
-                      <span className="text-sm text-cyan-300 font-sans font-medium">({activeRegion.nameHindi})</span>
-                    )}
                   </div>
                   <p className="text-xs text-slate-400 mt-0.5">{activeRegion.tagline}</p>
                 </div>
@@ -862,7 +856,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     SMP Surgitech operates its primary regional warehouse and logistics headquarters directly in <strong>Udaipur</strong>, guaranteeing immediate 1 to 3 hour emergency fulfillment to Cath Labs across:
                   </p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2">
-                    {activeRegion.districtsHindi?.map((d, i) => (
+                    {activeRegion.cities.map((d, i) => (
                       <div key={i} className="bg-slate-900/90 border border-slate-700/80 rounded px-2.5 py-1.5 text-xs text-white font-medium flex items-center gap-1.5">
                         <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
                         <span>{d}</span>

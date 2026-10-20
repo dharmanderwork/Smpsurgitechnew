@@ -349,7 +349,7 @@ export const RfqDrawer: React.FC<RfqDrawerProps> = ({
                             <option value="South Rajasthan">South Rajasthan (Udaipur, Dungarpur, Banswara, Bhilwara...)</option>
                             <option value="Madhya Pradesh">Madhya Pradesh (Indore, Bhopal, Jabalpur, Gwalior...)</option>
                             <option value="Chhattisgarh">Chhattisgarh (Raipur, Bilaspur, Durg-Bhilai...)</option>
-                            <option value="Uttar Pradesh">Part of Uttar Pradesh (Kanpur, Agra, Jhansi, Prayagraj...)</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh (Kanpur, Agra, Jhansi, Prayagraj...)</option>
                             <option value="Other">Other Region / National</option>
                           </select>
                         </div>

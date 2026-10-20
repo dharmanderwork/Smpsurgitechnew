@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TERRITORY_REGIONS } from '../data/products';
-import { MapPin, Phone, Mail, Clock, Truck, ShieldCheck, CheckCircle2, ArrowRight, Building2, Send } from 'lucide-react';
+import { MapPin, Phone, Mail, Building2 } from 'lucide-react';
 
 interface CoverageViewProps {
   onNavigate: (view: string) => void;
@@ -23,7 +23,7 @@ export const CoverageView: React.FC<CoverageViewProps> = ({ onNavigate }) => {
           Area Covered & Logistics Hubs
         </h1>
         <p className="text-sm text-slate-600 max-w-3xl leading-relaxed">
-          SMP Surgitech operates strategic temperature-controlled warehouses and 24/7 emergency dispatch desks across <strong>Madhya Pradesh</strong>, <strong>Chhattisgarh</strong>, <strong>South Rajasthan</strong>, and <strong>part of Uttar Pradesh</strong>.
+          SMP Surgitech operates strategic temperature-controlled warehouses and 24/7 emergency dispatch desks across <strong>Madhya Pradesh</strong>, <strong>Chhattisgarh</strong>, <strong>South Rajasthan</strong>, and <strong>Uttar Pradesh</strong>.
         </p>
       </div>
 
@@ -47,11 +47,6 @@ export const CoverageView: React.FC<CoverageViewProps> = ({ onNavigate }) => {
                   {region.emergencyCourierHours}
                 </span>
               </div>
-              {region.nameHindi && (
-                <div className={`text-xs mt-0.5 font-medium ${isSelected ? 'text-cyan-300' : 'text-slate-500'}`}>
-                  {region.nameHindi}
-                </div>
-              )}
               <div className={`text-[11px] mt-2 line-clamp-1 ${isSelected ? 'text-slate-300' : 'text-slate-500'}`}>
                 {region.tagline}
               </div>
@@ -68,9 +63,6 @@ export const CoverageView: React.FC<CoverageViewProps> = ({ onNavigate }) => {
               <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-white">
                 {currentRegion.state}
               </h2>
-              {currentRegion.nameHindi && (
-                <span className="text-lg text-cyan-400 font-sans">({currentRegion.nameHindi})</span>
-              )}
             </div>
             <p className="text-slate-400 text-xs sm:text-sm mt-1">{currentRegion.tagline}</p>
           </div>
@@ -80,7 +72,7 @@ export const CoverageView: React.FC<CoverageViewProps> = ({ onNavigate }) => {
           </span>
         </div>
 
-        {/* Special Spotlight on South Rajasthan (User requested specific districts) */}
+        {/* Special Spotlight on South Rajasthan (Udaipur Central Hub & Districts) */}
         {currentRegion.state === 'South Rajasthan' && (
           <div className="bg-cyan-950/40 border border-cyan-800/70 rounded-2xl p-6 space-y-4">
             <div className="flex items-center gap-2 text-cyan-300 font-bold text-sm uppercase tracking-wider">
@@ -88,18 +80,18 @@ export const CoverageView: React.FC<CoverageViewProps> = ({ onNavigate }) => {
               <span>South Rajasthan District Coverage (Headquarters & Central Hub: Udaipur)</span>
             </div>
             <p className="text-xs text-slate-300 leading-relaxed">
-              With our central logistics depot located in <strong>Udaipur (उदयपुर)</strong>, SMP Surgitech delivers acute angioplasty stent matrices, OCT catheters, and IABP consoles to cath labs and cardiac centers within <strong>1 to 3 hours</strong> across all key districts:
+              With our central logistics depot located in <strong>Udaipur</strong>, SMP Surgitech delivers acute angioplasty stent matrices, OCT catheters, and IABP consoles to cath labs and cardiac centers within <strong>1 to 3 hours</strong> across all key districts:
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 pt-2">
               {[
-                { name: 'Udaipur (उदयपुर)', desc: 'Central Regional Warehouse & 24/7 Desk' },
-                { name: 'Dungarpur (डूंगरपुर)', desc: 'Direct Highway Corridor Delivery' },
-                { name: 'Banswara (बांसवाड़ा)', desc: 'Pre-consigned Hospital Cath Labs' },
-                { name: 'Pratapgarh (प्रतापगढ़)', desc: 'Dedicated Technical Dispatch' },
-                { name: 'Rajsamand (राजसमंद)', desc: 'Express Standby Stocking' },
-                { name: 'Chittorgarh (चित्तौड़गढ़)', desc: 'Same-day Cath Lab Restocking' },
-                { name: 'Bhilwara (भीलवाड़ा)', desc: 'Frequent Daily Consignment Runs' }
+                { name: 'Udaipur', desc: 'Central Regional Warehouse & 24/7 Desk' },
+                { name: 'Dungarpur', desc: 'Direct Highway Corridor Delivery' },
+                { name: 'Banswara', desc: 'Pre-consigned Hospital Cath Labs' },
+                { name: 'Pratapgarh', desc: 'Dedicated Technical Dispatch' },
+                { name: 'Rajsamand', desc: 'Express Standby Stocking' },
+                { name: 'Chittorgarh', desc: 'Same-day Cath Lab Restocking' },
+                { name: 'Bhilwara', desc: 'Frequent Daily Consignment Runs' }
               ].map((district, idx) => (
                 <div key={idx} className="bg-slate-900 border border-slate-700/80 p-3.5 rounded-xl space-y-1">
                   <div className="font-bold text-white text-xs flex items-center gap-1.5">

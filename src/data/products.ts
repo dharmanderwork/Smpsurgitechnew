@@ -1,22 +1,13 @@
 import { Product, DealerBrand, TerritoryRegion, Testimonial } from '../types/instruments';
 
-import heroImg from '../assets/images/smp_xience_coronary_stent_1792349506273.jpg';
-import cathlabOctImg from '../assets/images/smp_cathlab_oct_coroflow_1792349506467.jpg';
-import impellaIabpImg from '../assets/images/smp_impella_iabp_circulatory_1792349522773.jpg';
-import pocketEcgImg from '../assets/images/smp_pocket_ecg_diagnostic_1792349523041.jpg';
-import surgicalSetImg from '../assets/images/smp_hero_surgical_instruments_1792343796772.jpg';
-import cardioInstrumentsImg from '../assets/images/smp_cardio_neuro_instruments_1792343798351.jpg';
-import qualityInspectionImg from '../assets/images/smp_quality_metallurgy_inspection_1792343798753.jpg';
-import orthoInstrumentsImg from '../assets/images/smp_orthopedic_surgical_set_1792343798115.jpg';
-
-export const HERO_IMAGE = heroImg;
-export const CATHLAB_OCT_IMAGE = cathlabOctImg;
-export const IMPELLA_IABP_IMAGE = impellaIabpImg;
-export const POCKET_ECG_IMAGE = pocketEcgImg;
-export const SURGICAL_SET_IMAGE = surgicalSetImg;
-export const CARDIO_INSTRUMENTS_IMAGE = cardioInstrumentsImg;
-export const QUALITY_INSPECTION_IMAGE = qualityInspectionImg;
-export const ORTHO_INSTRUMENTS_IMAGE = orthoInstrumentsImg;
+export const HERO_IMAGE = '/src/assets/images/smp_xience_coronary_stent_1792349506273.jpg';
+export const CATHLAB_OCT_IMAGE = '/src/assets/images/smp_cathlab_oct_coroflow_1792349506467.jpg';
+export const IMPELLA_IABP_IMAGE = '/src/assets/images/smp_impella_iabp_circulatory_1792349522773.jpg';
+export const POCKET_ECG_IMAGE = '/src/assets/images/smp_pocket_ecg_diagnostic_1792349523041.jpg';
+export const SURGICAL_SET_IMAGE = '/src/assets/images/smp_hero_surgical_instruments_1792343796772.jpg';
+export const CARDIO_INSTRUMENTS_IMAGE = '/src/assets/images/smp_cardio_neuro_instruments_1792343798351.jpg';
+export const QUALITY_INSPECTION_IMAGE = '/src/assets/images/smp_quality_metallurgy_inspection_1792343798753.jpg';
+export const ORTHO_INSTRUMENTS_IMAGE = '/src/assets/images/smp_orthopedic_surgical_set_1792343798115.jpg';
 
 export const FALLBACK_IMAGE = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" fill="%230f172a"><rect width="800" height="600" fill="%23090d16"/><circle cx="400" cy="300" r="140" fill="%230e7490" opacity="0.2"/><path d="M350 300h100M400 250v100" stroke="%2338bdf8" stroke-width="12" stroke-linecap="round"/><text x="400" y="470" fill="%2394a3b8" font-family="sans-serif" font-size="22" font-weight="bold" text-anchor="middle">SMP SURGITECH PRECISION SPEC</text></svg>';
 
@@ -80,26 +71,16 @@ export const DEALER_BRANDS: DealerBrand[] = [
 export const TERRITORY_REGIONS: TerritoryRegion[] = [
   {
     state: 'South Rajasthan',
-    nameHindi: 'दक्षिण राजस्थान',
     tagline: 'Direct Regional Warehouse & Rapid Cath Lab Supply Hub',
-    hqCity: 'Udaipur (उदयपुर)',
+    hqCity: 'Udaipur',
     cities: [
-      'Udaipur (उदयपुर)',
-      'Dungarpur (डूंगरपुर)',
-      'Banswara (बांसवाड़ा)',
-      'Pratapgarh (प्रतापगढ़)',
-      'Rajsamand (राजसमंद)',
-      'Chittorgarh (चित्तौड़गढ़)',
-      'Bhilwara (भीलवाड़ा)'
-    ],
-    districtsHindi: [
-      'उदयपुर (Udaipur)',
-      'डूंगरपुर (Dungarpur)',
-      'बांसवाड़ा (Banswara)',
-      'प्रतापगढ़ (Pratapgarh)',
-      'राजसमंद (Rajsamand)',
-      'चित्तौड़गढ़ (Chittorgarh)',
-      'भीलवाड़ा (Bhilwara)'
+      'Udaipur',
+      'Dungarpur',
+      'Banswara',
+      'Pratapgarh',
+      'Rajsamand',
+      'Chittorgarh',
+      'Bhilwara'
     ],
     coverageStatus: 'Direct Warehousing & Same-Day Dispatch',
     emergencyCourierHours: '1 to 3 Hours to Cath Labs',
@@ -111,19 +92,18 @@ export const TERRITORY_REGIONS: TerritoryRegion[] = [
     }
   },
   {
-    state: 'Madhya Pradesh (MP)',
-    nameHindi: 'मध्य प्रदेश',
+    state: 'Madhya Pradesh',
     tagline: 'Extensive State-Wide Consignment & Emergency Backup',
     hqCity: 'Indore / Bhopal Hubs',
     cities: [
-      'Indore (इंदौर)',
-      'Bhopal (भोपाल)',
-      'Jabalpur (जबलपुर)',
-      'Gwalior (ग्वालियर)',
-      'Ujjain (उज्जैन)',
-      'Sagar (सागर)',
-      'Rewa (रीवा)',
-      'Ratlam (रतलाम)'
+      'Indore',
+      'Bhopal',
+      'Jabalpur',
+      'Gwalior',
+      'Ujjain',
+      'Sagar',
+      'Rewa',
+      'Ratlam'
     ],
     coverageStatus: 'Direct Warehousing & Same-Day Dispatch',
     emergencyCourierHours: '2 to 4 Hours to Cath Labs',
@@ -135,18 +115,17 @@ export const TERRITORY_REGIONS: TerritoryRegion[] = [
     }
   },
   {
-    state: 'Chhattisgarh (CG)',
-    nameHindi: 'छत्तीसगढ़',
+    state: 'Chhattisgarh',
     tagline: 'Dedicated Cold-Chain & 24/7 Cath Lab Standby Support',
     hqCity: 'Raipur / Durg-Bhilai Hubs',
     cities: [
-      'Raipur (रायपुर)',
-      'Bilaspur (बिलासपुर)',
-      'Durg-Bhilai (दुर्ग-भिलाई)',
-      'Korba (कोरबा)',
-      'Rajnandgaon (राजनंदगांव)',
-      'Jagdalpur (जगदलपुर)',
-      'Raigarh (रायगढ़)'
+      'Raipur',
+      'Bilaspur',
+      'Durg-Bhilai',
+      'Korba',
+      'Rajnandgaon',
+      'Jagdalpur',
+      'Raigarh'
     ],
     coverageStatus: 'Active Cath Lab Logistics',
     emergencyCourierHours: '2 to 4 Hours to Cath Labs',
@@ -158,17 +137,16 @@ export const TERRITORY_REGIONS: TerritoryRegion[] = [
     }
   },
   {
-    state: 'Part of Uttar Pradesh (UP)',
-    nameHindi: 'उत्तर प्रदेश (चयनित क्षेत्र)',
+    state: 'Uttar Pradesh',
     tagline: 'Specialized Interventional & Surgical Support Corridor',
     hqCity: 'Agra / Kanpur Corridor',
     cities: [
-      'Kanpur (कानपुर)',
-      'Agra (आगरा)',
-      'Jhansi (झांसी)',
-      'Prayagraj (प्रयागराज)',
-      'Varanasi (वाराणसी)',
-      'Aligarh (अलीगढ़)'
+      'Kanpur',
+      'Agra',
+      'Jhansi',
+      'Prayagraj',
+      'Varanasi',
+      'Aligarh'
     ],
     coverageStatus: 'Dedicated Field Technical Support',
     emergencyCourierHours: '3 to 5 Hours Dedicated Express',
@@ -278,6 +256,8 @@ export const SURGICAL_PRODUCTS: Product[] = [
     packaging: 'Single unit sterile tyvek blister pack with traceability UDI labels',
     image: HERO_IMAGE,
     featured: true,
+    pdfUrl: '/pdf/DTP Patient Brochure Guide.pdf',
+    pdfFileName: 'DTP_Patient_Brochure_Guide.pdf',
     pdfSpec: {
       docNumber: 'TDS-ABT-XNC-SKY-2026',
       revision: 'Rev 5.1',
@@ -859,6 +839,8 @@ export const SURGICAL_PRODUCTS: Product[] = [
     packaging: 'Rigid sealed surgical catheter tray with optical sensor connectors',
     image: IMPELLA_IABP_IMAGE,
     featured: true,
+    pdfUrl: '/pdf/Impella CP with SmartAssist Data Sheet.pdf',
+    pdfFileName: 'Impella_CP_with_SmartAssist_Data_Sheet.pdf',
     pdfSpec: {
       docNumber: 'TDS-JNJ-IMP-2026',
       revision: 'Rev 7.0',
@@ -936,6 +918,8 @@ export const SURGICAL_PRODUCTS: Product[] = [
     packaging: 'Complete sterile insertion kit with puncture needle, dilatators, and helium lines',
     image: IMPELLA_IABP_IMAGE,
     featured: true,
+    pdfUrl: '/pdf/Interventional-AC3-IABP-Brochure_MC-005536-Rev-0.1.pdf',
+    pdfFileName: 'Interventional-AC3-IABP-Brochure.pdf',
     pdfSpec: {
       docNumber: 'TDS-TFX-IAB-2026',
       revision: 'Rev 5.4',
@@ -1217,3 +1201,128 @@ export const BRAND_FILTERS = [
   'Pocket ECG (Diagnostic Devices)',
   'SMP Surgitech (Cardiovascular Surgical)'
 ];
+
+export interface OfficialPdfItem {
+  id: string;
+  title: string;
+  brand: string;
+  category: string;
+  docCode: string;
+  fileSize: string;
+  fileName: string;
+  fileUrl: string;
+  description: string;
+  matchingProductId?: string;
+}
+
+export const OFFICIAL_MANUFACTURER_PDFS: OfficialPdfItem[] = [
+  {
+    id: 'pdf-impella-cp',
+    title: 'Impella CP® with SmartAssist® Clinical Data Sheet',
+    brand: 'J&J MedTech (Surgical Solutions)',
+    category: 'Mechanical Circulatory Support (Impella & IABP)',
+    docCode: 'TDS-IMP-CP-SA',
+    fileSize: '337 KB',
+    fileName: 'Impella CP with SmartAssist Data Sheet.pdf',
+    fileUrl: '/pdf/Impella CP with SmartAssist Data Sheet.pdf',
+    description: 'Complete mechanical specifications, microaxial pump flow curves (up to 4.3 L/min), optical sensor hemodynamics, and cannulation sizing matrix for high-risk PCI & cardiogenic shock.',
+    matchingProductId: 'impella-heart-pump-system'
+  },
+  {
+    id: 'pdf-impella-india-cons',
+    title: 'Abiomed Impella® India HRPCI Consensus Clinical Summary',
+    brand: 'J&J MedTech (Surgical Solutions)',
+    category: 'Mechanical Circulatory Support (Impella & IABP)',
+    docCode: 'MCI-IND-IMP-HRPCI',
+    fileSize: '3.2 MB',
+    fileName: 'Abiomed_Impella_India HRPCI Cons Summary_A4 4pg_20230116_FA (Preview) (2).pdf',
+    fileUrl: '/pdf/Abiomed_Impella_India HRPCI Cons Summary_A4 4pg_20230116_FA (Preview) (2).pdf',
+    description: 'Indian expert consensus recommendations for hemodynamic support during Protected High-Risk Percutaneous Coronary Intervention (HRPCI) and AMICS acute myocardial infarction management.',
+    matchingProductId: 'impella-heart-pump-system'
+  },
+  {
+    id: 'pdf-iabp-ac3',
+    title: 'Interventional AutoCAT® 2 WAVE / AC3 IABP System Brochure',
+    brand: 'Teleflex (Vascular Division)',
+    category: 'Mechanical Circulatory Support (Impella & IABP)',
+    docCode: 'MC-005536-Rev-0.1',
+    fileSize: '880 KB',
+    fileName: 'Interventional-AC3-IABP-Brochure_MC-005536-Rev-0.1.pdf',
+    fileUrl: '/pdf/Interventional-AC3-IABP-Brochure_MC-005536-Rev-0.1.pdf',
+    description: 'Full engineering brochure for Arrow AutoCAT 2 WAVE intra-aortic balloon pump console, proprietary WAVE timing algorithm, and DuraMac polyurethane balloon catheters.',
+    matchingProductId: 'iabp-pump-catheter-system'
+  },
+  {
+    id: 'pdf-iabp-ac3-optimus',
+    title: 'AC3 Optimus™ Intra-Aortic Balloon Pump Clinical Brochure',
+    brand: 'Teleflex (Vascular Division)',
+    category: 'Mechanical Circulatory Support (Impella & IABP)',
+    docCode: 'MC-002341-r0.2',
+    fileSize: '2.5 MB',
+    fileName: 'AC3-Optimus-Clinical-Brochure-MC-002341-r0.2.pdf',
+    fileUrl: '/pdf/AC3-Optimus-Clinical-Brochure-MC-002341-r0.2.pdf',
+    description: 'Clinical counterpulsation efficiency, automatic dicrotic notch identification, high-speed pneumatics, and bedside catheter management.',
+    matchingProductId: 'iabp-pump-catheter-system'
+  },
+  {
+    id: 'pdf-guideliner-v3',
+    title: 'GuideLiner® V3 Catheter Official Technical Brochure',
+    brand: 'Teleflex (Vascular Division)',
+    category: 'Cardiology Access Catheters',
+    docCode: 'MCI-2018-0444',
+    fileSize: '2.1 MB',
+    fileName: 'MCI-2018-0444_IN_VSI_BR_GuideLiner_V3_Catheter-EN_GKN.pdf',
+    fileUrl: '/pdf/MCI-2018-0444_IN_VSI_BR_GuideLiner_V3_Catheter-EN_GKN.pdf',
+    description: 'The industry-standard guide extension catheter providing deep engagement, backup support, and smooth stent delivery in tortuous and calcified coronary anatomies.',
+    matchingProductId: 'iabp-pump-catheter-system'
+  },
+  {
+    id: 'pdf-guideliner-trapliner-playbook',
+    title: 'GuideLiner® & TrapLiner® Clinical Playbook & Case Studies',
+    brand: 'Teleflex (Vascular Division)',
+    category: 'Cardiology Access Catheters',
+    docCode: 'MCI-2019-0561',
+    fileSize: '4.2 MB',
+    fileName: 'MCI-2019-0561-EN-SG-GuideLiner-TrapLiner-Playbook-0819.pdf',
+    fileUrl: '/pdf/MCI-2019-0561-EN-SG-GuideLiner-TrapLiner-Playbook-0819.pdf',
+    description: 'Comprehensive interventional cardiologist case playbook detailing guide catheter extension techniques, balloon trapping, and crossing complex chronic total occlusions (CTO).',
+    matchingProductId: 'iabp-pump-catheter-system'
+  },
+  {
+    id: 'pdf-turnpike-catheter',
+    title: 'Turnpike® Catheter Family Official Technical Spec Brochure',
+    brand: 'Teleflex (Vascular Division)',
+    category: 'Cardiology Access Catheters',
+    docCode: 'MCI-2019-0823',
+    fileSize: '7.2 MB',
+    fileName: 'MCI-2019-0823_IN_VSI_BR_Turnpike_EN-IN_HR (1).pdf',
+    fileUrl: '/pdf/MCI-2019-0823_IN_VSI_BR_Turnpike_EN-IN_HR (1).pdf',
+    description: 'Advanced microcatheters including Turnpike Standard, Spiral, and Gold with threaded tip technology engineered for navigating complex resistant coronary lesions.',
+    matchingProductId: 'iabp-pump-catheter-system'
+  },
+  {
+    id: 'pdf-supercross-microcatheter',
+    title: 'Supercross™ Microcatheter Engineering & Sizing Guide',
+    brand: 'Teleflex (Vascular Division)',
+    category: 'Cardiology Access Catheters',
+    docCode: 'MCI-2018-0396',
+    fileSize: '2.7 MB',
+    fileName: 'MCI-2018-0396_IN_VSI_BR_Supercrosscombined_EN_LR_2.pdf',
+    fileUrl: '/pdf/MCI-2018-0396_IN_VSI_BR_Supercrosscombined_EN_LR_2.pdf',
+    description: 'Pre-shaped microcatheter portfolio (Straight, 45°, 90°, 120°) facilitating selective guidewire redirection and branch vessel access in bifurcated coronary interventions.',
+    matchingProductId: 'iabp-pump-catheter-system'
+  },
+  {
+    id: 'pdf-dtp-patient-guide',
+    title: 'Direct-to-Patient (DTP) Clinical Procedure & Care Brochure',
+    brand: 'SMP Surgitech (Cardiovascular)',
+    category: 'Patient Education & Cath Lab Protocol',
+    docCode: 'SMP-DTP-2026',
+    fileSize: '9.3 MB',
+    fileName: 'DTP Patient Brochure Guide.pdf',
+    fileUrl: '/pdf/DTP Patient Brochure Guide.pdf',
+    description: 'Comprehensive patient and clinical guide explaining coronary angioplasty, cardiac catheterization procedures, stent implantation recovery, and post-discharge protocols.',
+    matchingProductId: 'xience-skypoint'
+  }
+];
+
